@@ -20,6 +20,9 @@ public class Meal {
         if (calorieIndex <= 1) {
             throw new DukeException("Please specify the name of the meal!");
         }
+        if (!(userInput[0].equals("ate"))) {
+            throw new DukeException("Please type in \"ate\" at the beginning!");
+        }
         int dateIndex = userInput.length - 1;
         int calories = Integer.parseInt(userInput[calorieIndex]);
         String mealDescription = userInput[1];
