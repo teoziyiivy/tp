@@ -1,4 +1,0 @@
-saveweight 50 9/6/2021
-checkweight
-saveweight 40 10/6/2021
-checkweight

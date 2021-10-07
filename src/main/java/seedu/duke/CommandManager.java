@@ -8,11 +8,13 @@ public class CommandManager {
     protected GymManager gymManager;
     protected Meal meal;
     protected Fluid fluid;
+    protected WeightTracker weightTracker;
 
-    public CommandManager(Fluid fluid, Meal meal, GymManager gymManager) {
+    public CommandManager(Fluid fluid, Meal meal, GymManager gymManager, WeightTracker weightTracker) {
         this.fluid = fluid;
         this.meal = meal;
         this.gymManager = gymManager;
+        this.weightTracker = weightTracker;
     }
 
     public void commandChecker() {
@@ -38,10 +40,10 @@ public class CommandManager {
                 fluid.sayDrank(input);
 
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
-                //input = addweightInputCommand(input, in);
+                weightTracker.readInput(input);
 
             } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
-                //input = checkweightInputCommand(input, in);
+                weightTracker.readInput(input);
 
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
