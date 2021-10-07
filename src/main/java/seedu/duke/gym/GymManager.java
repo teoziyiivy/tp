@@ -17,8 +17,12 @@ public class GymManager {
     public void addGymWorkout(String input) {
         String[] arguments = input.trim().split("/at", 2);
         gymScheduleList.add(new GymWorkout(arguments[0].trim(), arguments[1].trim()));
-        System.out.println("Noted! CLI.ckFit has scheduled your workout of " + arguments[0].trim() +
-                " at " + arguments[1].trim() + ".");
+        System.out.println("Noted! CLI.ckFit has scheduled your workout of " + arguments[0].trim()
+                + " at " + arguments[1].trim() + ".");
+    }
+
+    public void addGymWorkout(String activityDescription, String activityAt) {
+        gymScheduleList.add(new GymWorkout(activityDescription, activityAt));
     }
 
     // e.g. workout chest day /at 12pm /c 356
@@ -29,36 +33,8 @@ public class GymManager {
         completedGymWorkoutList.add(
                 new CompletedGymWorkout(arguments[0].trim(), arguments2[0].trim(), calories)
         );
-        System.out.println("Noted! CLI.ckFit has recorded your workout of " + arguments[0].trim() +
-                " at " + arguments2[0].trim() + ". " + calories + " calories have been burned. Keep working!");
-    }
-
-    // not for 08/10
-    public void addGymWorkout(String activityDescription, String activityAt) {
-        gymScheduleList.add(new GymWorkout(activityDescription, activityAt));
-    }
-
-    public void deleteGymWorkout(int workoutNumber) {
-        // short circuit if empty
-        if (gymScheduleList.isEmpty()) {
-            System.out.println("List is empty");
-            return;
-        }
-        if (isWorkoutNumberWithinRange(workoutNumber)) {
-            gymScheduleList.remove(workoutNumber - OFFSET_BY_1);
-        } else {
-            System.out.println("Invalid Activity number");
-        }
-    }
-
-    public boolean isWorkoutNumberWithinRange(int workoutNumber) {
-        //short circuit if empty
-        if (gymScheduleList.isEmpty()) {
-            return false;
-        }
-        int upperBound = gymScheduleList.size();
-        int lowerBound = LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING; // equals 1
-        return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound) ? true : false;
+        System.out.println("Noted! CLI.ckFit has recorded your workout of " + arguments[0].trim()
+                + " at " + arguments2[0].trim() + ". " + calories + " calories have been burned. Keep working!");
     }
 
     // if activity exists in schedule list can use activity number
@@ -84,6 +60,29 @@ public class GymManager {
         completedGymWorkoutList.add(
                 new CompletedGymWorkout(workoutDescription, workoutAt, caloriesBurned)
         );
+    }
+
+    public void deleteGymWorkout(int workoutNumber) {
+        // short circuit if empty
+        if (gymScheduleList.isEmpty()) {
+            System.out.println("List is empty");
+            return;
+        }
+        if (isWorkoutNumberWithinRange(workoutNumber)) {
+            gymScheduleList.remove(workoutNumber - OFFSET_BY_1);
+        } else {
+            System.out.println("Invalid Activity number");
+        }
+    }
+
+    public boolean isWorkoutNumberWithinRange(int workoutNumber) {
+        //short circuit if empty
+        if (gymScheduleList.isEmpty()) {
+            return false;
+        }
+        int upperBound = gymScheduleList.size();
+        int lowerBound = LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING; // equals 1
+        return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound) ? true : false;
     }
 
     public void deleteCompletedGymWorkout(int activityWorkout) {
