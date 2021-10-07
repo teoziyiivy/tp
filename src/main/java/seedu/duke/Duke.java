@@ -12,7 +12,6 @@ public class Duke {
     private WeightTracker weightTracker;
     private CommandManager commandManager;
 
-
     public Duke() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -33,7 +32,6 @@ public class Duke {
     public void run() {
         commandManager.commandChecker();
     }
-
 
     public static void main(String[] args) {
         new Duke().run();

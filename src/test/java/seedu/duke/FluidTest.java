@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 class FluidTest {
 
     @Test
