@@ -3,14 +3,14 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Meal {
-
-    protected String[] meals;
+    protected ArrayList<String> meals;
     protected int mealNumber;
 
     public Meal() {
-        this.meals = new String[100];
+        this.meals = new ArrayList<>();
         this.mealNumber = 0;
     }
 
@@ -35,7 +35,7 @@ public class Meal {
         System.out.println("Noted! CLI.ckFit has recorded your meal of " + mealDescription + " on "
                            + formatter.format(localDate) + ". " + calories +
                            " calories has been added to the calorie count!\n");
-        meals[mealNumber] = meal;
+        meals.add(meal);
         mealNumber += 1;
     }
 
