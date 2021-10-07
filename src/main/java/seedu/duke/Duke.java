@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.gym.GymManager;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,5 +19,9 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
+        GymManager gm = new GymManager();
+        gm.addGymWorkout("chest day /at 12pm");
+        gm.doneGymWorkout("chest day /at 12pm /c 356");
     }
 }

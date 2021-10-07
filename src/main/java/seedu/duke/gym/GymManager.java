@@ -13,6 +13,25 @@ public class GymManager {
         completedGymWorkoutList = new ArrayList<CompletedGymWorkout>();
     }
 
+    public void addGymWorkout(String input) {
+        String[] arguments = input.trim().split("/at", 2);
+        gymScheduleList.add(new GymWorkout(arguments[0].trim(), arguments[1].trim()));
+        System.out.println("Noted! CLI.ckFit has scheduled your workout of " + arguments[0].trim() +
+                " at " + arguments[1].trim() + ".");
+    }
+
+    public void doneGymWorkout(String input) {
+        String[] arguments = input.trim().split("/at", 2);
+        String[] arguments2 = arguments[1].trim().split("/c", 2);
+        int calories = Integer.parseInt(arguments2[1].trim());
+        completedGymWorkoutList.add(
+                new CompletedGymWorkout(arguments[0].trim(), arguments2[0].trim(), calories)
+        );
+        System.out.println("Noted! CLI.ckFit has recorded your workout of " + arguments[0].trim() +
+                " at " + arguments2[0].trim() + ". " + calories + " calories have been burned. Keep working!");
+    }
+
+    // not for 08/10
     public void addGymWorkout(String activityDescription, String activityAt) {
         gymScheduleList.add(new GymWorkout(activityDescription, activityAt));
     }
