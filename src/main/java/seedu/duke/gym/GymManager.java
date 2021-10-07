@@ -13,7 +13,7 @@ public class GymManager {
         completedGymWorkoutList = new ArrayList<CompletedGymWorkout>();
     }
 
-    // e.g. workoutschedule chest day /at 12pm
+    // e.g. schedule chest day /at 12pm
     public void addGymWorkout(String input) {
         String[] arguments = input.trim().split("/at", 2);
         gymScheduleList.add(new GymWorkout(arguments[0].trim(), arguments[1].trim()));
