@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.gym.GymManager;
+
 import java.util.Scanner;
 
 public class CommandManager {
