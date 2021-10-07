@@ -9,26 +9,19 @@ public class Fluid {
     protected ArrayList<String> fluidArray;
     protected int numberOfFluids;
 
-    //constructor
     public Fluid() {
         this.fluidArray = new ArrayList<>();
         this.numberOfFluids = 0;
     }
 
     public void toPrint(String fluidName, int volume, String date) {
-        System.out.println("Noted! CLI.ckFit has recorded your drink of "
-                + fluidName
-                + " of "
-                + volume
-                + " ml on "
-                + date + "."
-                + "\n");
+        System.out.println("Noted! CLI.ckFit has recorded your drink of " + fluidName + " of " + volume + " ml on " + date + "." + "\n");
     }
 
-    public void sayDrank(String input) {               //drank coca cola 300 17/10/2021
+    public void sayDrank(String input) {
         String[] arrayString = input.split(" ");
-        int lastIndex = arrayString.length - 1;              //date
-        int secondLastIndex = arrayString.length - 2;        //volume
+        int lastIndex = arrayString.length - 1;
+        int secondLastIndex = arrayString.length - 2;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dateTime = arrayString[lastIndex];
         LocalDate localDate = LocalDate.parse(dateTime, formatter);
