@@ -5,7 +5,15 @@ import seedu.duke.gym.GymManager;
 import java.util.Scanner;
 
 public class CommandManager {
-    GymManager gymManager = new GymManager();
+    protected GymManager gymManager;
+    protected Meal meal;
+    protected Fluid fluid;
+
+    public CommandManager(Fluid fluid, Meal meal, GymManager gymManager) {
+        this.fluid = fluid;
+        this.meal = meal;
+        this.gymManager = gymManager;
+    }
 
     public void commandChecker() {
         String input;
@@ -18,18 +26,16 @@ public class CommandManager {
         while (!(command.equals(Keywords.INPUT_BYE))) {
 
             if (command.equals(Keywords.INPUT_MEAL)) {
-                //input = mealInputCommand(input, in);
+                meal.addMeal(input);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT)) {
-                //input = workoutInputCommand(input, in);
                 gymManager.doneGymWorkout(result[1]);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT_SCHEDULE)) {
-                //input = workoutInputCommand(input, in);
                 gymManager.addGymWorkout(result[1]);
 
             } else if (command.equals(Keywords.INPUT_DRINKS)) {
-                //input = drinksInputCommand(input, in);
+                fluid.sayDrank(input);
 
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
                 //input = addweightInputCommand(input, in);
