@@ -15,7 +15,8 @@ public class Fluid {
     }
 
     public void toPrint(String fluidName, int volume, String date) {
-        System.out.println("Noted! CLI.ckFit has recorded your drink of " + fluidName + " of " + volume + " ml on " + date + "." + "\n");
+        System.out.println("Noted! CLI.ckFit has recorded your drink of " + fluidName + " of " + volume
+                + " ml on " + date + "." + "\n");
     }
 
     public void sayDrank(String input) {
