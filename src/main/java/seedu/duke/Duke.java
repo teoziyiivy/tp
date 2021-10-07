@@ -28,15 +28,14 @@ public class Duke {
         fluid.toPrint();
     }
 
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo + "\n");
         System.out.println("Enter your wish: " + "\n");
         Scanner scan = new Scanner(System.in);
@@ -56,5 +55,11 @@ public class Duke {
             break;
         default:
         }
+
+        System.out.println("Hello from\n" + logo);
+        System.out.println("What is your command?");
+
+        CommandManager commandManager = new CommandManager();
+        commandManager.commandChecker();
     }
 }
