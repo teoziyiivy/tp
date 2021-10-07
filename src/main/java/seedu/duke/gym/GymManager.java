@@ -13,6 +13,7 @@ public class GymManager {
         completedGymWorkoutList = new ArrayList<CompletedGymWorkout>();
     }
 
+    // e.g. workoutschedule chest day /at 12pm
     public void addGymWorkout(String input) {
         String[] arguments = input.trim().split("/at", 2);
         gymScheduleList.add(new GymWorkout(arguments[0].trim(), arguments[1].trim()));
@@ -20,6 +21,7 @@ public class GymManager {
                 " at " + arguments[1].trim() + ".");
     }
 
+    // e.g. workout chest day /at 12pm /c 356
     public void doneGymWorkout(String input) {
         String[] arguments = input.trim().split("/at", 2);
         String[] arguments2 = arguments[1].trim().split("/c", 2);
