@@ -16,7 +16,13 @@ public class Fluid {
     }
 
     public void toPrint(String fluidName, int volume, String date) {
-        System.out.println("Noted! CLI.ckFit has recorded your drink of " + fluidName + " of " + volume + " ml on " + date + "." + "\n");
+        System.out.println("Noted! CLI.ckFit has recorded your drink of "
+                + fluidName
+                + " of "
+                + volume
+                + " ml on "
+                + date + "."
+                + "\n");
     }
 
     public void sayDrank(String input) {               //drank coca cola 300 17/10/2021
@@ -34,5 +40,7 @@ public class Fluid {
         int volume = Integer.parseInt(arrayString[secondLastIndex]);
         String date = arrayString[lastIndex];
         toPrint(fluidDescription, volume, date);
+        fluidArray.add(input);
+        numberOfFluids += 1;
     }
 }
