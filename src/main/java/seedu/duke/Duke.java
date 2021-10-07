@@ -2,17 +2,14 @@ package seedu.duke;
 
 import seedu.duke.gym.GymManager;
 
-import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-
+@SuppressWarnings("ALL")
 public class Duke {
 
     private Meal meal;
     private Ui ui;
     private Fluid fluid;
     private GymManager gymManager;
+    private WeightTracker weightTracker;
     private CommandManager commandManager;
 
 
@@ -29,7 +26,8 @@ public class Duke {
         ui = new Ui();
         fluid = new Fluid();
         gymManager = new GymManager();
-        commandManager = new CommandManager(fluid,meal,gymManager);
+        weightTracker = new WeightTracker();
+        commandManager = new CommandManager(fluid, meal, gymManager, weightTracker);
     }
 
     public void run() {
