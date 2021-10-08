@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 public class Parser {
 
@@ -76,8 +75,4 @@ public class Parser {
         String description = userInput[0];
         return description;
     }
-
-
-
-
 }

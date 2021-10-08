@@ -1,10 +1,14 @@
 package seedu.duke.gym;
 
-public class CompletedGymWorkout extends GymWorkout {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class CompletedGymWorkout extends ScheduledGymWorkout {
     private int caloriesBurned;
 
-    public CompletedGymWorkout(String activityDescription, String activityAt, int caloriesBurned) {
-        super(activityDescription, activityAt);
+    public CompletedGymWorkout(String workoutDescription, LocalDate workoutDate,
+                               LocalTime workoutTime, int caloriesBurned) {
+        super(workoutDescription, workoutDate, workoutTime);
         this.caloriesBurned = caloriesBurned;
     }
 

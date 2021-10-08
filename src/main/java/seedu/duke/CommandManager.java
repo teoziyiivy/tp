@@ -31,10 +31,10 @@ public class CommandManager {
                 meal.addMeal(input);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT)) {
-                gymManager.doneGymWorkout(inputArguments[1]);
+                gymManager.addCompletedWorkout(inputArguments[1]);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT_SCHEDULE)) {
-                gymManager.addGymWorkout(inputArguments[1]);
+                gymManager.addScheduledWorkout(inputArguments[1]);
 
             } else if (command.equals(Keywords.INPUT_DRINKS)) {
                 fluid.sayDrank(input);

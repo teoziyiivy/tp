@@ -37,6 +37,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        new Duke().run();
+        //new Duke().run();
+        GymManager gm = new GymManager();
+        gm.addScheduledWorkout("chest day /d 17/08/2021 /t 7:59PM");
     }
 }

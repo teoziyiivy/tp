@@ -11,6 +11,6 @@ class GymManagerTest {
     void doneGymWorkout_non_integer_input() {
         GymManager gm = new GymManager();
         String input = "chest day /at 23:59 /c $@$!";
-        assertThrows(NumberFormatException.class, () -> gm.doneGymWorkout(input));
+        assertThrows(NumberFormatException.class, () -> gm.addCompletedWorkout(input));
     }
 }
