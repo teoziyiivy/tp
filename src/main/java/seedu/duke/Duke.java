@@ -7,7 +7,8 @@ public class Duke {
     public static ArrayList<WeightTracker> weights = new ArrayList<>();
 
     public static void printAddWeightResponse() {
-        System.out.println("Noted! CLI.ckFit has recorded your weight as " + weights.get(weights.size() - 1).getWeight() + ". Check back for your progress!");
+        System.out.println("Noted! CLI.ckFit has recorded your weight as " + weights.get(weights.size() - 1).getWeight()
+                + ". Check back for your progress!");
     }
 
     public static void printAddWeightException() {
