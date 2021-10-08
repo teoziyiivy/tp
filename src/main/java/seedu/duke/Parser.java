@@ -7,6 +7,27 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    //todo: replace the separators used in methods below with the final Strings to avoid magic literals
+    public static final String DATE_SEPARATOR = " /d ";
+    public static final String TIME_SEPARATOR = " /t ";
+    public static final String CALORIE_SEPARATOR = " /c ";
+    public static final String WHITESPACE = " ";
+
+    // the 3 boolean methods below are helper functions to short circuit
+    // e.g. if you need /c /d /t separators in the input,
+    // if either /c /d /t are missing you can give user an error message and exit the method
+    public static boolean containsDateSeparator(String inputArguments) {
+        return inputArguments.contains(DATE_SEPARATOR);
+    }
+
+    public static boolean containsTimeSeparator(String inputArguments) {
+        return inputArguments.contains(TIME_SEPARATOR);
+    }
+
+    public static boolean containsCalorieSeparator(String inputArguments) {
+        return inputArguments.contains(CALORIE_SEPARATOR);
+    }
+
     public static int parseStringToInteger(String input) throws NumberFormatException {
         return Integer.parseInt(input);
     }
@@ -15,9 +36,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         int calories = 0;
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/c")) {
-                calories = parseStringToInteger(userInput[i+1]);
+                calories = parseStringToInteger(userInput[i + 1]);
                 break;
             }
         }
@@ -37,9 +58,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String date = "";
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/d")) {
-                date = userInput[i+1];
+                date = userInput[i + 1];
                 break;
             }
         }
@@ -51,9 +72,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String time = "";
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/t")) {
-                time = userInput[i+1];
+                time = userInput[i + 1];
                 break;
             }
         }
@@ -70,7 +91,7 @@ public class Parser {
         return weight;
     }
 
-    public static String getScheduleDescription(String inputArguments) throws DukeException {
+    public static String getScheduleDescription(String inputArguments) {
         String[] userInput = inputArguments.split(" /d ");
         String description = userInput[0];
         return description;
