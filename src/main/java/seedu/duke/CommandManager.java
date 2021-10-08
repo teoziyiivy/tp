@@ -21,8 +21,8 @@ public class CommandManager {
         String input;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
-        String[] result = input.trim().split(" ", 2);
-        String command = result[0];
+        String[] inputArguments = input.trim().split(" ", 2);
+        String command = inputArguments[0];
 
 
         while (!(command.equals(Keywords.INPUT_BYE))) {
@@ -31,10 +31,10 @@ public class CommandManager {
                 meal.addMeal(input);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT)) {
-                gymManager.doneGymWorkout(result[1]);
+                gymManager.doneGymWorkout(inputArguments[1]);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT_SCHEDULE)) {
-                gymManager.addGymWorkout(result[1]);
+                gymManager.addGymWorkout(inputArguments[1]);
 
             } else if (command.equals(Keywords.INPUT_DRINKS)) {
                 fluid.sayDrank(input);
@@ -49,8 +49,8 @@ public class CommandManager {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
             }
             input = in.nextLine();
-            result = input.trim().split(" ", 2);
-            command = result[0];
+            inputArguments = input.trim().split(" ", 2);
+            command = inputArguments[0];
 
         }
         System.out.println("    Bye! Hope to see you again soon!");

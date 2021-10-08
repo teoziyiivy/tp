@@ -11,7 +11,7 @@ class FluidTest {
     @Test
     void sayDrank() {
         Fluid fluid = new Fluid();
-        String input = "drank cola 300 12/12/2021";
+        String input = "drank cola 300 12-12-2021";
         assertThrows(DateTimeParseException.class, () -> fluid.sayDrank(input));
     }
 }
