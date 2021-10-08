@@ -6,12 +6,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class ScheduledGymWorkout extends Tracker {
-        private String workoutDescription;
+public class ScheduledWorkout extends seedu.duke.Tracker {
+    private String workoutDescription;
     private LocalDate workoutDate;
     private LocalTime workoutTime;
     private LocalDateTime workoutDateTime;
-    public ScheduledGymWorkout(String workoutDescription, LocalDate workoutDate, LocalTime workoutTime) {
+
+    public ScheduledWorkout(String workoutDescription, LocalDate workoutDate, LocalTime workoutTime) {
         this.workoutDescription = workoutDescription;
         this.workoutDate = workoutDate;
         this.workoutTime = workoutTime;
@@ -23,7 +24,7 @@ public class ScheduledGymWorkout extends Tracker {
     }
 
     public void setWorkoutDescription(String workoutDescription) {
-        this. workoutDescription = workoutDescription;
+        this.workoutDescription = workoutDescription;
     }
 
     public LocalDate getWorkoutDate() {

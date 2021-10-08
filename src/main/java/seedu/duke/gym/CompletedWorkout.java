@@ -3,11 +3,11 @@ package seedu.duke.gym;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class CompletedGymWorkout extends ScheduledGymWorkout {
+public class CompletedWorkout extends ScheduledWorkout {
     private int caloriesBurned;
 
-    public CompletedGymWorkout(String workoutDescription, LocalDate workoutDate,
-                               LocalTime workoutTime, int caloriesBurned) {
+    public CompletedWorkout(String workoutDescription, LocalDate workoutDate,
+                            LocalTime workoutTime, int caloriesBurned) {
         super(workoutDescription, workoutDate, workoutTime);
         this.caloriesBurned = caloriesBurned;
     }
