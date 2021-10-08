@@ -8,9 +8,7 @@ public class WeightTrackerTest {
     @Test
     void addWeight() {
         WeightTracker weights = new WeightTracker();
-        String input = "addweight 50 08/10/2021";
-        Assertions.assertThrows(NumberFormatException.class, () -> {
-            weights.addWeight(input);
-        });
+        String input = "addweight";
+        Assertions.assertThrows(AddWeightException.class, () -> weights.addWeight(input));
     }
 }
