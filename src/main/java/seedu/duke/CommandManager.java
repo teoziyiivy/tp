@@ -24,7 +24,6 @@ public class CommandManager {
         String[] inputArguments = input.trim().split(" ", 2);
         String command = inputArguments[0];
 
-
         while (!(command.equals(Keywords.INPUT_BYE))) {
 
             if (command.equals(Keywords.INPUT_MEAL)) {
@@ -37,8 +36,12 @@ public class CommandManager {
                 gymManager.addGymWorkout(inputArguments[1]);
 
             } else if (command.equals(Keywords.INPUT_DRINKS)) {
-                fluid.sayDrank(input);
-
+                fluid.generateFluidParameters(inputArguments[1]);
+                fluid.addFluid(inputArguments[1]);
+            } else if (command.equals(Keywords.DELETE_DRINKS)) {
+                fluid.deleteFluid(inputArguments[1]);
+            } else if (command.equals(Keywords.LIST_DRINKS)) {
+                fluid.listFluid();
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
                 weightTracker.readInput(input);
 
