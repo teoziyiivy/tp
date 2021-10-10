@@ -2,6 +2,8 @@ package seedu.duke;
 
 import seedu.duke.gym.GymManager;
 
+import java.time.format.DateTimeParseException;
+
 @SuppressWarnings("ALL")
 public class Duke {
 
@@ -32,7 +34,12 @@ public class Duke {
     }
 
     public void run() {
-        commandManager.commandChecker();
+        try {
+            commandManager.commandChecker();
+        } catch (DateTimeParseException e) {
+            System.out.println("date problem");
+        }
+
     }
 
 
