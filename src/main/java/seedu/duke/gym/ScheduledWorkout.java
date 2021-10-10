@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class ScheduledWorkout extends seedu.duke.Tracker {
+public class ScheduledWorkout extends Tracker {
     private String workoutDescription;
     private LocalDate workoutDate;
     private LocalTime workoutTime;
