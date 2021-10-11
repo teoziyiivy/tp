@@ -1,11 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.gym.GymManager;
-
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
 import static seedu.duke.ClickfitMessages.CREDITS;
 
 public class CommandManager {
@@ -106,12 +103,11 @@ public class CommandManager {
             break;
         case Keywords.INPUT_BYE:
             isExit = true;
+            System.out.println(CREDITS);
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-
-        System.out.println(CREDITS);
     }
 }
