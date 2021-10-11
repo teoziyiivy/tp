@@ -1,7 +1,11 @@
-Noted! CLI.ckFit has recorded your weight as 50. Check back for your progress!
-Here are your recorded weights:
-Your weight was 50 on 9/6/2021.
-Noted! CLI.ckFit has recorded your weight as 40. Check back for your progress!
-Here are your recorded weights:
-Your weight was 50 on 9/6/2021.
-Your weight was 40 on 10/6/2021.
+Hello from
+   ______  _____     _____            __       ________  _   _
+ .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_
+/ .'   \_|  | |       | |      .---.  | | / ]   | |_ \_|__ `| |-'
+| |         | |   _   | |     / /'`\] | '' <    |  _|  [  | | |
+\ `.___.'\ _| |__/ | _| |_  _ | \__.  | |`\ \  _| |_    | | | |,
+ `.____ .'|________||_____|(_)'.___.'[__|  \_]|_____|  [___]\__/
+
+What is your command?
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+    Bye! Hope to see you again soon!
