@@ -6,8 +6,8 @@ import java.time.LocalTime;
 public class CompletedWorkout extends ScheduledWorkout {
     private int caloriesBurned;
 
-    public CompletedWorkout(String workoutDescription, LocalDate workoutDate,
-                            LocalTime workoutTime, int caloriesBurned) {
+    public CompletedWorkout(String workoutDescription, String workoutDate,
+                            String workoutTime, int caloriesBurned) {
         super(workoutDescription, workoutDate, workoutTime);
         this.caloriesBurned = caloriesBurned;
     }

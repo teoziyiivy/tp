@@ -8,15 +8,13 @@ import java.time.LocalTime;
 
 public class ScheduledWorkout extends Tracker {
     private String workoutDescription;
-    private LocalDate workoutDate;
-    private LocalTime workoutTime;
-    private LocalDateTime workoutDateTime;
+    private String workoutDate;
+    private String workoutTime;
 
-    public ScheduledWorkout(String workoutDescription, LocalDate workoutDate, LocalTime workoutTime) {
+    public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime) {
         this.workoutDescription = workoutDescription;
         this.workoutDate = workoutDate;
         this.workoutTime = workoutTime;
-        this.workoutDateTime = LocalDateTime.of(workoutDate, workoutTime);
     }
 
     public String getWorkoutDescription() {
@@ -27,27 +25,12 @@ public class ScheduledWorkout extends Tracker {
         this.workoutDescription = workoutDescription;
     }
 
-    public LocalDate getWorkoutDate() {
+    public String getWorkoutDate() {
         return workoutDate;
     }
 
-    public void setWorkoutDate(LocalDate workoutDate) {
-        this.workoutDate = workoutDate;
-    }
-
-    public LocalTime getWorkoutTime() {
+    public String getWorkoutTime() {
         return workoutTime;
     }
 
-    public void setWorkoutTime(LocalTime workoutTime) {
-        this.workoutTime = workoutTime;
-    }
-
-    public LocalDateTime getWorkoutDateTime() {
-        return workoutDateTime;
-    }
-
-    public void setWorkoutDateTime(LocalDateTime workoutDateTime) {
-        this.workoutDateTime = workoutDateTime;
-    }
 }

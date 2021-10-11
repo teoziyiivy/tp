@@ -52,9 +52,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         int volume = 0;
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/v")) {
-                volume = parseStringToInteger(userInput[i+1]);
+                volume = parseStringToInteger(userInput[i + 1]);
                 break;
             }
         }
