@@ -101,7 +101,6 @@ public class WorkoutTracker extends Tracker {
 
     public void missingDescriptionCheck(String inputArguments) throws DukeException {
         int indexOfFirstCalorieSeparator = inputArguments.indexOf(Parser.CALORIE_SEPARATOR.trim());
-        System.out.println(indexOfFirstCalorieSeparator);
         String subStringBeforeCalorieSeparator;
         if (indexOfFirstCalorieSeparator != -1) { // date separator not found
             subStringBeforeCalorieSeparator = inputArguments.substring(0, indexOfFirstCalorieSeparator).trim();
