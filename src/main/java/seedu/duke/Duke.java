@@ -23,7 +23,6 @@ public class Duke {
 
 
     public Duke() {
-
         meal = new Meal();
         ui = new Ui();
         fluid = new Fluid();
@@ -33,18 +32,12 @@ public class Duke {
         commandManager = new CommandManager(fluid, meal, gymManager, weightTracker, userHelp);
     }
 
-
-    public void run() throws DukeException {
-        commandManager.commandChecker();
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke().run();
-
     public void run() {
         try {
-            commandManager.commandChecker();
-        } catch (DateTimeParseException e) {
+            while (!commandManager.isExit) {
+                commandManager.commandChecker();
+            }
+        } catch (DateTimeParseException | DukeException e) {
             System.out.println("date problem");
         }
     }
@@ -52,9 +45,5 @@ public class Duke {
     public void uiRun() {
         ui.welcomeMessage();
         ui.memoryStartup();
-
     }
-
-
-
 }

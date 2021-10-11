@@ -2,8 +2,12 @@ package seedu.duke;
 
 public class Keywords {
     public static final String INPUT_MEAL = "ate";
-    public static final String INPUT_WORKOUT = "workout";
-    public static final String INPUT_WORKOUT_SCHEDULE = "schedule";
+    public static final String INPUT_WORKOUT = "addworkout";
+    public static final String INPUT_DELETE_WORKOUT = "deleteworkout";
+    public static final String INPUT_LIST_WORKOUT = "listworkout";
+    public static final String INPUT_WORKOUT_SCHEDULE = "addschedule";
+    public static final String INPUT_DELETE_SCHEDULE = "deleteschedule";
+    public static final String INPUT_LIST_SCHEDULE = "listschedule";
     public static final String INPUT_DRINKS = "drank";
     public static final String DELETE_DRINKS = "deletefluid";
     public static final String LIST_DRINKS = "listfluids";
