@@ -15,10 +15,12 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
 
+
     public static void main(String[] args) {
         new Duke().uiRun();
         new Duke().run();
     }
+
 
     public Duke() {
 
@@ -31,6 +33,14 @@ public class Duke {
         commandManager = new CommandManager(fluid, meal, gymManager, weightTracker, userHelp);
     }
 
+
+    public void run() throws DukeException {
+        commandManager.commandChecker();
+    }
+
+    public static void main(String[] args) throws DukeException {
+        new Duke().run();
+
     public void run() {
         try {
             commandManager.commandChecker();
@@ -42,6 +52,7 @@ public class Duke {
     public void uiRun() {
         ui.welcomeMessage();
         ui.memoryStartup();
+
     }
 
 

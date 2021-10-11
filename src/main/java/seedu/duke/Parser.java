@@ -48,6 +48,22 @@ public class Parser {
         return calories;
     }
 
+    public static int getVolume(String inputArguments) throws DukeException {
+        String[] userInput = inputArguments.split(" ");
+        int length = userInput.length;
+        int volume = 0;
+        for (int i = 1; i < length ; i++) {
+            if (userInput[i].equals("/v")) {
+                volume = parseStringToInteger(userInput[i+1]);
+                break;
+            }
+        }
+        if (volume < 0) {
+            throw new DukeException("Negative volume");
+        }
+        return volume;
+    }
+
     public static String getDescription(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(" /c ");
         String description = userInput[0];
@@ -64,7 +80,11 @@ public class Parser {
                 break;
             }
         }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         LocalDate localDate = LocalDate.parse(date, formatter);
         return formatter.format(localDate);
     }

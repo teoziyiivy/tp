@@ -12,7 +12,9 @@ public class Meal extends Tracker{
     protected String description;
     protected String date;
     protected String time;
+
     protected int totalCalories;
+
 
     public Meal() {
         this.meals = new ArrayList<>();
