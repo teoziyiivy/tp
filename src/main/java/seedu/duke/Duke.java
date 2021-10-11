@@ -43,7 +43,4 @@ public class Duke {
         ui.welcomeMessage();
         ui.memoryStartup();
     }
-
-
-
 }

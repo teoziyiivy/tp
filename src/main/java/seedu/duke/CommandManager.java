@@ -30,7 +30,7 @@ public class CommandManager {
         // to handle input= oneword e.g "addschedule" which does not split so inputArguments.length will be 1
         // basically this is to avoid accessing inputArguments[1] which is out of bounds
         // inputArguments is null if user input < 2 words
-        String inputArguments = (splitResult.length == 2) ? splitResult[1] : null;
+        String checkedInputArguments = (inputArguments.length == 2) ? inputArguments[1] : null;
       
         while (!(command.equals(Keywords.INPUT_BYE))) {
 
@@ -41,10 +41,10 @@ public class CommandManager {
             } else if (command.equals(Keywords.LIST_MEAL)) {
                 meal.listMeals();
             } else if (command.equals(Keywords.INPUT_WORKOUT)) {
-                gymManager.addCompletedWorkout(inputArguments);
+                gymManager.addCompletedWorkout(checkedInputArguments);
 
             } else if (command.equals(Keywords.INPUT_WORKOUT_SCHEDULE)) {
-                gymManager.addScheduledWorkout(inputArguments);
+                gymManager.addScheduledWorkout(checkedInputArguments);
 
             } else if (command.equals(Keywords.INPUT_DRINKS)) {
                 fluid.sayDrank(input);
@@ -56,15 +56,15 @@ public class CommandManager {
                 weightTracker.readInput(input);
 
             } else if (command.equals(Keywords.INPUT_HELP)) {
-                userHelp.generateUserHelpParameters(inputArguments);
+                userHelp.generateUserHelpParameters(checkedInputArguments);
 
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
             }
             input = in.nextLine();
-            splitResult = input.trim().split(" ", 2);
-            command = splitResult[0];
-            inputArguments = (splitResult.length == 2) ? splitResult[1] : null;
+            inputArguments = input.trim().split(" ", 2);
+            command = inputArguments[0];
+            checkedInputArguments = (inputArguments.length == 2) ? inputArguments[1] : null;
         }
         System.out.println(CREDITS);
 
