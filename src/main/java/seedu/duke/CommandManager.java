@@ -1,20 +1,23 @@
 package seedu.duke;
 
 import seedu.duke.gym.GymManager;
-
 import java.util.Scanner;
+import static seedu.duke.ClickfitMessages.CREDITS;
 
 public class CommandManager {
     protected GymManager gymManager;
     protected Meal meal;
     protected Fluid fluid;
     protected WeightTracker weightTracker;
+    protected UserHelp userHelp;
 
-    public CommandManager(Fluid fluid, Meal meal, GymManager gymManager, WeightTracker weightTracker) {
+    public CommandManager(Fluid fluid, Meal meal, GymManager gymManager, WeightTracker weightTracker,
+                          UserHelp userHelp) {
         this.fluid = fluid;
         this.meal = meal;
         this.gymManager = gymManager;
         this.weightTracker = weightTracker;
+        this.userHelp = userHelp;
     }
 
     public void commandChecker() {
@@ -49,6 +52,9 @@ public class CommandManager {
             } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
                 weightTracker.readInput(input);
 
+            } else if (command.equals(Keywords.INPUT_HELP)) {
+                userHelp.generateUserHelpParameters(inputArguments);
+
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
             }
@@ -57,7 +63,7 @@ public class CommandManager {
             command = splitResult[0];
             inputArguments = (splitResult.length == 2) ? splitResult[1] : null;
         }
-        System.out.println("    Bye! Hope to see you again soon!");
+        System.out.println(CREDITS);
 
     }
 
