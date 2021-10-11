@@ -31,7 +31,7 @@ class GymManagerTest {
     @Test
     void isScheduledWorkoutNumberWithinRange_inputWithinRange_success() {
         GymManager gm = new GymManager();
-        String argumentInput = "test /d 07/07/2021 /t 7:59PM";
+        String argumentInput = "test /d 07/07/2021 /t 17:59";
         gm.addScheduledWorkout(argumentInput);
         assertTrue(gm.isScheduledWorkoutNumberWithinRange(1));
     }
@@ -49,7 +49,7 @@ class GymManagerTest {
     @Test
     void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() {
         GymManager gm = new GymManager();
-        String argumentInput = "test /c 123 /d 07/07/2021 /t 7:59PM";
+        String argumentInput = "test /c 123 /d 07/07/2021 /t 17:59";
         gm.addCompletedWorkout(argumentInput);
         assertTrue(gm.isCompletedWorkoutNumberWithinRange(1));
     }
@@ -57,14 +57,14 @@ class GymManagerTest {
     @Test
     void scheduledWorkoutSeparatorCheck_MissingSeparator_exceptionThrow() {
         GymManager gm = new GymManager();
-        String argumentInput = "test /d 07/07/2021 7:59PM";
+        String argumentInput = "test /d 07/07/2021 17:59";
         assertThrows(DukeException.class, () -> gm.scheduledWorkoutSeparatorCheck(argumentInput));
     }
 
     @Test
     void completedWorkoutSeparatorCheck_MissingSeparator_exceptionThrow() {
         GymManager gm = new GymManager();
-        String argumentInput = "test 123 07/07/2021 7:59PM";
+        String argumentInput = "test 123 07/07/2021 17:59";
         assertThrows(DukeException.class, () -> gm.scheduledWorkoutSeparatorCheck(argumentInput));
     }
 

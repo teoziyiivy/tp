@@ -48,13 +48,29 @@ public class Parser {
         return calories;
     }
 
+    public static int getVolume(String inputArguments) throws DukeException {
+        String[] userInput = inputArguments.split(" ");
+        int length = userInput.length;
+        int volume = 0;
+        for (int i = 1; i < length; i++) {
+            if (userInput[i].equals("/v")) {
+                volume = parseStringToInteger(userInput[i + 1]);
+                break;
+            }
+        }
+        if (volume < 0) {
+            throw new DukeException("Negative volume");
+        }
+        return volume;
+    }
+
     public static String getDescription(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(" /c ");
         String description = userInput[0];
         return description;
     }
 
-    public static LocalDate getDate(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getDate(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String date = "";
@@ -65,10 +81,11 @@ public class Parser {
             }
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(date, formatter);
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return formatter.format(localDate);
     }
 
-    public static LocalTime getTime(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getTime(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String time = "";
@@ -78,8 +95,9 @@ public class Parser {
                 break;
             }
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
-        return LocalTime.parse(time, formatter);
+        LocalTime localTime = LocalTime.parse(time);
+        String properTime = localTime.format(DateTimeFormatter.ofPattern("h:mma"));
+        return properTime;
     }
 
     public static int getWeight(String inputArguments) throws DukeException {

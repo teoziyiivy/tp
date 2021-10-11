@@ -6,13 +6,12 @@ import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 class FluidTest {
 
     @Test
     void sayDrank() {
         Fluid fluid = new Fluid();
         String input = "drank cola 300 12-12-2021";
-        assertThrows(DateTimeParseException.class, () -> fluid.sayDrank(input));
+        assertThrows(DateTimeParseException.class, () -> fluid.addFluid(input));
     }
 }

@@ -3,8 +3,6 @@ package seedu.duke.gym;
 import seedu.duke.DukeException;
 import seedu.duke.Parser;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -59,8 +57,8 @@ public class GymManager {
             nullArgumentCheck(inputArguments);
             scheduledWorkoutSeparatorCheck(inputArguments);
             String workoutDescription = Parser.getScheduleDescription(inputArguments);
-            LocalDate workoutDate = Parser.getDate(inputArguments);
-            LocalTime workoutTime = Parser.getTime(inputArguments);
+            String workoutDate = Parser.getDate(inputArguments);
+            String workoutTime = Parser.getTime(inputArguments);
             scheduledWorkoutList.add(
                     new ScheduledWorkout(workoutDescription, workoutDate, workoutTime)
             );
@@ -78,8 +76,8 @@ public class GymManager {
             completedWorkoutSeparatorCheck(inputArguments);
             String workoutDescription = Parser.getDescription(inputArguments);
             int caloriesBurned = Parser.getCalories(inputArguments);
-            LocalDate workoutDate = Parser.getDate(inputArguments);
-            LocalTime workoutTime = Parser.getTime(inputArguments);
+            String workoutDate = Parser.getDate(inputArguments);
+            String workoutTime = Parser.getTime(inputArguments);
             completedWorkoutList.add(
                     new CompletedWorkout(workoutDescription, workoutDate, workoutTime, caloriesBurned)
             );
@@ -122,9 +120,9 @@ public class GymManager {
         }
         if (isScheduledWorkoutNumberWithinRange(workoutNumber)) {
             ScheduledWorkout workoutToDelete = scheduledWorkoutList.get(workoutNumber - OFFSET_BY_1);
-            System.out.println("Noted! CLI.ckFit has successfully deleted your scheduled workout of "
-                    + workoutToDelete.getWorkoutDescription() + " at " + workoutToDelete.getWorkoutDate().toString()
-                    + " " + workoutToDelete.getWorkoutTime().toString() + "!");
+            System.out.println("Noted! CLI.ckFit has successfully deleted your scheduled workout of \""
+                    + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
+                    + " at " + workoutToDelete.getWorkoutTime() + "!");
             scheduledWorkoutList.remove(workoutNumber - OFFSET_BY_1);
         } else {
             System.out.println("Failed to delete that workout! Please enter an Integer within range.");
@@ -145,9 +143,9 @@ public class GymManager {
         }
         if (isCompletedWorkoutNumberWithinRange(workoutNumber)) {
             CompletedWorkout workoutToDelete = completedWorkoutList.get(workoutNumber - OFFSET_BY_1);
-            System.out.println("Noted! CLI.ckFit has successfully deleted your completed workout of "
-                    + workoutToDelete.getWorkoutDescription() + " at " + workoutToDelete.getWorkoutDate().toString()
-                    + " " + workoutToDelete.getWorkoutTime().toString() + " where you burned "
+            System.out.println("Noted! CLI.ckFit has successfully deleted your completed workout of \""
+                    + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
+                    + " at " + workoutToDelete.getWorkoutTime() + " where you burned "
                     + workoutToDelete.getCaloriesBurned() + " calories!");
             completedWorkoutList.remove(workoutNumber - OFFSET_BY_1);
         } else {
@@ -165,7 +163,7 @@ public class GymManager {
         for (ScheduledWorkout s : scheduledWorkoutList) {
             //placeholder before user interface class implemented
             System.out.println(currentIndex + ". " + s.getWorkoutDescription() + " (at: "
-                    + s.getWorkoutDate().toString() + " " + s.getWorkoutTime().toString() + ")");
+                    + s.getWorkoutDate() + " " + s.getWorkoutTime() + ")");
             currentIndex++;
         }
     }
@@ -180,7 +178,7 @@ public class GymManager {
         for (CompletedWorkout c : completedWorkoutList) {
             //placeholder before user interface class implemented
             System.out.println(currentIndex + ". " + c.getWorkoutDescription() + " (at: "
-                    + c.getWorkoutDate().toString() + " " + c.getWorkoutTime().toString() + ")(calories burned: "
+                    + c.getWorkoutDate() + " " + c.getWorkoutTime() + " | calories burned: "
                     + c.getCaloriesBurned() + ")");
             currentIndex++;
         }

@@ -1,40 +1,60 @@
 package seedu.duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Fluid {
+public class Fluid extends Tracker {
 
     protected ArrayList<String> fluidArray;
-    protected int numberOfFluids;
+    protected int fluidNumber;
+    protected String description;
+    protected int calories;
+    protected int volume;
+    protected String date;
+    protected String time;
 
     public Fluid() {
         this.fluidArray = new ArrayList<>();
-        this.numberOfFluids = 0;
+        this.fluidNumber = 0;
     }
 
-    public void toPrint(String fluidName, int volume, String date) {
-        System.out.println("Noted! CLI.ckFit has recorded your drink of " + fluidName + " of " + volume
-                + " ml on " + date + "." + "\n");
+    public void generateFluidParameters(String inputArguments) throws DukeException {
+        description = Parser.getDescription(inputArguments);
+        calories = Parser.getCalories(inputArguments);
+        volume = Parser.getVolume(inputArguments);
+        date = Parser.getDate(inputArguments);
+        time = Parser.getTime(inputArguments);
     }
 
-    public void sayDrank(String input) {
-        String[] arrayString = input.split(" ");
-        int lastIndex = arrayString.length - 1;
-        int secondLastIndex = arrayString.length - 2;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dateTime = arrayString[lastIndex];
-        LocalDate localDate = LocalDate.parse(dateTime, formatter);
-        System.out.println("Date Entered: " + formatter.format(localDate) + "\n");
-        String fluidDescription = arrayString[1];
-        for (int i = 2; i < secondLastIndex; i++) {
-            fluidDescription = fluidDescription.concat(" " + arrayString[i]);
+    public void addFluid(String inputArguments) throws DukeException {
+        generateFluidParameters(inputArguments);
+        fluidArray.add(inputArguments);
+        fluidNumber += 1;
+        System.out.println("Noted! CLI.ckFit has recorded your drink of " + description + " of " + calories
+                + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
+    }
+
+    public void deleteFluid(String inputArguments) throws DukeException {
+        int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
+        generateFluidParameters(fluidArray.get(taskNumber));
+        fluidArray.remove(taskNumber);
+        fluidNumber -= 1;
+        System.out.println("Noted! CLI.ckFit has deleted your drink of " + description + " of " + calories
+                + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
+    }
+
+    public void listFluid() {
+        try {
+            int i = 1;
+            for (String fluid : fluidArray) {
+                generateFluidParameters(fluid);
+                System.out.println(i + ". " + description + " of " + calories
+                        + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
+                i++;
+            }
+            System.out.println("\n");
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+            return;
         }
-        int volume = Integer.parseInt(arrayString[secondLastIndex]);
-        String date = arrayString[lastIndex];
-        toPrint(fluidDescription, volume, date);
-        fluidArray.add(input);
-        numberOfFluids += 1;
     }
+
 }
