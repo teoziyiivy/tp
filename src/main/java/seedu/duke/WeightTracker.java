@@ -25,7 +25,11 @@ public class WeightTracker extends Tracker {
         String command = splitLine[0];
         input = input.replaceAll("^" + command + " ", "");
         if (command.equals("checkweight")) {
-            printWeight();
+            try {
+                printWeight();
+            } catch (NoWeightsException e) {
+                printNoWeightsException();
+            }
         } else if (command.equals("addweight")) {
             try {
                 addWeight(input);
@@ -49,18 +53,22 @@ public class WeightTracker extends Tracker {
     }
 
     public void printAddWeightException() {
-        System.out.println("There was a problem adding your weight.\n"
+        System.out.println("CLI.ckFit encountered a problem adding your weight.\n"
                 + "Please follow the format: addweight <weight> /d <date>");
     }
 
     public void printDeleteWeightException() {
-        System.out.println("There was a problem deleting your weight.\n"
+        System.out.println("CLI.ckFit encountered a problem deleting your weight.\n"
                 + "Please follow the format: deleteweight <index>");
     }
 
     public void printDeleteWeightIndexException() {
-        System.out.println("There was a problem deleting your weight.\n"
+        System.out.println("CLI.ckFit encountered a problem deleting your weight.\n"
                 + "Please ensure the index is within the list.");
+    }
+
+    public void printNoWeightsException() {
+        System.out.println("CLI.ckFit has no recorded weights.");
     }
 
     public void addWeight(String input) throws AddWeightException {
@@ -92,11 +100,15 @@ public class WeightTracker extends Tracker {
         }
     }
 
-    public void printWeight() {
-        System.out.println("Here are your recorded weights:");
-        for (int i = 0; i < numberOfWeights; i++) {
-            System.out.println((i + 1) + ". " + getWeight(weightsArray.get(i)) + " on "
-                    + getDate(weightsArray.get(i)));
+    public void printWeight() throws NoWeightsException {
+        if (numberOfWeights == 0) {
+            throw new NoWeightsException();
+        } else {
+            System.out.println("Here are your recorded weights:");
+            for (int i = 0; i < numberOfWeights; i++) {
+                System.out.println((i + 1) + ". " + getWeight(weightsArray.get(i)) + " on "
+                        + getDate(weightsArray.get(i)));
+            }
         }
     }
 }
