@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 public class Parser {
 
@@ -16,9 +15,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         int calories = 0;
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < length ; i++) {
             if (userInput[i].equals("/c")) {
-                calories = parseStringToInteger(userInput[i + 1]);
+                calories = parseStringToInteger(userInput[i+1]);
                 break;
             }
         }
@@ -34,42 +33,43 @@ public class Parser {
         return description;
     }
 
-    public static LocalDate getDate(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getDate(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String date = "";
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < length ; i++) {
             if (userInput[i].equals("/d")) {
-                date = userInput[i + 1];
+                date = userInput[i+1];
                 break;
             }
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(date, formatter);
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return formatter.format(localDate);
     }
 
-    public static LocalTime getTime(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getTime(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String time = "";
-        for (int i = 1; i < length; i++) {
+        for (int i = 1; i < length ; i++) {
             if (userInput[i].equals("/t")) {
-                time = userInput[i + 1];
+                time = userInput[i+1];
                 break;
             }
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
-        return LocalTime.parse(time, formatter);
+        LocalTime localTime = LocalTime.parse(time);
+        String properTime = localTime.format(DateTimeFormatter.ofPattern("h:mma"));
+        return properTime;
     }
 
-    public static String getWeight(String inputArguments) throws DukeException {
+    public static int getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(" /d ");
-        String weightString = userInput[0];
-        int weightInt = parseStringToInteger(userInput[0]);
-        if (weightInt < 0) {
+        int weight = parseStringToInteger(userInput[0]);
+        if (weight < 0) {
             throw new DukeException("Negative weight");
         }
-        return weightString;
+        return weight;
     }
 
     public static String getScheduleDescription(String inputArguments) throws DukeException {

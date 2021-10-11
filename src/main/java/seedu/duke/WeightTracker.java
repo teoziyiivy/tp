@@ -1,26 +1,33 @@
 package seedu.duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class WeightTracker extends Tracker {
     protected ArrayList<String> weightsArray;
     protected int numberOfWeights;
-
+    protected int weight;
+    protected String date;
 
     public WeightTracker() {
         this.weightsArray = new ArrayList<>();
         this.numberOfWeights = 0;
     }
 
-    public String getWeight(String input) {
-        return input.replaceAll(" /d.+", "");
+    public void generateWeightParameters(String inputArguments) {
+        try {
+            weight = Parser.getWeight(inputArguments);
+            date = Parser.getDate(inputArguments);
+        } catch (NumberFormatException e) {
+            return;
+        } catch (DukeException e) {
+            return;
+        }
     }
 
-    public String getDate(String input) {
-        return input.replaceAll(".+/d ", "");
-    }
-
-    public void readInput(String input) {
+    public void readInput(String input)
+            throws NumberFormatException, DukeException, DateTimeParseException {
         String[] splitLine = input.split(" ", 2);
         String command = splitLine[0];
         input = input.replaceAll("^" + command + " ", "");
@@ -47,14 +54,14 @@ public class WeightTracker extends Tracker {
         }
     }
 
-    public void printAddWeightResponse(String weight, String date) {
+    public void printAddWeightResponse(int weight, String date) {
         System.out.println("Noted! CLI.ckFit has recorded your weight as "
                 + weight + " on " + date + ". Check back for your progress!");
     }
 
     public void printAddWeightException() {
         System.out.println("CLI.ckFit encountered a problem adding your weight.\n"
-                + "Please follow the format: addweight <weight> /d <date>");
+                + "Please follow the format: addweight <weight> /d <DD/MM/YYYY>");
     }
 
     public void printDeleteWeightException() {
@@ -71,13 +78,11 @@ public class WeightTracker extends Tracker {
         System.out.println("CLI.ckFit has no recorded weights.");
     }
 
-    public void addWeight(String input) throws AddWeightException {
+    public void addWeight(String input) throws AddWeightException, DateTimeParseException {
+        generateWeightParameters(input);
         if (!input.matches("(.*) /d (.*)")) {
             throw new AddWeightException();
         } else {
-            //extracting the weight and date
-            String weight = getWeight(input);
-            String date = getDate(input);
             //weights.add(new WeightTracker(weight, date));
             printAddWeightResponse(weight, date);
             weightsArray.add(input);
@@ -93,10 +98,12 @@ public class WeightTracker extends Tracker {
         if (weightIndex > numberOfWeights) {
             throw new DeleteWeightIndexException();
         } else {
-            String weightToRemove = weightsArray.get(weightIndex - 1);
+            String indexToRemove = weightsArray.get(weightIndex - 1);
+            generateWeightParameters(indexToRemove);
             System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
-                    + getWeight(weightToRemove) + " on " + getDate(weightToRemove) + ".");
+                    + weight + " on " + date + ".");
             weightsArray.remove(weightIndex - 1);
+            numberOfWeights = numberOfWeights - 1;
         }
     }
 
@@ -106,8 +113,9 @@ public class WeightTracker extends Tracker {
         } else {
             System.out.println("Here are your recorded weights:");
             for (int i = 0; i < numberOfWeights; i++) {
-                System.out.println((i + 1) + ". " + getWeight(weightsArray.get(i)) + " on "
-                        + getDate(weightsArray.get(i)));
+                String indexToPrint = weightsArray.get(i);
+                generateWeightParameters(indexToPrint);
+                System.out.println((i + 1) + ". " + weight + " on " + date);
             }
         }
     }

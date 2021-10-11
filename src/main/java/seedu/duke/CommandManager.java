@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.gym.GymManager;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class CommandManager {
@@ -40,14 +41,25 @@ public class CommandManager {
                 fluid.sayDrank(input);
 
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
-                weightTracker.readInput(input);
-
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                } catch (DateTimeParseException e) {
+                    weightTracker.printAddWeightException();
+                }
             } else if (command.equals(Keywords.INPUT_DELETE_WEIGHT)) {
-                weightTracker.readInput(input);
-
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                }
             } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
-                weightTracker.readInput(input);
-
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                }
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
             }

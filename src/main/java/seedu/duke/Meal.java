@@ -11,8 +11,8 @@ public class Meal extends Tracker{
     protected int mealNumber;
     protected int calories;
     protected String description;
-    protected LocalDate date;
-    protected LocalTime time;
+    protected String date;
+    protected String time;
 
     public Meal() {
         this.meals = new ArrayList<>();
