@@ -66,5 +66,4 @@ public class Meal extends Tracker{
         System.out.println("Total number of meals: " + mealNumber);
         System.out.println("Total calories: " + totalCalories);
     }
-
 }

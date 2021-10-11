@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.gym.GymManager;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import static seedu.duke.ClickfitMessages.CREDITS;
 
@@ -20,12 +22,13 @@ public class CommandManager {
         this.userHelp = userHelp;
     }
 
-    public void commandChecker() {
+    public void commandChecker() throws DukeException {
         String input;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
         String[] inputArguments = input.trim().split(" ", 2);
         String command = inputArguments[0];
+
         // naming/way is implemented can be changed,
         // to handle input= oneword e.g "addschedule" which does not split so inputArguments.length will be 1
         // basically this is to avoid accessing inputArguments[1] which is out of bounds
@@ -47,19 +50,43 @@ public class CommandManager {
                 gymManager.addScheduledWorkout(inputArguments);
 
             } else if (command.equals(Keywords.INPUT_DRINKS)) {
-                fluid.sayDrank(input);
-
+                try {
+                    fluid.addFluid(inputArguments[1]);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter in the format: deadline (desc) /d dd/mm/yyyy");
+                }
+              else if (command.equals(Keywords.DELETE_DRINKS)) {
+                fluid.deleteFluid(inputArguments[1]);
+              }
+              else if (command.equals(Keywords.LIST_DRINKS)) {
+                fluid.listFluid();
+              }
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
-                weightTracker.readInput(input);
-
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                } catch (DateTimeParseException e) {
+                    weightTracker.printAddWeightException();
+                }
+            } else if (command.equals(Keywords.INPUT_DELETE_WEIGHT)) {
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                }
             } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                }
                 weightTracker.readInput(input);
-
             } else if (command.equals(Keywords.INPUT_HELP)) {
                 userHelp.generateUserHelpParameters(inputArguments);
-
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
+                break;
             }
             input = in.nextLine();
             splitResult = input.trim().split(" ", 2);
@@ -67,7 +94,5 @@ public class CommandManager {
             inputArguments = (splitResult.length == 2) ? splitResult[1] : null;
         }
         System.out.println(CREDITS);
-
     }
-
 }
