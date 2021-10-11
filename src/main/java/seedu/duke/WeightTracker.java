@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -19,10 +18,8 @@ public class WeightTracker extends Tracker {
         try {
             weight = Parser.getWeight(inputArguments);
             date = Parser.getDate(inputArguments);
-        } catch (NumberFormatException e) {
-            return;
-        } catch (DukeException e) {
-            return;
+        } catch (NumberFormatException | DukeException e) {
+            printAddWeightException();
         }
     }
 
