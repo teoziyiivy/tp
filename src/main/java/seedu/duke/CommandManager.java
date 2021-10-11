@@ -1,10 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.gym.GymManager;
-
-
 import java.time.format.DateTimeParseException;
-
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import static seedu.duke.ClickfitMessages.CREDITS;
 
@@ -64,14 +62,28 @@ public class CommandManager {
                 fluid.listFluid();
               }
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
-                weightTracker.readInput(input);
-
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                } catch (DateTimeParseException e) {
+                    weightTracker.printAddWeightException();
+                }
+            } else if (command.equals(Keywords.INPUT_DELETE_WEIGHT)) {
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                }
             } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
+                try {
+                    weightTracker.readInput(input);
+                } catch (DukeException e) {
+                    return;
+                }
                 weightTracker.readInput(input);
-
             } else if (command.equals(Keywords.INPUT_HELP)) {
                 userHelp.generateUserHelpParameters(inputArguments);
-
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
                 break;
@@ -82,7 +94,5 @@ public class CommandManager {
             inputArguments = (splitResult.length == 2) ? splitResult[1] : null;
         }
         System.out.println(CREDITS);
-
     }
-
 }
