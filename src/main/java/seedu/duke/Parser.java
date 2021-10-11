@@ -96,4 +96,9 @@ public class Parser {
         String description = userInput[0];
         return description;
     }
+
+    public static String getHelpDescription(String inputArguments) {
+        String description = inputArguments;
+        return description;
+    }
 }
