@@ -48,9 +48,10 @@ public class Fluid extends Tracker {
             for (String fluid : fluidArray) {
                 generateFluidParameters(fluid);
                 System.out.println(i + ". " + description + " of " + calories
-                        + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
+                        + " calories and " + volume + " ml on " + date + " at " + time + "." + "\n");
                 i++;
             }
+
             System.out.println("\n");
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             return;

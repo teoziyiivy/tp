@@ -6,9 +6,8 @@ import static seedu.duke.ClickfitMessages.HELP_UG;
 public class UserHelp {
 
     public static void generateUserHelpParameters(String input) {
-        if (input.trim().equals("commands")) {
+        if (input != null && input.trim().equals("commands")) {
             getCommands();
-
         } else {
             getUG();
         }
