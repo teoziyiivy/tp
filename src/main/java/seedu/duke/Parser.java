@@ -54,7 +54,7 @@ public class Parser {
         return description;
     }
 
-    public static LocalDate getDate(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getDate(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String date = "";
@@ -65,10 +65,11 @@ public class Parser {
             }
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(date, formatter);
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return formatter.format(localDate);
     }
 
-    public static LocalTime getTime(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getTime(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String time = "";
@@ -78,8 +79,9 @@ public class Parser {
                 break;
             }
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
-        return LocalTime.parse(time, formatter);
+        LocalTime localTime = LocalTime.parse(time);
+        String properTime = localTime.format(DateTimeFormatter.ofPattern("h:mma"));
+        return properTime;
     }
 
     public static int getWeight(String inputArguments) throws DukeException {

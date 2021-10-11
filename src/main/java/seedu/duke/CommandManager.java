@@ -24,19 +24,22 @@ public class CommandManager {
         String input;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
-        String[] splitResult = input.trim().split(" ", 2); //todo: maybe also add this to parser class?
-        String command = splitResult[0];
+        String[] inputArguments = input.trim().split(" ", 2);
+        String command = inputArguments[0];
         // naming/way is implemented can be changed,
         // to handle input= oneword e.g "addschedule" which does not split so inputArguments.length will be 1
         // basically this is to avoid accessing inputArguments[1] which is out of bounds
         // inputArguments is null if user input < 2 words
         String inputArguments = (splitResult.length == 2) ? splitResult[1] : null;
-
+      
         while (!(command.equals(Keywords.INPUT_BYE))) {
 
             if (command.equals(Keywords.INPUT_MEAL)) {
-                meal.addMeal(input);
-
+                meal.addMeal(inputArguments[1]);
+            } else if (command.equals(Keywords.DELETE_MEAL)) {
+                meal.deleteMeal(inputArguments[1]);
+            } else if (command.equals(Keywords.LIST_MEAL)) {
+                meal.listMeals();
             } else if (command.equals(Keywords.INPUT_WORKOUT)) {
                 gymManager.addCompletedWorkout(inputArguments);
 

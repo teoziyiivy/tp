@@ -2,6 +2,8 @@ package seedu.duke;
 
 import seedu.duke.gym.GymManager;
 
+import java.time.format.DateTimeParseException;
+
 @SuppressWarnings("ALL")
 public class Duke {
 
@@ -15,7 +17,7 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke().uiRun();
-        new Duke().runProcesses();
+        new Duke().run();
     }
 
     public Duke() {
@@ -29,8 +31,12 @@ public class Duke {
         commandManager = new CommandManager(fluid, meal, gymManager, weightTracker, userHelp);
     }
 
-    public void runProcesses() {
-        commandManager.commandChecker();
+    public void run() {
+        try {
+            commandManager.commandChecker();
+        } catch (DateTimeParseException e) {
+            System.out.println("date problem");
+        }
     }
 
     public void uiRun() {
