@@ -30,6 +30,7 @@ public class WorkoutTracker extends Tracker {
     public void addWorkout(String inputArguments)
             throws DukeException, DateTimeParseException, NumberFormatException {
         nullArgumentCheck(inputArguments);
+        missingDescriptionCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         workoutSeparatorCheck(inputArguments);
         generateWorkoutParameters(inputArguments);
@@ -96,5 +97,20 @@ public class WorkoutTracker extends Tracker {
         int upperBound = workoutList.size();
         int lowerBound = LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING;
         return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound);
+    }
+
+    public void missingDescriptionCheck(String inputArguments) throws DukeException {
+        int indexOfFirstCalorieSeparator = inputArguments.indexOf(Parser.CALORIE_SEPARATOR.trim());
+        System.out.println(indexOfFirstCalorieSeparator);
+        String subStringBeforeCalorieSeparator;
+        if (indexOfFirstCalorieSeparator != -1) { // date separator not found
+            subStringBeforeCalorieSeparator = inputArguments.substring(0, indexOfFirstCalorieSeparator).trim();
+        } else {
+            throw new DukeException("Invalid or missing separator... Please try again!");
+        }
+        if (subStringBeforeCalorieSeparator.isEmpty()) {
+            throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
+                    + "Please enter a description!");
+        }
     }
 }

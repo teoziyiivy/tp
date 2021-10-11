@@ -28,7 +28,7 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
-    public static int getCalories(String inputArguments) throws DukeException {
+    public static int getCalories(String inputArguments) throws DukeException, NumberFormatException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         int calories = 0;

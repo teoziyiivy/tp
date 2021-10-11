@@ -55,37 +55,46 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void deleteWorkout_nonInteger_exceptionThrow() {
+    void deleteWorkout_nonInteger_exceptionThrow() throws DukeException {
         WorkoutTracker wt = new WorkoutTracker();
-        String inputArguments = "@!$!@$!";
-        assertThrows(DukeException.class, () -> wt.deleteWorkout(inputArguments));
+        String argumentInput1 = "test /c 123 /d 07/07/2021 /t 17:59";
+        wt.addWorkout(argumentInput1);
+        String argumentInput2 = "@!$!@$!";
+        assertThrows(NumberFormatException.class, () -> wt.deleteWorkout(argumentInput2));
     }
 
     @Test
     void addWorkout_missingSeparator_exceptionThrow() {
-        ScheduleTracker st = new ScheduleTracker();
+        WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 07/07/2021 17:59";
-        assertThrows(DukeException.class, () -> st.addScheduledWorkout(argumentInput));
+        assertThrows(DukeException.class, () -> wt.addWorkout(argumentInput));
     }
 
     @Test
     void addWorkout_invalidDateFormat_exceptionThrow() {
-        ScheduleTracker st = new ScheduleTracker();
+        WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 /d 07-07-2021 /t 17:59";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput));
+        assertThrows(DateTimeParseException.class, () -> wt.addWorkout(argumentInput));
     }
 
     @Test
     void addWorkout_invalidTimeFormat_exceptionThrow() {
-        ScheduleTracker st = new ScheduleTracker();
+        WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 /d 07/07/2021 /t 7pm";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput));
+        assertThrows(DateTimeParseException.class, () -> wt.addWorkout(argumentInput));
     }
 
     @Test
     void addWorkout_nonIntegerCalorie_exceptionThrow() {
-        ScheduleTracker st = new ScheduleTracker();
-        String argumentInput = "test c/ @$! /d 07/07/2021 /t 7pm";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput));
+        WorkoutTracker wt = new WorkoutTracker();
+        String argumentInput = "test /c @$! /d 07/07/2021 /t 7:59";
+        assertThrows(NumberFormatException.class, () -> wt.addWorkout(argumentInput));
+    }
+
+    @Test
+    void missingDescriptionCheck_missingDescription_exceptionThrow() {
+        WorkoutTracker wt = new WorkoutTracker();
+        String argumentInput = "  /c 123 /d 07/07/2021 /t 07:59";
+        assertThrows(DukeException.class, () -> wt.missingDescriptionCheck(argumentInput));
     }
 }
