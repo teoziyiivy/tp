@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-public class Meal extends Tracker{
+public class Meal extends Tracker {
     protected ArrayList<String> meals;
     protected int mealNumber;
     protected int calories;
@@ -27,7 +27,7 @@ public class Meal extends Tracker{
             date = Parser.getDate(inputArguments);
             time = Parser.getTime(inputArguments);
         } catch (NumberFormatException e) {
-
+            return;
         } catch (DukeException e) {
             System.out.println("run away");
         }
@@ -50,7 +50,7 @@ public class Meal extends Tracker{
         mealNumber -= 1;
         totalCalories -= calories;
         System.out.println(description + " will be removed from your list of meals consumed. You now "
-                           + "have " + totalCalories + " left!\n");
+                + "have " + totalCalories + " left!\n");
     }
 
     public void listMeals() throws DateTimeParseException, NumberFormatException {
@@ -66,5 +66,4 @@ public class Meal extends Tracker{
         System.out.println("Total number of meals: " + mealNumber);
         System.out.println("Total calories: " + totalCalories);
     }
-
 }

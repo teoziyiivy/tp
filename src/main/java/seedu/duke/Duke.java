@@ -15,13 +15,14 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
 
+
     public static void main(String[] args) {
         new Duke().uiRun();
         new Duke().run();
     }
 
-    public Duke() {
 
+    public Duke() {
         meal = new Meal();
         ui = new Ui();
         fluid = new Fluid();
@@ -33,8 +34,10 @@ public class Duke {
 
     public void run() {
         try {
-            commandManager.commandChecker();
-        } catch (DateTimeParseException e) {
+            while (!commandManager.isExit) {
+                commandManager.commandChecker();
+            }
+        } catch (DateTimeParseException | DukeException e) {
             System.out.println("date problem");
         }
     }
