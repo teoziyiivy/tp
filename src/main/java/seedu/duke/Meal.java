@@ -2,7 +2,6 @@ package seedu.duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -14,9 +13,13 @@ public class Meal extends Tracker{
     protected String date;
     protected String time;
 
+    protected int totalCalories;
+
+
     public Meal() {
         this.meals = new ArrayList<>();
         this.mealNumber = 0;
+        this.totalCalories = 0;
     }
 
     public void generateMealParameters(String inputArguments) {
@@ -28,29 +31,42 @@ public class Meal extends Tracker{
         } catch (NumberFormatException e) {
 
         } catch (DukeException e) {
-
-        } catch (DateTimeParseException e) {
-
+            System.out.println("run away");
         }
     }
 
-    public void addMeal(String meal) throws DateTimeParseException, NumberFormatException {
-        String[] userInput = meal.split(" ");
-        int calorieIndex = userInput.length - 2;
-        int dateIndex = userInput.length - 1;
-        int calories = Integer.parseInt(userInput[calorieIndex]);
-        String mealDescription = userInput[1];
-        for (int i = 2; i < calorieIndex; i++) {
-            mealDescription = mealDescription.concat(" " + userInput[i]);
-        }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String date = userInput[dateIndex];
-        LocalDate localDate = LocalDate.parse(date, formatter);
+    public void addMeal(String inputArguments) throws DateTimeParseException, NumberFormatException {
+        generateMealParameters(inputArguments);
         System.out.println("Noted! CLI.ckFit has recorded your meal of "
-                + mealDescription + " on " + formatter.format(localDate)
+                + description + " on " + date + " and at " + time
                 + ". " + calories + " calories has been added to the calorie count!\n");
-        meals.add(meal);
+        totalCalories += calories;
+        meals.add(inputArguments);
         mealNumber += 1;
+    }
+
+    public void deleteMeal(String inputArguments) throws DateTimeParseException, NumberFormatException {
+        int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        generateMealParameters(meals.get(mealIndex));
+        meals.remove(mealIndex);
+        mealNumber -= 1;
+        totalCalories -= calories;
+        System.out.println(description + " will be removed from your list of meals consumed. You now "
+                           + "have " + totalCalories + " left!\n");
+    }
+
+    public void listMeals() throws DateTimeParseException, NumberFormatException {
+        int i = 1;
+        for (String meal : meals) {
+            generateMealParameters(meal);
+            System.out.println(i + ". " + description);
+            System.out.println("Calories: " + calories);
+            System.out.println("Date: " + date);
+            System.out.println("Time: " + time + "\n");
+            i += 1;
+        }
+        System.out.println("Total number of meals: " + mealNumber);
+        System.out.println("Total calories: " + totalCalories);
     }
 
 }
