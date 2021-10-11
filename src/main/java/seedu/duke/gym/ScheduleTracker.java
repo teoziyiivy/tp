@@ -1,5 +1,6 @@
 package seedu.duke.gym;
 
+import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.Parser;
 
@@ -25,6 +26,7 @@ public class ScheduleTracker {
     public void addScheduledWorkout(String inputArguments)
             throws DukeException, DateTimeParseException, NumberFormatException {
         nullArgumentCheck(inputArguments);
+        missingDescriptionCheck(inputArguments);
         scheduledWorkoutSeparatorCheck(inputArguments);
         // index 0: description | index 1: date | index 2: time
         String[] generatedParameters = generateScheduledWorkoutParameters(inputArguments);
@@ -93,6 +95,20 @@ public class ScheduleTracker {
     public void emptyScheduledWorkoutListCheck() throws DukeException {
         if (scheduledWorkoutList.isEmpty()) {
             throw new DukeException("Completed Workout list is empty!");
+        }
+    }
+
+    public void missingDescriptionCheck(String inputArguments) throws DukeException {
+        int indexOfFirstDateSeparator = inputArguments.indexOf(Parser.DATE_SEPARATOR.trim());
+        String subStringBeforeDateSeparator;
+        if (indexOfFirstDateSeparator != -1) { // date separator not found
+            subStringBeforeDateSeparator = inputArguments.substring(0, indexOfFirstDateSeparator).trim();
+        } else {
+            throw new DukeException("Invalid or missing separator... Please try again!");
+        }
+        if (subStringBeforeDateSeparator.isEmpty()) {
+            throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
+                    + "Please enter a description!");
         }
     }
 }

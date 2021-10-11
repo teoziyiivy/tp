@@ -59,10 +59,12 @@ class ScheduleTrackerTest {
 
 
     @Test
-    void deleteScheduledWorkout_nonInteger_exceptionThrow() {
+    void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException {
         ScheduleTracker st = new ScheduleTracker();
-        String inputArguments = "@!$!@$!";
-        assertThrows(DukeException.class, () -> st.deleteScheduledWorkout(inputArguments));
+        String argumentInput1 = "test /d 07/07/2021 /t 17:59";
+        st.addScheduledWorkout(argumentInput1); //must be non empty list
+        String argumentInput2 = "@!$!@$!";
+        assertThrows(NumberFormatException.class, () -> st.deleteScheduledWorkout(argumentInput2));
     }
 
     @Test
@@ -84,5 +86,12 @@ class ScheduleTrackerTest {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2021 /t 7pm";
         assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput));
+    }
+
+    @Test
+    void missingDescriptionCheck_missingDescription_exceptionThrow() {
+        ScheduleTracker st = new ScheduleTracker();
+        String argumentInput = " /d 07/07/2021 /t 07:59";
+        assertThrows(DukeException.class, () -> st.missingDescriptionCheck(argumentInput));
     }
 }

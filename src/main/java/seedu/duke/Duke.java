@@ -19,7 +19,7 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
         new Duke().run();
     }
