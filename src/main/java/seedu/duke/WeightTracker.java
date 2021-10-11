@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-public class WeightTracker {
+public class WeightTracker extends Tracker {
     protected ArrayList<String> weightsArray;
     protected int numberOfWeights;
 
@@ -10,6 +10,14 @@ public class WeightTracker {
     public WeightTracker() {
         this.weightsArray = new ArrayList<>();
         this.numberOfWeights = 0;
+    }
+
+    public String getWeight(String input) {
+        return input.replaceAll(" /d.+", "");
+    }
+
+    public String getDate(String input) {
+        return input.replaceAll(".+/d ", "");
     }
 
     public void readInput(String input) {
@@ -24,6 +32,12 @@ public class WeightTracker {
             } catch (AddWeightException e) {
                 printAddWeightException();
             }
+        } else if (command.equals("deleteweight")) {
+            try {
+                deleteWeight(input);
+            } catch (DeleteWeightException e) {
+                printDeleteWeightException();
+            }
         }
     }
 
@@ -36,13 +50,17 @@ public class WeightTracker {
         System.out.println("There was a problem adding your weight.");
     }
 
+    public void printDeleteWeightException() {
+        System.out.println("There was a problem deleting your weight.");
+    }
+
     public void addWeight(String input) throws AddWeightException {
         if (!input.matches("(.*) (.*)")) {
             throw new AddWeightException();
         } else {
             //extracting the weight and date
-            String weight = input.replaceAll(" .+", "");
-            String date = input.replaceAll(".+ ", "");
+            String weight = getWeight(input);
+            String date = getDate(input);
             //weights.add(new WeightTracker(weight, date));
             printAddWeightResponse(weight, date);
             weightsArray.add(input);
@@ -50,10 +68,23 @@ public class WeightTracker {
         }
     }
 
+    public void deleteWeight(String input) throws DeleteWeightException {
+        int weightIndex = Parser.parseStringToInteger(input);
+        if (weightIndex > numberOfWeights) {
+            throw new DeleteWeightException();
+        } else {
+            String weightToRemove = weightsArray.get(weightIndex - 1);
+            System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
+                    + getWeight(weightToRemove) + " on " + getDate(weightToRemove));
+            weightsArray.remove(weightIndex - 1);
+        }
+    }
+
     public void printWeight() {
         System.out.println("Here are your recorded weights:");
-        for (String a : weightsArray) {
-            System.out.println(a);
+        for (int i = 0; i < numberOfWeights; i++) {
+            System.out.println(getWeight(weightsArray.get(i)) + " "
+                    + getDate(weightsArray.get(i)));
         }
     }
 }

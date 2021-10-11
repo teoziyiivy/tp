@@ -16,9 +16,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         int calories = 0;
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/c")) {
-                calories = parseStringToInteger(userInput[i+1]);
+                calories = parseStringToInteger(userInput[i + 1]);
                 break;
             }
         }
@@ -38,9 +38,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String date = "";
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/d")) {
-                date = userInput[i+1];
+                date = userInput[i + 1];
                 break;
             }
         }
@@ -52,9 +52,9 @@ public class Parser {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
         String time = "";
-        for (int i = 1; i < length ; i++) {
+        for (int i = 1; i < length; i++) {
             if (userInput[i].equals("/t")) {
-                time = userInput[i+1];
+                time = userInput[i + 1];
                 break;
             }
         }
@@ -62,13 +62,14 @@ public class Parser {
         return LocalTime.parse(time, formatter);
     }
 
-    public static int getWeight(String inputArguments) throws DukeException {
+    public static String getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(" /d ");
-        int weight = parseStringToInteger(userInput[0]);
-        if (weight < 0) {
+        String weightString = userInput[0];
+        int weightInt = parseStringToInteger(userInput[0]);
+        if (weightInt < 0) {
             throw new DukeException("Negative weight");
         }
-        return weight;
+        return weightString;
     }
 
     public static String getScheduleDescription(String inputArguments) throws DukeException {

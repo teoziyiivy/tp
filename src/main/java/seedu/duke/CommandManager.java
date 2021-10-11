@@ -42,6 +42,9 @@ public class CommandManager {
             } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
                 weightTracker.readInput(input);
 
+            } else if (command.equals(Keywords.INPUT_DELETE_WEIGHT)) {
+                weightTracker.readInput(input);
+
             } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
                 weightTracker.readInput(input);
 
