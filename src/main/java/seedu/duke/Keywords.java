@@ -10,4 +10,5 @@ public class Keywords {
     public static final String INPUT_BYE = "bye";
     public static final String DELETE_MEAL = "deletemeal";
     public static final String LIST_MEAL = "listmeal";
+    public static final String INPUT_HELP = "help";
 }
