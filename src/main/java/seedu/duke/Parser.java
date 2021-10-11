@@ -7,15 +7,11 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    //todo: replace the separators used in methods below with the final Strings to avoid magic literals
     public static final String DATE_SEPARATOR = " /d ";
     public static final String TIME_SEPARATOR = " /t ";
     public static final String CALORIE_SEPARATOR = " /c ";
     public static final String WHITESPACE = " ";
 
-    // the 3 boolean methods below are helper functions to short circuit
-    // e.g. if you need /c /d /t separators in the input,
-    // if either /c /d /t are missing you can give user an error message and exit the method
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
     }
@@ -109,9 +105,12 @@ public class Parser {
         return weight;
     }
 
-    public static String getScheduleDescription(String inputArguments) {
+    public static String getScheduleDescription(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(" /d ");
         String description = userInput[0];
+        if (userInput.length == 1) {
+            throw new DukeException("Please enter a valid description!");
+        }
         return description;
     }
 
