@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Fluid extends Tracker {
@@ -18,30 +17,23 @@ public class Fluid extends Tracker {
         this.fluidNumber = 0;
     }
 
-    public void generateFluidParameters(String inputArguments) {
-        try {
+    public void generateFluidParameters(String inputArguments) throws DukeException{
             description = Parser.getDescription(inputArguments);
             calories = Parser.getCalories(inputArguments);
             volume = Parser.getVolume(inputArguments);
             date = Parser.getDate(inputArguments);
             time = Parser.getTime(inputArguments);
-        } catch (NumberFormatException e) {
-
-        } catch (DukeException e) {
-
-        } catch (DateTimeParseException e) {
-
-        }
     }
 
-    public void addFluid(String inputArguments) {               //drank cola /c 60 /v 100 /d 12/12/2021 /t 10:30
-        fluidArray.add(inputArguments);                         //drank water /c 0 /v 300 /d 11/11/2021 /t 12:30
-        fluidNumber += 1;                                       //drank juice /c 30 /v 75 /d 03/10/2021 /t 22:30
+    public void addFluid(String inputArguments) throws DukeException {               //drank cola /c 60 /v 100 /d 12/12/2021 /t 10:30
+        generateFluidParameters(inputArguments);                                     //drank water /c 0 /v 300 /d 11/11/2021 /t 12:30
+        fluidArray.add(inputArguments);                                              //drank juice /c 30 /v 75 /d 03/10/2021 /t 22:30
+        fluidNumber += 1;
         System.out.println("Noted! CLI.ckFit has recorded your drink of " + description + " of " + calories
                 + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
     }
 
-    public void deleteFluid(String inputArguments) {
+    public void deleteFluid(String inputArguments) throws DukeException {
         int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
         generateFluidParameters(fluidArray.get(taskNumber));
         fluidArray.remove(taskNumber);
@@ -60,7 +52,7 @@ public class Fluid extends Tracker {
                 i++;
             }
             System.out.println("\n");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
 
         }
     }

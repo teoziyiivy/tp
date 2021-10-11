@@ -30,11 +30,11 @@ public class Duke {
         commandManager = new CommandManager(fluid, meal, gymManager, weightTracker);
     }
 
-    public void run() {
+    public void run() throws DukeException {
         commandManager.commandChecker();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         new Duke().run();
     }
 }

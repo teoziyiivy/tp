@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.gym.GymManager;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class CommandManager {
@@ -17,7 +18,7 @@ public class CommandManager {
         this.weightTracker = weightTracker;
     }
 
-    public void commandChecker() {
+    public void commandChecker() throws DukeException {
         String input;
         Scanner in = new Scanner(System.in);
         input = in.nextLine();
@@ -26,30 +27,36 @@ public class CommandManager {
 
         while (!(command.equals(Keywords.INPUT_BYE))) {
 
-            if (command.equals(Keywords.INPUT_MEAL)) {
+            switch (command) {
+            case Keywords.INPUT_MEAL:
                 meal.addMeal(input);
-
-            } else if (command.equals(Keywords.INPUT_WORKOUT)) {
+                break;
+            case Keywords.INPUT_WORKOUT:
                 gymManager.doneGymWorkout(inputArguments[1]);
-
-            } else if (command.equals(Keywords.INPUT_WORKOUT_SCHEDULE)) {
+                break;
+            case Keywords.INPUT_WORKOUT_SCHEDULE:
                 gymManager.addGymWorkout(inputArguments[1]);
-
-            } else if (command.equals(Keywords.INPUT_DRINKS)) {
-                fluid.generateFluidParameters(inputArguments[1]);
-                fluid.addFluid(inputArguments[1]);
-            } else if (command.equals(Keywords.DELETE_DRINKS)) {
+                break;
+            case Keywords.INPUT_DRINKS:
+                try {
+                    fluid.addFluid(inputArguments[1]);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter in the format: deadline (desc) /d dd/mm/yyyy");
+                }
+                break;
+            case Keywords.DELETE_DRINKS:
                 fluid.deleteFluid(inputArguments[1]);
-            } else if (command.equals(Keywords.LIST_DRINKS)) {
+                break;
+            case Keywords.LIST_DRINKS:
                 fluid.listFluid();
-            } else if (command.equals(Keywords.INPUT_ADD_WEIGHT)) {
+                break;
+            case Keywords.INPUT_ADD_WEIGHT:
+            case Keywords.INPUT_CHECK_WEIGHT:
                 weightTracker.readInput(input);
-
-            } else if (command.equals(Keywords.INPUT_CHECK_WEIGHT)) {
-                weightTracker.readInput(input);
-
-            } else {
+                break;
+            default:
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
+                break;
             }
             input = in.nextLine();
             inputArguments = input.trim().split(" ", 2);

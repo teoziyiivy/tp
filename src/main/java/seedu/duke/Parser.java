@@ -60,7 +60,7 @@ public class Parser {
                 break;
             }
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
         return formatter.format(localDate);
     }
