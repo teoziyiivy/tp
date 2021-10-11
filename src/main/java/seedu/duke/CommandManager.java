@@ -1,11 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.gym.GymManager;
-
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
 import static seedu.duke.ClickfitMessages.CREDITS;
 
 public class CommandManager {
@@ -65,14 +62,28 @@ public class CommandManager {
             gymManager.listScheduledWorkouts();
             break;
         case Keywords.INPUT_DRINKS:
-            try {
-                fluid.addFluid(inputArguments);
-            } catch (DateTimeParseException e) {
-                System.out.println("Please enter in the format: deadline (desc) /d dd/mm/yyyy");
+            if (inputArguments != null) {
+                try {
+                    fluid.addFluid(inputArguments);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
+                            + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
+                }
+            } else {
+                System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
+                        + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
             }
             break;
         case Keywords.DELETE_DRINKS:
-            fluid.deleteFluid(inputArguments);
+            if (inputArguments != null) {
+                if (fluid.fluidArray.size() == 0) {
+                    System.out.println("You have no existing fluid entries to delete.");
+                } else {
+                    fluid.deleteFluid(inputArguments);
+                }
+            } else {
+                System.out.println("Please enter in the format: deletefluid [entry_number]");
+            }
             break;
         case Keywords.LIST_DRINKS:
             fluid.listFluid();
@@ -102,16 +113,15 @@ public class CommandManager {
             weightTracker.readInput(input);
             break;
         case Keywords.INPUT_HELP:
-            userHelp.generateUserHelpParameters(inputArguments);
+            UserHelp.generateUserHelpParameters(inputArguments);
             break;
         case Keywords.INPUT_BYE:
             isExit = true;
+            System.out.println(CREDITS);
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");//overall error check
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-
-        System.out.println(CREDITS);
     }
 }

@@ -15,12 +15,10 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
 
-
     public static void main(String[] args) {
         new Duke().uiRun();
         new Duke().run();
     }
-
 
     public Duke() {
         meal = new Meal();
