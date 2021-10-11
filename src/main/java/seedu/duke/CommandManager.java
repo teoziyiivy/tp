@@ -66,12 +66,12 @@ public class CommandManager {
                 try {
                     fluid.addFluid(inputArguments);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] " +
-                            "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
+                    System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
+                            + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
                 }
             } else {
-                System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] " +
-                        "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
+                System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
+                        + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
             }
             break;
         case Keywords.DELETE_DRINKS:
