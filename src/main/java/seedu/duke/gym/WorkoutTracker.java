@@ -23,15 +23,17 @@ public class WorkoutTracker extends Tracker {
 
     public void generateWorkoutParameters(String inputArguments)
             throws DukeException, DateTimeParseException, NumberFormatException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting generation of parameters for workout.");
         workoutDescription = Parser.getDescription(inputArguments);
         caloriesBurned = Parser.getCalories(inputArguments);
         workoutDate = Parser.getDate(inputArguments);
         workoutTime = Parser.getTime(inputArguments);
-        GlobalLogger.LOGGER.log(Level.INFO,"Successfully generated parameters for scheduled workout.");
+        GlobalLogger.LOGGER.log(Level.INFO,"Successfully generated parameters for workout.");
     }
 
     public void addWorkout(String inputArguments)
             throws DukeException, DateTimeParseException, NumberFormatException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting to try and add workout.");
         nullArgumentCheck(inputArguments);
         missingDescriptionCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
@@ -45,6 +47,7 @@ public class WorkoutTracker extends Tracker {
     }
 
     public void deleteWorkout(String inputArguments) throws DukeException, NumberFormatException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting to try and delete workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         emptyWorkoutListCheck();
@@ -66,6 +69,7 @@ public class WorkoutTracker extends Tracker {
 
     public void listWorkouts()
             throws DukeException, DateTimeParseException, NumberFormatException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting to try and list workouts.");
         emptyWorkoutListCheck();
         assert workoutList.size() > 0 : "List should be non empty at this point";
         int currentIndex = 1;

@@ -18,7 +18,9 @@ public class ScheduleTracker {
         scheduledWorkoutList = new ArrayList<>();
     }
 
-    public static String[] generateScheduledWorkoutParameters(String inputArguments) throws DukeException {
+    public static String[] generateScheduledWorkoutParameters(String inputArguments)
+            throws DukeException, DateTimeParseException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting generation of parameters for scheduled workout.");
         String workoutDescription = Parser.getScheduleDescription(inputArguments);
         String workoutDate = Parser.getDate(inputArguments);
         String workoutTime = Parser.getTime(inputArguments);
@@ -29,6 +31,7 @@ public class ScheduleTracker {
 
     public void addScheduledWorkout(String inputArguments)
             throws DukeException, DateTimeParseException, NumberFormatException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
         missingDescriptionCheck(inputArguments);
         scheduledWorkoutSeparatorCheck(inputArguments);
@@ -54,6 +57,7 @@ public class ScheduleTracker {
     }
 
     public void deleteScheduledWorkout(String inputArguments) throws DukeException, NumberFormatException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting to try and delete scheduled workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         emptyScheduledWorkoutListCheck();
@@ -75,6 +79,7 @@ public class ScheduleTracker {
     }
 
     public void listScheduledWorkouts() throws DukeException {
+        GlobalLogger.LOGGER.log(Level.INFO,"Starting to try and list scheduled workouts.");
         emptyScheduledWorkoutListCheck();
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkoutList) {
