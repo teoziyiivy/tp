@@ -1,6 +1,5 @@
 package seedu.duke.gym;
 
-import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.Parser;
 
@@ -30,7 +29,7 @@ public class ScheduleTracker {
         scheduledWorkoutSeparatorCheck(inputArguments);
         // index 0: description | index 1: date | index 2: time
         String[] generatedParameters = generateScheduledWorkoutParameters(inputArguments);
-        assert generatedParameters.length == 3 : "exactly 3 parameters should be generated";
+        assert generatedParameters.length == 3 : "Exactly 3 parameters should be generated";
         String workoutDescription = generatedParameters[0];
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
@@ -68,7 +67,6 @@ public class ScheduleTracker {
 
     public void listScheduledWorkouts() throws DukeException {
         emptyScheduledWorkoutListCheck();
-
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkoutList) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription());
@@ -80,7 +78,8 @@ public class ScheduleTracker {
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
         if (inputArguments == null) {
-            throw new DukeException("Please enter an argument!");
+            throw new DukeException("Please enter arguments in the format: schedule [workout_description] "
+                    + "/d [dd/mm/yyyy] /t [hh:mm]");
         }
     }
 
@@ -88,13 +87,14 @@ public class ScheduleTracker {
         boolean areSeparatorsCorrect = Parser.containsDateSeparator(inputArguments)
                 && Parser.containsTimeSeparator(inputArguments);
         if (!areSeparatorsCorrect) {
-            throw new DukeException("Invalid or missing separator... Please try again!");
+            throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
+                    + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]");
         }
     }
 
     public void emptyScheduledWorkoutListCheck() throws DukeException {
         if (scheduledWorkoutList.isEmpty()) {
-            throw new DukeException("Completed Workout list is empty!");
+            throw new DukeException("Scheduled Workout list is empty!");
         }
     }
 
@@ -104,11 +104,12 @@ public class ScheduleTracker {
         if (indexOfFirstDateSeparator != -1) { // date separator not found
             subStringBeforeDateSeparator = inputArguments.substring(0, indexOfFirstDateSeparator).trim();
         } else {
-            throw new DukeException("Invalid or missing separator... Please try again!");
+            throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
+                    + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]");
         }
         if (subStringBeforeDateSeparator.isEmpty()) {
             throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
-                    + "Please enter a description!");
+                    + "Please enter a description for your workout!");
         }
     }
 }

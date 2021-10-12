@@ -77,7 +77,9 @@ public class WorkoutTracker extends Tracker {
                 && Parser.containsDateSeparator(inputArguments)
                 && Parser.containsTimeSeparator(inputArguments);
         if (!areSeparatorsCorrect) {
-            throw new DukeException("Invalid or missing separator... Please try again!");
+            throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
+                    + "Please enter in the format: workout [workout_description] /c [calories_burned]"
+                    + " /d [dd/mm/yyyy] /t [hh:mm]");
         }
     }
 
@@ -105,11 +107,13 @@ public class WorkoutTracker extends Tracker {
         if (indexOfFirstCalorieSeparator != -1) { // date separator not found
             subStringBeforeCalorieSeparator = inputArguments.substring(0, indexOfFirstCalorieSeparator).trim();
         } else {
-            throw new DukeException("Invalid or missing separator... Please try again!");
+            throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
+                    + "Please enter in the format: workout [workout_description] /c [calories_burned]"
+                    + " /d [dd/mm/yyyy] /t [hh:mm]");
         }
         if (subStringBeforeCalorieSeparator.isEmpty()) {
             throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
-                    + "Please enter a description!");
+                    + "Please enter a workout description!");
         }
     }
 }
