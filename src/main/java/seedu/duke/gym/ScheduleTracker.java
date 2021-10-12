@@ -23,7 +23,7 @@ public class ScheduleTracker {
         String workoutDate = Parser.getDate(inputArguments);
         String workoutTime = Parser.getTime(inputArguments);
         String[] generatedParameters = {workoutDescription, workoutDate, workoutTime};
-        GlobalLogger.LOGGER.log(Level.INFO,"Successfully generated parameters for schedule work.");
+        GlobalLogger.LOGGER.log(Level.INFO,"Successfully generated parameters for scheduled workout.");
         return generatedParameters;
     }
 

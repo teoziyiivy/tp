@@ -27,6 +27,7 @@ public class WorkoutTracker extends Tracker {
         caloriesBurned = Parser.getCalories(inputArguments);
         workoutDate = Parser.getDate(inputArguments);
         workoutTime = Parser.getTime(inputArguments);
+        GlobalLogger.LOGGER.log(Level.INFO,"Successfully generated parameters for scheduled workout.");
     }
 
     public void addWorkout(String inputArguments)
