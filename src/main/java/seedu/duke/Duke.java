@@ -4,8 +4,7 @@ import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
 import java.time.format.DateTimeParseException;
-
-import static seedu.duke.ClickfitMessages.CREDITS;
+import java.util.logging.LogManager;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -18,6 +17,8 @@ public class Duke {
     private WeightTracker weightTracker;
     private CommandManager commandManager;
     private UserHelp userHelp;
+    private GlobalLogger loggers;
+
 
     public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
@@ -32,6 +33,7 @@ public class Duke {
         workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
+        loggers = new GlobalLogger();
         commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
     }
 
@@ -45,7 +47,7 @@ public class Duke {
                 continue;
             }
         }
-        System.out.println(CREDITS);
+        LogManager.getLogManager().reset(); //clear settings, close log handlers
     }
 
     public void uiRun() {

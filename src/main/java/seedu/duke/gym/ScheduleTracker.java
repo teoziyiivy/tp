@@ -1,10 +1,14 @@
 package seedu.duke.gym;
 
+
+import seedu.duke.GlobalLogger;
 import seedu.duke.DukeException;
 import seedu.duke.Parser;
 
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class ScheduleTracker {
     private ArrayList<ScheduledWorkout> scheduledWorkoutList;
@@ -19,6 +23,7 @@ public class ScheduleTracker {
         String workoutDate = Parser.getDate(inputArguments);
         String workoutTime = Parser.getTime(inputArguments);
         String[] generatedParameters = {workoutDescription, workoutDate, workoutTime};
+        GlobalLogger.LOGGER.fine("test");
         return generatedParameters;
     }
 
@@ -39,6 +44,7 @@ public class ScheduleTracker {
         ScheduledWorkout workout = scheduledWorkoutList.get(scheduledWorkoutList.size() - 1);
         System.out.println("Noted! CLI.ckFit has scheduled your workout of description \"" + workoutDescription
                 + "\" on " + workoutDate + " at " + workoutTime + ".");
+        GlobalLogger.LOGGER.log(Level.INFO,"Successfully added workout to schedule.");
     }
 
     public boolean isScheduledWorkoutNumberWithinRange(int workoutNumber) {
@@ -60,9 +66,12 @@ public class ScheduleTracker {
                     + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
                     + " at " + workoutToDelete.getWorkoutTime() + "!");
             scheduledWorkoutList.remove(workoutIndex);
+            GlobalLogger.LOGGER.log(Level.INFO,"Successfully deleted scheduled workout.");
         } else {
+            GlobalLogger.LOGGER.log(Level.WARNING,"Failed to delete scheduled workout.");
             throw new DukeException("Failed to delete that workout! Please enter an Integer within range.");
         }
+
     }
 
     public void listScheduledWorkouts() throws DukeException {
@@ -74,6 +83,7 @@ public class ScheduleTracker {
             System.out.println("Time: " + workout.getWorkoutTime() + "\n");
             currentIndex++;
         }
+        GlobalLogger.LOGGER.log(Level.INFO,"Successfully listed workouts.");
     }
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
@@ -81,21 +91,26 @@ public class ScheduleTracker {
             throw new DukeException("Please enter arguments in the format: schedule [workout_description] "
                     + "/d [dd/mm/yyyy] /t [hh:mm]");
         }
+        GlobalLogger.LOGGER.fine("test");
     }
 
     public void scheduledWorkoutSeparatorCheck(String inputArguments) throws DukeException {
         boolean areSeparatorsCorrect = Parser.containsDateSeparator(inputArguments)
                 && Parser.containsTimeSeparator(inputArguments);
         if (!areSeparatorsCorrect) {
+            GlobalLogger.LOGGER.log(Level.WARNING,"Separators in user input are missing or invalid.");
             throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
                     + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]");
         }
+        GlobalLogger.LOGGER.log(Level.INFO,"Separators in user input are correct.");
     }
 
     public void emptyScheduledWorkoutListCheck() throws DukeException {
         if (scheduledWorkoutList.isEmpty()) {
+            GlobalLogger.LOGGER.log(Level.WARNING,"Schedule list is empty.");
             throw new DukeException("Scheduled Workout list is empty!");
         }
+        GlobalLogger.LOGGER.log(Level.INFO,"Schedule list is not empty.");
     }
 
     public void missingDescriptionCheck(String inputArguments) throws DukeException {
@@ -104,12 +119,15 @@ public class ScheduleTracker {
         if (indexOfFirstDateSeparator != -1) { // date separator not found
             subStringBeforeDateSeparator = inputArguments.substring(0, indexOfFirstDateSeparator).trim();
         } else {
+            GlobalLogger.LOGGER.log(Level.WARNING,"Separators in user input are missing or invalid.");
             throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
                     + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]");
         }
         if (subStringBeforeDateSeparator.isEmpty()) {
+            GlobalLogger.LOGGER.log(Level.WARNING,"Description is missing in user input arguments.");
             throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
                     + "Please enter a description for your workout!");
         }
+        GlobalLogger.LOGGER.log(Level.INFO,"Description is present in user input arguments.");
     }
 }
