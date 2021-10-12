@@ -23,7 +23,7 @@ public class ScheduleTracker {
         String workoutDate = Parser.getDate(inputArguments);
         String workoutTime = Parser.getTime(inputArguments);
         String[] generatedParameters = {workoutDescription, workoutDate, workoutTime};
-        GlobalLogger.LOGGER.fine("test");
+        GlobalLogger.LOGGER.log(Level.INFO,"Successfully generated parameters for schedule work.");
         return generatedParameters;
     }
 
@@ -88,10 +88,11 @@ public class ScheduleTracker {
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
         if (inputArguments == null) {
+            GlobalLogger.LOGGER.log(Level.WARNING,"User input argument(s) is null.");
             throw new DukeException("Please enter arguments in the format: schedule [workout_description] "
                     + "/d [dd/mm/yyyy] /t [hh:mm]");
         }
-        GlobalLogger.LOGGER.fine("test");
+        GlobalLogger.LOGGER.log(Level.INFO,"User input argument(s) is not null.");
     }
 
     public void scheduledWorkoutSeparatorCheck(String inputArguments) throws DukeException {

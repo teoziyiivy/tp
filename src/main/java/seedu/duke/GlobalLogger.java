@@ -24,7 +24,7 @@ public class GlobalLogger {
         ch.setLevel(Level.SEVERE); // change this to test console logs of different levels
         LOGGER.addHandler(ch);
         try {
-            FileHandler fh = new FileHandler("Logger.log", MAXIMUM_LOG_FILE_SIZE, 1, true);
+            FileHandler fh = new FileHandler("Logger.log", MAXIMUM_LOG_FILE_SIZE, 1, false);
             fh.setFormatter(new SimpleFormatter());
             fh.setLevel(Level.INFO); // change this to test file logs of different levels
             LOGGER.addHandler(fh);
