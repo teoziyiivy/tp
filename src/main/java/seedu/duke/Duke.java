@@ -1,8 +1,11 @@
 package seedu.duke;
 
-import seedu.duke.gym.GymManager;
+import seedu.duke.gym.ScheduleTracker;
+import seedu.duke.gym.WorkoutTracker;
 
 import java.time.format.DateTimeParseException;
+
+import static seedu.duke.ClickfitMessages.CREDITS;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -10,40 +13,43 @@ public class Duke {
     private Meal meal;
     private Ui ui;
     private Fluid fluid;
-    private GymManager gymManager;
+    private ScheduleTracker scheduleTracker;
+    private WorkoutTracker workoutTracker;
     private WeightTracker weightTracker;
     private CommandManager commandManager;
+    private UserHelp userHelp;
 
+    public static void main(String[] args) throws DukeException {
+        new Duke().uiRun();
+        new Duke().run();
+    }
 
     public Duke() {
-        String logo = "   ______  _____     _____            __       ________  _   _\n"
-                + " .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_\n"
-                + "/ .'   \\_|  | |       | |      .---.  | | / ]   | |_ \\_|__ `| |-'\n"
-                + "| |         | |   _   | |     / /'`\\] | '' <    |  _|  [  | | |\n"
-                + "\\ `.___.'\\ _| |__/ | _| |_  _ | \\__.  | |`\\ \\  _| |_    | | | |,\n"
-                + " `.____ .'|________||_____|(_)'.___.'[__|  \\_]|_____|  [___]\\__/";
-
-        System.out.println("Hello from\n" + logo + "\n");
-        System.out.println("What is your command?");
         meal = new Meal();
         ui = new Ui();
         fluid = new Fluid();
-        gymManager = new GymManager();
+        scheduleTracker = new ScheduleTracker();
+        workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
-        commandManager = new CommandManager(fluid, meal, gymManager, weightTracker);
+        userHelp = new UserHelp();
+        commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
     }
 
     public void run() {
-        try {
-            commandManager.commandChecker();
-        } catch (DateTimeParseException e) {
-            System.out.println("date problem");
+        while (!commandManager.isExit) {
+            try {
+                commandManager.commandChecker();
+            } catch (DateTimeParseException e) {
+                System.out.println("date problem");
+            } catch (DukeException ignored) {
+                continue;
+            }
         }
-
+        System.out.println(CREDITS);
     }
 
-
-    public static void main(String[] args) {
-        new Duke().run();
+    public void uiRun() {
+        ui.welcomeMessage();
+        ui.memoryStartup();
     }
 }
