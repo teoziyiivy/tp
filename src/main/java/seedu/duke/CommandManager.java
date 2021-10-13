@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
