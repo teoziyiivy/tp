@@ -1,6 +1,10 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.AddWeightException;
+import seedu.duke.exceptions.DeleteWeightException;
+import seedu.duke.exceptions.DeleteWeightIndexException;
+import seedu.duke.exceptions.NoWeightsException;
+import seedu.duke.exceptions.DukeException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
