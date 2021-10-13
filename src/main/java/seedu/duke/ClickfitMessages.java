@@ -13,7 +13,7 @@ public class ClickfitMessages {
 
     public static final String CREDITS = System.lineSeparator() + "Thank you for the hardwork today. "
             + "CLI.ckFit wishes you a good day" + System.lineSeparator() + "Team CLI.ckFit is proudly "
-            + "brought to you by Jie Wen, Vishal, Pragyan, Ivy and Edward."
+            + "brought to you by Jiewen, Vishal, Pragyan, Ivy and Edward."
             + System.lineSeparator() + "See you soon!";
 
     public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Welcome back! Would you "

@@ -2,6 +2,10 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.AddWeightException;
+import seedu.duke.exceptions.DeleteWeightException;
+import seedu.duke.exceptions.DeleteWeightIndexException;
+import seedu.duke.exceptions.NoWeightsException;
 
 public class WeightTrackerTest {
 

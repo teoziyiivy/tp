@@ -1,6 +1,6 @@
 package seedu.duke.gym;
 
-import seedu.duke.DukeException;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
 import seedu.duke.Tracker;
 
