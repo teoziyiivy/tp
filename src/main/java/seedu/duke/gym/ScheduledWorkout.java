@@ -1,12 +1,6 @@
 package seedu.duke.gym;
 
-import seedu.duke.Tracker;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
-public class ScheduledWorkout extends Tracker {
+public class ScheduledWorkout {
     private String workoutDescription;
     private String workoutDate;
     private String workoutTime;
@@ -21,10 +15,6 @@ public class ScheduledWorkout extends Tracker {
         return workoutDescription;
     }
 
-    public void setWorkoutDescription(String workoutDescription) {
-        this.workoutDescription = workoutDescription;
-    }
-
     public String getWorkoutDate() {
         return workoutDate;
     }
@@ -32,5 +22,4 @@ public class ScheduledWorkout extends Tracker {
     public String getWorkoutTime() {
         return workoutTime;
     }
-
 }
