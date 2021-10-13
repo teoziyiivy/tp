@@ -2,7 +2,6 @@ package seedu.duke.gym;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
