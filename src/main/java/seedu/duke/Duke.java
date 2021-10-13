@@ -1,8 +1,10 @@
 package seedu.duke;
 
-import seedu.duke.gym.GymManager;
+import seedu.duke.gym.ScheduleTracker;
+import seedu.duke.gym.WorkoutTracker;
 
 import java.time.format.DateTimeParseException;
+import java.util.logging.LogManager;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -10,36 +12,39 @@ public class Duke {
     private Meal meal;
     private Ui ui;
     private Fluid fluid;
-    private GymManager gymManager;
+    private ScheduleTracker scheduleTracker;
+    private WorkoutTracker workoutTracker;
     private WeightTracker weightTracker;
     private CommandManager commandManager;
     private UserHelp userHelp;
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
         new Duke().run();
     }
-
 
     public Duke() {
         meal = new Meal();
         ui = new Ui();
         fluid = new Fluid();
-        gymManager = new GymManager();
+        scheduleTracker = new ScheduleTracker();
+        workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
-        commandManager = new CommandManager(fluid, meal, gymManager, weightTracker, userHelp);
+        commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
     }
 
     public void run() {
-        try {
-            while (!commandManager.isExit) {
+        while (!commandManager.isExit) {
+            try {
                 commandManager.commandChecker();
+            } catch (DateTimeParseException e) {
+                System.out.println("date problem");
+            } catch (DukeException ignored) {
+                continue;
             }
-        } catch (DateTimeParseException | DukeException e) {
-            System.out.println("date problem");
         }
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
