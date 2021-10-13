@@ -2,7 +2,7 @@ package seedu.duke.gym;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.DukeException;
+import seedu.duke.exceptions.DukeException;
 
 
 import java.time.format.DateTimeParseException;
