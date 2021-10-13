@@ -1,7 +1,6 @@
 package seedu.duke.gym;
 
-import seedu.duke.Duke;
-import seedu.duke.DukeException;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
 
 import java.time.format.DateTimeParseException;

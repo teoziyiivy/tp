@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
+
 import java.util.ArrayList;
 
 public class Fluid extends Tracker {
