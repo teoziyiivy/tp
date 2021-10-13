@@ -17,8 +17,6 @@ public class Duke {
     private WeightTracker weightTracker;
     private CommandManager commandManager;
     private UserHelp userHelp;
-    private GlobalLogger loggers;
-
 
     public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
@@ -33,7 +31,6 @@ public class Duke {
         workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
-        loggers = new GlobalLogger();
         commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
     }
 
@@ -47,7 +44,7 @@ public class Duke {
                 continue;
             }
         }
-        LogManager.getLogManager().reset(); //clear settings, close log handlers
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
