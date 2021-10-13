@@ -4,8 +4,7 @@ import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
 import java.time.format.DateTimeParseException;
-
-import static seedu.duke.ClickfitMessages.CREDITS;
+import java.util.logging.LogManager;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -45,7 +44,7 @@ public class Duke {
                 continue;
             }
         }
-        System.out.println(CREDITS);
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
