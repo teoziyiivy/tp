@@ -27,8 +27,6 @@ Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 
 `ate chicken /c 250 /d 14/10/2021 /t 08:30`
 
-`ate nasilemak /c 580`
-
 ### Adding fluids: `drank`
 
 Adds a new fluid to the list of fluid items.
@@ -44,8 +42,6 @@ Example of usage:
 
 `drank milk /c 180 /d 08/09/2021 /t 07:40`
 
-`drank proteinshake /c 450`
-
 ### Adding weight: `addweight`
 
 Adds a new weight to the list of weight items.
@@ -58,8 +54,6 @@ Format: `addweight WEIGHT /d DATE`
 Example of usage:
 
 `addweight 50 /d 03/04/2021`
-
-`addweight 60 /d 04/05/2021`
 
 ### Adding workout: `workout`
 
@@ -75,8 +69,6 @@ Format: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
 Example of usage:
 
 `workout jog /c 250 /d 07/08/2021 /t 15:00`
-
-`workout pullups /c 50 /d 17/10/2021 /t 07:30`
 
 ### Delete a meal: `deletemeal`
 
