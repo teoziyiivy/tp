@@ -14,6 +14,18 @@ public class Parser {
     public static final String CALORIE_SEPARATOR = " /c ";
     public static final String WHITESPACE = " ";
 
+    public static boolean containsSeparators(String inputArguments) {
+        if (inputArguments.contains("/c")) {
+            return true;
+        } else if (inputArguments.contains("/d")) {
+            return true;
+        } else if (inputArguments.contains("/t")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
     }
@@ -63,7 +75,16 @@ public class Parser {
     }
 
     public static String getDescription(String inputArguments) throws DukeException {
-        String[] userInput = inputArguments.split(" /c ");
+        String[] userInput;
+        if (containsCalorieSeparator(inputArguments)) {
+            userInput = inputArguments.split(" /c ");
+        } else if (containsDateSeparator(inputArguments)) {
+            userInput = inputArguments.split(" /d ");
+        } else if (containsTimeSeparator(inputArguments)) {
+            userInput = inputArguments.split(" /t ");
+        } else {
+            return inputArguments;
+        }
         String description = userInput[0];
         return description;
     }

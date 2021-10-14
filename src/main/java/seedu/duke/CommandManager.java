@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.MealException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
@@ -33,13 +34,16 @@ public class CommandManager {
         this.isExit = false;
     }
 
-    public void commandChecker() throws DukeException {
+    public void commandChecker() throws DukeException, NullPointerException, MealException {
         String input = scanner.nextLine();
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.INPUT_MEAL:
+            if (splitResults.length == 1) {
+                throw new MealException();
+            }
             meal.addMeal(inputArguments);
             break;
         case Keywords.DELETE_MEAL:
