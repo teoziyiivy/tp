@@ -4,6 +4,7 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Fluid extends Tracker {
@@ -20,6 +21,7 @@ public class Fluid extends Tracker {
     public Fluid() {
         this.fluidArray = new ArrayList<>();
         this.fluidNumber = 0;
+        logr.setLevel(Level.SEVERE);
     }
 
     public void generateFluidParameters(String inputArguments) throws DukeException {
