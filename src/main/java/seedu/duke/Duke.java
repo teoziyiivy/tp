@@ -3,9 +3,11 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
-
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
+
+import static seedu.duke.ClickfitMessages.DATE_ERROR;
+import static seedu.duke.ClickfitMessages.NUMBER_ERROR;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -40,13 +42,11 @@ public class Duke {
             try {
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date or time detected." + System.lineSeparator()
-                        + "Please enter date and time in the format: [dd/mm/yyyy] [hh:mm]");
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid number format detected." + System.lineSeparator()
-                        + "Please enter a valid integer.");
+                System.out.println(DATE_ERROR);
             } catch (DukeException ignored) {
                 continue;
+            } catch (NumberFormatException e) {
+                System.out.println(NUMBER_ERROR);
             }
         }
         LogManager.getLogManager().reset();
