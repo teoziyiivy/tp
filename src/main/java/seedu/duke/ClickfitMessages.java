@@ -57,4 +57,7 @@ public class ClickfitMessages {
 
     public static final String NUMBER_ERROR = "Please enter the calories/volume properly";
 
+    public static final String MEAL_NAME_ERROR = "Please enter the name of your meal";
+
+
 }
