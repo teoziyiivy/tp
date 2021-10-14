@@ -1,22 +1,28 @@
 package seedu.duke;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.MealException;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Meal extends Tracker{
+public class Meal extends Tracker {
     protected ArrayList<String> meals;
     protected int mealNumber;
     protected int calories;
     protected String description;
-    protected LocalDate date;
-    protected LocalTime time;
+    protected String date;
+    protected String time;
+    protected int totalCalories;
+    private static Logger logger = Logger.getLogger("MealTrackerLogger");
+
 
     public Meal() {
         this.meals = new ArrayList<>();
         this.mealNumber = 0;
+        this.totalCalories = 0;
     }
 
     public void generateMealParameters(String inputArguments) {
@@ -25,32 +31,63 @@ public class Meal extends Tracker{
             description = Parser.getDescription(inputArguments);
             date = Parser.getDate(inputArguments);
             time = Parser.getTime(inputArguments);
-        } catch (NumberFormatException e) {
-
         } catch (DukeException e) {
-
-        } catch (DateTimeParseException e) {
-
+            System.out.println("run away");
         }
     }
 
-    public void addMeal(String meal) throws DateTimeParseException, NumberFormatException {
-        String[] userInput = meal.split(" ");
-        int calorieIndex = userInput.length - 2;
-        int dateIndex = userInput.length - 1;
-        int calories = Integer.parseInt(userInput[calorieIndex]);
-        String mealDescription = userInput[1];
-        for (int i = 2; i < calorieIndex; i++) {
-            mealDescription = mealDescription.concat(" " + userInput[i]);
+    public void addMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, MealException {
+        logger.entering(getClass().getName(),"addMeal");
+        logger.log(Level.INFO, "generating meal parameters");
+        generateMealParameters(inputArguments);
+        if ((description.equals("") || Parser.containsSeparators(description))) {
+            throw new MealException();
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String date = userInput[dateIndex];
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        logger.log(Level.INFO, "meal parameters generated");
         System.out.println("Noted! CLI.ckFit has recorded your meal of "
-                + mealDescription + " on " + formatter.format(localDate)
+                + description + " on " + date + " and at " + time
                 + ". " + calories + " calories has been added to the calorie count!\n");
-        meals.add(meal);
+        totalCalories += calories;
+        meals.add(inputArguments);
         mealNumber += 1;
+        logger.log(Level.INFO,"meal has been added to meal list");
+        logger.exiting(getClass().getName(),"addMeal");
     }
 
+    public void deleteMeal(String inputArguments) throws DateTimeParseException, NumberFormatException {
+        assert mealNumber != 0;
+        logger.entering(getClass().getName(),"deleteMeal");
+        int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        logger.log(Level.INFO, "generating meal parameters");
+        generateMealParameters(meals.get(mealIndex));
+        logger.log(Level.INFO, "meal parameters generated");
+        meals.remove(mealIndex);
+        mealNumber -= 1;
+        totalCalories -= calories;
+        logger.log(Level.INFO,"meal has been deleted from meal list");
+        System.out.println(description + " will be removed from your list of meals consumed. You now "
+                + "have " + totalCalories + " left!\n");
+        logger.exiting(getClass().getName(),"deleteMeal");
+    }
+
+    public void listMeals() {
+        assert mealNumber != 0;
+        logger.entering(getClass().getName(),"listMeals");
+        int i = 1;
+        logger.log(Level.INFO, "entering for loop");
+        for (String meal : meals) {
+            logger.log(Level.INFO, "generating meal parameters");
+            generateMealParameters(meal);
+            logger.log(Level.INFO, "meal parameters generated");
+            System.out.println(i + ". " + description);
+            System.out.println("Calories: " + calories);
+            System.out.println("Date: " + date);
+            System.out.println("Time: " + time + "\n");
+            i += 1;
+        }
+        System.out.println("Total number of meals: " + mealNumber);
+        System.out.println("Total calories: " + totalCalories);
+        logger.log(Level.INFO,"meal list printed");
+        logger.exiting(getClass().getName(),"listMeal");
+    }
 }

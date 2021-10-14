@@ -13,7 +13,7 @@ public class ClickfitMessages {
 
     public static final String CREDITS = System.lineSeparator() + "Thank you for the hardwork today. "
             + "CLI.ckFit wishes you a good day" + System.lineSeparator() + "Team CLI.ckFit is proudly "
-            + "brought to you by Jie Wen, Vishal, Pragyan, Ivy and Edward."
+            + "brought to you by Jiewen, Vishal, Pragyan, Ivy and Edward."
             + System.lineSeparator() + "See you soon!";
 
     public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Welcome back! Would you "
@@ -36,12 +36,28 @@ public class ClickfitMessages {
             System.lineSeparator() + "ScheduleDescription:"
                     + System.lineSeparator()
                     + "<command> <description> /d <date>"
+                    + System.lineSeparator() + "\n"
+                    + "Fluids:"
                     + System.lineSeparator()
-                    + System.lineSeparator()
+                    + "<command> <description> /c <calories> /v <volume> /d <date> /t <time>"
+                    + System.lineSeparator() + "\n"
                     + "All else:" + System.lineSeparator()
                     + "<command> <description> /c <calories> /d <date> /t <time>"
-                    + System.lineSeparator();
+                    + System.lineSeparator() + "\n";
 
     public static final String HELP_UG = "Here is the link to our User Guide!";
+
+    public static final String DATE_ERROR = "Please enter your date in the right format. "
+            + "It should be \"DD/MM/YYYY\"";
+
+    public static final String TIME_ERROR = "Please enter your time in the right format. "
+            + "It should be \"HH:MM\"";
+
+    public static final String NAME_ERROR = "Please enter the name or description of your meal/fluid";
+
+    public static final String NUMBER_ERROR = "Please enter the calories/volume properly";
+
+    public static final String MEAL_NAME_ERROR = "Please enter the name of your meal";
+
 
 }

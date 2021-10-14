@@ -1,4 +1,4 @@
-Hello from
+Greetings from
    ______  _____     _____            __       ________  _   _
  .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_
 / .'   \_|  | |       | |      .---.  | | / ]   | |_ \_|__ `| |-'
@@ -6,6 +6,12 @@ Hello from
 \ `.___.'\ _| |__/ | _| |_  _ | \__.  | |`\ \  _| |_    | | | |,
  `.____ .'|________||_____|(_)'.___.'[__|  \_]|_____|  [___]\__/
 
-What is your command?
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-    Bye! Hope to see you again soon!
+
+Lets get your fitness journey started! input any commands to get started! Type "help commands" to get started! If you want to read the UG, type in "help UG"!
+Lets work hard together in your fitness journey!
+
+Welcome back! Would you like to load up the records of your fitness journey?
+Key in Y/N.
+
+Understood! CLI.ckFit is accessing your storage...
+What would you like to start with?
