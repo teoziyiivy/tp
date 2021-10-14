@@ -92,6 +92,6 @@ class ScheduleTrackerTest {
     void missingDescriptionCheck_missingDescription_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = " /d 07/07/2021 /t 07:59";
-        assertThrows(DukeException.class, () -> st.missingDescriptionCheck(argumentInput));
+        assertThrows(DukeException.class, () -> st.missingDescriptionOrSeparatorCheck(argumentInput));
     }
 }

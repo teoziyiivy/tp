@@ -95,6 +95,6 @@ class WorkoutTrackerTest {
     void missingDescriptionCheck_missingDescription_exceptionThrow() {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "  /c 123 /d 07/07/2021 /t 07:59";
-        assertThrows(DukeException.class, () -> wt.missingDescriptionCheck(argumentInput));
+        assertThrows(DukeException.class, () -> wt.missingDescriptionOrSeparatorCheck(argumentInput));
     }
 }
