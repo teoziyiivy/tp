@@ -4,9 +4,11 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
-
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
+
+import static seedu.duke.ClickfitMessages.DATE_ERROR;
+import static seedu.duke.ClickfitMessages.NUMBER_ERROR;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -49,9 +51,8 @@ public class Duke {
             } catch (MealException e) {
                 System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (NullPointerException e) {
-                System.out.println("KKK");
-            }
-        }
+                System.out.println(ClickfitMessages.INCORRECT_INPUT);
+            } 
         LogManager.getLogManager().reset();
     }
 

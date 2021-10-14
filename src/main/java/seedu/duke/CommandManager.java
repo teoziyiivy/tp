@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
@@ -74,7 +75,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
-                } catch (DateTimeParseException e) {
+                } catch (DateTimeParseException | FluidExceptions e) {
                     System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
                             + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
                 }
