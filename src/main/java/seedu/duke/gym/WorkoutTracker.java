@@ -126,6 +126,8 @@ public class WorkoutTracker extends Tracker {
         String subStringBeforeCalorieSeparator = "";
         if (indexOfFirstCalorieSeparator != -1) { // date separator not found
             subStringBeforeCalorieSeparator = inputArguments.substring(0, indexOfFirstCalorieSeparator).trim();
+        } else {
+            workoutSeparatorCheck(inputArguments);
         }
         if (subStringBeforeCalorieSeparator.isEmpty()) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
