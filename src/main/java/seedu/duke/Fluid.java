@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -28,11 +30,15 @@ public class Fluid extends Tracker {
         time = Parser.getTime(inputArguments);
     }
 
-    public void addFluid(String inputArguments) throws DukeException {
+    //drank coke /c 60 /v 200 /d 12/12/2021 /t 10:30
+    public void addFluid(String inputArguments) throws DukeException, FluidExceptions {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
         generateFluidParameters(inputArguments);
         logr.info("end of generating fluid parameters");
+        if ((description.equals("") || Parser.containsSeparators(description))) {
+            throw new FluidExceptions();
+        }
         fluidArray.add(inputArguments);
         logr.info("fluid intake has been added");
         fluidNumber += 1;
