@@ -41,8 +41,8 @@ public class CommandManager {
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
-//        assert !input.equals("");
-//        assert !Objects.equals(inputArguments, "");
+        //assert !input.equals("");
+        //assert !Objects.equals(inputArguments, "");
         switch (command) {
         case Keywords.INPUT_MEAL:
             if (splitResults.length == 1) {
