@@ -76,7 +76,6 @@ public class ScheduleTracker {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Failed to delete scheduled workout.");
             throw new DukeException("Failed to delete that workout! Please enter an Integer within range.");
         }
-
     }
 
     public void listScheduledWorkouts() throws DukeException {
