@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
@@ -33,13 +35,16 @@ public class CommandManager {
         this.isExit = false;
     }
 
-    public void commandChecker() throws DukeException {
+    public void commandChecker() throws DukeException, NullPointerException, MealException {
         String input = scanner.nextLine();
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.INPUT_MEAL:
+            if (splitResults.length == 1) {
+                throw new MealException();
+            }
             meal.addMeal(inputArguments);
             break;
         case Keywords.DELETE_MEAL:
@@ -70,7 +75,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
-                } catch (DateTimeParseException e) {
+                } catch (DateTimeParseException | FluidExceptions e) {
                     System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
                             + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
                 }
