@@ -40,7 +40,11 @@ public class Duke {
             try {
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {
-                System.out.println("date problem");
+                System.out.println("Invalid date or time detected." + System.lineSeparator()
+                        + "Please enter date and time in the format: [dd/mm/yyyy] [hh:mm]");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number format detected." + System.lineSeparator()
+                        + "Please enter a valid integer.");
             } catch (DukeException ignored) {
                 continue;
             }
