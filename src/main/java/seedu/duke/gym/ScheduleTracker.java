@@ -33,7 +33,9 @@ public class ScheduleTracker {
             throws DukeException, DateTimeParseException, NumberFormatException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
-        missingDescriptionOrSeparatorCheck(inputArguments);
+        assert inputArguments != null : "Exception should already been thrown if argument is null";
+        missingDescriptionCheck(inputArguments);
+        scheduledWorkoutSeparatorCheck(inputArguments);
         // index 0: description | index 1: date | index 2: time
         String[] generatedParameters = generateScheduledWorkoutParameters(inputArguments);
         assert generatedParameters.length == 3 : "Exactly 3 parameters should be generated";
@@ -118,13 +120,11 @@ public class ScheduleTracker {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Schedule list is not empty.");
     }
 
-    public void missingDescriptionOrSeparatorCheck(String inputArguments) throws DukeException {
+    public void missingDescriptionCheck(String inputArguments) throws DukeException {
         int indexOfFirstDateSeparator = inputArguments.indexOf(Parser.DATE_SEPARATOR.trim());
         String subStringBeforeDateSeparator = "";
         if (indexOfFirstDateSeparator != -1) { // date separator not found
             subStringBeforeDateSeparator = inputArguments.substring(0, indexOfFirstDateSeparator).trim();
-        } else {
-            scheduledWorkoutSeparatorCheck(inputArguments);
         }
         if (subStringBeforeDateSeparator.isEmpty()) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");

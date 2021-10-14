@@ -38,7 +38,7 @@ public class WorkoutTracker extends Tracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
-        missingDescriptionOrSeparatorCheck(inputArguments);
+        missingDescriptionCheck(inputArguments);
         generateWorkoutParameters(inputArguments);
         System.out.println("Noted! CLI.ckFit has recorded your workout of description \"" + workoutDescription
                 + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
@@ -120,13 +120,11 @@ public class WorkoutTracker extends Tracker {
         return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound);
     }
 
-    public void missingDescriptionOrSeparatorCheck(String inputArguments) throws DukeException {
+    public void missingDescriptionCheck(String inputArguments) throws DukeException {
         int indexOfFirstCalorieSeparator = inputArguments.indexOf(Parser.CALORIE_SEPARATOR.trim());
         String subStringBeforeCalorieSeparator = "";
         if (indexOfFirstCalorieSeparator != -1) { // date separator not found
             subStringBeforeCalorieSeparator = inputArguments.substring(0, indexOfFirstCalorieSeparator).trim();
-        } else {
-            workoutSeparatorCheck(inputArguments);
         }
         if (subStringBeforeCalorieSeparator.isEmpty()) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
