@@ -37,7 +37,7 @@ public class Ui {
     public void memoryStartup() {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput = uiScanner.nextLine();
-        //assert !Objects.equals(uiInput, "");
+        assert !Objects.equals(uiInput, "");
         if (uiInput.trim().equals("Y")) {
             System.out.println(MEMORY_STARTUP_Y_INPUT);
             System.out.println("What would you like to start with?");
