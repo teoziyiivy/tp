@@ -124,6 +124,8 @@ public class ScheduleTracker {
         String subStringBeforeDateSeparator = "";
         if (indexOfFirstDateSeparator != -1) { // date separator not found
             subStringBeforeDateSeparator = inputArguments.substring(0, indexOfFirstDateSeparator).trim();
+        } else {
+            scheduledWorkoutSeparatorCheck(inputArguments);
         }
         if (subStringBeforeDateSeparator.isEmpty()) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
