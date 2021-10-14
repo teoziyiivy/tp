@@ -88,18 +88,6 @@ public class Parser {
         return description;
     }
 
-    public static boolean containsSeparators(String inputArguments) {
-        if (inputArguments.contains("/c")) {
-            return true;
-        } else if (inputArguments.contains("/d")) {
-            return true;
-        } else if (inputArguments.contains("/t")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static String getDate(String inputArguments) throws DukeException, DateTimeParseException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
