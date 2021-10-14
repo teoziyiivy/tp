@@ -31,7 +31,7 @@ public class WeightTracker extends Tracker {
             weight = Parser.getWeight(inputArguments);
             date = Parser.getDate(inputArguments);
         } catch (NumberFormatException | DukeException e) {
-            printAddWeightException();
+            printGenerateParametersException();
         }
         logger.exiting(getClass().getName(), "generateWeightParameters");
         logger.log(Level.INFO, "end of generating weight parameters");
@@ -80,6 +80,10 @@ public class WeightTracker extends Tracker {
         }
         logger.exiting(getClass().getName(), "readInput");
         logger.log(Level.INFO, "end of processing");
+    }
+
+    public void printGenerateParametersException() {
+        System.out.println("CLI.ckFit could not generate your parameters.");
     }
 
     public void printAddWeightResponse(int weight, String date) {
