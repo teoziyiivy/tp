@@ -39,6 +39,7 @@ public class WorkoutTracker extends Tracker {
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         missingDescriptionCheck(inputArguments);
+        workoutSeparatorCheck(inputArguments);
         generateWorkoutParameters(inputArguments);
         System.out.println("Noted! CLI.ckFit has recorded your workout of description \"" + workoutDescription
                 + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
