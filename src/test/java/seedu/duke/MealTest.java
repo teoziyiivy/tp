@@ -40,9 +40,9 @@ class MealTest {
         Meal meal = new Meal();
         String input = "pasta /c 300 /d 14/09/2021 /t 17:45";
         meal.addMeal(input);
-        String delete_input = "two";
+        String deleteInput = "two";
         Assertions.assertThrows(NumberFormatException.class, () -> {
-            meal.deleteMeal(delete_input);
+            meal.deleteMeal(deleteInput);
         });
     }
 }
