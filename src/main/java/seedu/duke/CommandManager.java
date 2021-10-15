@@ -10,8 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static seedu.duke.ClickfitMessages.CREDITS;
-
 public class CommandManager {
     protected ScheduleTracker scheduleTracker;
     protected WorkoutTracker workoutTracker;
@@ -36,7 +34,7 @@ public class CommandManager {
         this.isExit = false;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException, MealException {
+    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions {
         String input = scanner.nextLine();
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
@@ -78,28 +76,30 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
-                } catch (DateTimeParseException | FluidExceptions e) {
-                    System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
-                            + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
+                } catch (FluidExceptions e) {
+                    System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
             } else {
-                System.out.println("Please enter in the format: [fluid_name] /c [calorie_intake] "
-                        + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]");
+                throw new FluidExceptions();
             }
             break;
         case Keywords.DELETE_DRINKS:
             if (inputArguments != null) {
-                if (fluid.fluidArray.size() == 0) {
-                    System.out.println("You have no existing fluid entries to delete.");
+                if (Fluid.fluidArray.size() == 0) {
+                    System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
                 }
             } else {
-                System.out.println("Please enter in the format: deletefluid [entry_number]");
+                System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
             }
             break;
         case Keywords.LIST_DRINKS:
-            fluid.listFluid();
+            if (Fluid.fluidArray.size() == 0) {
+                System.out.println(ClickfitMessages.FLUID_LIST_ERROR);
+            } else {
+                fluid.listFluid();
+            }
             break;
         case Keywords.INPUT_ADD_WEIGHT:
             try {
@@ -131,7 +131,7 @@ public class CommandManager {
             break;
         case Keywords.INPUT_BYE:
             isExit = true;
-            System.out.println(CREDITS);
+            System.out.println(ClickfitMessages.CREDITS);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
