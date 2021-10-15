@@ -183,6 +183,24 @@ Example of usage:
 
 `listschedule`
 
+###Help Commands: `help commands`
+
+Lists out the formats for the meal, fluid, gym and weight functions.
+
+Format: `help commands`
+
+Example of usage:
+`help commands`
+
+###Help Commands: `help UG`
+
+Provides the hyperlink to the user guide for more tech-savvy users to read.
+
+Format: `help UG`
+
+Example of usage:
+`help UG`
+
 ## FAQ
 
 **Q**: How many meals/fluids/weights or workouts can I add?
@@ -192,6 +210,10 @@ Example of usage:
 **Q**: How do I do well for CS2113T?
 
 **A**: Just try your best bro.
+
+**Q**: Can I A- and above this mod?
+
+**A**: Dunno bro, but if it helps, you are already an A+ in my eyes ;)
 
 ## Command Summary
 
@@ -205,6 +227,8 @@ Example of usage:
 * Remove weight: `deleteweight INDEX`
 * Remove workout: `deleteworkout INDEX`
 * Remove scheduled workout: `deleteschedule INDEX`
+* Access user help: `help commands`
+* Access user guide: `help UG`
 * 
 * List fluids: `listfluids`
 * 
