@@ -27,16 +27,6 @@ Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 
 `ate chicken /c 250 /d 14/10/2021 /t 08:30`
 
-### Adding fluids: `drank`
-
-Adds a new fluid to the list of fluid items.
-
-Format: `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
-
-* The `FLUID_NAME` can contain spaces.
-* The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
-* The `DATE` is in dd/mm/yyyy.
-* The `TIME` is in hh:mm.
 
 Example of usage:
 
@@ -96,6 +86,17 @@ Format: `deletemeal INDEX`
 
 `deletemeal 1`
 
+### Delete fluids: `deletefluid`
+
+Remove a fluid from the list of fluid items.
+
+Format: `deletefluid INDEX`
+
+* The `INDEX` can only contain integers from the list.
+
+Example of usage:
+
+`deletefluid 2`
 
 ### Delete weight: `deleteweight`
 
