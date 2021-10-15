@@ -3,7 +3,10 @@ package seedu.duke.gym;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +16,8 @@ import java.util.logging.Logger;
 public class ScheduleTracker {
     private ArrayList<ScheduledWorkout> scheduledWorkoutList;
     private static final int LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING = 1;
+    private static final int FIRST_INDEX_IN_LIST = 0;
+    private static final int DAYS_IN_A_WEEK = 7;
     public static final Logger SCHEDULE_TRACKER_LOGGER = Logger.getLogger("ScheduleTrackerLogger");
 
     public ScheduleTracker() {
@@ -44,13 +49,14 @@ public class ScheduleTracker {
         String workoutDescription = generatedParameters[0];
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
+        boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
         scheduledWorkoutList.add(
-                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime)
+                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, isRecurringWorkout)
         );
         ScheduledWorkout workout = scheduledWorkoutList.get(scheduledWorkoutList.size() - 1);
         System.out.println("Noted! CLI.ckFit has scheduled your workout of description \"" + workoutDescription
-                + "\" on " + workoutDate + " at " + workoutTime + ".");
-        sortList();
+                + "\" on " + workoutDate + " at " + workoutTime + "." + System.lineSeparator());
+        cleanUpScheduleList();
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout to schedule.");
     }
 
@@ -72,21 +78,24 @@ public class ScheduleTracker {
             ScheduledWorkout workoutToDelete = scheduledWorkoutList.get(workoutIndex);
             System.out.println("Noted! CLI.ckFit has successfully deleted your scheduled workout of description \""
                     + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
-                    + " at " + workoutToDelete.getWorkoutTime() + "!");
+                    + " at " + workoutToDelete.getWorkoutTime() + "!" + System.lineSeparator());
             scheduledWorkoutList.remove(workoutIndex);
+            cleanUpScheduleList();
             SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted scheduled workout.");
         } else {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Failed to delete scheduled workout.");
-            throw new DukeException("Failed to delete that workout! Please enter an Integer within range.");
+            throw new DukeException("Failed to delete that workout! Please enter an Integer within range."
+                    + System.lineSeparator());
         }
     }
 
     public void listScheduledWorkouts() throws DukeException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
         emptyScheduledWorkoutListCheck();
+        cleanUpScheduleList();
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkoutList) {
-            System.out.println(currentIndex + ". " + workout.getWorkoutDescription());
+            System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
             System.out.println("Date: " + workout.getWorkoutDate());
             System.out.println("Time: " + workout.getWorkoutTime() + "\n");
             currentIndex++;
@@ -94,7 +103,44 @@ public class ScheduleTracker {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
     }
 
-    public void sortList() {
+    public void cleanUpScheduleList() {
+        sortScheduleList();
+        LocalDate currentDate = LocalDateTime.now().toLocalDate();
+        boolean isAnyWorkoutUpdatedOrDeleted = false;
+        boolean isAnyWorkoutOverdue = true;
+        ScheduledWorkout firstWorkoutEntry;
+        while (isAnyWorkoutOverdue) {
+            firstWorkoutEntry = scheduledWorkoutList.get(FIRST_INDEX_IN_LIST);
+            if (firstWorkoutEntry.getWorkoutDateAsLocalDate().isBefore(currentDate)) {
+                updateOrDeleteScheduledWorkout(firstWorkoutEntry, currentDate);
+                isAnyWorkoutUpdatedOrDeleted = true;
+            } else {
+                isAnyWorkoutOverdue = false;
+            }
+        }
+        if (isAnyWorkoutUpdatedOrDeleted) {
+            System.out.println("CLI.ckFit helped to clean up or update some past scheduled workouts!"
+                    + System.lineSeparator());
+        }
+    }
+
+    public void updateOrDeleteScheduledWorkout(ScheduledWorkout scheduledWorkout, LocalDate currentDate) {
+        if (scheduledWorkout.isRecurring()) {
+            rescheduleRecurringWorkout(scheduledWorkout, currentDate);
+        } else {
+            scheduledWorkoutList.remove(scheduledWorkoutList.indexOf(scheduledWorkout));
+        }
+        sortScheduleList();
+    }
+
+    public void rescheduleRecurringWorkout(ScheduledWorkout scheduledWorkout, LocalDate currentDate) {
+        long daysUntilCurrentDate = ChronoUnit.DAYS.between(
+                scheduledWorkout.getWorkoutDateAsLocalDate(), currentDate);
+        long daysToAdd = (long) (Math.ceil((double) daysUntilCurrentDate / DAYS_IN_A_WEEK) * DAYS_IN_A_WEEK);
+        scheduledWorkout.incrementWorkoutDate(daysToAdd);
+    }
+
+    public void sortScheduleList() {
         Collections.sort(scheduledWorkoutList, Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
     }
 
@@ -102,7 +148,7 @@ public class ScheduleTracker {
         if (inputArguments == null) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "User input argument(s) is null.");
             throw new DukeException("Please enter arguments in the format: schedule [workout_description] "
-                    + "/d [dd/mm/yyyy] /t [hh:mm]");
+                    + "/d [dd/mm/yyyy] /t [hh:mm]" + System.lineSeparator());
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "User input argument(s) is not null.");
     }
@@ -113,7 +159,8 @@ public class ScheduleTracker {
         if (!areSeparatorsCorrect) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Separators in user input are missing or invalid.");
             throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
-                    + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]");
+                    + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]"
+                    + System.lineSeparator());
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Separators in user input are correct.");
     }
@@ -121,7 +168,7 @@ public class ScheduleTracker {
     public void emptyScheduledWorkoutListCheck() throws DukeException {
         if (scheduledWorkoutList.isEmpty()) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Schedule list is empty.");
-            throw new DukeException("Scheduled Workout list is empty!");
+            throw new DukeException("Scheduled Workout list is empty!" + System.lineSeparator());
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Schedule list is not empty.");
     }
@@ -137,7 +184,7 @@ public class ScheduleTracker {
         if (subStringBeforeDateSeparator.isEmpty()) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
             throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
-                    + "Please enter a description for your workout!");
+                    + "Please enter a description for your workout!" + System.lineSeparator());
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Description is present in user input arguments.");
     }

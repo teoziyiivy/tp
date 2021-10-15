@@ -12,7 +12,7 @@ public class ScheduledWorkout {
     private LocalDateTime workoutDateTime;
     private boolean isRecurring;
 
-    public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime) {
+    public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime, boolean isRecurring) {
 
         this.workoutDescription = workoutDescription;
         this.workoutDate = workoutDate;
@@ -20,6 +20,7 @@ public class ScheduledWorkout {
         workoutDateTime = LocalDateTime.of(
                 LocalDate.parse(workoutDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("h:mma")));
+        this.isRecurring = isRecurring;
     }
 
     public String getWorkoutDescription() {
@@ -30,11 +31,28 @@ public class ScheduledWorkout {
         return workoutDate;
     }
 
+    public void incrementWorkoutDate(long days) {
+        workoutDateTime = workoutDateTime.plusDays(days);
+        workoutDate = workoutDateTime.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public LocalDate getWorkoutDateAsLocalDate() {
+        return workoutDateTime.toLocalDate();
+    }
+
     public String getWorkoutTime() {
         return workoutTime;
     }
 
     public LocalDateTime getWorkoutDateTime() {
         return workoutDateTime;
+    }
+
+    public boolean isRecurring() {
+        return isRecurring;
+    }
+
+    public String isRecurringStatus() {
+        return isRecurring ? " [R]" : "";
     }
 }

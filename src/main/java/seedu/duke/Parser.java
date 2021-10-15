@@ -12,6 +12,8 @@ public class Parser {
     public static final String DATE_SEPARATOR = " /d ";
     public static final String TIME_SEPARATOR = " /t ";
     public static final String CALORIE_SEPARATOR = " /c ";
+    public static final String RECURRING_FLAG = " /r";
+    public static final String EMPTY_STRING = "";
 
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains("/c")) {
@@ -35,6 +37,14 @@ public class Parser {
 
     public static boolean containsCalorieSeparator(String inputArguments) {
         return inputArguments.contains(CALORIE_SEPARATOR);
+    }
+
+    public static boolean isRecurringWorkout(String inputArguments) {
+        String[] splitResults = inputArguments.split(RECURRING_FLAG, 2);
+        if (splitResults.length == 1) {
+            return false;
+        }
+        return splitResults[1].isEmpty(); // true if /r flag is at the end of the string
     }
 
     public static int parseStringToInteger(String input) throws NumberFormatException {
