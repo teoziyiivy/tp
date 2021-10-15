@@ -1,9 +1,8 @@
 # User Guide
-
 ## Introduction
 
 CLI.ckFit is a desktop app for managing your nutrition and fitness needs via a Command Line Interface (CLI). 
-It allows you to track your meals, recipes, calories, water intake and exercise regimen conveniently.
+It allows you to track your meals, fluid intakes, recipes, calories and exercise regimen conveniently.
 
 ## Quick Start
 
@@ -181,9 +180,13 @@ Example of usage:
 
 ## FAQ
 
+**Q**: How many meals/fluids/weights or workouts can I add?
+
+**A**: The sky is the limit.
+
 **Q**: How do I do well for CS2113T?
 
-**A**: Try hard
+**A**: Just try your best bro.
 
 ## Command Summary
 
@@ -193,7 +196,7 @@ Example of usage:
 * Add workout: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
 * Add scheduled workout: `schedule WORKOUT_NAME /d DATE /t TIME`
 * Remove meal: `deletemeal INDEX`
-* 
+* Remove fluid: `deletefluid INDEX`
 * Remove weight: `deleteweight INDEX`
 * Remove workout: `deleteworkout INDEX`
 * Remove scheduled workout: `deleteschedule INDEX`
