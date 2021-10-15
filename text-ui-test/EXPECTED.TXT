@@ -17,6 +17,3 @@ CLI.ckFit has detected a wrong input, kindly type in either a "Y" or a "N".
 
 Welcome back! Would you like to load up the records of your fitness journey?
 Key in Y/N.
-
-Understood! CLI.ckFit is accessing your storage...
-What would you like to start with?

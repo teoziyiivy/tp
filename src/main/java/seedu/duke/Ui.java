@@ -13,6 +13,9 @@ import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 public class Ui {
 
     private Scanner uiScanner;
+    public static final String HORIZONTAL_BAR = "____________________________________________________________"
+        + "____________________________________________________________"; //placeholder
+    public static final String USER_PROMPT = "Enter command: "; //placeholder
     public boolean isValidStartup;
 
     public Ui() {
