@@ -18,8 +18,8 @@ Adds a new meal to the list of meal items.
 
 Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 
-* The `MEAL_NAME` cannot contain spaces.
-* The `MEAL_CALORIES` can only contain integers.
+* The `MEAL_NAME` can contain spaces.
+* The `MEAL_CALORIES` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 
@@ -33,8 +33,8 @@ Adds a new fluid to the list of fluid items.
 
 Format: `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
 
-* The `FLUID_NAME` cannot contain spaces.
-* The `FLUID_CALORIES` can only contain integers.
+* The `FLUID_NAME` can contain spaces.
+* The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 
@@ -61,14 +61,28 @@ Adds a new workout to the list of workout items.
 
 Format: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
 
-* The `WORKOUT_NAME` cannot contain spaces.
-* The `CALORIES_BURNT` can only contain integers.
+* The `WORKOUT_NAME` can contain spaces.
+* The `CALORIES_BURNT` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 
 Example of usage:
 
 `workout jog /c 250 /d 07/08/2021 /t 15:00`
+
+### Adding scheduled workout: `schedule`
+
+Adds a new scheduled workout to the list of scheduled workout items.
+
+Format: `schedule WORKOUT_NAME /d DATE /t TIME`
+
+* The `WORKOUT_NAME` can contain spaces.
+* The `DATE` is in dd/mm/yyyy.
+* The `TIME` is in hh:mm.
+
+Example of usage:
+
+`schedule chest day /d 07/08/2021 /t 15:00`
 
 ### Delete a meal: `deletemeal`
 
@@ -118,6 +132,42 @@ Example of usage:
 
 `deleteworkout 3`
 
+### Delete workout: `deleteschedule`
+
+Remove a workout from the list of workout items.
+
+Format: `deleteschedule INDEX`
+
+* The `INDEX` can only contain integers from the list.
+
+Example of usage:
+
+`deleteschedule 3`
+
+### List meals(TODO)
+### List fluids(TODO)
+### List/check? weights(TODO)
+
+### List workouts: `listworkout`
+
+Lists out all stored workout descriptions, calories burned, date and time.
+
+Format: `listworkout`
+
+Example of usage:
+
+`listworkout`
+
+### List scheduled workouts: `listschedule`
+
+Lists out all stored scheduled workout descriptions, date and time.
+
+Format: `listschedule`
+
+Example of usage:
+
+`listschedule`
+
 ## FAQ
 
 **Q**: How do I do well for CS2113T?
@@ -126,11 +176,18 @@ Example of usage:
 
 ## Command Summary
 
-* Add meal `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
-* Add fluid `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
-* Add weight `addweight WEIGHT /d DATE`
-* Add workout `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
-* Remove meal `deletemeal INDEX`
-* Remove fluid `deletefluid INDEX`
-* Remove weight `deleteweight INDEX`
-* Remove workout `deleteworkout INDEX`
+* Add meal: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
+* Add fluid: `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
+* Add weight: `addweight WEIGHT /d DATE`
+* Add workout: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
+* Add scheduled workout: `schedule WORKOUT_NAME /d DATE /t TIME`
+* Remove meal: `deletemeal INDEX`
+* Remove fluid: `deletefluid INDEX`
+* Remove weight: `deleteweight INDEX`
+* Remove workout: `deleteworkout INDEX`
+* Remove scheduled workout: `deleteschedule INDEX`
+* 
+* 
+* 
+* List workouts: `listworkouts`
+* List scheduled workouts: `listschedule`
