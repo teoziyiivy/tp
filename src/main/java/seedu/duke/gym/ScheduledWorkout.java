@@ -55,4 +55,8 @@ public class ScheduledWorkout {
     public String isRecurringStatus() {
         return isRecurring ? " [R]" : "";
     }
+
+    public String isRecurringStatusAsText() {
+        return isRecurring ? "recurring " : "";
+    }
 }
