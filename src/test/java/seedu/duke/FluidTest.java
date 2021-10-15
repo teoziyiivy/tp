@@ -3,10 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
-
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FluidTest {

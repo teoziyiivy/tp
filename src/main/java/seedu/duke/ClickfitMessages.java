@@ -59,5 +59,12 @@ public class ClickfitMessages {
 
     public static final String MEAL_NAME_ERROR = "Please enter the name of your meal";
 
+    public static final String FLUID_ADD_FORMAT_ERROR = "Please enter in the format: [fluid_name] /c [calorie_intake] "
+            + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]";
 
+    public static final String FLUID_DELETE_ERROR = "You have no existing fluid entries to delete.";
+
+    public static final String FLUID_DELETE_FORMAT_ERROR = "Please enter in the format: deletefluid [entry_number]";
+
+    public static final String FLUID_LIST_ERROR = "You have no fluid entries yet.";
 }

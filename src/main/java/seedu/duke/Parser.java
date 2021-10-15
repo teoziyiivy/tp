@@ -15,18 +15,6 @@ public class Parser {
     public static final String RECURRING_FLAG = " /r";
     public static final String EMPTY_STRING = "";
 
-    public static boolean containsSeparators(String inputArguments) {
-        if (inputArguments.contains("/c")) {
-            return true;
-        } else if (inputArguments.contains("/d")) {
-            return true;
-        } else if (inputArguments.contains("/t")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
     }
@@ -49,6 +37,18 @@ public class Parser {
 
     public static int parseStringToInteger(String input) throws NumberFormatException {
         return Integer.parseInt(input);
+    }
+
+    public static boolean containsSeparators(String inputArguments) {
+        if (inputArguments.contains("/c")) {
+            return true;
+        } else if (inputArguments.contains("/d")) {
+            return true;
+        } else if (inputArguments.contains("/t")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static int getCalories(String inputArguments) throws DukeException, NumberFormatException {
