@@ -23,6 +23,7 @@ public class Meal extends Tracker {
         this.meals = new ArrayList<>();
         this.mealNumber = 0;
         this.totalCalories = 0;
+        logger.setLevel(Level.SEVERE);
     }
 
     public void generateMealParameters(String inputArguments) {

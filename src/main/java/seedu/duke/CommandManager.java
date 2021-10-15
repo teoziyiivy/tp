@@ -7,6 +7,7 @@ import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static seedu.duke.ClickfitMessages.CREDITS;
@@ -40,6 +41,8 @@ public class CommandManager {
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        assert !input.equals("");
+        assert !Objects.equals(inputArguments, "");
         switch (command) {
         case Keywords.INPUT_MEAL:
             if (splitResults.length == 1) {
@@ -108,19 +111,20 @@ public class CommandManager {
             }
             break;
         case Keywords.INPUT_DELETE_WEIGHT:
-            try {
-                weightTracker.readInput(input);
-            } catch (DukeException e) {
-                return;
-            }
-            break;
+            //removed the below code as they have identical functions
+            //try {
+            //    weightTracker.readInput(input);
+            //} catch (DukeException e) {
+            //return;
+            //}
+            //break;
         case Keywords.INPUT_CHECK_WEIGHT:
             try {
                 weightTracker.readInput(input);
             } catch (DukeException e) {
                 return;
             }
-            weightTracker.readInput(input);
+            //weightTracker.readInput(input);
             break;
         case Keywords.INPUT_HELP:
             UserHelp.generateUserHelpParameters(inputArguments);
