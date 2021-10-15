@@ -6,7 +6,7 @@ import seedu.duke.exceptions.FluidExceptions;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FluidTest {
 
@@ -86,7 +86,7 @@ class FluidTest {
     @Test
     void listFluid() {
         Fluid.fluidArray = new ArrayList<>();
-        assert(Fluid.fluidArray.size() == 0);
+        assert (Fluid.fluidArray.size() == 0);
     }
 
     @Test
@@ -94,6 +94,6 @@ class FluidTest {
         Fluid.fluidArray = new ArrayList<>();
         Fluid.fluidArray.add("drank coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
         Fluid.fluidArray.add("drank water /c 0 /v 200 /d 13/12/2021 /t 12:30");
-        assert(Fluid.fluidArray.size() != 0);
+        assert (Fluid.fluidArray.size() != 0);
     }
 }
