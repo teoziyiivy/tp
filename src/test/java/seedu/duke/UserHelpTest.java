@@ -10,6 +10,5 @@ class UserHelpTest {
     void generateUserHelpParameters() {
         String input = "commands";
         assertTrue(input.trim().equals("commands"));
-
     }
 }

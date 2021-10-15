@@ -21,7 +21,7 @@ public class Fluid extends Tracker {
     public Fluid() {
         fluidArray = new ArrayList<>();
         fluidNumber = 0;
-        logr.setLevel(Level.WARNING);
+        logr.setLevel(Level.SEVERE);
     }
 
     public void generateFluidParameters(String inputArguments) throws DukeException {
