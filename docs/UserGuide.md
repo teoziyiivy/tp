@@ -8,6 +8,11 @@ It allows you to track your meals, fluid intakes, recipes, calories and exercise
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CLI.ckFit` from [here](http://link.to/duke).
+3. Go to the folder you saved the CLIckFit.jar file and note the absolute file path.
+4. If you are using Windows, open up a Command prompt terminal cmd.exe or powershell.exe and for
+   Mac and Linux users, do the same with the terminal of your respective systems.
+5. Navigate to the folder where the CLIckFit.jar file is stored.
+6. Execute java -jar CLIckFit.jar in the terminal, and the application will start running.
 
 ## Features
 
