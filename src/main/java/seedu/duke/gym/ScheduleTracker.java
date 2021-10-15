@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -141,7 +140,7 @@ public class ScheduleTracker {
     }
 
     public void sortScheduleList() {
-        Collections.sort(scheduledWorkoutList, Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
+        scheduledWorkoutList.sort(Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
     }
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
