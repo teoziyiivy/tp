@@ -5,6 +5,8 @@ import seedu.duke.Parser;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +50,7 @@ public class ScheduleTracker {
         ScheduledWorkout workout = scheduledWorkoutList.get(scheduledWorkoutList.size() - 1);
         System.out.println("Noted! CLI.ckFit has scheduled your workout of description \"" + workoutDescription
                 + "\" on " + workoutDate + " at " + workoutTime + ".");
+        sortList();
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout to schedule.");
     }
 
@@ -89,6 +92,10 @@ public class ScheduleTracker {
             currentIndex++;
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
+    }
+
+    public void sortList() {
+        Collections.sort(scheduledWorkoutList, Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
     }
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
