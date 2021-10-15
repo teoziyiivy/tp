@@ -10,8 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static seedu.duke.ClickfitMessages.*;
-
 public class CommandManager {
     protected ScheduleTracker scheduleTracker;
     protected WorkoutTracker workoutTracker;
@@ -79,7 +77,7 @@ public class CommandManager {
                 try {
                     fluid.addFluid(inputArguments);
                 } catch (FluidExceptions e) {
-                    System.out.println(FLUID_ADD_FORMAT_ERROR);
+                    System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
             } else {
                 throw new FluidExceptions();
@@ -88,17 +86,17 @@ public class CommandManager {
         case Keywords.DELETE_DRINKS:
             if (inputArguments != null) {
                 if (Fluid.fluidArray.size() == 0) {
-                    System.out.println(FLUID_DELETE_ERROR);
+                    System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
                 }
             } else {
-                System.out.println(FLUID_DELETE_FORMAT_ERROR);
+                System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
             }
             break;
         case Keywords.LIST_DRINKS:
             if (Fluid.fluidArray.size() == 0) {
-                System.out.println(FLUID_LIST_ERROR);
+                System.out.println(ClickfitMessages.FLUID_LIST_ERROR);
             } else {
                 fluid.listFluid();
             }
@@ -133,7 +131,7 @@ public class CommandManager {
             break;
         case Keywords.INPUT_BYE:
             isExit = true;
-            System.out.println(CREDITS);
+            System.out.println(ClickfitMessages.CREDITS);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
