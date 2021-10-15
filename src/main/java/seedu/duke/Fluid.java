@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Fluid extends Tracker {
 
-    protected ArrayList<String> fluidArray;
+    protected static ArrayList<String> fluidArray;
     protected int fluidNumber;
     protected String description;
     protected int calories;

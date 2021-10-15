@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
@@ -41,14 +42,16 @@ public class Duke {
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {
                 System.out.println(ClickfitMessages.DATE_ERROR);
-            } catch (DukeException ignored) {
-                continue;
             } catch (NumberFormatException e) {
                 System.out.println(ClickfitMessages.NUMBER_ERROR);
-            } catch (MealException e) {
-                System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (NullPointerException e) {
                 System.out.println(ClickfitMessages.INCORRECT_INPUT);
+            } catch (DukeException ignored) {
+                continue;
+            }  catch (MealException e) {
+                System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
+            } catch (FluidExceptions e) {
+                System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
             }
             LogManager.getLogManager().reset();
         }
