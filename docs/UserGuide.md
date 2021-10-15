@@ -96,17 +96,6 @@ Format: `deletemeal INDEX`
 
 `deletemeal 1`
 
-### Delete fluids: `deletefluid`
-
-Remove a fluid from the list of fluid items.
-
-Format: `deletefluid INDEX`
-
-* The `INDEX` can only contain integers from the list.
-
-Example of usage:
-
-`deletefluid 2`
 
 ### Delete weight: `deleteweight`
 

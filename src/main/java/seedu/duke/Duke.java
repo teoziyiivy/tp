@@ -50,13 +50,8 @@ public class Duke {
             } catch (NullPointerException e) {
                 System.out.println(ClickfitMessages.INCORRECT_INPUT);
             }
-<<<<<<< .merge_file_a25276
             LogManager.getLogManager().reset();
         }
-=======
-        }
-        LogManager.getLogManager().reset();
->>>>>>> .merge_file_a13028
     }
 
     public void uiRun() {
