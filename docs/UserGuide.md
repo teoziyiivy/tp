@@ -1,9 +1,8 @@
 # User Guide
-
 ## Introduction
 
 CLI.ckFit is a desktop app for managing your nutrition and fitness needs via a Command Line Interface (CLI). 
-It allows you to track your meals, recipes, calories, water intake and exercise regimen conveniently.
+It allows you to track your meals, fluid intakes, recipes, calories and exercise regimen conveniently.
 
 ## Quick Start
 
@@ -31,10 +30,11 @@ Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 
 Adds a new fluid to the list of fluid items.
 
-Format: `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
+Format: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
 
 * The `FLUID_NAME` can contain spaces.
 * The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
+* The `VOLUME` can only contain positive integers inclusive of 0.  
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 
@@ -145,7 +145,17 @@ Example of usage:
 `deleteschedule 3`
 
 ### List meals(TODO)
-### List fluids(TODO)
+
+### List fluids
+
+Lists all fluid entries made.
+
+Format: `listfluids`
+
+Example of usage:
+
+`listfluids`
+
 ### List/check? weights(TODO)
 
 ### List workouts: `listworkout`
@@ -170,14 +180,18 @@ Example of usage:
 
 ## FAQ
 
+**Q**: How many meals/fluids/weights or workouts can I add?
+
+**A**: The sky is the limit.
+
 **Q**: How do I do well for CS2113T?
 
-**A**: Try hard
+**A**: Just try your best bro.
 
 ## Command Summary
 
 * Add meal: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
-* Add fluid: `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
+* Add fluid: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
 * Add weight: `addweight WEIGHT /d DATE`
 * Add workout: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
 * Add scheduled workout: `schedule WORKOUT_NAME /d DATE /t TIME`
@@ -187,7 +201,7 @@ Example of usage:
 * Remove workout: `deleteworkout INDEX`
 * Remove scheduled workout: `deleteschedule INDEX`
 * 
-* 
+* List fluids: `listfluids`
 * 
 * List workouts: `listworkouts`
 * List scheduled workouts: `listschedule`
