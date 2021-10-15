@@ -27,6 +27,17 @@ Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 
 `ate chicken /c 250 /d 14/10/2021 /t 08:30`
 
+### Adding fluids: `drank`
+
+Adds a new fluid to the list of fluid items.
+
+Format: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
+
+* The `FLUID_NAME` can contain spaces.
+* The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
+* The `VOLUME` can only contain positive integers inclusive of 0.  
+* The `DATE` is in dd/mm/yyyy.
+* The `TIME` is in hh:mm.
 
 Example of usage:
 
@@ -135,7 +146,17 @@ Example of usage:
 `deleteschedule 3`
 
 ### List meals(TODO)
-### List fluids(TODO)
+
+### List fluids
+
+Lists all fluid entries made.
+
+Format: `listfluids`
+
+Example of usage:
+
+`listfluids`
+
 ### List/check? weights(TODO)
 
 ### List workouts: `listworkout`
@@ -167,17 +188,17 @@ Example of usage:
 ## Command Summary
 
 * Add meal: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
-* Add fluid: `drank FLUID_NAME /c FLUID_CALORIES /d DATE /t TIME`
+* Add fluid: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
 * Add weight: `addweight WEIGHT /d DATE`
 * Add workout: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
 * Add scheduled workout: `schedule WORKOUT_NAME /d DATE /t TIME`
 * Remove meal: `deletemeal INDEX`
-* Remove fluid: `deletefluid INDEX`
+* 
 * Remove weight: `deleteweight INDEX`
 * Remove workout: `deleteworkout INDEX`
 * Remove scheduled workout: `deleteschedule INDEX`
 * 
-* 
+* List fluids: `listfluids`
 * 
 * List workouts: `listworkouts`
 * List scheduled workouts: `listschedule`
