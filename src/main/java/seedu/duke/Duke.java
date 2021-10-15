@@ -40,7 +40,7 @@ public class Duke {
         while (!commandManager.isExit) {
             try {
                 System.out.println(Ui.HORIZONTAL_BAR);
-                System.out.print("Enter command: ");
+                System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {
                 System.out.println(ClickfitMessages.DATE_ERROR);
