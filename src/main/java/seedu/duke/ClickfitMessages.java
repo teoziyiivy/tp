@@ -35,15 +35,19 @@ public class ClickfitMessages {
     public static final String HELP_COMMANDS =
             System.lineSeparator() + "ScheduleDescription:"
                     + System.lineSeparator()
-                    + "<command> <description> /d <date>"
+                    + "<command> <description> /d <date> /t <time>"
                     + System.lineSeparator() + "\n"
                     + "Fluids:"
                     + System.lineSeparator()
                     + "<command> <description> /c <calories> /v <volume> /d <date> /t <time>"
                     + System.lineSeparator() + "\n"
+                    + "Add weight:"
+                    + System.lineSeparator()
+                    + "<command> <weight> /d <date>"
+                    + System.lineSeparator() + "\n"
                     + "All else:" + System.lineSeparator()
-                    + "<command> <description> /c <calories> /d <date> /t <time>"
-                    + System.lineSeparator() + "\n";
+                    + "<command> <description> /c <calories> /d <date> /t <time>";
+
 
     public static final String HELP_UG = "Here is the link to our User Guide!";
 
