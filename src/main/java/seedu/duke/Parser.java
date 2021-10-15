@@ -29,6 +29,18 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
+    public static boolean containsSeparators(String inputArguments) {
+        if (inputArguments.contains("/c")) {
+            return true;
+        } else if (inputArguments.contains("/d")) {
+            return true;
+        } else if (inputArguments.contains("/t")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static int getCalories(String inputArguments) throws DukeException, NumberFormatException {
         String[] userInput = inputArguments.split(" ");
         int length = userInput.length;
