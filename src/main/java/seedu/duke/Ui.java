@@ -3,7 +3,12 @@ package seedu.duke;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static seedu.duke.ClickfitMessages.*;
+import static seedu.duke.ClickfitMessages.MESSAGE_A;
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_N_INPUT;
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
+import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
 
 public class Ui {
 
@@ -12,6 +17,11 @@ public class Ui {
         + "____________________________________________________________"; //placeholder
     public static final String USER_PROMPT = "Enter command: "; //placeholder
     public boolean isValidStartup;
+    protected String sex;
+    protected int weight;
+    protected int height;
+    protected int age;
+    protected int activityLevel;
 
 
     public Ui() {
@@ -34,25 +44,30 @@ public class Ui {
     }
 
     public void getInfo() {
-        System.out.println("what is your SEX : M / F ?");
+        System.out.println(CALCULATOR_PROMPT);
         String uiInput = uiScanner.nextLine();
-        String sex = uiInput;
-        System.out.println("what is your weight in kg?");
-        uiInput = uiScanner.nextLine();
-        int weight = Integer.parseInt(uiInput);
-        System.out.println("what is your height in cm?");
-        uiInput = uiScanner.nextLine();
-        int height = Integer.parseInt(uiInput);
-        System.out.println("what is your age in years?");
-        uiInput = uiScanner.nextLine();
-        int age = Integer.parseInt(uiInput);
-        System.out.println("what is your activity level from a scale of 1 - 5?");
-        uiInput = uiScanner.nextLine();
-        int activityLevel = Integer.parseInt(uiInput);
 
-        Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
-        calculator.getBMI();
-        calculator.getIdealCalories();
+        if (uiInput.trim().equals("Y")) {
+            System.out.println("what is your SEX : M / F ?");
+            uiInput = uiScanner.nextLine();
+            sex = uiInput;
+            System.out.println("what is your weight in kg?");
+            uiInput = uiScanner.nextLine();
+            weight = Integer.parseInt(uiInput);
+            System.out.println("what is your height in cm?");
+            uiInput = uiScanner.nextLine();
+            height = Integer.parseInt(uiInput);
+            System.out.println("what is your age in years?");
+            uiInput = uiScanner.nextLine();
+            age = Integer.parseInt(uiInput);
+            System.out.println("what is your activity level from a scale of 1 - 5?");
+            uiInput = uiScanner.nextLine();
+            activityLevel = Integer.parseInt(uiInput);
+
+            Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
+            calculator.getBmi();
+            calculator.getIdealCalories();
+        }
 
     }
 
