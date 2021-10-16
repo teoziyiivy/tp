@@ -229,7 +229,7 @@ Example of usage:
 * Remove scheduled workout: `deleteschedule INDEX`
 * Access user help: `help commands`
 * Access user guide: `help UG`
-* 
+* list meals: `listmeals`
 * List fluids: `listfluids`
 * 
 * List workouts: `listworkouts`
