@@ -43,7 +43,7 @@ public class WorkoutTracker extends Tracker {
         generateWorkoutParameters(inputArguments);
         System.out.println("Noted! CLI.ckFit has recorded your workout of description \"" + workoutDescription
                 + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
-                + caloriesBurned + " calories!");
+                + caloriesBurned + " calories!" + System.lineSeparator());
         workoutList.add(inputArguments);
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
@@ -60,7 +60,7 @@ public class WorkoutTracker extends Tracker {
             generateWorkoutParameters(workoutList.get(workoutIndex));
             System.out.println("Noted! CLI.ckFit has successfully deleted your recorded workout of description \""
                     + workoutDescription + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
-                    + caloriesBurned + " calories!");
+                    + caloriesBurned + " calories!" + System.lineSeparator());
             workoutList.remove(workoutIndex);
             WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted workout.");
         } else {
@@ -94,7 +94,7 @@ public class WorkoutTracker extends Tracker {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Separators in user input are missing or invalid.");
             throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
                     + "Please enter in the format: workout [workout_description] /c [calories_burned]"
-                    + " /d [dd/mm/yyyy] /t [hh:mm]");
+                    + " /d [dd/mm/yyyy] /t [hh:mm]" + System.lineSeparator());
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Separators in user input are correct.");
     }
@@ -102,7 +102,7 @@ public class WorkoutTracker extends Tracker {
     public void nullArgumentCheck(String inputArguments) throws DukeException {
         if (inputArguments == null) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "User input argument(s) is null.");
-            throw new DukeException("Please enter an argument!");
+            throw new DukeException("Please enter an argument!" + System.lineSeparator());
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "User input argument(s) is not null.");
     }
@@ -110,7 +110,7 @@ public class WorkoutTracker extends Tracker {
     public void emptyWorkoutListCheck() throws DukeException {
         if (workoutList.isEmpty()) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Workout list is empty.");
-            throw new DukeException("Workout list is empty!");
+            throw new DukeException("Workout list is empty!" + System.lineSeparator());
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Workout list is not empty.");
     }
@@ -132,7 +132,7 @@ public class WorkoutTracker extends Tracker {
         if (subStringBeforeCalorieSeparator.isEmpty()) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
             throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
-                    + "Please enter a workout description!");
+                    + "Please enter a workout description!" + System.lineSeparator());
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Description is present in user input arguments.");
     }
