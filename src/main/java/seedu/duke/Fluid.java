@@ -16,11 +16,14 @@ public class Fluid extends Tracker {
     protected int volume;
     protected String date;
     protected String time;
+    protected int totalCalories;
+    protected int totalVolume;
     private static final Logger logr = Logger.getLogger("FluidLogger");
 
     public Fluid() {
-        this.fluidArray = new ArrayList<>();
+        fluidArray = new ArrayList<>();
         this.fluidNumber = 0;
+        this.totalCalories = 0;
         logr.setLevel(Level.SEVERE);
     }
 
@@ -36,14 +39,19 @@ public class Fluid extends Tracker {
     public void addFluid(String inputArguments) throws DukeException, FluidExceptions {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
+
         generateFluidParameters(inputArguments);
+
         logr.info("end of generating fluid parameters");
         if ((description.equals("") || Parser.containsSeparators(description))) {
             throw new FluidExceptions();
         }
+        inputArguments = description + " /c " + calories + " /v " + volume + " /d " + date + " /t " + time;
         fluidArray.add(inputArguments);
         logr.info("fluid intake has been added");
         fluidNumber += 1;
+        totalCalories += calories;
+        totalVolume += volume;
         System.out.println("Noted! CLI.ckFit has recorded your drink of " + description + " of " + calories
                 + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
         logr.exiting(getClass().getName(), "addFluid");
@@ -60,6 +68,8 @@ public class Fluid extends Tracker {
         fluidArray.remove(taskNumber);
         logr.info("fluid intake has been removed");
         fluidNumber -= 1;
+        totalCalories -= calories;
+        totalVolume -= volume;
         System.out.println("Noted! CLI.ckFit has deleted your drink of " + description + " of " + calories
                 + " calories and " + volume + " ml on " + date + " " + time + "." + "\n");
         logr.exiting(getClass().getName(), "deleteFluid");
@@ -80,11 +90,15 @@ public class Fluid extends Tracker {
                 System.out.println("Time: " + time + "\n");
                 i++;
             }
+            System.out.println("Total number of meals: " + fluidNumber);
+            System.out.println("Total calories: " + totalCalories);
+            System.out.println("Total volume: " + totalVolume);
             System.out.println("\n");
             logr.info("finished printing fluid list");
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             return;
         }
+
         logr.exiting(getClass().getName(), "listFluid");
     }
 }

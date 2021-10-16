@@ -39,6 +39,8 @@ public class Duke {
     public void run() {
         while (!commandManager.isExit) {
             try {
+                System.out.println(Ui.HORIZONTAL_BAR);
+                System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {
                 System.out.println(ClickfitMessages.DATE_ERROR);
@@ -59,6 +61,7 @@ public class Duke {
 
     public void uiRun() {
         ui.welcomeMessage();
+        ui.getInfo();
         while (!ui.isValidStartup) {
             ui.memoryStartup();
         }
