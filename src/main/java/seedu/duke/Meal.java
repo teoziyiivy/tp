@@ -40,7 +40,9 @@ public class Meal extends Tracker {
     public void addMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, MealException {
         logger.entering(getClass().getName(),"addMeal");
         logger.log(Level.INFO, "generating meal parameters");
+
         generateMealParameters(inputArguments);
+
         if ((description.equals("") || Parser.containsSeparators(description))) {
             throw new MealException();
         }
@@ -49,6 +51,7 @@ public class Meal extends Tracker {
                 + description + " on " + date + " and at " + time
                 + ". " + calories + " calories has been added to the calorie count!\n");
         totalCalories += calories;
+        inputArguments = description + " /c " + calories + " /d " + date + " /t " + time;
         meals.add(inputArguments);
         mealNumber += 1;
         logger.log(Level.INFO,"meal has been added to meal list");
