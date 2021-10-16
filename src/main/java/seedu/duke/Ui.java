@@ -3,12 +3,7 @@ package seedu.duke;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static seedu.duke.ClickfitMessages.MESSAGE_A;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_N_INPUT;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
-
+import static seedu.duke.ClickfitMessages.*;
 
 public class Ui {
 
@@ -17,6 +12,7 @@ public class Ui {
         + "____________________________________________________________"; //placeholder
     public static final String USER_PROMPT = "Enter command: "; //placeholder
     public boolean isValidStartup;
+
 
     public Ui() {
         uiScanner = new Scanner(System.in);
@@ -35,6 +31,29 @@ public class Ui {
         //future implementation: if list is empty, sout message A, else sout mesage B
         System.out.println(MESSAGE_A);
         //System.out.println(MESSAGE_B);
+    }
+
+    public void getInfo() {
+        System.out.println("what is your SEX : M / F ?");
+        String uiInput = uiScanner.nextLine();
+        String sex = uiInput;
+        System.out.println("what is your weight in kg?");
+        uiInput = uiScanner.nextLine();
+        int weight = Integer.parseInt(uiInput);
+        System.out.println("what is your height in cm?");
+        uiInput = uiScanner.nextLine();
+        int height = Integer.parseInt(uiInput);
+        System.out.println("what is your age in years?");
+        uiInput = uiScanner.nextLine();
+        int age = Integer.parseInt(uiInput);
+        System.out.println("what is your activity level from a scale of 1 - 5?");
+        uiInput = uiScanner.nextLine();
+        int activityLevel = Integer.parseInt(uiInput);
+
+        Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
+        calculator.getBMI();
+        calculator.getIdealCalories();
+
     }
 
     public void memoryStartup() {
