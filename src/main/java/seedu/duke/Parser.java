@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
-
 public class Parser {
 
     public static final String DATE_SEPARATOR = " /d ";

@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
-
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,9 +38,7 @@ public class Fluid extends Tracker {
     public void addFluid(String inputArguments) throws DukeException, FluidExceptions {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
-
         generateFluidParameters(inputArguments);
-
         logr.info("end of generating fluid parameters");
         if ((description.equals("") || Parser.containsSeparators(description))) {
             throw new FluidExceptions();
@@ -90,15 +87,13 @@ public class Fluid extends Tracker {
                 System.out.println("Time: " + time + "\n");
                 i++;
             }
-            System.out.println("Total number of meals: " + fluidNumber);
+            System.out.println("Total number of fluids: " + fluidNumber);
             System.out.println("Total calories: " + totalCalories);
             System.out.println("Total volume: " + totalVolume);
-            System.out.println("\n");
             logr.info("finished printing fluid list");
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             return;
         }
-
         logr.exiting(getClass().getName(), "listFluid");
     }
 }
