@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.gym.ScheduleTracker;
@@ -34,7 +35,7 @@ public class CommandManager {
         this.isExit = false;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions {
+    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -43,6 +44,10 @@ public class CommandManager {
         assert !input.equals("");
         assert !Objects.equals(inputArguments, "");
         switch (command) {
+        case Keywords.LIBRARY:
+            assert inputArguments != null;
+            foodBankParser(inputArguments);
+            break;
         case Keywords.INPUT_MEAL:
             if (splitResults.length == 1) {
                 throw new MealException();
@@ -139,4 +144,25 @@ public class CommandManager {
             break;
         }
     }
+
+    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException{
+        String[] splitResults = inputArguments.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        switch (command) {
+        case Keywords.ADD_MEAL:
+            FoodBank.addCustomMeal(inputArguments);
+            break;
+        case Keywords.DELETE_MEAL:
+            FoodBank.deleteCustomMeal(inputArguments);
+            break;
+        case Keywords.LIST_MEAL:
+            FoodBank.listCustomMeal();
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+    }
+
 }
