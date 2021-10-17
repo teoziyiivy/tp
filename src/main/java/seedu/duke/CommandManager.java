@@ -158,7 +158,7 @@ public class CommandManager {
             break;
         case Keywords.LIST_DRINKS:
             FoodBank.listCustomFluids();
-
+            break;
         case Keywords.ADD_MEAL:
             FoodBank.addCustomMeal(inputArguments);
             break;
