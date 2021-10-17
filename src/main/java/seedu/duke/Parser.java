@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FoodBankException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -58,20 +59,26 @@ public class Parser {
         }
     }
 
-    public static int getCalories(String inputArguments) throws DukeException, NumberFormatException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
-        int length = userInput.length;
+    public static int getCalories(String inputArguments) throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
-        for (int i = 1; i < length; i++) {
-            if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
-                calories = parseStringToInteger(userInput[i + 1]);
-                break;
+        if (!containsCalorieSeparator(inputArguments)) {
+            String description = getDescription(inputArguments);
+            calories = FoodBank.findCalories(description);
+            return calories;
+        } else {
+            String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+            int length = userInput.length;
+            for (int i = 1; i < length; i++) {
+                if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
+                    calories = parseStringToInteger(userInput[i + 1]);
+                }
+            }
+            if (calories < 0) {
+                throw new DukeException("Negative calories");
+            } else {
+                return calories;
             }
         }
-        if (calories < 0) {
-            throw new DukeException("Negative calories");
-        }
-        return calories;
     }
 
     public static int getVolume(String inputArguments) throws DukeException {
