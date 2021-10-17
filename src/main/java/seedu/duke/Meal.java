@@ -27,7 +27,7 @@ public class Meal extends Tracker {
         logger.setLevel(Level.SEVERE);
     }
 
-    public void generateMealParameters(String inputArguments) {
+    public void generateMealParameters(String inputArguments) throws FoodBankException {
         try {
             calories = Parser.getCalories(inputArguments);
             description = Parser.getDescription(inputArguments);
@@ -38,13 +38,13 @@ public class Meal extends Tracker {
         }
     }
 
-    public void addMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, MealException {
+    public void addMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
         logger.entering(getClass().getName(),"addMeal");
         logger.log(Level.INFO, "generating meal parameters");
 
         generateMealParameters(inputArguments);
 
-        if ((description.equals("") || Parser.containsSeparators(description))) {
+        if (Parser.containsSeparators(description)) {
             throw new MealException();
         }
         logger.log(Level.INFO, "meal parameters generated");
@@ -59,7 +59,7 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(),"addMeal");
     }
 
-    public void deleteMeal(String inputArguments) throws DateTimeParseException, NumberFormatException {
+    public void deleteMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, FoodBankException {
         assert mealNumber != 0;
         logger.entering(getClass().getName(),"deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
@@ -75,7 +75,7 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(),"deleteMeal");
     }
 
-    public void listMeals() {
+    public void listMeals() throws FoodBankException{
         assert mealNumber != 0;
         logger.entering(getClass().getName(),"listMeals");
         int i = 1;
