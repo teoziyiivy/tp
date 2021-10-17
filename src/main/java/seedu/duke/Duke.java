@@ -19,6 +19,7 @@ public class Duke {
     private WeightTracker weightTracker;
     private CommandManager commandManager;
     private UserHelp userHelp;
+    private FoodBank foodbank;
 
     public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
@@ -34,6 +35,7 @@ public class Duke {
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
         commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        foodbank = new FoodBank();
     }
 
     public void run() {

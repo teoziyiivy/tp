@@ -9,6 +9,7 @@ public class Keywords {
     public static final String INPUT_DELETE_SCHEDULE = "deleteschedule";
     public static final String INPUT_LIST_SCHEDULE = "listschedule";
     public static final String INPUT_DRINKS = "drank";
+    public static final String CUSTOM_FLUID = "fluid";
     public static final String DELETE_DRINKS = "deletefluid";
     public static final String LIST_DRINKS = "listfluids";
     public static final String INPUT_ADD_WEIGHT = "addweight";

@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 
 import java.time.format.DateTimeParseException;
@@ -32,7 +33,7 @@ public class Meal extends Tracker {
             description = Parser.getDescription(inputArguments);
             date = Parser.getDate(inputArguments);
             time = Parser.getTime(inputArguments);
-        } catch (DukeException e) {
+        } catch (DukeException | FoodBankException e) {
             System.out.println("run away");
         }
     }
