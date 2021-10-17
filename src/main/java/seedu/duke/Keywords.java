@@ -18,6 +18,6 @@ public class Keywords {
     public static final String DELETE_MEAL = "deletemeal";
     public static final String LIST_MEAL = "listmeals";
     public static final String INPUT_HELP = "help";
-    public static final String CUSTOM_MEAL = "meal";
-
+    public static final String ADD_MEAL = "addmeal";
+    public static final String LIBRARY = "library";
 }

@@ -44,6 +44,10 @@ public class CommandManager {
         assert !input.equals("");
         assert !Objects.equals(inputArguments, "");
         switch (command) {
+        case Keywords.LIBRARY:
+            assert inputArguments != null;
+            foodBankParser(inputArguments);
+            break;
         case Keywords.INPUT_MEAL:
             if (splitResults.length == 1) {
                 throw new MealException();
@@ -140,4 +144,25 @@ public class CommandManager {
             break;
         }
     }
+
+    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException{
+        String[] splitResults = inputArguments.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        switch (command) {
+        case Keywords.ADD_MEAL:
+            FoodBank.addCustomMeal(inputArguments);
+            break;
+        case Keywords.DELETE_MEAL:
+            FoodBank.deleteCustomMeal(inputArguments);
+            break;
+        case Keywords.LIST_MEAL:
+            FoodBank.listCustomMeal();
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+    }
+
 }
