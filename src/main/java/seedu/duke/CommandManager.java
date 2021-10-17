@@ -158,6 +158,15 @@ public class CommandManager {
             break;
         case Keywords.LIST_DRINKS:
             FoodBank.listCustomFluids();
+
+        case Keywords.ADD_MEAL:
+            FoodBank.addCustomMeal(inputArguments);
+            break;
+        case Keywords.DELETE_MEAL:
+            FoodBank.deleteCustomMeal(inputArguments);
+            break;
+        case Keywords.LIST_MEAL:
+            FoodBank.listCustomMeal();
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
