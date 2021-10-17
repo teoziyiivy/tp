@@ -33,7 +33,7 @@ public class Meal extends Tracker {
             description = Parser.getDescription(inputArguments);
             date = Parser.getDate(inputArguments);
             time = Parser.getTime(inputArguments);
-        } catch (DukeException e) {
+        } catch (DukeException | FoodBankException e) {
             System.out.println("run away");
         }
     }

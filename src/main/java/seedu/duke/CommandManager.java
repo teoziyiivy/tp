@@ -82,7 +82,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
-                } catch (FluidExceptions e) {
+                } catch (FluidExceptions | FoodBankException e) {
                     System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
             } else {
@@ -150,6 +150,15 @@ public class CommandManager {
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
+        case Keywords.ADD_FLUID:
+            FoodBank.addCustomFluid(inputArguments);
+            break;
+        case Keywords.DELETE_DRINKS:
+            FoodBank.deleteCustomFluids(inputArguments);
+            break;
+        case Keywords.LIST_DRINKS:
+            FoodBank.listCustomFluids();
+
         case Keywords.ADD_MEAL:
             FoodBank.addCustomMeal(inputArguments);
             break;
@@ -164,5 +173,4 @@ public class CommandManager {
             break;
         }
     }
-
 }

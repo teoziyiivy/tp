@@ -20,8 +20,8 @@ public class Duke {
     private WeightTracker weightTracker;
     private CommandManager commandManager;
     private UserHelp userHelp;
+    private FoodBank foodbank;
     private FoodBank foodBank;
-
 
     public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
@@ -37,6 +37,7 @@ public class Duke {
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
         commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        foodbank = new FoodBank();
         foodBank = new FoodBank();
     }
 
@@ -59,7 +60,7 @@ public class Duke {
             } catch (FluidExceptions e) {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
             } catch (FoodBankException e) {
-                //
+                e.printStackTrace();
             }
             LogManager.getLogManager().reset();
         }
