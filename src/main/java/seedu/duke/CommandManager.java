@@ -44,6 +44,10 @@ public class CommandManager {
         assert !input.equals("");
         assert !Objects.equals(inputArguments, "");
         switch (command) {
+        case Keywords.LIBRARY:
+            assert inputArguments != null;
+            foodBankParser(inputArguments);
+            break;
         case Keywords.INPUT_MEAL:
             if (splitResults.length == 1) {
                 throw new MealException();
@@ -134,6 +138,26 @@ public class CommandManager {
         case Keywords.INPUT_BYE:
             isExit = true;
             System.out.println(ClickfitMessages.CREDITS);
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+    }
+
+    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException{
+        String[] splitResults = inputArguments.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        switch (command) {
+        case Keywords.ADD_FLUID:
+            FoodBank.addCustomFluid(inputArguments);
+            break;
+        case Keywords.DELETE_DRINKS:
+            FoodBank.deleteCustomFluids(inputArguments);
+            break;
+        case Keywords.LIST_DRINKS:
+            FoodBank.listCustomFluids();
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
