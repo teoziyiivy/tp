@@ -32,7 +32,7 @@ public class FoodBank {
         }
     }
 
-    public static void addCustomFluid(String inputArguments) {
+    public static void addCustomFluid(String inputArguments) throws FoodBankException {
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
         fluids.add(inputArguments);
@@ -41,7 +41,7 @@ public class FoodBank {
                 " You now have " + totalFluids + " fluids!\n");
     }
 
-    public static void deleteCustomFluids(String inputArguments) {
+    public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
         int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
         generateParameters(fluids.get(taskNumber));
         fluids.remove(taskNumber);
@@ -50,14 +50,26 @@ public class FoodBank {
                 " You now have " + totalFluids + " fluids left!\n");
     }
 
-    public static void listCustomFluids() {
+    public static void listCustomFluids() throws FoodBankException {
         int i = 1;
         for (String fluid : fluids) {
             generateParameters(fluid);
-            System.out.println(i + ". " + description + " " + calories + "\n");
-            i++;
+            System.out.println(i + ". " + description);
+            System.out.println("Calories: " + calories + "\n");
+            i += 1;
         }
-        System.out.println("Total number of fluids in library: " + totalFluids + "\n");
+        System.out.println("Total number of fluids in library: " + totalFluids);
+    }
+
+    public static void listCustomMeal() throws FoodBankException {
+        int i = 1;
+        for (String meal : meals) {
+            generateParameters(meal);
+            System.out.println(i + ". " + description);
+            System.out.println("Calories: " + calories + "\n");
+            i += 1;
+        }
+        System.out.println("Total number of meals in library: " + totalMeals);
     }
 
     public static void addCustomMeal(String inputArguments) throws FoodBankException{
@@ -76,17 +88,6 @@ public class FoodBank {
         totalMeals -= 1;
         System.out.println(description + " will be removed from your list of meals consumed. You now have "
                 + totalMeals + " meals left!\n");
-    }
-
-    public static void listCustomMeal() throws FoodBankException {
-        int i = 1;
-        for (String meal : meals) {
-            generateParameters(meal);
-            System.out.println(i + ". " + description);
-            System.out.println("Calories: " + calories + "\n");
-            i += 1;
-        }
-        System.out.println("Total number of meals in library: " + totalMeals);
     }
 
     public static int findCalories(String name) throws FoodBankException {
