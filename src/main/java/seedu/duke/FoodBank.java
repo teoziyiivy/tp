@@ -2,8 +2,8 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+import java.util.ArrayList;
 import seedu.duke.exceptions.MealException;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,8 +15,7 @@ public class FoodBank {
     protected static String description;
     protected static int totalMeals;
     protected static int totalFluids;
-
-
+  
     public FoodBank() {
         meals = new ArrayList<>();
         fluids = new ArrayList<>();
@@ -31,6 +30,34 @@ public class FoodBank {
         } catch (DukeException e) {
             System.out.println("run away");
         }
+    }
+
+    public static void addCustomFluid(String inputArguments) {
+        generateParameters(inputArguments);
+        inputArguments = description + " /c " + calories;
+        fluids.add(inputArguments);
+        totalFluids += 1;
+        System.out.println(description + ", which has " + calories + " calories, will be added to your library of fluids." +
+                " You now have " + totalFluids + " fluids!\n");
+    }
+
+    public static void deleteCustomFluids(String inputArguments) {
+        int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
+        generateParameters(fluids.get(taskNumber));
+        fluids.remove(taskNumber);
+        totalFluids -= 1;
+        System.out.println(description + " will be removed from your list of fluids consumed." +
+                " You now have " + totalFluids + " fluids left!\n");
+    }
+
+    public static void listCustomFluids() {
+        int i = 1;
+        for (String fluid : fluids) {
+            generateParameters(fluid);
+            System.out.println(i + ". " + description + " " + calories + "\n");
+            i++;
+        }
+        System.out.println("Total number of fluids in library: " + totalFluids + "\n");
     }
 
     public static void addCustomMeal(String inputArguments) throws FoodBankException{
