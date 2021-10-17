@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public class Fluid extends Tracker {
         logr.setLevel(Level.SEVERE);
     }
 
-    public void generateFluidParameters(String inputArguments) throws DukeException {
+    public void generateFluidParameters(String inputArguments) throws DukeException, FoodBankException {
         description = Parser.getDescription(inputArguments);
         calories = Parser.getCalories(inputArguments);
         volume = Parser.getVolume(inputArguments);
@@ -36,12 +37,10 @@ public class Fluid extends Tracker {
     }
 
     //drank coke /c 60 /v 200 /d 12/12/2021 /t 10:30
-    public void addFluid(String inputArguments) throws DukeException, FluidExceptions {
+    public void addFluid(String inputArguments) throws DukeException, FluidExceptions, FoodBankException {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
-
         generateFluidParameters(inputArguments);
-
         logr.info("end of generating fluid parameters");
         if ((description.equals("") || Parser.containsSeparators(description))) {
             throw new FluidExceptions();
@@ -57,7 +56,7 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "addFluid");
     }
 
-    public void deleteFluid(String inputArguments) throws DukeException {
+    public void deleteFluid(String inputArguments) throws DukeException, FoodBankException {
         logr.entering(getClass().getName(), "deleteFluid");
         assert fluidArray.size() != 0 : "Fluid array should not be empty";
         int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
@@ -90,15 +89,13 @@ public class Fluid extends Tracker {
                 System.out.println("Time: " + time + "\n");
                 i++;
             }
-            System.out.println("Total number of meals: " + fluidNumber);
+            System.out.println("Total number of fluids: " + fluidNumber);
             System.out.println("Total calories: " + totalCalories);
             System.out.println("Total volume: " + totalVolume);
-            System.out.println("\n");
             logr.info("finished printing fluid list");
-        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException | FoodBankException e) {
             return;
         }
-
         logr.exiting(getClass().getName(), "listFluid");
     }
 }

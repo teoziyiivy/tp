@@ -2,6 +2,7 @@ package seedu.duke.gym;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FoodBankException;
 
 import java.time.format.DateTimeParseException;
 
@@ -27,7 +28,7 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() throws DukeException {
+    void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() throws DukeException, FoodBankException {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput);
@@ -48,7 +49,7 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void deleteWorkout_nonInteger_exceptionThrow() throws DukeException {
+    void deleteWorkout_nonInteger_exceptionThrow() throws DukeException, FoodBankException {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput1 = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput1);

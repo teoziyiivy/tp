@@ -231,6 +231,6 @@ Example of usage:
 * Access user guide: `help UG`
 * list meals: `listmeals`
 * List fluids: `listfluids`
-* 
+* List weights: 
 * List workouts: `listworkouts`
 * List scheduled workouts: `listschedule`
