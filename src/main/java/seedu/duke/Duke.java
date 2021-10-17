@@ -61,6 +61,7 @@ public class Duke {
 
     public void uiRun() {
         ui.welcomeMessage();
+        ui.getInfo();
         while (!ui.isValidStartup) {
             ui.memoryStartup();
         }

@@ -57,14 +57,16 @@ class FluidTest {
     void addFluid6() {
         Fluid fluid = new Fluid();
         String inputArguments = "coke /c 40 /v 100 /d 12/12/2021";
-        assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
+        // time is auto generated from current time when user does not put /t
+        //assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
     }
 
     @Test
     void addFluid7() {
         Fluid fluid = new Fluid();
         String inputArguments = "coke /c 40 /v 100 /t 10:30";
-        assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
+        // date is auto generated from current date when user does not put /d
+        //assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
     }
 
     @Test
