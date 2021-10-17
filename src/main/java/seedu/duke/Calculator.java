@@ -1,6 +1,7 @@
 package seedu.duke;
 
 public class Calculator {
+
     protected int height;
     protected int weight;
     protected int bmi;
@@ -21,8 +22,26 @@ public class Calculator {
         this.multiplier = 0;
     }
 
+    public void getBmi() {
+        System.out.println(System.lineSeparator() + "Your BMI outcome is " + System.lineSeparator());
+        String getBmiOutcome;
+        bmi = (weight / ((height / 100) ^ 2));
+
+        if (bmi < 18.5) {
+            getBmiOutcome = "Underweight";
+        } else if ((bmi >= 18.5) && (bmi < 24.9)) {
+            getBmiOutcome = "Normal weight";
+        } else if ((bmi >= 25) && (bmi < 29.9)) {
+            getBmiOutcome = "Overweight";
+        } else {
+            getBmiOutcome = "Obesity";
+        }
+        System.out.println(getBmiOutcome);
+    }
+
     public void getIdealCalories() {
-        System.out.println(System.lineSeparator() + "Your ideal number of calories to maintain your weight is " + System.lineSeparator());
+        System.out.println(System.lineSeparator() + "Your ideal number of calories to maintain your weight is "
+                + System.lineSeparator());
         if (activityLevel == 1) {
             multiplier = 1.2;
         } else if (activityLevel == 2) {
@@ -34,7 +53,7 @@ public class Calculator {
         } else if (activityLevel == 5) {
             multiplier = 1.90;
         } else {
-            System.out.println("go fk yourself");
+            System.out.println("go check yourself");
         }
 
         if (sex.equals("M")) {
@@ -43,6 +62,5 @@ public class Calculator {
             idealCalories = (int) ((655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age)) * multiplier);
         }
         System.out.println(idealCalories);
-
     }
 }
