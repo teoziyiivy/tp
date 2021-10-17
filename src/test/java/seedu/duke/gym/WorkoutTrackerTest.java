@@ -35,13 +35,6 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void completedWorkoutSeparatorCheck_MissingSeparator_exceptionThrow() {
-        WorkoutTracker wt = new WorkoutTracker();
-        String argumentInput = "test 123 07/07/2021 17:59";
-        assertThrows(DukeException.class, () -> wt.workoutSeparatorCheck(argumentInput));
-    }
-
-    @Test
     void emptyCompletedWorkoutListCheck_emptyList_exceptionThrow() {
         WorkoutTracker wt = new WorkoutTracker();
         assertThrows(DukeException.class, wt::emptyWorkoutListCheck);
@@ -61,13 +54,6 @@ class WorkoutTrackerTest {
         wt.addWorkout(argumentInput1);
         String argumentInput2 = "@!$!@$!";
         assertThrows(NumberFormatException.class, () -> wt.deleteWorkout(argumentInput2));
-    }
-
-    @Test
-    void addWorkout_missingSeparator_exceptionThrow() {
-        WorkoutTracker wt = new WorkoutTracker();
-        String argumentInput = "test /c 123 07/07/2021 17:59";
-        assertThrows(DukeException.class, () -> wt.addWorkout(argumentInput));
     }
 
     @Test

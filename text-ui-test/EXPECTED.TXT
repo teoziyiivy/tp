@@ -10,10 +10,8 @@ Greetings from
 Lets get your fitness journey started! input any commands to get started! Type "help commands" to get started! If you want to read the UG, type in "help UG"!
 Lets work hard together in your fitness journey!
 
-Welcome back! Would you like to load up the records of your fitness journey?
+Welcome back! Would you like to check your BMI and recommended caloric intake?
 Key in Y/N.
-
-CLI.ckFit has detected a wrong input, kindly type in either a "Y" or a "N".
 
 Welcome back! Would you like to load up the records of your fitness journey?
 Key in Y/N.
