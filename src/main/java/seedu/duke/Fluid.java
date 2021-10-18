@@ -5,12 +5,14 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Fluid extends Tracker {
 
-    protected static ArrayList<String> fluidArray;
+    protected ArrayList<String> fluidArray;
     protected int fluidNumber;
     protected String description;
     protected int calories;
@@ -22,7 +24,7 @@ public class Fluid extends Tracker {
     private static final Logger logr = Logger.getLogger("FluidLogger");
 
     public Fluid() {
-        fluidArray = new ArrayList<>();
+        this.fluidArray = new ArrayList<>();
         this.fluidNumber = 0;
         this.totalCalories = 0;
         logr.setLevel(Level.SEVERE);
