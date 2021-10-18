@@ -3,6 +3,8 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -70,7 +72,7 @@ class FluidTest {
     }
 
     @Test
-    void deleteFluid() throws DukeException, FluidExceptions {
+    void deleteFluid() throws DukeException, FluidExceptions, FoodBankException {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
         String input = "deletefluid one";
@@ -78,7 +80,7 @@ class FluidTest {
     }
 
     @Test
-    void deleteFluid2() throws DukeException, FluidExceptions {
+    void deleteFluid2() throws DukeException, FluidExceptions, FoodBankException {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
         String input = "deletefluid";
@@ -87,8 +89,8 @@ class FluidTest {
 
     @Test
     void listFluid() {
-        Fluid.fluidArray = new ArrayList<>();
-        assert (Fluid.fluidArray.size() == 0);
+        fluidArray = new ArrayList<>();
+        assert (fluidArray.size() == 0);
     }
 
     @Test

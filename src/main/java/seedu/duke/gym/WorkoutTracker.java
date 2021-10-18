@@ -3,6 +3,7 @@ package seedu.duke.gym;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
 import seedu.duke.Tracker;
+import seedu.duke.exceptions.FoodBankException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class WorkoutTracker extends Tracker {
     }
 
     public void generateWorkoutParameters(String inputArguments)
-            throws DukeException, DateTimeParseException, NumberFormatException {
+            throws DukeException, DateTimeParseException, NumberFormatException, FoodBankException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for workout.");
         workoutDescription = Parser.getDescription(inputArguments);
         caloriesBurned = Parser.getCalories(inputArguments);
@@ -34,7 +35,7 @@ public class WorkoutTracker extends Tracker {
     }
 
     public void addWorkout(String inputArguments)
-            throws DukeException, DateTimeParseException, NumberFormatException {
+            throws DukeException, DateTimeParseException, NumberFormatException, FoodBankException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
@@ -50,7 +51,7 @@ public class WorkoutTracker extends Tracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
 
-    public void deleteWorkout(String inputArguments) throws DukeException, NumberFormatException {
+    public void deleteWorkout(String inputArguments) throws DukeException, NumberFormatException, FoodBankException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
@@ -72,7 +73,7 @@ public class WorkoutTracker extends Tracker {
     }
 
     public void listWorkouts()
-            throws DukeException, DateTimeParseException, NumberFormatException {
+            throws DukeException, DateTimeParseException, NumberFormatException, FoodBankException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list workouts.");
         emptyWorkoutListCheck();
         assert workoutList.size() > 0 : "List should be non empty at this point";

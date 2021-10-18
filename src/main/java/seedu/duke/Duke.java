@@ -2,15 +2,17 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
+
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
 
 @SuppressWarnings("ALL")
 public class Duke {
-
     private Meal meal;
     private Ui ui;
     private Fluid fluid;
@@ -19,6 +21,9 @@ public class Duke {
     private WeightTracker weightTracker;
     private CommandManager commandManager;
     private UserHelp userHelp;
+    private FoodBank foodbank;
+    private DateTracker dateTracker;
+    private Storage storage;
 
     public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
@@ -33,7 +38,10 @@ public class Duke {
         workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
-        commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        storage = new Storage("userData.txt");
+        commandManager = new CommandManager(storage, fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        foodbank = new FoodBank();
+        dateTracker = new DateTracker();
     }
 
     public void run() {
@@ -54,6 +62,10 @@ public class Duke {
                 System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (FluidExceptions e) {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
+            } catch (FoodBankException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("ccc");
             }
             LogManager.getLogManager().reset();
         }
