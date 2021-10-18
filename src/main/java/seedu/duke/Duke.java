@@ -9,6 +9,7 @@ import seedu.duke.gym.WorkoutTracker;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.logging.LogManager;
 
 @SuppressWarnings("ALL")
@@ -23,6 +24,7 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
     private FoodBank foodbank;
+    private DateTracker dateTracker;
     private Storage storage;
 
     public static void main(String[] args) throws DukeException {
@@ -38,18 +40,24 @@ public class Duke {
         workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
-        storage = new Storage("userData.txt", fluid, meal, scheduleTracker, workoutTracker, weightTracker);
+        storage = new Storage("userData.txt");
         commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
         foodbank = new FoodBank();
+        dateTracker = new DateTracker();
     }
 
     public void run() {
         while (!commandManager.isExit) {
             try {
+               // ArrayList<String> time = new ArrayList<>();
+                // time.add("cola /t 10:30");
+               // time.add("water /t 09:30");
+                // time.add("fanta /t 22:30");
+                // DateTracker.sortTime(time);
                 System.out.println(Ui.HORIZONTAL_BAR);
                 System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
-                storage.saveAllTasks();
+                storage.saveAllTasks(fluid, meal, scheduleTracker, workoutTracker, weightTracker);
             } catch (DateTimeParseException e) {
                 System.out.println(ClickfitMessages.DATE_ERROR);
             } catch (NumberFormatException e) {

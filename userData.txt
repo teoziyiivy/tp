@@ -1,1 +1,6 @@
-Today's date: 18/10/2021
+Date: 12/12/1999
+Meals
+mytwinbrother /c 10000 /d 12/12/1999 /t 10:30
+Date: 18/10/2021
+Meals
+risotto /c 90 /d 18/10/2021 /t 18:02
