@@ -14,66 +14,70 @@ import java.nio.file.StandardOpenOption;
 public class Storage {
 
     protected String filePath;
-    protected ScheduleTracker scheduleTracker;
-    protected WorkoutTracker workoutTracker;
-    protected Meal meal;
-    protected Fluid fluid;
-    protected WeightTracker weightTracker;
 
-    public Storage(String filePath,Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
-                   WeightTracker weightTracker) {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        this.fluid = fluid;
-        this.meal = meal;
-        this.scheduleTracker = scheduleTracker;
-        this.workoutTracker = workoutTracker;
-        this.weightTracker = weightTracker;
     }
 
-    public void saveAllTasks() throws IOException {
+    public void saveAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+                             WeightTracker weightTracker) throws IOException {
         String filePath = new File(this.filePath).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
-        String todayDate;
         String currentDate;
         String currentMeal;
         String currentFluid;
+        String header;
         String customMeal;
         String customFluid;
-        int indexNumber = 1;
-        todayDate = "Today's date: " + Parser.getSystemDate();
-        Files.write(Paths.get(filePath), todayDate.getBytes(), StandardOpenOption.APPEND);
+        int headerFlag;
         for (String date : DateTracker.dates) {
-            currentDate = "Date: " + date;
+            currentDate = "Date: " + date + "\n";
             Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
-            for (String meal : meal.meals) {
-                currentMeal = indexNumber + ". " + meal;
-                Files.write(Paths.get(filePath), currentMeal.getBytes(), StandardOpenOption.APPEND);
-                indexNumber += 1;
+            headerFlag = 0;
+            for (String m : meal.meals) {
+                if (m.contains(date) && (headerFlag == 0)) {
+                    header = "Meals" + "\n";
+                    Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                    headerFlag = 1;
+                }
+                if (m.contains(date)) {
+                    currentMeal = m + "\n";
+                    Files.write(Paths.get(filePath), currentMeal.getBytes(), StandardOpenOption.APPEND);
+                }
             }
-            indexNumber = 1;
-            for (String fluid : fluid.fluidArray) {
-                currentFluid = indexNumber + ". " + fluid;
-                Files.write(Paths.get(filePath), currentFluid.getBytes(), StandardOpenOption.APPEND);
-                indexNumber += 1;
+            headerFlag = 0;
+            for (String f : fluid.fluidArray) {
+                if (f.contains(date) && (headerFlag == 0)) {
+                    header = "Fluids" + "\n";
+                    Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                    headerFlag = 1;
+                }
+                if (f.contains(date)) {
+                    currentFluid = f + "\n";
+                    Files.write(Paths.get(filePath), currentFluid.getBytes(), StandardOpenOption.APPEND);
+                }
             }
         }
-        indexNumber = 1;
-        for (String meal : FoodBank.meals) {
-            customMeal = indexNumber + ". " + meal;
+        headerFlag = 0;
+        for (String m : FoodBank.meals) {
+            if (headerFlag == 0) {
+                header = "Meal Library" + "\n";
+                Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                headerFlag = 1;
+            }
+            customMeal = m + "\n";
             Files.write(Paths.get(filePath), customMeal.getBytes(), StandardOpenOption.APPEND);
-            indexNumber += 1;
         }
-        indexNumber = 1;
-        for (String fluid : FoodBank.fluids) {
-            customFluid = indexNumber + ". " + fluid;
+        headerFlag = 0;
+        for (String f : FoodBank.fluids) {
+            if (headerFlag == 0) {
+                header = "Fluid Library" + "\n";
+                Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                headerFlag = 1;
+            }
+            customFluid = f + "\n";
             Files.write(Paths.get(filePath), customFluid.getBytes(), StandardOpenOption.APPEND);
-            indexNumber += 1;
         }
         fw.close();
     }
 }
-
-
-
-
-

@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant ":ScheduleTracker"
+participant ":ScheduledWorkout"
+
+->":ScheduleTracker" : addScheduledWorkout(inputArguments: String)
+activate ":ScheduleTracker" #FFBBBB
+
+":ScheduleTracker"->":ScheduleTracker" : generateParameters(inputArguments: String)
+activate ":ScheduleTracker" #DarkSalmon
+return String[3]
+
+":ScheduleTracker"->":ScheduleTracker" : scheduledWorkouts.add(scheduledWorkout : ScheduleWorkout)
+activate ":ScheduleTracker" #DarkSalmon
+return
+
+":ScheduleTracker"->":ScheduleTracker" : cleanUpScheduleList
+activate ":ScheduleTracker" #DarkSalmon
+
+loop \tno more overdue workouts\t
+    note left : Take note that a workout is "overdue" \nif its scheduled date is before the current date
+    ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
+    activate ":ScheduleTracker" #IndianRed
+    alt \tisRecurringWorkout\t
+        ":ScheduleTracker"->":ScheduleTracker" : rescheduleRecurringWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
+        activate ":ScheduleTracker" #LightSalmon
+        ":ScheduleTracker"->":ScheduledWorkout" : incrementWorkoutDate(days: long)
+        |||
+        activate ":ScheduledWorkout"
+        return
+        return
+        |||
+    else else
+        ":ScheduleTracker"->":ScheduleTracker" : deleteWorkout()
+        activate ":ScheduleTracker" #LightSalmon
+        ":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.remove(scheduledWorkout : ScheduleWorkout)
+        activate ":ScheduledWorkout"
+        destroy ":ScheduledWorkout"
+        return
+        return
+        |||
+    end
+end
+
+":ScheduleTracker"->":ScheduleTracker" : sortScheduleList()
+activate ":ScheduleTracker" #LightSalmon
+return
+
+return
+return
+return
+
+@enduml
