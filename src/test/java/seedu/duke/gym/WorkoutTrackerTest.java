@@ -2,6 +2,7 @@ package seedu.duke.gym;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FoodBankException;
 
 import java.time.format.DateTimeParseException;
 
@@ -27,18 +28,11 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() throws DukeException {
+    void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() throws DukeException, FoodBankException {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput);
         assertTrue(wt.isWorkoutNumberWithinRange(1));
-    }
-
-    @Test
-    void completedWorkoutSeparatorCheck_MissingSeparator_exceptionThrow() {
-        WorkoutTracker wt = new WorkoutTracker();
-        String argumentInput = "test 123 07/07/2021 17:59";
-        assertThrows(DukeException.class, () -> wt.workoutSeparatorCheck(argumentInput));
     }
 
     @Test
@@ -55,19 +49,12 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void deleteWorkout_nonInteger_exceptionThrow() throws DukeException {
+    void deleteWorkout_nonInteger_exceptionThrow() throws DukeException, FoodBankException {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput1 = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput1);
         String argumentInput2 = "@!$!@$!";
         assertThrows(NumberFormatException.class, () -> wt.deleteWorkout(argumentInput2));
-    }
-
-    @Test
-    void addWorkout_missingSeparator_exceptionThrow() {
-        WorkoutTracker wt = new WorkoutTracker();
-        String argumentInput = "test /c 123 07/07/2021 17:59";
-        assertThrows(DukeException.class, () -> wt.addWorkout(argumentInput));
     }
 
     @Test

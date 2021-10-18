@@ -3,6 +3,8 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -57,18 +59,20 @@ class FluidTest {
     void addFluid6() {
         Fluid fluid = new Fluid();
         String inputArguments = "coke /c 40 /v 100 /d 12/12/2021";
-        assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
+        // time is auto generated from current time when user does not put /t
+        //assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
     }
 
     @Test
     void addFluid7() {
         Fluid fluid = new Fluid();
         String inputArguments = "coke /c 40 /v 100 /t 10:30";
-        assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
+        // date is auto generated from current date when user does not put /d
+        //assertThrows(DateTimeParseException.class, () -> fluid.addFluid(inputArguments));
     }
 
     @Test
-    void deleteFluid() throws DukeException, FluidExceptions {
+    void deleteFluid() throws DukeException, FluidExceptions, FoodBankException {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
         String input = "deletefluid one";
@@ -76,7 +80,7 @@ class FluidTest {
     }
 
     @Test
-    void deleteFluid2() throws DukeException, FluidExceptions {
+    void deleteFluid2() throws DukeException, FluidExceptions, FoodBankException {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
         String input = "deletefluid";

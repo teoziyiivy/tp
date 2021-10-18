@@ -19,7 +19,7 @@ public class ScheduledWorkout {
         this.workoutTime = workoutTime;
         workoutDateTime = LocalDateTime.of(
                 LocalDate.parse(workoutDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("h:mma")));
+                LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
     }
 
