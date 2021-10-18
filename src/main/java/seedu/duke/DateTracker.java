@@ -23,29 +23,13 @@ public class DateTracker {
         Collections.sort(dates);
     }
 
-    public static void sortTime(ArrayList<String> list) {                                //test method
-        Collections.sort(list, new Comparator<String>() {
-            public int compare(String o1, String o2) {
-                String[] left = o1.split("\\s+");
-                String[] right = o2.split("\\s+");
-                return left[left.length - 1].compareTo(right[right.length - 1]);
-            }
-        });
-        for (String t : list) {
-            System.out.println(t + "\n");
-        }
-    }
-/*
     public static void sortTime(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
-            @Override
             public int compare(String o1, String o2) {
                 String[] left = o1.split("\\s+");
                 String[] right = o2.split("\\s+");
                 return left[left.length - 1].compareTo(right[right.length - 1]);
             }
         });
-        System.out.println(list);
     }
- */
 }
