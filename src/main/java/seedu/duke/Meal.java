@@ -38,7 +38,8 @@ public class Meal extends Tracker {
         }
     }
 
-    public void addMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
+    public void addMeal(String inputArguments)
+            throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
         logger.entering(getClass().getName(),"addMeal");
         logger.log(Level.INFO, "generating meal parameters");
 
@@ -59,7 +60,8 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(),"addMeal");
     }
 
-    public void deleteMeal(String inputArguments) throws DateTimeParseException, NumberFormatException, FoodBankException {
+    public void deleteMeal(String inputArguments)
+            throws DateTimeParseException, NumberFormatException, FoodBankException {
         assert mealNumber != 0;
         logger.entering(getClass().getName(),"deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
@@ -75,7 +77,7 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(),"deleteMeal");
     }
 
-    public void listMeals() throws FoodBankException{
+    public void listMeals() throws FoodBankException {
         assert mealNumber != 0;
         logger.entering(getClass().getName(),"listMeals");
         int i = 1;

@@ -29,7 +29,7 @@ public class Storage {
         String header;
         String customMeal;
         String customFluid;
-        int headerFlag = 0;
+        int headerFlag;
         for (String date : DateTracker.dates) {
             currentDate = "Date: " + date + "\n";
             Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
@@ -81,8 +81,3 @@ public class Storage {
         fw.close();
     }
 }
-
-
-
-
-

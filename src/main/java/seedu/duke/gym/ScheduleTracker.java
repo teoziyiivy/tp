@@ -13,14 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ScheduleTracker {
-    private ArrayList<ScheduledWorkout> scheduledWorkoutList;
+    private ArrayList<ScheduledWorkout> scheduledWorkouts;
     private static final int LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING = 1;
     private static final int FIRST_INDEX_IN_LIST = 0;
     private static final int DAYS_IN_A_WEEK = 7;
     public static final Logger SCHEDULE_TRACKER_LOGGER = Logger.getLogger("ScheduleTrackerLogger");
 
     public ScheduleTracker() {
-        scheduledWorkoutList = new ArrayList<>();
+        scheduledWorkouts = new ArrayList<>();
         SCHEDULE_TRACKER_LOGGER.setLevel(Level.SEVERE);
     }
 
@@ -49,10 +49,10 @@ public class ScheduleTracker {
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
-        scheduledWorkoutList.add(
+        scheduledWorkouts.add(
                 new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, isRecurringWorkout)
         );
-        ScheduledWorkout workout = scheduledWorkoutList.get(scheduledWorkoutList.size() - 1);
+        ScheduledWorkout workout = scheduledWorkouts.get(scheduledWorkouts.size() - 1);
         System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
                 + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
                 + workoutTime + ".");
@@ -61,7 +61,7 @@ public class ScheduleTracker {
     }
 
     public boolean isScheduledWorkoutNumberWithinRange(int workoutNumber) {
-        int upperBound = scheduledWorkoutList.size();
+        int upperBound = scheduledWorkouts.size();
         int lowerBound = LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING;
         return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound);
     }
@@ -71,16 +71,16 @@ public class ScheduleTracker {
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         emptyScheduledWorkoutListCheck();
-        assert scheduledWorkoutList.size() > 0 : "List should be non empty at this point";
+        assert scheduledWorkouts.size() > 0 : "List should be non empty at this point";
         int workoutNumber = Parser.parseStringToInteger(inputArguments);
         int workoutIndex = workoutNumber - 1; // 0-indexing
         if (isScheduledWorkoutNumberWithinRange(workoutNumber)) {
-            ScheduledWorkout workoutToDelete = scheduledWorkoutList.get(workoutIndex);
+            ScheduledWorkout workoutToDelete = scheduledWorkouts.get(workoutIndex);
             System.out.println("Noted! CLI.ckFit has successfully deleted your "
                     + workoutToDelete.isRecurringStatusAsText() + "scheduled workout of description \""
                     + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
                     + " at " + workoutToDelete.getWorkoutTime() + "!");
-            scheduledWorkoutList.remove(workoutIndex);
+            scheduledWorkouts.remove(workoutIndex);
             cleanUpScheduleList();
             SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted scheduled workout.");
         } else {
@@ -94,7 +94,7 @@ public class ScheduleTracker {
         emptyScheduledWorkoutListCheck();
         cleanUpScheduleList();
         int currentIndex = 1;
-        for (ScheduledWorkout workout : scheduledWorkoutList) {
+        for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
             System.out.println("Date: " + workout.getWorkoutDate());
             System.out.println("Time: " + workout.getWorkoutTime() + "\n");
@@ -110,7 +110,7 @@ public class ScheduleTracker {
         boolean isAnyWorkoutOverdue = true;
         ScheduledWorkout firstWorkoutEntry;
         while (isAnyWorkoutOverdue) {
-            firstWorkoutEntry = scheduledWorkoutList.get(FIRST_INDEX_IN_LIST);
+            firstWorkoutEntry = scheduledWorkouts.get(FIRST_INDEX_IN_LIST);
             if (firstWorkoutEntry.getWorkoutDateAsLocalDate().isBefore(currentDate)) {
                 updateOrDeleteScheduledWorkout(firstWorkoutEntry, currentDate);
                 isAnyWorkoutUpdatedOrDeleted = true;
@@ -128,7 +128,7 @@ public class ScheduleTracker {
         if (scheduledWorkout.isRecurring()) {
             rescheduleRecurringWorkout(scheduledWorkout, currentDate);
         } else {
-            scheduledWorkoutList.remove(scheduledWorkoutList.indexOf(scheduledWorkout));
+            scheduledWorkouts.remove(scheduledWorkouts.indexOf(scheduledWorkout));
         }
         sortScheduleList();
     }
@@ -141,7 +141,7 @@ public class ScheduleTracker {
     }
 
     public void sortScheduleList() {
-        scheduledWorkoutList.sort(Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
+        scheduledWorkouts.sort(Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
     }
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
@@ -165,7 +165,7 @@ public class ScheduleTracker {
     }
 
     public void emptyScheduledWorkoutListCheck() throws DukeException {
-        if (scheduledWorkoutList.isEmpty()) {
+        if (scheduledWorkouts.isEmpty()) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Schedule list is empty.");
             throw new DukeException("Scheduled Workout list is empty!");
         }

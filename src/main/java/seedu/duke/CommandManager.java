@@ -150,7 +150,7 @@ public class CommandManager {
         storage.saveAllTasks(fluid, meal, scheduleTracker, workoutTracker, weightTracker);
     }
 
-    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException{
+    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;

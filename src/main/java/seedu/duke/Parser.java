@@ -59,7 +59,8 @@ public class Parser {
         }
     }
 
-    public static int getCalories(String inputArguments) throws DukeException, NumberFormatException, FoodBankException {
+    public static int getCalories(String inputArguments)
+            throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
         if (!containsCalorieSeparator(inputArguments)) {
             String description = getDescription(inputArguments);
