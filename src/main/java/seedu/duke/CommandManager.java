@@ -35,7 +35,8 @@ public class CommandManager {
         this.isExit = false;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException {
+    public void commandChecker()
+            throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -145,7 +146,7 @@ public class CommandManager {
         }
     }
 
-    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException{
+    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
