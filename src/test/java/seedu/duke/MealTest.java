@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 
 import java.time.format.DateTimeParseException;
@@ -36,7 +37,7 @@ class MealTest {
     }
 
     @Test
-    void deleteMeal1() throws MealException {
+    void deleteMeal1() throws MealException, FoodBankException {
         Meal meal = new Meal();
         String input = "pasta /c 300 /d 14/09/2021 /t 17:45";
         meal.addMeal(input);
