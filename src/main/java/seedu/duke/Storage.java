@@ -80,4 +80,17 @@ public class Storage {
         }
         fw.close();
     }
+
+    public void loadAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+                             WeightTracker weightTracker) throws IOException {
+        String filePath = new File(this.filePath).getAbsolutePath();
+        FileWriter fw = new FileWriter(filePath, false);
+        String currentDate;
+        String currentMeal;
+        String currentFluid;
+        String header;
+        String customMeal;
+        String customFluid;
+
+    }
 }
