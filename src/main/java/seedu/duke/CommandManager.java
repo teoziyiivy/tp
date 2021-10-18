@@ -91,7 +91,7 @@ public class CommandManager {
             break;
         case Keywords.DELETE_DRINKS:
             if (inputArguments != null) {
-                if (Fluid.fluidArray.size() == 0) {
+                if (fluid.fluidArray.size() == 0) {
                     System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
@@ -101,7 +101,7 @@ public class CommandManager {
             }
             break;
         case Keywords.LIST_DRINKS:
-            if (Fluid.fluidArray.size() == 0) {
+            if (fluid.fluidArray.size() == 0) {
                 System.out.println(ClickfitMessages.FLUID_LIST_ERROR);
             } else {
                 fluid.listFluid();
