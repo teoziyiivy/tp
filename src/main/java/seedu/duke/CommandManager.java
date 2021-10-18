@@ -1,11 +1,14 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -21,8 +24,9 @@ public class CommandManager {
     protected boolean isExit;
     protected String command;
     protected String inputArguments;
+    protected Storage storage;
 
-    public CommandManager(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+    public CommandManager(Storage storage, Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                           WeightTracker weightTracker, UserHelp userHelp) {
         this.fluid = fluid;
         this.meal = meal;
@@ -32,9 +36,10 @@ public class CommandManager {
         this.weightTracker = weightTracker;
         this.userHelp = userHelp;
         this.isExit = false;
+        this.storage = storage;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions {
+    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException, IOException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -43,6 +48,10 @@ public class CommandManager {
         assert !input.equals("");
         assert !Objects.equals(inputArguments, "");
         switch (command) {
+        case Keywords.LIBRARY:
+            assert inputArguments != null;
+            foodBankParser(inputArguments);
+            break;
         case Keywords.INPUT_MEAL:
             if (splitResults.length == 1) {
                 throw new MealException();
@@ -77,7 +86,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
-                } catch (FluidExceptions e) {
+                } catch (FluidExceptions | FoodBankException e) {
                     System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
             } else {
@@ -86,7 +95,7 @@ public class CommandManager {
             break;
         case Keywords.DELETE_DRINKS:
             if (inputArguments != null) {
-                if (Fluid.fluidArray.size() == 0) {
+                if (fluid.fluidArray.size() == 0) {
                     System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
@@ -96,7 +105,7 @@ public class CommandManager {
             }
             break;
         case Keywords.LIST_DRINKS:
-            if (Fluid.fluidArray.size() == 0) {
+            if (fluid.fluidArray.size() == 0) {
                 System.out.println(ClickfitMessages.FLUID_LIST_ERROR);
             } else {
                 fluid.listFluid();
@@ -133,6 +142,36 @@ public class CommandManager {
         case Keywords.INPUT_BYE:
             isExit = true;
             System.out.println(ClickfitMessages.CREDITS);
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+        storage.saveAllTasks(fluid, meal, scheduleTracker, workoutTracker, weightTracker);
+    }
+
+    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
+        String[] splitResults = inputArguments.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        switch (command) {
+        case Keywords.ADD_FLUID:
+            FoodBank.addCustomFluid(inputArguments);
+            break;
+        case Keywords.DELETE_DRINKS:
+            FoodBank.deleteCustomFluids(inputArguments);
+            break;
+        case Keywords.LIST_DRINKS:
+            FoodBank.listCustomFluids();
+            break;
+        case Keywords.ADD_MEAL:
+            FoodBank.addCustomMeal(inputArguments);
+            break;
+        case Keywords.DELETE_MEAL:
+            FoodBank.deleteCustomMeal(inputArguments);
+            break;
+        case Keywords.LIST_MEAL:
+            FoodBank.listCustomMeal();
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
