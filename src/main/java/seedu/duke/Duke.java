@@ -13,7 +13,6 @@ import java.util.logging.LogManager;
 
 @SuppressWarnings("ALL")
 public class Duke {
-
     private Meal meal;
     private Ui ui;
     private Fluid fluid;
@@ -23,6 +22,7 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
     private FoodBank foodbank;
+    private DateTracker dateTracker;
     private Storage storage;
 
     public static void main(String[] args) throws DukeException {
@@ -38,9 +38,10 @@ public class Duke {
         workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
-        storage = new Storage("userData.txt", fluid, meal, scheduleTracker, workoutTracker, weightTracker);
-        commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        storage = new Storage("userData.txt");
+        commandManager = new CommandManager(storage, fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
         foodbank = new FoodBank();
+        dateTracker = new DateTracker();
     }
 
     public void run() {
@@ -49,7 +50,6 @@ public class Duke {
                 System.out.println(Ui.HORIZONTAL_BAR);
                 System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
-                storage.saveAllTasks();
             } catch (DateTimeParseException e) {
                 System.out.println(ClickfitMessages.DATE_ERROR);
             } catch (NumberFormatException e) {
