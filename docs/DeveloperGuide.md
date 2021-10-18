@@ -18,7 +18,7 @@ the sake of better comprehensibility.
 
 #### ScheduleTracker: Adding scheduled workout
 
-![diagram-7209279434078158182](https://user-images.githubusercontent.com/69461398/137695507-67f555aa-8b68-419c-b47e-6aa74fb9c8b6.png)
+![diagram-8825593443024174765](https://user-images.githubusercontent.com/69461398/137699150-d537d8aa-6edd-4bdc-a559-30e33b0e7637.png)
 
 
 The UML sequence diagram above shows what happens when the method `addScheduledWorkout(...)` is called. 

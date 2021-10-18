@@ -18,7 +18,7 @@ return
 activate ":ScheduleTracker" #DarkSalmon
 
 loop \tno more overdue workouts\t
-    note left : Take note that a workout is "overdue" \nif its date is before the current date
+    note left : Take note that a workout is "overdue" \nif its scheduled date is before the current date
     ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
     activate ":ScheduleTracker" #IndianRed
     alt \tisRecurringWorkout\t
