@@ -57,9 +57,11 @@ public class CommandManager {
                 throw new MealException();
             }
             meal.addMeal(inputArguments);
+            DateTracker.sortTime(meal.meals);
             break;
         case Keywords.DELETE_MEAL:
             meal.deleteMeal(inputArguments);
+            DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
             break;
         case Keywords.LIST_MEAL:
             meal.listMeals();
@@ -86,6 +88,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
+                    DateTracker.sortTime(fluid.fluidArray);
                 } catch (FluidExceptions | FoodBankException e) {
                     System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
@@ -99,6 +102,7 @@ public class CommandManager {
                     System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
+                    DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
                 }
             } else {
                 System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
