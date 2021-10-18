@@ -14,11 +14,37 @@ It allows you to track your meals, fluid intakes, recipes, calories and exercise
 5. Navigate to the folder where the CLIckFit.jar file is stored.
 6. Execute java -jar CLIckFit.jar in the terminal, and the application will start running.
 
-## Features
+## Command Summary
+*Psssstttttt click on the commands to skip sections!*
 
-### Adding a meal: `ate`
+Command | Format of input
+------------ | -------------
+[**Add meal**](#Adding-a-meal)| `ate <MEAL_NAME> /c <MEAL_CALORIES> /d <DATE> /t <TIME>`
+[**Add fluid**](#Adding-fluids)| `drank <FLUID_NAME> /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
+[**Add weight**](#Adding-weight)| `addweight <WEIGHT> /d <DATE>`
+[**Add workout**](#Adding-workout)| `workout <WORKOUT_NAME> /c <CALORIES_BURNT> /d <DATE> /t <TIME>`
+[**Add scheduled workout**](#Adding-scheduled-workout)| `schedule <WORKOUT_NAME> /d <DATE> /t <TIME>`
+[**Remove meal**](#Delete-a-meal)| `deletemeal <INDEX>`
+[**Remove fluid**](#Delete-fluids)| `deletefluid <INDEX>`
+[**Remove weight**](#Delete-weight)| `deleteweight <INDEX>`
+[**Remove workout**](#Delete-workout)| `deleteworkout <INDEX>`
+[**Remove scheduled workout**](#Delete-workout-schedule)| `deleteschedule <INDEX>`
+[**List meals**](#List-meals)| `listmeals`
+[**List fluids**](#List-fluids)| `listfluids`
+[**List weights**](#List-weights)| `listweights`
+[**List workouts**](#List-workouts)| `listworkouts`
+[**List scheduled workouts**](#List-scheduled-workouts)| `listschedule`
+[**Access user help**](#Help-Commands)| `help commands`
+[**Access user guide**](#Help-UG)| `help UG`
 
-Adds a new meal to the list of meal items.
+
+# *Features:*
+
+# Adding a meal 
+
+Command word:`ate`
+
+Description: `Adds a new meal to the list of meal items.`
 
 Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 
@@ -27,13 +53,16 @@ Format: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 
-* Example of usage: 
+Example of usage: 
 
 `ate chicken /c 250 /d 14/10/2021 /t 08:30`
 
-### Adding fluids: `drank`
 
-Adds a new fluid to the list of fluid items.
+# Adding fluids
+
+Command Word: `drank`
+
+Description: `Adds a new fluid to the list of fluid items.`
 
 Format: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
 
@@ -47,9 +76,11 @@ Example of usage:
 
 `drank milk /c 180 /d 08/09/2021 /t 07:40`
 
-### Adding weight: `addweight`
+# Adding weight
 
-Adds a new weight to the list of weight items.
+Command Word: `addweight`
+
+Description: `Adds a new weight to the list of weight items.`
 
 Format: `addweight WEIGHT /d DATE`
 
@@ -60,9 +91,11 @@ Example of usage:
 
 `addweight 50 /d 03/04/2021`
 
-### Adding workout: `workout`
+# Adding workout
 
-Adds a new workout to the list of workout items.
+Command Word: `workout`
+
+Description: `Adds a new workout to the list of workout items.`
 
 Format: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
 
@@ -75,9 +108,11 @@ Example of usage:
 
 `workout jog /c 250 /d 07/08/2021 /t 15:00`
 
-### Adding scheduled workout: `schedule`
+# Adding scheduled workout
 
-Adds a new scheduled workout to the list of scheduled workout items.
+Command Word: `schedule`
+
+Description: `Adds a new scheduled workout to the list of scheduled workout items.`
 
 Format: `schedule WORKOUT_NAME /d DATE /t TIME`
 
@@ -89,9 +124,11 @@ Example of usage:
 
 `schedule chest day /d 07/08/2021 /t 15:00`
 
-### Delete a meal: `deletemeal`
+# Delete a meal
 
-Remove a meal from the list of meal items.
+Command Word: `deletemeal`
+
+Description: `Remove a meal from the list of meal items.`
 
 Format: `deletemeal INDEX`
 
@@ -101,9 +138,11 @@ Format: `deletemeal INDEX`
 
 `deletemeal 1`
 
-### Delete fluids: `deletefluid`
+# Delete fluids
 
-Remove a fluid from the list of fluid items.
+Command Word: `deletefluid`
+
+Description: `Remove a fluid from the list of fluid items.`
 
 Format: `deletefluid INDEX`
 
@@ -113,9 +152,11 @@ Example of usage:
 
 `deletefluid 2`
 
-### Delete weight: `deleteweight`
+# Delete weight
 
-Remove a weight from the list of weight items.
+Command Word:`deleteweight`
+
+Description: `Remove a weight from the list of weight items.`
 
 Format: `deleteweight INDEX`
 
@@ -125,9 +166,11 @@ Example of usage:
 
 `deleteweight 1`
 
-### Delete workout: `deleteworkout`
+# Delete workout
 
-Remove a workout from the list of workout items.
+Command Word:`deleteworkout`
+
+Description: `Remove a workout from the list of workout items.`
 
 Format: `deleteworkout INDEX`
 
@@ -137,9 +180,11 @@ Example of usage:
 
 `deleteworkout 3`
 
-### Delete workout: `deleteschedule`
+# Delete workout schedule
 
-Remove a workout from the list of workout items.
+Command Word: `deleteschedule`
+
+Description: `Remove a workout from the list of workout items.`
 
 Format: `deleteschedule INDEX`
 
@@ -149,56 +194,68 @@ Example of usage:
 
 `deleteschedule 3`
 
-### List meals(TODO)
+# List meals
 
-### List fluids
+Command Word: `listmeals`
 
-Lists all fluid entries made.
+Description: `Lists all meal entries made.`
 
-Format: `listfluids`
+Example of usage:
+
+`listmeals`
+
+# List fluids
+
+Command Words:`listfluids`
+
+Description: `Lists all fluid entries made.`
 
 Example of usage:
 
 `listfluids`
 
-### List/check? weights(TODO)
+# List weights
 
-### List workouts: `listworkout`
+# List workouts
 
-Lists out all stored workout descriptions, calories burned, date and time.
+Command Word:`listworkout`
 
-Format: `listworkout`
+Description: `Lists out all stored workout descriptions, 
+calories burned, date and time.`
 
 Example of usage:
 
 `listworkout`
 
-### List scheduled workouts: `listschedule`
+# List scheduled workouts
 
-Lists out all stored scheduled workout descriptions, date and time.
+Command Word: `listschedule`
 
-Format: `listschedule`
+Description: `Lists out all stored scheduled 
+workout descriptions, date and time.`
 
 Example of usage:
 
 `listschedule`
 
-###Help Commands: `help commands`
+# Help Commands
 
-Lists out the formats for the meal, fluid, gym and weight functions.
+Command Word: `help commands`
 
-Format: `help commands`
+Description: `Lists out the formats for the meal, fluid, gym and weight functions.`
 
 Example of usage:
+
 `help commands`
 
-###Help Commands: `help UG`
+# Help UG
 
-Provides the hyperlink to the user guide for more tech-savvy users to read.
+Command Word: `help UG`
 
-Format: `help UG`
+Description: `Provides the hyperlink to the user guide for more tech-savvy users to read.`
 
 Example of usage:
+
 `help UG`
 
 ## FAQ
@@ -211,26 +268,7 @@ Example of usage:
 
 **A**: Just try your best bro.
 
-**Q**: Can I A- and above this mod?
+**Q**: Can I A- this mod?
 
-**A**: Dunno bro, but if it helps, you are already an A+ in my eyes ;)
+**A**: Dunno bro, but if it helps, you are already an A+ in my eyes :)
 
-## Command Summary
-
-* Add meal: `ate MEAL_NAME /c MEAL_CALORIES /d DATE /t TIME`
-* Add fluid: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
-* Add weight: `addweight WEIGHT /d DATE`
-* Add workout: `workout WORKOUT_NAME /c CALORIES_BURNT /d DATE /t TIME`
-* Add scheduled workout: `schedule WORKOUT_NAME /d DATE /t TIME`
-* Remove meal: `deletemeal INDEX`
-* Remove fluid: `deletefluid INDEX`
-* Remove weight: `deleteweight INDEX`
-* Remove workout: `deleteworkout INDEX`
-* Remove scheduled workout: `deleteschedule INDEX`
-* Access user help: `help commands`
-* Access user guide: `help UG`
-* list meals: `listmeals`
-* List fluids: `listfluids`
-* List weights: 
-* List workouts: `listworkouts`
-* List scheduled workouts: `listschedule`
