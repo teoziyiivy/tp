@@ -37,8 +37,9 @@ public class FoodBank {
         inputArguments = description + " /c " + calories;
         fluids.add(inputArguments);
         totalFluids += 1;
-        System.out.println(description + ", which has " + calories + " calories, will be added to your library of fluids." +
-                " You now have " + totalFluids + " fluids!\n");
+        System.out.println(description + ", which has " + calories
+                + " calories, will be added to your library of fluids."
+                + " You now have " + totalFluids + " fluids!\n");
     }
 
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
@@ -46,8 +47,8 @@ public class FoodBank {
         generateParameters(fluids.get(taskNumber));
         fluids.remove(taskNumber);
         totalFluids -= 1;
-        System.out.println(description + " will be removed from your list of fluids consumed." +
-                " You now have " + totalFluids + " fluids left!\n");
+        System.out.println(description + " will be removed from your list of fluids consumed."
+                + " You now have " + totalFluids + " fluids left!\n");
     }
 
     public static void listCustomFluids() throws FoodBankException {
@@ -72,16 +73,16 @@ public class FoodBank {
         System.out.println("Total number of meals in library: " + totalMeals);
     }
 
-    public static void addCustomMeal(String inputArguments) throws FoodBankException{
+    public static void addCustomMeal(String inputArguments) throws FoodBankException {
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
         meals.add(inputArguments);
         totalMeals += 1;
-        System.out.println(description + ", which has " + calories + " calories, will be added to your library of meals. You now have "
-                + totalMeals + " meals!\n");
+        System.out.println(description + ", which has " + calories
+                + " calories, will be added to your library of meals. You now have " + totalMeals + " meals!\n");
     }
 
-    public static void deleteCustomMeal(String inputArguments) throws NumberFormatException , FoodBankException {
+    public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
         generateParameters(meals.get(mealIndex));
         meals.remove(mealIndex);
