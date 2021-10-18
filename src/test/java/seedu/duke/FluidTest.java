@@ -89,8 +89,8 @@ class FluidTest {
 
     @Test
     void listFluid() {
-        Fluid.fluidArray = new ArrayList<>();
-        assert (Fluid.fluidArray.size() == 0);
+        fluidArray = new ArrayList<>();
+        assert (fluidArray.size() == 0);
     }
 
     @Test

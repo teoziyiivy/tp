@@ -124,7 +124,9 @@ public class Parser {
             }
         }
         if (date.equals("")) {
-            return getSystemDate();
+            String newDate = getSystemDate();
+            DateTracker.checkIfDateExists(newDate);
+            return newDate;
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
