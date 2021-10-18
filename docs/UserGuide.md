@@ -19,23 +19,23 @@ It allows you to track your meals, fluid intakes, recipes, calories and exercise
 
 Command | Format of input
 ------------ | -------------
-[**Add meal**](#Adding-a-meal)| `ate <MEAL_NAME> /c <MEAL_CALORIES> /d <DATE> /t <TIME>`
-[**Add fluid**](#Adding-fluids)| `drank <FLUID_NAME> /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
-[**Add weight**](#Adding-weight)| `addweight <WEIGHT> /d <DATE>`
-[**Add workout**](#Adding-workout)| `workout <WORKOUT_NAME> /c <CALORIES_BURNT> /d <DATE> /t <TIME>`
-[**Add scheduled workout**](#Adding-scheduled-workout)| `schedule <WORKOUT_NAME> /d <DATE> /t <TIME>`
-[**Remove meal**](#Delete-a-meal)| `deletemeal <INDEX>`
-[**Remove fluid**](#Delete-fluids)| `deletefluid <INDEX>`
-[**Remove weight**](#Delete-weight)| `deleteweight <INDEX>`
-[**Remove workout**](#Delete-workout)| `deleteworkout <INDEX>`
-[**Remove scheduled workout**](#Delete-workout-schedule)| `deleteschedule <INDEX>`
-[**List meals**](#List-meals)| `listmeals`
-[**List fluids**](#List-fluids)| `listfluids`
-[**List weights**](#List-weights)| `listweights`
-[**List workouts**](#List-workouts)| `listworkouts`
-[**List scheduled workouts**](#List-scheduled-workouts)| `listschedule`
-[**Access user help**](#Help-Commands)| `help commands`
-[**Access user guide**](#Help-UG)| `help UG`
+[**Add meal**](#adding-a-meal)| `ate <MEAL_NAME> /c <MEAL_CALORIES> /d <DATE> /t <TIME>`
+[**Add fluid**](#adding-fluids)| `drank <FLUID_NAME> /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
+[**Add weight**](#adding-weight)| `addweight <WEIGHT> /d <DATE>`
+[**Add workout**](#adding-workout)| `workout <WORKOUT_NAME> /c <CALORIES_BURNT> /d <DATE> /t <TIME>`
+[**Add scheduled workout**](#adding-scheduled-workout)| `schedule <WORKOUT_NAME> /d <DATE> /t <TIME>`
+[**Remove meal**](#delete-a-meal)| `deletemeal <INDEX>`
+[**Remove fluid**](#delete-fluids)| `deletefluid <INDEX>`
+[**Remove weight**](#delete-weight)| `deleteweight <INDEX>`
+[**Remove workout**](#delete-workout)| `deleteworkout <INDEX>`
+[**Remove scheduled workout**](#delete-workout-schedule)| `deleteschedule <INDEX>`
+[**List meals**](#list-meals)| `listmeals`
+[**List fluids**](#list-fluids)| `listfluids`
+[**List weights**](#list-weights)| `listweights`
+[**List workouts**](#list-workouts)| `listworkouts`
+[**List scheduled workouts**](#list-scheduled-workouts)| `listschedule`
+[**Access user help**](#help-Commands)| `help commands`
+[**Access user guide**](#help-UG)| `help UG`
 
 
 # *Features:*
