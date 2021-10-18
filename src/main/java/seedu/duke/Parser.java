@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Locale;
 
 public class Parser {
@@ -126,6 +127,7 @@ public class Parser {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
+        DateTracker.checkIfDateExists(formatter.format(localDate));
         return formatter.format(localDate);
     }
 
