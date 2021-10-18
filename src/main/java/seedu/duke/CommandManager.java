@@ -7,6 +7,8 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -22,8 +24,9 @@ public class CommandManager {
     protected boolean isExit;
     protected String command;
     protected String inputArguments;
+    protected Storage storage;
 
-    public CommandManager(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+    public CommandManager(Storage storage, Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                           WeightTracker weightTracker, UserHelp userHelp) {
         this.fluid = fluid;
         this.meal = meal;
@@ -33,9 +36,10 @@ public class CommandManager {
         this.weightTracker = weightTracker;
         this.userHelp = userHelp;
         this.isExit = false;
+        this.storage = storage;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException {
+    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException, IOException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -143,6 +147,7 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
+        storage.saveAllTasks(fluid, meal, scheduleTracker, workoutTracker, weightTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException{
