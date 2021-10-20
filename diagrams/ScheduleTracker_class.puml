@@ -18,13 +18,24 @@ class ScheduledWorkout {
 -workoutDateTime: LocalDateTime
 -isRecurring: boolean
 
-+ScheduledWorkout(workoutDescription: String,
-workoutDate: String, workoutTime: String, isRecurring: boolean)
++ScheduledWorkout(workoutDescription: String, \n\tworkoutDate: String, workoutTime: String, \n\tisRecurring: boolean)
 +incrementWorkoutDate(): void
 }
 
-ScheduleTracker -->  "[0..*] scheduledWorkouts" ScheduledWorkout
+note top of WorkoutActivity : Basic getter methods for attribute omitted
+class WorkoutActivity {
+private String activityDescription;
+    -boolean isDistanceActivity = false;
+    -activityDistance: int
+    -activitySets: int
+    -activityReps: int
 
+    +WorkoutActivity(activityDescription: String,
+     \tactivityQuantifier: int[ ],\n\tisDistanceActivity: boolean)
+}
+
+ScheduleTracker -->  "[0..*] scheduledWorkouts" ScheduledWorkout
+ScheduledWorkout -->  "\t\t\n\n\n\n[0..*] activities" WorkoutActivity
 
 
 @enduml

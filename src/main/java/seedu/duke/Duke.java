@@ -1,14 +1,13 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.*;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutActivity;
+import seedu.duke.workout.WorkoutTracker;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -65,7 +64,7 @@ public class Duke {
                 System.out.println(ClickfitMessages.INCORRECT_INPUT);
             } catch (DukeException ignored) {
                 continue;
-            }  catch (MealException e) {
+            } catch (MealException e) {
                 System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (FluidExceptions e) {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
