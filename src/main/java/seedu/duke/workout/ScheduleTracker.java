@@ -1,4 +1,4 @@
-package seedu.duke.gym;
+package seedu.duke.workout;
 
 import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,13 +61,14 @@ public class ScheduleTracker {
             System.out.println("There were some errors during loading of ScheduleTracker data, "
                     + "some data may have been lost");
         }
+        cleanUpScheduleList();
     }
 
     public String[] generateScheduledWorkoutParameters(String inputArguments)
             throws DukeException, DateTimeParseException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for scheduled workout.");
         String workoutDescription = Parser.getScheduleDescription(inputArguments);
-        String workoutDate = Parser.getDate(inputArguments);
+        String workoutDate = Parser.getDateNoDateTracker(inputArguments);
         String workoutTime = Parser.getTime(inputArguments);
         String[] generatedParameters = {workoutDescription, workoutDate, workoutTime};
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully generated parameters for scheduled workout.");
@@ -86,9 +88,10 @@ public class ScheduleTracker {
         String workoutDescription = generatedParameters[0];
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
+        Map<String, int[]> activityMap = Parser.getActivities(inputArguments);
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
         scheduledWorkouts.add(
-                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, isRecurringWorkout)
+                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout)
         );
         ScheduledWorkout workout = scheduledWorkouts.get(scheduledWorkouts.size() - 1);
         if (!isSquelchAddMessage) {
@@ -148,7 +151,8 @@ public class ScheduleTracker {
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
             System.out.println("Date: " + workout.getWorkoutDate());
-            System.out.println("Time: " + workout.getWorkoutTime() + "\n");
+            System.out.println("Time: " + workout.getWorkoutTime());
+            System.out.println(workout.getActivitiesAsString());
             currentIndex++;
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
@@ -169,7 +173,8 @@ public class ScheduleTracker {
             for (ScheduledWorkout workout : filteredScheduleList) {
                 System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
                 System.out.println("Date: " + workout.getWorkoutDate());
-                System.out.println("Time: " + workout.getWorkoutTime() + "\n");
+                System.out.println("Time: " + workout.getWorkoutTime());
+                System.out.println(workout.getActivitiesAsString());
                 currentIndex++;
             }
         }
@@ -180,12 +185,32 @@ public class ScheduleTracker {
         for (ScheduledWorkout workout : scheduledWorkouts) {
             scheduleListAsString += workout.getWorkoutDescription() + Parser.DATE_SEPARATOR
                     + workout.getWorkoutDate() + Parser.TIME_SEPARATOR + workout.getWorkoutTime();
+            scheduleListAsString += getActivitiesAsString(workout);
             if (workout.isRecurring()) {
                 scheduleListAsString += Parser.RECURRING_FLAG;
             }
             scheduleListAsString += System.lineSeparator();
         }
         return scheduleListAsString;
+    }
+
+    private String getActivitiesAsString(ScheduledWorkout workout) {
+        StringBuilder activityString = new StringBuilder();
+        if (!workout.getActivities().isEmpty()) {
+            activityString.append(Parser.ACTIVITY_SEPARATOR);
+            int currentIndex = 0;
+            for (WorkoutActivity activity : workout.getActivities()) {
+                activityString.append(activity.getActivityDescription())
+                        .append(Parser.ACTIVITY_SPLITTER)
+                        .append(activity.getActivitySets())
+                        .append(Parser.QUANTIFIER_SPLITTER)
+                        .append(activity.getActivityReps());
+                currentIndex++;
+                activityString.append(
+                        (currentIndex < workout.getActivities().size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+            }
+        }
+        return activityString.toString();
     }
 
     public void cleanUpScheduleList() {

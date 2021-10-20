@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 
 import java.io.File;
 import java.io.FileWriter;
