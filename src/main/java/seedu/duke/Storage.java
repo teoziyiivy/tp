@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -101,25 +102,59 @@ public class Storage {
          */
     }
 
-
-    public void loadTasksFood(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
-                              WeightTracker weightTracker) throws IOException {
+    public ArrayList<String> loadMeals() throws IOException {
+        System.out.println("fuck");
+        ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(this.filePath).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
-        while (!(s.nextLine().equals("Fluids"))) {
+        int flag = 0;
+        while ((s.hasNext()) && (flag == 0)) {
             textFromFile = s.nextLine();
-            if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
-                meal.meals.add(textFromFile);
+            if (textFromFile.equals("Fluids")) {
+                flag = 1;
+            } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
+                meals.add(textFromFile);
+            } else {
+                flag = 0;
             }
         }
+        return meals;
+    }
+
+    public ArrayList<String> loadFluids() throws IOException {
+        ArrayList<String> fluids = new ArrayList<>();
+        String newFilePath = new File(this.filePath).getAbsolutePath();
+        File f = new File(newFilePath);
+        Scanner s = new Scanner(f);
+        String textFromFile;
+        int flag = 0;
         while (s.hasNext()) {
             textFromFile = s.nextLine();
-            if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
-                fluid.fluidArray.add(textFromFile);
+            if ((flag == 1) && (textFromFile.contains(Parser.CALORIE_SEPARATOR))) {
+                fluids.add(textFromFile);
+            } else if (textFromFile.equals("Fluids")) {
+                flag = 1;
+            } else {
+                flag = 0;
             }
         }
+        return fluids;
+    }
+
+    public ArrayList<String> loadTasks() throws IOException {
+        String newFilePath = new File(this.filePath).getAbsolutePath();
+        ArrayList<String> loadedTasks = new ArrayList<>();
+        File f = new File(newFilePath);
+        Scanner s = new Scanner(f);
+        String textFromFile;
+        while (s.hasNext()) {
+            textFromFile = s.nextLine();
+            loadedTasks.add(textFromFile);
+        }
+        //System.out.println(Ui.STARTING_MESSAGE);
+        return loadedTasks;
     }
 
     public static void initializeScheduleDataFile() {
