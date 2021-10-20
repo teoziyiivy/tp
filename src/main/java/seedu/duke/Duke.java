@@ -1,8 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.LoadException;
 import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutActivity;
 import seedu.duke.workout.WorkoutTracker;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;

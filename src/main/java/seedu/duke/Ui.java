@@ -16,7 +16,7 @@ public class Ui {
 
     private Scanner uiScanner;
     public static final String HORIZONTAL_BAR = "____________________________________________________________"
-        + "____________________________________________________________"; //placeholder
+            + "____________________________________________________________"; //placeholder
     public static final String USER_PROMPT = "Enter command: "; //placeholder
     protected String sex;
     protected int weight;
@@ -71,7 +71,7 @@ public class Ui {
 
     }
 
-    public boolean memoryStartup() throws LoadException{
+    public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput = uiScanner.nextLine();
         assert !Objects.equals(uiInput, "");

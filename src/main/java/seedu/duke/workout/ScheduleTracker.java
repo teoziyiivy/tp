@@ -93,8 +93,8 @@ public class ScheduleTracker {
         try {
             activityMap = Parser.getActivities(inputArguments);
         } catch (NumberFormatException nfe) {
-            throw new DukeException("Please enter a single integer [distance in metres] for distance based " +
-                    "activities(swimming/running/cycling). E.g. running:8000" + "" + System.lineSeparator()
+            throw new DukeException("Please enter a single integer [distance in metres] for distance based "
+                    + "activities(swimming/running/cycling). E.g. running:8000" + "" + System.lineSeparator()
                     + "Enter two integers [set]x[reps]" + " for everything else. E.g. bench press:3x12");
         }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
