@@ -116,8 +116,6 @@ public class Storage {
                 flag = 1;
             } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
                 meals.add(textFromFile);
-            } else {
-                flag = 0;
             }
         }
         return meals;
@@ -136,8 +134,6 @@ public class Storage {
                 fluids.add(textFromFile);
             } else if (textFromFile.equals("Fluids")) {
                 flag = 1;
-            } else {
-                flag = 0;
             }
         }
         return fluids;

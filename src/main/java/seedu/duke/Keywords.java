@@ -21,4 +21,10 @@ public class Keywords {
     public static final String ADD_FLUID = "addfluid";
     public static final String ADD_MEAL = "addmeal";
     public static final String LIBRARY = "library";
+    public static final String LIST = "list";
+    public static final String MEAL = "meals";
+    public static final String FLUID = "fluids";
+    public static final String WEIGHT = "weights";
+    public static final String WORKOUT = "workouts";
+    public static final String SCHEDULE = "schedules";
 }
