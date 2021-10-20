@@ -30,7 +30,7 @@ public class WeightTracker extends Tracker {
             weight = Parser.getWeight(inputArguments);
             date = Parser.getDate(inputArguments);
         } catch (NumberFormatException | DukeException e) {
-            printGenerateParametersException();
+            WeightTrackerMessages.printGenerateParametersException();
         }
         logger.exiting(getClass().getName(), "generateWeightParameters");
         logger.log(Level.INFO, "end of generating weight parameters");
@@ -50,7 +50,7 @@ public class WeightTracker extends Tracker {
                 printWeight();
             } catch (NoWeightsException e) {
                 logger.log(Level.WARNING, "caught empty list error", e);
-                printNoWeightsException();
+                WeightTrackerMessages.printNoWeightsException();
             }
             break;
         case "addweight":
@@ -58,7 +58,7 @@ public class WeightTracker extends Tracker {
                 addWeight(input);
             } catch (AddWeightException e) {
                 logger.log(Level.WARNING, "caught incorrect input format error", e);
-                printAddWeightException();
+                WeightTrackerMessages.printAddWeightException();
             }
             break;
         case "deleteweight":
@@ -66,10 +66,10 @@ public class WeightTracker extends Tracker {
                 deleteWeight(input);
             } catch (DeleteWeightException e) {
                 logger.log(Level.WARNING, "caught empty input error", e);
-                printDeleteWeightException();
+                WeightTrackerMessages.printDeleteWeightException();
             } catch (DeleteWeightIndexException e) {
                 logger.log(Level.WARNING, "caught invalid index error", e);
-                printDeleteWeightIndexException();
+                WeightTrackerMessages.printDeleteWeightIndexException();
             }
             break;
         default:
@@ -81,34 +81,6 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of processing");
     }
 
-    public void printGenerateParametersException() {
-        System.out.println("CLI.ckFit could not generate your parameters.");
-    }
-
-    public void printAddWeightResponse(int weight, String date) {
-        System.out.println("Noted! CLI.ckFit has recorded your weight as "
-                + weight + " on " + date + ". Check back for your progress!");
-    }
-
-    public void printAddWeightException() {
-        System.out.println("CLI.ckFit encountered a problem adding your weight.\n"
-                + "Please follow the format: addweight <weight> /d <DD/MM/YYYY>");
-    }
-
-    public void printDeleteWeightException() {
-        System.out.println("CLI.ckFit encountered a problem deleting your weight.\n"
-                + "Please follow the format: deleteweight <index>");
-    }
-
-    public void printDeleteWeightIndexException() {
-        System.out.println("CLI.ckFit encountered a problem deleting your weight.\n"
-                + "Please ensure the index is within the list.");
-    }
-
-    public void printNoWeightsException() {
-        System.out.println("CLI.ckFit has no recorded weights.");
-    }
-
     public void addWeight(String input) throws AddWeightException, DateTimeParseException {
         logger.entering(getClass().getName(), "addWeight");
         logger.log(Level.INFO, "going to add a weight and date to the list");
@@ -117,7 +89,7 @@ public class WeightTracker extends Tracker {
             throw new AddWeightException();
         } else {
             //weights.add(new WeightTracker(weight, date));
-            printAddWeightResponse(weight, date);
+            WeightTrackerMessages.printAddWeightResponse(weight, date);
             weightsArray.add(input);
             numberOfWeights += 1;
             assert numberOfWeights > 0 : "number of logged weights should be more than zero";

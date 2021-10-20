@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+abstract class Tracker {
+}
+
+class WeightTracker {
+#weightsArray: ArrayList<String>
+#numberOfWeights: int
+#weight: int
+#date: String
+- {static} logger: Logger
++WeightTracker()
++generateWeightParameters(inputArguments: String): void
++readInput(input: String): void
++addWeight(input: String): void
++deleteWeight(input: String): void
++printWeight((input: String): void
+}
+
+class WeightTrackerMessages {
++printGenerateParametersException(): void
++printAddWeightResponse(weight: int, date: String): void
++printAddWeightException(): void
++printDeleteWeightException(): void
++printDeleteWeightIndexException(): void
++printNoWeightsException(): void
+}
+
+WeightTrackerMessages ..> WeightTracker
+WeightTracker --|> "<<extends>>" Tracker
+
+@enduml

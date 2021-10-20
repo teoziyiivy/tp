@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.LoadException;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -14,9 +16,8 @@ public class Ui {
 
     private Scanner uiScanner;
     public static final String HORIZONTAL_BAR = "____________________________________________________________"
-        + "____________________________________________________________"; //placeholder
+            + "____________________________________________________________"; //placeholder
     public static final String USER_PROMPT = "Enter command: "; //placeholder
-    public boolean isValidStartup;
     protected String sex;
     protected int weight;
     protected int height;
@@ -26,7 +27,6 @@ public class Ui {
 
     public Ui() {
         uiScanner = new Scanner(System.in);
-        isValidStartup = false;
     }
 
     public static void welcomeMessage() {
@@ -71,21 +71,23 @@ public class Ui {
 
     }
 
-    public void memoryStartup() {
+    public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput = uiScanner.nextLine();
         assert !Objects.equals(uiInput, "");
-        if (uiInput.trim().equals("Y")) {
+        if (uiInput.equals("Y")) {
             System.out.println(MEMORY_STARTUP_Y_INPUT);
             System.out.println("What would you like to start with?");
-            isValidStartup = true;
-            //future: call list from command manager class
-        } else if (uiInput.trim().equals("N")) {
+            return true;
+
+        } else if (uiInput.equals("N")) {
             System.out.println(MEMORY_STARTUP_N_INPUT);
             System.out.println("What would you like to start with?");
-            isValidStartup = true;
+            return false;
         } else {
-            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
+            throw new LoadException();
         }
     }
+
+
 }

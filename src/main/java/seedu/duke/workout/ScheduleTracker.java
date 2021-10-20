@@ -1,41 +1,82 @@
-package seedu.duke.gym;
+package seedu.duke.workout;
 
+import seedu.duke.Duke;
+import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ScheduleTracker {
     private ArrayList<ScheduledWorkout> scheduledWorkouts;
     private static final int LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING = 1;
     private static final int FIRST_INDEX_IN_LIST = 0;
     private static final int DAYS_IN_A_WEEK = 7;
+    private static final String INPUT_ALL = "all";
     public static final Logger SCHEDULE_TRACKER_LOGGER = Logger.getLogger("ScheduleTrackerLogger");
 
     public ScheduleTracker() {
         scheduledWorkouts = new ArrayList<>();
         SCHEDULE_TRACKER_LOGGER.setLevel(Level.SEVERE);
+        try {
+            loadScheduleData();//for now auto-load, later on just call scheduleTracker.loadScheduleData() if user wants
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to locate ScheduleTracker data file.");
+        }
     }
 
-    public static String[] generateScheduledWorkoutParameters(String inputArguments)
+    public void loadScheduleData() throws FileNotFoundException {
+        File dataFile = new File(Storage.SCHEDULE_DATA_FILE_PATH);
+        // short circuit preload if file is empty
+        if (dataFile.length() == 0) {
+            return;
+        }
+        Scanner fileScanner = new Scanner(dataFile);
+        String currentLine = "";
+        boolean isDataLoadCorrectly = true;
+        while (fileScanner.hasNext()) {
+            currentLine = fileScanner.nextLine();
+            // if any empty lines, skip to next iteration of the while loop
+            if (currentLine.isEmpty()) {
+                continue;
+            }
+            try {
+                addScheduledWorkout(currentLine, true);
+            } catch (DukeException | DateTimeParseException e) {
+                isDataLoadCorrectly = false;
+            }
+        }
+        if (!isDataLoadCorrectly) {
+            System.out.println("There were some errors during loading of ScheduleTracker data, "
+                    + "some data may have been lost");
+        }
+        cleanUpScheduleList();
+    }
+
+    public String[] generateScheduledWorkoutParameters(String inputArguments)
             throws DukeException, DateTimeParseException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for scheduled workout.");
         String workoutDescription = Parser.getScheduleDescription(inputArguments);
-        String workoutDate = Parser.getDate(inputArguments);
+        String workoutDate = Parser.getDateNoDateTracker(inputArguments);
         String workoutTime = Parser.getTime(inputArguments);
         String[] generatedParameters = {workoutDescription, workoutDate, workoutTime};
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully generated parameters for scheduled workout.");
         return generatedParameters;
     }
 
-    public void addScheduledWorkout(String inputArguments)
+    public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage)
             throws DukeException, DateTimeParseException, NumberFormatException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
@@ -48,14 +89,24 @@ public class ScheduleTracker {
         String workoutDescription = generatedParameters[0];
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
+        Map<String, int[]> activityMap;
+        try {
+            activityMap = Parser.getActivities(inputArguments);
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("Please enter a single integer [distance in metres] for distance based "
+                    + "activities(swimming/running/cycling). E.g. running:8000" + "" + System.lineSeparator()
+                    + "Enter two integers [set]x[reps]" + " for everything else. E.g. bench press:3x12");
+        }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
         scheduledWorkouts.add(
-                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, isRecurringWorkout)
+                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout)
         );
         ScheduledWorkout workout = scheduledWorkouts.get(scheduledWorkouts.size() - 1);
-        System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
-                + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
-                + workoutTime + ".");
+        if (!isSquelchAddMessage) {
+            System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
+                    + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
+                    + workoutTime + ".");
+        }
         cleanUpScheduleList();
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout to schedule.");
     }
@@ -89,21 +140,91 @@ public class ScheduleTracker {
         }
     }
 
-    public void listScheduledWorkouts() throws DukeException {
-        SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
+    public void listScheduledWorkouts(String inputArguments) throws DukeException {
         emptyScheduledWorkoutListCheck();
         cleanUpScheduleList();
+        if (inputArguments == null) {
+            listScheduledWorkoutsOnDate(Parser.getSystemDate());
+        } else if (inputArguments.equals(INPUT_ALL)) {
+            listAllScheduledWorkouts();
+        } else {
+            listScheduledWorkoutsOnDate(inputArguments);
+        }
+    }
+
+    public void listAllScheduledWorkouts() {
+        SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
+        System.out.println("FULL WORKOUT SCHEDULE:" + System.lineSeparator());
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
             System.out.println("Date: " + workout.getWorkoutDate());
-            System.out.println("Time: " + workout.getWorkoutTime() + "\n");
+            System.out.println("Time: " + workout.getWorkoutTime());
+            System.out.println(workout.getActivitiesAsString());
             currentIndex++;
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
     }
 
+    public void listScheduledWorkoutsOnDate(String inputArguments) {
+        ArrayList<ScheduledWorkout> filteredScheduleList = (ArrayList<ScheduledWorkout>) scheduledWorkouts.stream()
+                .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
+        if (filteredScheduleList.isEmpty()) {
+            System.out.println("Workout schedule is empty on that the date: " + inputArguments);
+        } else {
+            if (inputArguments.equals(Parser.getSystemDate())) {
+                System.out.println("WORKOUT SCHEDULE FOR TODAY:" + System.lineSeparator());
+            } else {
+                System.out.println("WORKOUT SCHEDULE ON " + inputArguments + ":" + System.lineSeparator());
+            }
+            int currentIndex = 1;
+            for (ScheduledWorkout workout : filteredScheduleList) {
+                System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
+                System.out.println("Date: " + workout.getWorkoutDate());
+                System.out.println("Time: " + workout.getWorkoutTime());
+                System.out.println(workout.getActivitiesAsString());
+                currentIndex++;
+            }
+        }
+    }
+
+    public String getScheduleListAsString() {
+        String scheduleListAsString = "";
+        for (ScheduledWorkout workout : scheduledWorkouts) {
+            scheduleListAsString += workout.getWorkoutDescription() + Parser.DATE_SEPARATOR
+                    + workout.getWorkoutDate() + Parser.TIME_SEPARATOR + workout.getWorkoutTime();
+            scheduleListAsString += getActivitiesAsString(workout);
+            if (workout.isRecurring()) {
+                scheduleListAsString += Parser.RECURRING_FLAG;
+            }
+            scheduleListAsString += System.lineSeparator();
+        }
+        return scheduleListAsString;
+    }
+
+    private String getActivitiesAsString(ScheduledWorkout workout) {
+        StringBuilder activityString = new StringBuilder();
+        if (!workout.getActivities().isEmpty()) {
+            activityString.append(Parser.ACTIVITY_SEPARATOR);
+            int currentIndex = 0;
+            for (WorkoutActivity activity : workout.getActivities()) {
+                activityString.append(activity.getActivityDescription())
+                        .append(Parser.ACTIVITY_SPLITTER)
+                        .append(activity.getActivitySets())
+                        .append(Parser.QUANTIFIER_SPLITTER)
+                        .append(activity.getActivityReps());
+                currentIndex++;
+                activityString.append(
+                        (currentIndex < workout.getActivities().size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+            }
+        }
+        return activityString.toString();
+    }
+
     public void cleanUpScheduleList() {
+        if (scheduledWorkouts.isEmpty()) {
+            return;
+        }
         sortScheduleList();
         LocalDate currentDate = LocalDateTime.now().toLocalDate();
         boolean isAnyWorkoutUpdatedOrDeleted = false;
