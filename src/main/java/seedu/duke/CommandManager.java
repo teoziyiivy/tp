@@ -7,7 +7,6 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -80,7 +79,7 @@ public class CommandManager {
             scheduleTracker.deleteScheduledWorkout(inputArguments);
             break;
         case Keywords.INPUT_LIST_SCHEDULE:
-            scheduleTracker.listScheduledWorkouts();
+            scheduleTracker.listScheduledWorkouts(inputArguments);
             break;
         case Keywords.INPUT_DRINKS:
             if (inputArguments != null) {

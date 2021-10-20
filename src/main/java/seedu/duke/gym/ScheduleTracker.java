@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ScheduleTracker {
     private ArrayList<ScheduledWorkout> scheduledWorkouts;
     private static final int LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING = 1;
     private static final int FIRST_INDEX_IN_LIST = 0;
     private static final int DAYS_IN_A_WEEK = 7;
+    private static final String INPUT_ALL = "all";
     public static final Logger SCHEDULE_TRACKER_LOGGER = Logger.getLogger("ScheduleTrackerLogger");
 
     public ScheduleTracker() {
@@ -89,10 +91,20 @@ public class ScheduleTracker {
         }
     }
 
-    public void listScheduledWorkouts() throws DukeException {
-        SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
+    public void listScheduledWorkouts(String inputArguments) throws DukeException {
         emptyScheduledWorkoutListCheck();
         cleanUpScheduleList();
+        if (inputArguments == null) {
+            listScheduledWorkoutsOnDate(Parser.getSystemDate());
+        } else if (inputArguments.equals(INPUT_ALL)) {
+            listAllScheduledWorkouts();
+        } else {
+            listScheduledWorkoutsOnDate(inputArguments);
+        }
+    }
+
+    public void listAllScheduledWorkouts() throws DukeException {
+        SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
@@ -101,6 +113,22 @@ public class ScheduleTracker {
             currentIndex++;
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
+    }
+
+    public void listScheduledWorkoutsOnDate(String inputArguments) {
+        ArrayList<ScheduledWorkout> filteredScheduleList = (ArrayList<ScheduledWorkout>) scheduledWorkouts.stream()
+                .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
+        if (filteredScheduleList.isEmpty()) {
+            System.out.println("Workout schedule is empty on that the date: " + inputArguments);
+        } else {
+            int currentIndex = 1;
+            for (ScheduledWorkout workout : filteredScheduleList) {
+                System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
+                System.out.println("Date: " + workout.getWorkoutDate());
+                System.out.println("Time: " + workout.getWorkoutTime() + "\n");
+                currentIndex++;
+            }
+        }
     }
 
     public void cleanUpScheduleList() {
