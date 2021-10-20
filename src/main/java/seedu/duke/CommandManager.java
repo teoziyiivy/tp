@@ -112,7 +112,7 @@ public class CommandManager {
             } catch (DukeException e) {
                 return;
             } catch (DateTimeParseException e) {
-                weightTracker.printAddWeightException();
+                WeightTrackerMessages.printAddWeightException();
             }
             break;
         case Keywords.INPUT_DELETE_WEIGHT:
