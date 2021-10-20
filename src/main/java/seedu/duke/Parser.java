@@ -82,6 +82,23 @@ public class Parser {
         }
     }
 
+    public static int getCaloriesBurnedForWorkout(String inputArguments)
+            throws DukeException, NumberFormatException {
+        int calories = 0;
+        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        int length = userInput.length;
+        for (int i = 1; i < length; i++) {
+            if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
+                calories = parseStringToInteger(userInput[i + 1]);
+            }
+        }
+        if (calories < 0) {
+            throw new DukeException("Negative calories");
+        } else {
+            return calories;
+        }
+    }
+
     public static int getVolume(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
@@ -113,7 +130,7 @@ public class Parser {
         return description;
     }
 
-    public static String getDate(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getDate(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
         String date = "";
@@ -130,11 +147,13 @@ public class Parser {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
-        DateTracker.checkIfDateExists(formatter.format(localDate));
+        //Keeps throwing NullPointerException so like half the JUnits fail assertion due to wrong Exception thrown
+        //static method requires static attribute created non static DateTracker constructor
+        DateTracker.checkIfDateExists(formatter.format(localDate)); //this is causing JUnits to fail
         return formatter.format(localDate);
     }
 
-    public static String getTime(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getTime(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
         String time = "";
@@ -189,7 +208,6 @@ public class Parser {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
         LocalTime now = LocalTime.now();
         systemTime = now.format(dtf);
-
         return systemTime;
     }
 }

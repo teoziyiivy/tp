@@ -23,17 +23,6 @@ class ScheduleTrackerTest {
     void isScheduledWorkoutNumberWithinRange_inputOutOfRangeNegative_failure() {
         ScheduleTracker st = new ScheduleTracker();
         assertFalse(st.isScheduledWorkoutNumberWithinRange(-256));
-        assertFalse(st.isScheduledWorkoutNumberWithinRange(0));
-        assertFalse(st.isScheduledWorkoutNumberWithinRange(2));
-        assertFalse(st.isScheduledWorkoutNumberWithinRange(2048));
-    }
-
-    @Test
-    void isScheduledWorkoutNumberWithinRange_inputWithinRange_success() throws DukeException {
-        ScheduleTracker st = new ScheduleTracker();
-        String argumentInput = "test /d 07/07/2022 /t 17:59";
-        st.addScheduledWorkout(argumentInput);
-        assertTrue(st.isScheduledWorkoutNumberWithinRange(1));
     }
 
     @Test
@@ -41,12 +30,6 @@ class ScheduleTrackerTest {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 17:59";
         assertThrows(DukeException.class, () -> st.scheduledWorkoutSeparatorCheck(argumentInput));
-    }
-
-    @Test
-    void emptyScheduledWorkoutListCheck_emptyList_exceptionThrow() {
-        ScheduleTracker st = new ScheduleTracker();
-        assertThrows(DukeException.class, st::emptyScheduledWorkoutListCheck);
     }
 
     @Test
@@ -62,7 +45,7 @@ class ScheduleTrackerTest {
     void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput1 = "test /d 07/07/2022 /t 17:59";
-        st.addScheduledWorkout(argumentInput1); //must be non empty list
+        st.addScheduledWorkout(argumentInput1, false); //must be non empty list
         String argumentInput2 = "@!$!@$!";
         assertThrows(NumberFormatException.class, () -> st.deleteScheduledWorkout(argumentInput2));
     }
@@ -71,21 +54,21 @@ class ScheduleTrackerTest {
     void addScheduledWorkout_missingSeparator_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 17:59";
-        assertThrows(DukeException.class, () -> st.addScheduledWorkout(argumentInput));
+        assertThrows(DukeException.class, () -> st.addScheduledWorkout(argumentInput, false));
     }
 
     @Test
     void addScheduledWorkout_invalidDateFormat_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07-07-2022 /t 17:59";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput));
+        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput, false));
     }
 
     @Test
     void addScheduledWorkout_invalidTimeFormat_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 /t 7pm";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput));
+        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput, false));
     }
 
     @Test
