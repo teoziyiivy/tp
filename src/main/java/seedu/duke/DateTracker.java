@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.gym.ScheduleTracker;
+import seedu.duke.gym.WorkoutTracker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,6 +40,24 @@ public class DateTracker {
                 return left[left.length - 1].compareTo(right[right.length - 1]);
             }
         });
+    }
+
+    public static void deleteDateFromList(String inputArguments, Fluid fluid,
+                                          Meal meal, ScheduleTracker scheduleTracker,
+                                          WorkoutTracker workoutTracker,
+                                          WeightTracker weightTracker) throws DukeException {
+        String date = Parser.getDate(inputArguments);
+        for (String m : meal.meals) {
+            if (m.contains(date)) {
+                return;
+            }
+        }
+        for (String f : fluid.fluidArray) {
+            if (f.contains(date)) {
+                return;
+            }
+        }
+        dates.remove(dates.indexOf(date));
     }
 
     public static void sortDateAndTime(ArrayList<String> list) {

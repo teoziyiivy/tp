@@ -25,7 +25,8 @@ public class CommandManager {
     protected String inputArguments;
     protected Storage storage;
 
-    public CommandManager(Storage storage, Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+    public CommandManager(Storage storage, Fluid fluid, Meal meal,
+                          ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                           WeightTracker weightTracker, UserHelp userHelp) {
         this.fluid = fluid;
         this.meal = meal;
@@ -38,7 +39,9 @@ public class CommandManager {
         this.storage = storage;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException, MealException, FluidExceptions, FoodBankException, IOException {
+    public void commandChecker() throws DukeException, NullPointerException,
+            MealException, FluidExceptions,
+            FoodBankException, IOException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -55,9 +58,11 @@ public class CommandManager {
                 throw new MealException();
             }
             meal.addMeal(inputArguments);
+            DateTracker.sortTime(meal.meals);
             break;
         case Keywords.DELETE_MEAL:
             meal.deleteMeal(inputArguments);
+            DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
             break;
         case Keywords.LIST_MEAL:
             meal.listMeals();

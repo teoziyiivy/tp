@@ -149,7 +149,7 @@ public class Parser {
         LocalDate localDate = LocalDate.parse(date, formatter);
         //Keeps throwing NullPointerException so like half the JUnits fail assertion due to wrong Exception thrown
         //static method requires static attribute created non static DateTracker constructor
-        //DateTracker.checkIfDateExists(formatter.format(localDate));
+        DateTracker.checkIfDateExists(formatter.format(localDate)); //this is causing JUnits to fail
         return formatter.format(localDate);
     }
 
