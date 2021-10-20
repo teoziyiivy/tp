@@ -147,7 +147,7 @@ public class Parser {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
-        //Keeps throwing NullPointerException so many JUnits fail assertion due to wrong Exception thrown
+        //Keeps throwing NullPointerException so like half the JUnits fail assertion due to wrong Exception thrown
         //static method requires static attribute created non static DateTracker constructor
         //DateTracker.checkIfDateExists(formatter.format(localDate));
         return formatter.format(localDate);

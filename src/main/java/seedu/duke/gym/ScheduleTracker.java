@@ -6,7 +6,6 @@ import seedu.duke.Parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -33,12 +32,10 @@ public class ScheduleTracker {
             loadScheduleData();//for now auto-load, later on just call scheduleTracker.loadScheduleData() if user wants
         } catch (FileNotFoundException e) {
             System.out.println("Unable to locate ScheduleTracker data file.");
-        } catch (DukeException ignored) {
-            System.out.println("Unknown error during loading of ScheduleTracker data file");
         }
     }
 
-    public void loadScheduleData() throws DukeException, FileNotFoundException {
+    public void loadScheduleData() throws FileNotFoundException {
         File dataFile = new File(Storage.SCHEDULE_DATA_FILE_PATH);
         // short circuit preload if file is empty
         if (dataFile.length() == 0) {
@@ -133,7 +130,6 @@ public class ScheduleTracker {
     }
 
     public void listScheduledWorkouts(String inputArguments) throws DukeException {
-        System.out.println("WORKOUT SCHEDULE:" + System.lineSeparator());
         emptyScheduledWorkoutListCheck();
         cleanUpScheduleList();
         if (inputArguments == null) {
@@ -147,6 +143,7 @@ public class ScheduleTracker {
 
     public void listAllScheduledWorkouts() {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
+        System.out.println("FULL WORKOUT SCHEDULE:" + System.lineSeparator());
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
@@ -163,6 +160,11 @@ public class ScheduleTracker {
         if (filteredScheduleList.isEmpty()) {
             System.out.println("Workout schedule is empty on that the date: " + inputArguments);
         } else {
+            if (inputArguments.equals(Parser.getSystemDate())) {
+                System.out.println("WORKOUT SCHEDULE FOR TODAY:" + System.lineSeparator());
+            } else {
+                System.out.println("WORKOUT SCHEDULE ON " + inputArguments + ":" + System.lineSeparator());
+            }
             int currentIndex = 1;
             for (ScheduledWorkout workout : filteredScheduleList) {
                 System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());

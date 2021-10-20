@@ -182,7 +182,7 @@ public class CommandManager {
     public void executeWorkoutCommand(String command, String inputArguments) throws DukeException {
         switch (command) {
         case Keywords.INPUT_ADD_WORKOUT:
-            workoutTracker.addWorkout(inputArguments);
+            workoutTracker.addWorkout(inputArguments, false);
             break;
         case Keywords.INPUT_DELETE_WORKOUT:
             workoutTracker.deleteWorkout(inputArguments);
@@ -194,5 +194,6 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
+        Storage.saveWorkoutData(workoutTracker);
     }
 }

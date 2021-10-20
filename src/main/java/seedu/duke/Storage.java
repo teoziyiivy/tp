@@ -1,29 +1,26 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.ScheduledWorkout;
 import seedu.duke.gym.WorkoutTracker;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Storage {
 
     protected String filePath;
     public static final String SCHEDULE_DATA_FILE_PATH = "scheduleData.txt";
+    public static final String WORKOUT_DATA_FILE_PATH = "workoutData.txt";
 
     public Storage(String filePath) {
         this.filePath = filePath;
         initializeScheduleDataFile();
+        initializeWorkoutDataFile();
     }
 
     public void saveAllTasks(Fluid fluid, Meal meal,
@@ -106,10 +103,43 @@ public class Storage {
     }
 
     public static void saveScheduleData(ScheduleTracker scheduleTracker) {
+        if (scheduleTracker == null) {
+            System.out.println("Unable to find ScheduleTracker object.");
+            return;
+        }
         try {
             writeToScheduleDataFile(scheduleTracker.getScheduleListAsString());
         } catch (IOException ioe) {
             System.out.println("Error during writing to data file for ScheduleTracker.");
+        }
+    }
+
+    public static void initializeWorkoutDataFile() {
+        File dataFile = new File(WORKOUT_DATA_FILE_PATH);
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException ioe) {
+                System.out.println("Error during data file creation for WorkoutTracker.");
+            }
+        }
+    }
+
+    public static void writeToWorkoutDataFile(String textToWrite) throws IOException {
+        FileWriter fileWriter = new FileWriter(WORKOUT_DATA_FILE_PATH);
+        fileWriter.write(textToWrite);
+        fileWriter.close();
+    }
+
+    public static void saveWorkoutData(WorkoutTracker workoutTracker) {
+        if (workoutTracker == null) {
+            System.out.println("Unable to find WorkoutTracker object.");
+            return;
+        }
+        try {
+            writeToWorkoutDataFile(workoutTracker.getWorkoutListAsString());
+        } catch (IOException ioe) {
+            System.out.println("Error during writing to data file for WorkoutTracker.");
         }
     }
 }
