@@ -1,15 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.*;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FluidExceptions;
-import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.MealException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
@@ -30,25 +23,36 @@ public class Duke {
     private DateTracker dateTracker;
     private Storage storage;
 
-    public static void main(String[] args) throws DukeException {
-        new Duke().uiRun();
+    public static void main(String[] args) throws DukeException, FoodBankException, FluidExceptions {
         new Duke().run();
     }
 
-    public Duke() {
-        meal = new Meal();
-        ui = new Ui();
-        fluid = new Fluid();
-        scheduleTracker = new ScheduleTracker();
-        workoutTracker = new WorkoutTracker();
-        weightTracker = new WeightTracker();
-        userHelp = new UserHelp();
-        storage = new Storage("Food.txt");
-        commandManager = new CommandManager(storage, fluid,
-                meal, scheduleTracker, workoutTracker,
-                weightTracker, userHelp);
-        foodbank = new FoodBank();
-        dateTracker = new DateTracker();
+    public Duke() throws DukeException, FoodBankException, FluidExceptions {
+        try {
+            meal = new Meal();
+            ui = new Ui();
+            fluid = new Fluid();
+            scheduleTracker = new ScheduleTracker();
+            workoutTracker = new WorkoutTracker();
+            weightTracker = new WeightTracker();
+            userHelp = new UserHelp();
+            storage = new Storage("Food.txt");
+            commandManager = new CommandManager(storage, fluid,
+                    meal, scheduleTracker, workoutTracker,
+                    weightTracker, userHelp);
+            foodbank = new FoodBank();
+            dateTracker = new DateTracker();
+            ui.welcomeMessage();
+            ui.getInfo();
+            if (ui.memoryStartup()) {
+                meal.meals = storage.loadMeals();
+                fluid.fluidArray = storage.loadFluids();
+            }
+        } catch (LoadException e) {
+            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
+        } catch (IOException e) {
+            System.out.println("ccc");
+        }
     }
 
     public void run() {
@@ -76,20 +80,5 @@ public class Duke {
             }
         }
         LogManager.getLogManager().reset();
-    }
-
-    public void uiRun() {
-        try {
-            ui.welcomeMessage();
-            ui.getInfo();
-            if (ui.memoryStartup()) {
-                meal.meals = storage.loadMeals();
-                fluid.fluidArray = storage.loadFluids();
-            }
-        } catch (LoadException e) {
-            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
-        } catch (IOException e) {
-            System.out.println("ccc");
-        }
     }
 }

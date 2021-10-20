@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 
@@ -103,7 +106,6 @@ public class Storage {
     }
 
     public ArrayList<String> loadMeals() throws IOException {
-        System.out.println("fuck");
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(this.filePath).getAbsolutePath();
         File f = new File(newFilePath);
@@ -116,8 +118,6 @@ public class Storage {
                 flag = 1;
             } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
                 meals.add(textFromFile);
-            } else {
-                flag = 0;
             }
         }
         return meals;
@@ -136,8 +136,6 @@ public class Storage {
                 fluids.add(textFromFile);
             } else if (textFromFile.equals("Fluids")) {
                 flag = 1;
-            } else {
-                flag = 0;
             }
         }
         return fluids;

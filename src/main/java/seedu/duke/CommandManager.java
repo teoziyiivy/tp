@@ -193,7 +193,7 @@ public class CommandManager {
             workoutTracker.deleteWorkout(inputArguments);
             break;
         case Keywords.INPUT_LIST_WORKOUT:
-            workoutTracker.listWorkouts(inputArguments);
+            //workoutTracker.listWorkouts(inputArguments);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

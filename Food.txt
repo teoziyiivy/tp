@@ -1,2 +1,6 @@
 Meals
+Date: 21/10/2021
+risoto /c 600 /d 21/10/2021 /t 00:52
 Fluids
+Date: 21/10/2021
+fanta /c 70 /v 0 /d 21/10/2021 /t 00:52

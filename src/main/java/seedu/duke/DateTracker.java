@@ -60,17 +60,17 @@ public class DateTracker {
         dates.remove(dates.indexOf(date));
     }
 
-    public static void sortDateAndTime(ArrayList<String> list) {
-        Collections.sort(list, new Comparator<>() {
-            public int compare(String o1, String o2) {
-                LocalDateTime o1DateTime = LocalDateTime.of(
-                        LocalDate.parse(Parser.getDateNoDateTracker(o1), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                        LocalTime.parse(Parser.getTime(o1), DateTimeFormatter.ofPattern("HH:mm")));
-                LocalDateTime o2DateTime = LocalDateTime.of(
-                        LocalDate.parse(Parser.getDateNoDateTracker(o2), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                        LocalTime.parse(Parser.getTime(o2), DateTimeFormatter.ofPattern("HH:mm")));
-                return o1DateTime.compareTo(o2DateTime);
-            }
-        });
-    }
+//    public static void sortDateAndTime(ArrayList<String> list) {
+//        Collections.sort(list, new Comparator<>() {
+//            public int compare(String o1, String o2) {
+//                LocalDateTime o1DateTime = LocalDateTime.of(
+//                        LocalDate.parse(Parser.getDateNoDateTracker(o1), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+//                        LocalTime.parse(Parser.getTime(o1), DateTimeFormatter.ofPattern("HH:mm")));
+//                LocalDateTime o2DateTime = LocalDateTime.of(
+//                        LocalDate.parse(Parser.getDateNoDateTracker(o2), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+//                        LocalTime.parse(Parser.getTime(o2), DateTimeFormatter.ofPattern("HH:mm")));
+//                return o1DateTime.compareTo(o2DateTime);
+//            }
+//        });
+//    }
 }
