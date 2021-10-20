@@ -69,8 +69,8 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println("ccc");
             }
-            LogManager.getLogManager().reset();
         }
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
