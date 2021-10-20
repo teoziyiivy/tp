@@ -42,7 +42,7 @@ public class Duke {
         commandManager = new CommandManager(storage, fluid, meal,
                 scheduleTracker, workoutTracker, weightTracker, userHelp);
         foodbank = new FoodBank();
-        //dateTracker = new DateTracker();
+        dateTracker = new DateTracker();
     }
 
     public void run() {

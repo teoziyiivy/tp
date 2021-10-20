@@ -30,10 +30,11 @@ public class ScheduleTracker {
         scheduledWorkouts = new ArrayList<>();
         SCHEDULE_TRACKER_LOGGER.setLevel(Level.SEVERE);
         try {
-            loadScheduleData();
+            loadScheduleData();//for now auto-load, later on just call scheduleTracker.loadScheduleData() if user wants
         } catch (FileNotFoundException e) {
             System.out.println("Unable to locate ScheduleTracker data file.");
         } catch (DukeException ignored) {
+            System.out.println("Unknown error during loading of ScheduleTracker data file");
         }
     }
 
@@ -54,22 +55,14 @@ public class ScheduleTracker {
             }
             try {
                 addScheduledWorkout(currentLine, true);
-            } catch (DukeException e) {
-                isDataLoadCorrectly = false;
-            } catch (DateTimeParseException e) {
+            } catch (DukeException | DateTimeParseException e) {
                 isDataLoadCorrectly = false;
             }
         }
-        System.out.println("There were some errors during loading of ScheduleTracker data, "
-                + "some data may have been lost");
-    }
-
-    public void loadCurrentLine(String currentLine) throws DukeException {
-        String[] generatedParameters = generateScheduledWorkoutParameters(currentLine);
-        String workoutDescription = generatedParameters[0];
-        String workoutDate = generatedParameters[1];
-        String workoutTime = generatedParameters[2];
-        boolean isRecurringWorkout = Parser.isRecurringWorkout(currentLine);
+        if (!isDataLoadCorrectly) {
+            System.out.println("There were some errors during loading of ScheduleTracker data, "
+                    + "some data may have been lost");
+        }
     }
 
     public String[] generateScheduledWorkoutParameters(String inputArguments)
