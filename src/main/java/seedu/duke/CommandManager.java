@@ -4,10 +4,9 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.FluidExceptions;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -48,7 +47,6 @@ public class CommandManager {
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
-        assert !input.equals("");
         assert !Objects.equals(inputArguments, "");
         switch (command) {
         case Keywords.LIBRARY:
@@ -70,22 +68,14 @@ public class CommandManager {
             meal.listMeals();
             break;
         case Keywords.INPUT_ADD_WORKOUT:
-            workoutTracker.addWorkout(inputArguments);
-            break;
         case Keywords.INPUT_DELETE_WORKOUT:
-            workoutTracker.deleteWorkout(inputArguments);
-            break;
         case Keywords.INPUT_LIST_WORKOUT:
-            workoutTracker.listWorkouts();
+            executeWorkoutCommand(command, inputArguments);
             break;
         case Keywords.INPUT_ADD_SCHEDULE:
-            scheduleTracker.addScheduledWorkout(inputArguments);
-            break;
         case Keywords.INPUT_DELETE_SCHEDULE:
-            scheduleTracker.deleteScheduledWorkout(inputArguments);
-            break;
         case Keywords.INPUT_LIST_SCHEDULE:
-            scheduleTracker.listScheduledWorkouts();
+            executeScheduleCommand(command, inputArguments);
             break;
         case Keywords.INPUT_DRINKS:
             if (inputArguments != null) {
@@ -126,20 +116,12 @@ public class CommandManager {
             }
             break;
         case Keywords.INPUT_DELETE_WEIGHT:
-            //removed the below code as they have identical functions
-            //try {
-            //    weightTracker.readInput(input);
-            //} catch (DukeException e) {
-            //return;
-            //}
-            //break;
         case Keywords.INPUT_CHECK_WEIGHT:
             try {
                 weightTracker.readInput(input);
             } catch (DukeException e) {
                 return;
             }
-            //weightTracker.readInput(input);
             break;
         case Keywords.INPUT_HELP:
             UserHelp.generateUserHelpParameters(inputArguments);
@@ -152,7 +134,7 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        storage.saveAllTasks(fluid, meal, scheduleTracker, workoutTracker, weightTracker);
+        storage.saveAllTasks(fluid, meal, weightTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
@@ -182,5 +164,41 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
+    }
+
+    public void executeScheduleCommand(String command, String inputArguments) throws DukeException {
+        switch (command) {
+        case Keywords.INPUT_ADD_SCHEDULE:
+            scheduleTracker.addScheduledWorkout(inputArguments, false);
+            break;
+        case Keywords.INPUT_DELETE_SCHEDULE:
+            scheduleTracker.deleteScheduledWorkout(inputArguments);
+            break;
+        case Keywords.INPUT_LIST_SCHEDULE:
+            scheduleTracker.listScheduledWorkouts(inputArguments);
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+        Storage.saveScheduleData(scheduleTracker);
+    }
+
+    public void executeWorkoutCommand(String command, String inputArguments) throws DukeException {
+        switch (command) {
+        case Keywords.INPUT_ADD_WORKOUT:
+            workoutTracker.addWorkout(inputArguments, false);
+            break;
+        case Keywords.INPUT_DELETE_WORKOUT:
+            workoutTracker.deleteWorkout(inputArguments);
+            break;
+        case Keywords.INPUT_LIST_WORKOUT:
+            workoutTracker.listWorkouts(inputArguments);
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+        Storage.saveWorkoutData(workoutTracker);
     }
 }

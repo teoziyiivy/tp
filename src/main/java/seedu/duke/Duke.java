@@ -1,15 +1,20 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.*;
+import seedu.duke.gym.ScheduleTracker;
+import seedu.duke.gym.WorkoutTracker;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
+
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 
 @SuppressWarnings("ALL")
 public class Duke {
@@ -69,15 +74,22 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println("ccc");
             }
-            LogManager.getLogManager().reset();
         }
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
-        ui.welcomeMessage();
-        ui.getInfo();
-        while (!ui.isValidStartup) {
-            ui.memoryStartup();
+        try {
+            ui.welcomeMessage();
+            ui.getInfo();
+            if (ui.memoryStartup()) {
+                meal.meals = storage.loadMeals();
+                fluid.fluidArray = storage.loadFluids();
+            }
+        } catch (LoadException e) {
+            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
+        } catch (IOException e) {
+            System.out.println("ccc");
         }
     }
 }

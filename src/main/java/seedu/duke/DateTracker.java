@@ -1,17 +1,21 @@
 package seedu.duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class DateTracker {
-    protected static ArrayList<String> dates;
+    protected static ArrayList<String> dates; //static
 
     public DateTracker() {
-        dates = new ArrayList<>();
+        dates = new ArrayList<>(); //constructor is not static
     }
 
     public static void checkIfDateExists(String newDate) {
@@ -54,5 +58,19 @@ public class DateTracker {
             }
         }
         dates.remove(dates.indexOf(date));
+    }
+
+    public static void sortDateAndTime(ArrayList<String> list) {
+        Collections.sort(list, new Comparator<>() {
+            public int compare(String o1, String o2) {
+                LocalDateTime o1DateTime = LocalDateTime.of(
+                        LocalDate.parse(Parser.getDateNoDateTracker(o1), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                        LocalTime.parse(Parser.getTime(o1), DateTimeFormatter.ofPattern("HH:mm")));
+                LocalDateTime o2DateTime = LocalDateTime.of(
+                        LocalDate.parse(Parser.getDateNoDateTracker(o2), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                        LocalTime.parse(Parser.getTime(o2), DateTimeFormatter.ofPattern("HH:mm")));
+                return o1DateTime.compareTo(o2DateTime);
+            }
+        });
     }
 }

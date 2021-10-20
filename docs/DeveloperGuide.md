@@ -12,7 +12,7 @@ The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.co
 
 Above are the UML class level diagrams of `ScheduleTracker` and `ScheduledWorkout`. As seen in the diagram, one 
 `ScheduleTracker` object keeps track/is linked to **any** number of `ScheduledWorkout` objects, thus have a 
-multiplicity of `0..*`. This association forms through a privat eattribute `scheduledWorkouts` which is of type 
+multiplicity of `0..*`. This association forms through a private attribute `scheduledWorkouts` which is of type 
 `ArrayList<ScheduledWorkout>`. Do note that not all class attributes and methods are present in the diagram for 
 the sake of better comprehensibility.
 
@@ -50,7 +50,7 @@ place. This makes the process of accessing stored data more seamless and conveni
 |v1.0|fitness enthusiast|record my fitness activities|plan my extensive workout schedule|
 |v1.0|user|update how many calories I have burned through my workouts|keep track of my daily calories|
 |v2.0|user|have scheduled workouts in the list to be sorted by the nearest dates|easily keep track of upcoming workouts|
-|v2.0|As a frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week
+|v2.0|As a frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|
 
 ## Non-Functional Requirements
 
