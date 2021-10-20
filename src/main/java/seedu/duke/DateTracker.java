@@ -1,12 +1,15 @@
 package seedu.duke;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DateTracker {
-    protected static ArrayList<String> dates;
+    protected static
+    ArrayList<String> dates; //static
 
     public DateTracker() {
-        dates = new ArrayList<>();
+        dates = new ArrayList<>(); //constructor is not static
     }
 
     public static void checkIfDateExists(String newDate) {

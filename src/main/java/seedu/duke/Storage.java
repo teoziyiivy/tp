@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.ScheduledWorkout;
 import seedu.duke.gym.WorkoutTracker;
@@ -7,16 +8,18 @@ import seedu.duke.gym.WorkoutTracker;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Storage {
 
     protected String filePath;
-    private static final String SCHEDULE_DATA_FILE_PATH = "schedule.txt";
+    public static final String SCHEDULE_DATA_FILE_PATH = "scheduleData.txt";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -109,5 +112,4 @@ public class Storage {
             System.out.println("Error during writing to data file for ScheduleTracker.");
         }
     }
-
 }

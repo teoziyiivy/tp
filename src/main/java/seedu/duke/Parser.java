@@ -130,7 +130,9 @@ public class Parser {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
-        DateTracker.checkIfDateExists(formatter.format(localDate));
+        //causing NullPointerException for half the JUnits
+        //static method requires DateTracker constructor
+        //DateTracker.checkIfDateExists(formatter.format(localDate));
         return formatter.format(localDate);
     }
 
@@ -189,7 +191,6 @@ public class Parser {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
         LocalTime now = LocalTime.now();
         systemTime = now.format(dtf);
-
         return systemTime;
     }
 }

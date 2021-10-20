@@ -142,7 +142,7 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        storage.saveAllTasks(fluid, meal, weightTracker);
+        //storage.saveAllTasks(fluid, meal, weightTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
@@ -177,7 +177,7 @@ public class CommandManager {
     public void executeScheduleCommand(String command, String inputArguments) throws DukeException {
         switch (command) {
         case Keywords.INPUT_ADD_SCHEDULE:
-            scheduleTracker.addScheduledWorkout(inputArguments);
+            scheduleTracker.addScheduledWorkout(inputArguments, false);
             break;
         case Keywords.INPUT_DELETE_SCHEDULE:
             scheduleTracker.deleteScheduledWorkout(inputArguments);

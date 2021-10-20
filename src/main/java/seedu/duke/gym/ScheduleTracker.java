@@ -1,14 +1,19 @@
 package seedu.duke.gym;
 
+import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -24,9 +29,50 @@ public class ScheduleTracker {
     public ScheduleTracker() {
         scheduledWorkouts = new ArrayList<>();
         SCHEDULE_TRACKER_LOGGER.setLevel(Level.SEVERE);
+        try {
+            loadScheduleData();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to locate ScheduleTracker data file.");
+        } catch (DukeException ignored) {
+        }
     }
 
-    public static String[] generateScheduledWorkoutParameters(String inputArguments)
+    public void loadScheduleData() throws DukeException, FileNotFoundException {
+        File dataFile = new File(Storage.SCHEDULE_DATA_FILE_PATH);
+        // short circuit preload if file is empty
+        if (dataFile.length() == 0) {
+            return;
+        }
+        Scanner fileScanner = new Scanner(dataFile);
+        String currentLine = "";
+        boolean isDataLoadCorrectly = true;
+        while (fileScanner.hasNext()) {
+            currentLine = fileScanner.nextLine();
+            // if any empty lines, skip to next iteration of the while loop
+            if (currentLine.isEmpty()) {
+                continue;
+            }
+            try {
+                addScheduledWorkout(currentLine, true);
+            } catch (DukeException e) {
+                isDataLoadCorrectly = false;
+            } catch (DateTimeParseException e) {
+                isDataLoadCorrectly = false;
+            }
+        }
+        System.out.println("There were some errors during loading of ScheduleTracker data, "
+                + "some data may have been lost");
+    }
+
+    public void loadCurrentLine(String currentLine) throws DukeException {
+        String[] generatedParameters = generateScheduledWorkoutParameters(currentLine);
+        String workoutDescription = generatedParameters[0];
+        String workoutDate = generatedParameters[1];
+        String workoutTime = generatedParameters[2];
+        boolean isRecurringWorkout = Parser.isRecurringWorkout(currentLine);
+    }
+
+    public String[] generateScheduledWorkoutParameters(String inputArguments)
             throws DukeException, DateTimeParseException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for scheduled workout.");
         String workoutDescription = Parser.getScheduleDescription(inputArguments);
@@ -37,7 +83,7 @@ public class ScheduleTracker {
         return generatedParameters;
     }
 
-    public void addScheduledWorkout(String inputArguments)
+    public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage)
             throws DukeException, DateTimeParseException, NumberFormatException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
@@ -55,9 +101,11 @@ public class ScheduleTracker {
                 new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, isRecurringWorkout)
         );
         ScheduledWorkout workout = scheduledWorkouts.get(scheduledWorkouts.size() - 1);
-        System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
-                + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
-                + workoutTime + ".");
+        if (!isSquelchAddMessage) {
+            System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
+                    + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
+                    + workoutTime + ".");
+        }
         cleanUpScheduleList();
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout to schedule.");
     }
@@ -92,6 +140,7 @@ public class ScheduleTracker {
     }
 
     public void listScheduledWorkouts(String inputArguments) throws DukeException {
+        System.out.println("WORKOUT SCHEDULE:" + System.lineSeparator());
         emptyScheduledWorkoutListCheck();
         cleanUpScheduleList();
         if (inputArguments == null) {

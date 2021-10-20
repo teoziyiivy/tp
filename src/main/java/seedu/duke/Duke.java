@@ -39,9 +39,10 @@ public class Duke {
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
         storage = new Storage("userData.txt");
-        commandManager = new CommandManager(storage, fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        commandManager = new CommandManager(storage, fluid, meal,
+                scheduleTracker, workoutTracker, weightTracker, userHelp);
         foodbank = new FoodBank();
-        dateTracker = new DateTracker();
+        //dateTracker = new DateTracker();
     }
 
     public void run() {
@@ -67,8 +68,8 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println("ccc");
             }
-            LogManager.getLogManager().reset();
         }
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
