@@ -29,24 +29,35 @@ public class Duke {
     private Storage storage;
 
     public static void main(String[] args) throws DukeException {
-        new Duke().uiRun();
         new Duke().run();
     }
 
     public Duke() {
-        meal = new Meal();
-        ui = new Ui();
-        fluid = new Fluid();
-        scheduleTracker = new ScheduleTracker();
-        workoutTracker = new WorkoutTracker();
-        weightTracker = new WeightTracker();
-        userHelp = new UserHelp();
-        storage = new Storage("Food.txt");
-        commandManager = new CommandManager(storage, fluid,
-                meal, scheduleTracker, workoutTracker,
-                weightTracker, userHelp);
-        foodbank = new FoodBank();
-        dateTracker = new DateTracker();
+        try {
+            meal = new Meal();
+            ui = new Ui();
+            fluid = new Fluid();
+            scheduleTracker = new ScheduleTracker();
+            workoutTracker = new WorkoutTracker();
+            weightTracker = new WeightTracker();
+            userHelp = new UserHelp();
+            storage = new Storage("Food.txt");
+            commandManager = new CommandManager(storage, fluid,
+                    meal, scheduleTracker, workoutTracker,
+                    weightTracker, userHelp);
+            foodbank = new FoodBank();
+            dateTracker = new DateTracker();
+            ui.welcomeMessage();
+            ui.getInfo();
+            if (ui.memoryStartup()) {
+                meal.meals = storage.loadMeals();
+                fluid.fluidArray = storage.loadFluids();
+            }
+        } catch (LoadException e) {
+            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
+        } catch (IOException e) {
+            System.out.println("ccc");
+        }
     }
 
     public void run() {
@@ -74,20 +85,5 @@ public class Duke {
             }
         }
         LogManager.getLogManager().reset();
-    }
-
-    public void uiRun() {
-        try {
-            ui.welcomeMessage();
-            ui.getInfo();
-            if (ui.memoryStartup()) {
-                meal.meals = storage.loadMeals();
-                fluid.fluidArray = storage.loadFluids();
-            }
-        } catch (LoadException e) {
-            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
-        } catch (IOException e) {
-            System.out.println("ccc");
-        }
     }
 }

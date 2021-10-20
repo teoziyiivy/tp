@@ -76,21 +76,29 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "deleteFluid");
     }
 
-    public void listFluid() {
+    public void listFluid(String date) {
         logr.entering(getClass().getName(), "listFluid");
         assert fluidArray.size() != 0 : "Fluid array should not be empty";
         try {
             logr.info("going to print fluid list");
             int i = 1;
+            totalCalories = 0;
+            totalVolume = 0;
+            fluidNumber = 0;
             for (String fluid : fluidArray) {
-                generateFluidParameters(fluid);
-                System.out.println(i + ". " + description);
-                System.out.println("Calories: " + calories);
-                System.out.println("Volume: " + volume);
-                System.out.println("Date: " + date);
-                System.out.println("Time: " + time + "\n");
-                i++;
+                if (fluid.contains(date)) {
+                    generateFluidParameters(fluid);
+                    System.out.println(i + ". " + description);
+                    System.out.println("Calories: " + calories);
+                    System.out.println("Volume: " + volume);
+                    System.out.println("Date: " + date);
+                    System.out.println("Time: " + time + "\n");
+                    i++;
+                    totalCalories += calories;
+                    totalVolume += volume;
+                }
             }
+            fluidNumber = i - 1;
             System.out.println("Total number of fluids: " + fluidNumber);
             System.out.println("Total calories: " + totalCalories);
             System.out.println("Total volume: " + totalVolume);
