@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
+import java.util.Scanner;
 
 public class Storage {
 
@@ -80,4 +80,26 @@ public class Storage {
         }
         fw.close();
     }
+
+    /*
+    public void loadTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+                          WeightTracker weightTracker) throws IOException {
+        String newFilePath = new File(this.filePath).getAbsolutePath();
+        File f = new File(newFilePath);
+        Scanner s = new Scanner(f);
+        String textFromFile;
+
+        while (s.hasNext()) {
+            if (s.nextLine().equals("Meals")) {
+
+            }
+        }
+        while (s.hasNext()) {
+            textFromFile = s.nextLine();
+            loadedTasks.add(textFromFile);
+        }
+        System.out.println(Ui.STARTING_MESSAGE);
+        return loadedTasks;
+    }
+     */
 }

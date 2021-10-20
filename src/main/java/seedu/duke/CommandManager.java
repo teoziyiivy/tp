@@ -57,9 +57,11 @@ public class CommandManager {
                 throw new MealException();
             }
             meal.addMeal(inputArguments);
+            DateTracker.sortTime(meal.meals);
             break;
         case Keywords.DELETE_MEAL:
             meal.deleteMeal(inputArguments);
+            DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
             break;
         case Keywords.LIST_MEAL:
             meal.listMeals();
