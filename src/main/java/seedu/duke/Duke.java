@@ -7,7 +7,6 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
@@ -28,11 +27,11 @@ public class Duke {
     private DateTracker dateTracker;
     private Storage storage;
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FoodBankException, FluidExceptions {
         new Duke().run();
     }
 
-    public Duke() {
+    public Duke() throws DukeException, FoodBankException, FluidExceptions {
         try {
             meal = new Meal();
             ui = new Ui();

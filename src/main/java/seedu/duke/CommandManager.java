@@ -57,6 +57,7 @@ public class CommandManager {
             } else {
                 listParser(inputArguments);
             }
+            listParser(inputArguments);
             break;
         case Keywords.LIBRARY:
             assert inputArguments != null;
@@ -190,7 +191,7 @@ public class CommandManager {
                 date = Parser.getSystemDate();
             }
         } else {
-                date = splitResults[1];
+            date = splitResults[1];
         }
         switch (command) {
         case Keywords.MEAL:
@@ -210,9 +211,6 @@ public class CommandManager {
             FoodBank.deleteCustomMeal(inputArguments);
             break;
              */
-        default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            break;
         }
     }
 
@@ -243,7 +241,7 @@ public class CommandManager {
             workoutTracker.deleteWorkout(inputArguments);
             break;
         case Keywords.INPUT_LIST_WORKOUT:
-            workoutTracker.listWorkouts(inputArguments);
+            //workoutTracker.listWorkouts(inputArguments);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

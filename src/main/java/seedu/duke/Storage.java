@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 
@@ -103,7 +106,6 @@ public class Storage {
     }
 
     public ArrayList<String> loadMeals() throws IOException {
-        System.out.println("fuck");
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(this.filePath).getAbsolutePath();
         File f = new File(newFilePath);
