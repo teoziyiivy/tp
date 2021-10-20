@@ -1,4 +1,14 @@
-Date: 05/10/2021
+Date: 15/10/2021
 Date: 18/10/2021
+Meals
+risoto /c 260 /d 18/10/2021 /t 21:39
+Fluids
+cola /c 60 /v 0 /d 18/10/2021 /t 21:39
 Date: 19/10/2021
-Date: 20/10/2021
+Meals
+pasta /c 450 /d 19/10/2021 /t 19:00
+pasta /c 400 /d 19/10/2021 /t 21:40
+Meal Library
+risoto /c 260
+Fluid Library
+cola /c 60
