@@ -7,6 +7,40 @@ The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.co
 
 ## Design & implementation
 
+### WeightTracker: Class diagram
+![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
+
+Above are the UML class level diagrams of `WeightTrackerMessages`, `WeightTracker` and `Tracker`. As seen in
+the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` and the `WeightTracker` 
+class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+
+#### WeightTracker: Adding weight
+![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/138136616-37fd90e1-4158-4006-85d8-708593153cde.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
+The `WeightTracker` class calls the `readInput` function which reads the input and calls the `addWeight` 
+function which calls the `generateWeightParameters` function which updates the `weight` and `date` 
+variables. Then the `weight` and `date` variables are added to weight array list and 
+`printAddWeightResponse` is called from the `WeightTrackerMessages` class.
+
+#### WeightTracker: Deleting weight
+![WeightTracker_delete_sequence](https://user-images.githubusercontent.com/69446729/138136415-6ae09524-9712-494f-8792-3f945f0601d8.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `deleteweight`.
+The `WeightTracker` class calls the `readInput` function which reads the input and calls the `deleteWeight`
+function which calls the `generateWeightParameters` function which updates the `weight` and `date`
+variables with the index parameters to be deleted. Then the `weight` and `date` variables are deleted 
+from the weight array list.
+
+#### WeightTracker: Checking weights
+![WeightTracker_check_sequence](https://user-images.githubusercontent.com/69446729/138136750-30b7e949-e156-4d88-9ebf-3446c31d7284.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `checkweight`.
+The `WeightTracker` class calls the `readInput` function which reads the input and calls the `checkWeight`
+function which calls the `generateWeightParameters` function which updates the `weight` and `date`
+variables with the parameters to be printed. Then the `weight` and `date` variables are 
+printed for the entire list.
+
 ### ScheduleTracker: Class diagram
 ![](../diagrams/ScheduleTracker_class.png)
 
@@ -35,13 +69,12 @@ list is output to the user. This also ensures the `scheduledWorkouts` ArrayList 
 
 ## Product scope
 ### Target user profile
-
-Useful for people getting into serious fitness routines such as athletes but can be extended to general populace
+Specifically made for people getting into serious fitness routines such as athletes but helpful for general populace.
 
 ### Value proposition
 
-CLI.ckFit is a comprehensive workout client with the two main components of a workout diary and a calorie manager 
-with the peripherals being weight tracking and BMI/recommended caloric intake calculator. These features can be 
+CLI.ckFit is a comprehensive workout client with the two main components of a workout diary and a calorie manager
+with the peripherals being weight tracking and BMI/recommended caloric intake calculator. These features can be
 conveniently accessed via the Command Line Interface (CLI).
 
 ## User Stories
