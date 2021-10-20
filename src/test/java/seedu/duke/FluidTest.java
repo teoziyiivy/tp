@@ -89,15 +89,15 @@ class FluidTest {
 
     @Test
     void listFluid() {
-        fluidArray = new ArrayList<>();
-        assert (fluidArray.size() == 0);
+        Fluid fluid = new Fluid();
+        assert ((fluid.fluidArray).size() == 0);
     }
 
     @Test
     void listFluid2() {
-        Fluid.fluidArray = new ArrayList<>();
-        Fluid.fluidArray.add("drank coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
-        Fluid.fluidArray.add("drank water /c 0 /v 200 /d 13/12/2021 /t 12:30");
-        assert (Fluid.fluidArray.size() != 0);
+        Fluid fluid = new Fluid();
+        fluid.fluidArray.add("drank coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
+        fluid.fluidArray.add("drank water /c 0 /v 200 /d 13/12/2021 /t 12:30");
+        assert (fluid.fluidArray.size() != 0);
     }
 }

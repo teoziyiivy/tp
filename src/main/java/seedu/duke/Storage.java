@@ -21,28 +21,31 @@ public class Storage {
 
     public void saveAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                              WeightTracker weightTracker) throws IOException {
-        String filePath = new File(this.filePath).getAbsolutePath();
-        FileWriter fw = new FileWriter(filePath, false);
         String currentDate;
         String currentMeal;
         String currentFluid;
         String header;
         String customMeal;
         String customFluid;
+        String filePath = new File(this.filePath).getAbsolutePath();
+        FileWriter fw = new FileWriter(filePath, false);
         int headerFlag;
         for (String date : DateTracker.dates) {
             currentDate = "Date: " + date + "\n";
             Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
+            fw.close();
             headerFlag = 0;
             for (String m : meal.meals) {
                 if (m.contains(date) && (headerFlag == 0)) {
                     header = "Meals" + "\n";
                     Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                    fw.close();
                     headerFlag = 1;
                 }
                 if (m.contains(date)) {
                     currentMeal = m + "\n";
                     Files.write(Paths.get(filePath), currentMeal.getBytes(), StandardOpenOption.APPEND);
+                    fw.close();
                 }
             }
             headerFlag = 0;
@@ -50,11 +53,13 @@ public class Storage {
                 if (f.contains(date) && (headerFlag == 0)) {
                     header = "Fluids" + "\n";
                     Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                    fw.close();
                     headerFlag = 1;
                 }
                 if (f.contains(date)) {
                     currentFluid = f + "\n";
                     Files.write(Paths.get(filePath), currentFluid.getBytes(), StandardOpenOption.APPEND);
+                    fw.close();
                 }
             }
         }
@@ -63,22 +68,25 @@ public class Storage {
             if (headerFlag == 0) {
                 header = "Meal Library" + "\n";
                 Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                fw.close();
                 headerFlag = 1;
             }
             customMeal = m + "\n";
             Files.write(Paths.get(filePath), customMeal.getBytes(), StandardOpenOption.APPEND);
+            fw.close();
         }
         headerFlag = 0;
         for (String f : FoodBank.fluids) {
             if (headerFlag == 0) {
                 header = "Fluid Library" + "\n";
                 Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                fw.close();
                 headerFlag = 1;
             }
             customFluid = f + "\n";
             Files.write(Paths.get(filePath), customFluid.getBytes(), StandardOpenOption.APPEND);
+            fw.close();
         }
-        fw.close();
     }
 
     /*

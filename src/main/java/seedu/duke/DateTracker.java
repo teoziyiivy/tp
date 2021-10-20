@@ -3,7 +3,9 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.gym.ScheduleTracker;
 import seedu.duke.gym.WorkoutTracker;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DateTracker {
     protected static ArrayList<String> dates;
@@ -36,7 +38,9 @@ public class DateTracker {
         });
     }
 
-    public static void deleteDateFromList(String inputArguments, Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+    public static void deleteDateFromList(String inputArguments, Fluid fluid,
+                                          Meal meal, ScheduleTracker scheduleTracker,
+                                          WorkoutTracker workoutTracker,
                                           WeightTracker weightTracker) throws DukeException {
         String date = Parser.getDate(inputArguments);
         for (String m : meal.meals) {
