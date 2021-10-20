@@ -178,7 +178,7 @@ public class CommandManager {
         }
     }
 
-    public void listParser(String inputArguments) throws NullPointerException, FoodBankException {
+    public void listParser(String inputArguments) throws NullPointerException, FoodBankException, DukeException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         //inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
@@ -200,6 +200,10 @@ public class CommandManager {
         case Keywords.FLUID:
             fluid.listFluid(date);
             break;
+        case Keywords.CALORIES:
+            int calCount = fluid.getCalories(date) + meal.getCalories(date);
+            System.out.println("\n" + "Your total calorie consumption for " + date + " is:" + calCount);
+            break;
             /*
         case Keywords.WORKOUT:
             FoodBank.listCustomFluids();
@@ -211,6 +215,9 @@ public class CommandManager {
             FoodBank.deleteCustomMeal(inputArguments);
             break;
              */
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
         }
     }
 

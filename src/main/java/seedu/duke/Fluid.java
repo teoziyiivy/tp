@@ -5,8 +5,6 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -86,7 +84,7 @@ public class Fluid extends Tracker {
             totalVolume = 0;
             fluidNumber = 0;
             for (String fluid : fluidArray) {
-                if (fluid.contains(date)) {
+                if (fluid.contains(date)) {  //listfluid wont work cuz of date check
                     generateFluidParameters(fluid);
                     System.out.println(i + ". " + description);
                     System.out.println("Calories: " + calories);
@@ -107,5 +105,16 @@ public class Fluid extends Tracker {
             return;
         }
         logr.exiting(getClass().getName(), "listFluid");
+    }
+
+    public int getCalories(String date) throws DukeException, FoodBankException {
+        int calorieTotal = 0;
+        for (String fluid : fluidArray) {
+            if (fluid.contains(date)) {
+                generateFluidParameters(fluid);
+                calorieTotal += calories;
+            }
+        }
+        return calorieTotal;
     }
 }

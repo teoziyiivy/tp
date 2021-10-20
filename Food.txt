@@ -1,6 +1,7 @@
 Meals
 Date: 21/10/2021
-risoto /c 600 /d 21/10/2021 /t 00:52
+risotto /c 1 /d 21/10/2021 /t 06:00
 Fluids
 Date: 21/10/2021
-fanta /c 70 /v 0 /d 21/10/2021 /t 00:52
+cola /c 100 /v 0 /d 21/10/2021 /t 05:51
+water /c 10 /v 0 /d 21/10/2021 /t 05:51
