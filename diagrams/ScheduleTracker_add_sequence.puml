@@ -6,23 +6,16 @@ participant ":ScheduledWorkout"
 ->":ScheduleTracker" : addScheduledWorkout(inputArguments: String)
 activate ":ScheduleTracker" #FFBBBB
 
-":ScheduleTracker"->":ScheduleTracker" : generateParameters(inputArguments: String)
-activate ":ScheduleTracker" #DarkSalmon
-return String[3]
-
-":ScheduleTracker"->":ScheduleTracker" : scheduledWorkouts.add(scheduledWorkout : ScheduleWorkout)
-activate ":ScheduleTracker" #DarkSalmon
-return
-
-":ScheduleTracker"->":ScheduleTracker" : cleanUpScheduleList
+":ScheduleTracker"->":ScheduleTracker" : cleanUpScheduleList()
+note right: Take note that the method calls \nare NOT comprehensive. \ne.g.some  method calls such as \ngenerating of paramaters are omitted
 activate ":ScheduleTracker" #DarkSalmon
 
 loop \tno more overdue workouts\t
     note left : Take note that a workout is "overdue" \nif its scheduled date is before the current date
-    ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
+    ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(\n\tscheduledWorkout : ScheduleWorkout,\n\tcurrentDate: LocalDate)
     activate ":ScheduleTracker" #IndianRed
     alt \tisRecurringWorkout\t
-        ":ScheduleTracker"->":ScheduleTracker" : rescheduleRecurringWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
+        ":ScheduleTracker"->":ScheduleTracker" : rescheduleRecurringWorkout(\n\tscheduledWorkout : ScheduleWorkout,\n\tcurrentDate: LocalDate)
         activate ":ScheduleTracker" #LightSalmon
         ":ScheduleTracker"->":ScheduledWorkout" : incrementWorkoutDate(days: long)
         |||
@@ -33,7 +26,7 @@ loop \tno more overdue workouts\t
     else else
         ":ScheduleTracker"->":ScheduleTracker" : deleteWorkout()
         activate ":ScheduleTracker" #LightSalmon
-        ":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.remove(scheduledWorkout : ScheduleWorkout)
+        ":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.remove(\n\tscheduledWorkout : ScheduleWorkout)
         activate ":ScheduledWorkout"
         destroy ":ScheduledWorkout"
         return
