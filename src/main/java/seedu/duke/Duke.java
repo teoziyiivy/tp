@@ -39,7 +39,9 @@ public class Duke {
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
         storage = new Storage("userData.txt");
-        commandManager = new CommandManager(storage, fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        commandManager = new CommandManager(storage, fluid,
+                meal, scheduleTracker, workoutTracker,
+                weightTracker, userHelp);
         foodbank = new FoodBank();
         dateTracker = new DateTracker();
     }
