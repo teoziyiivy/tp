@@ -1,17 +1,23 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.*;
+import seedu.duke.gym.ScheduleTracker;
+import seedu.duke.gym.WorkoutTracker;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
+
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
 
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
+
 @SuppressWarnings("ALL")
 public class Duke {
-
     private Meal meal;
     private Ui ui;
     private Fluid fluid;
@@ -21,7 +27,8 @@ public class Duke {
     private CommandManager commandManager;
     private UserHelp userHelp;
     private FoodBank foodbank;
-    private FoodBank foodBank;
+    private DateTracker dateTracker;
+    private Storage storage;
 
     public static void main(String[] args) throws DukeException {
         new Duke().uiRun();
@@ -36,9 +43,12 @@ public class Duke {
         workoutTracker = new WorkoutTracker();
         weightTracker = new WeightTracker();
         userHelp = new UserHelp();
-        commandManager = new CommandManager(fluid, meal, scheduleTracker, workoutTracker, weightTracker, userHelp);
+        storage = new Storage("Food.txt");
+        commandManager = new CommandManager(storage, fluid,
+                meal, scheduleTracker, workoutTracker,
+                weightTracker, userHelp);
         foodbank = new FoodBank();
-        foodBank = new FoodBank();
+        dateTracker = new DateTracker();
     }
 
     public void run() {
@@ -61,16 +71,25 @@ public class Duke {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
             } catch (FoodBankException e) {
                 e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("ccc");
             }
-            LogManager.getLogManager().reset();
         }
+        LogManager.getLogManager().reset();
     }
 
     public void uiRun() {
-        ui.welcomeMessage();
-        ui.getInfo();
-        while (!ui.isValidStartup) {
-            ui.memoryStartup();
+        try {
+            ui.welcomeMessage();
+            ui.getInfo();
+            if (ui.memoryStartup()) {
+                meal.meals = storage.loadMeals();
+                fluid.fluidArray = storage.loadFluids();
+            }
+        } catch (LoadException e) {
+            System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
+        } catch (IOException e) {
+            System.out.println("ccc");
         }
     }
 }

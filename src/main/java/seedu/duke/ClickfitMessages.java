@@ -49,7 +49,8 @@ public class ClickfitMessages {
                     + "<command> <description> /c <calories> /d <date> /t <time>";
 
 
-    public static final String HELP_UG = "Here is the link to our User Guide!";
+    public static final String HELP_UG = "Here is the link to our User Guide! "
+            + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";
 
     public static final String DATE_ERROR = "Please enter your date in the right format. "
             + "It should be \"DD/MM/YYYY\"";

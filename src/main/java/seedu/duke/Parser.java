@@ -2,12 +2,15 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.workout.WorkoutActivity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class Parser {
 
@@ -16,6 +19,11 @@ public class Parser {
     public static final String CALORIE_SEPARATOR = " /c ";
     public static final String RECURRING_FLAG = " /r";
     public static final String VOLUME_SEPARATOR = " /v ";
+    public static final String ACTIVITY_SEPARATOR = " /a ";
+    public static final String NO_INPUT_ACTIVITY = "nil";
+    public static final String MULTIPLE_ACTIVITY_MARKER = ",";
+    public static final String ACTIVITY_SPLITTER = ":";
+    public static final String QUANTIFIER_SPLITTER = "x";
     public static final String SPACE_SEPARATOR = " ";
 
     public static boolean containsVolumeSeparator(String inputArguments) {
@@ -34,6 +42,10 @@ public class Parser {
         return inputArguments.contains(CALORIE_SEPARATOR);
     }
 
+    public static boolean containsActivitySeparator(String inputArguments) {
+        return inputArguments.contains(ACTIVITY_SEPARATOR);
+    }
+
     public static boolean isRecurringWorkout(String inputArguments) {
         String[] splitResults = inputArguments.split(RECURRING_FLAG, 2);
         if (splitResults.length == 1) {
@@ -41,6 +53,7 @@ public class Parser {
         }
         return splitResults[1].isEmpty(); // true if /r flag is at the end of the string
     }
+
 
     public static int parseStringToInteger(String input) throws NumberFormatException {
         return Integer.parseInt(input);
@@ -81,6 +94,23 @@ public class Parser {
         }
     }
 
+    public static int getCaloriesBurnedForWorkout(String inputArguments)
+            throws DukeException, NumberFormatException {
+        int calories = 0;
+        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        int length = userInput.length;
+        for (int i = 1; i < length; i++) {
+            if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
+                calories = parseStringToInteger(userInput[i + 1]);
+            }
+        }
+        if (calories < 0) {
+            throw new DukeException("Negative calories");
+        } else {
+            return calories;
+        }
+    }
+
     public static int getVolume(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
@@ -112,7 +142,7 @@ public class Parser {
         return description;
     }
 
-    public static String getDate(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getDate(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
         String date = "";
@@ -123,14 +153,39 @@ public class Parser {
             }
         }
         if (date.equals("")) {
-            return getSystemDate();
+            String newDate = getSystemDate();
+            DateTracker.checkIfDateExists(newDate);
+            return newDate;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        //Keeps throwing NullPointerException so like half the JUnits fail assertion due to wrong Exception thrown
+        //static method requires static attribute created non static DateTracker constructor
+        DateTracker.checkIfDateExists(formatter.format(localDate)); //this is causing JUnits to fail
+        return formatter.format(localDate);
+    }
+
+    public static String getDateNoDateTracker(String inputArguments) throws DateTimeParseException {
+        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        int length = userInput.length;
+        String date = "";
+        for (int i = 1; i < length; i++) {
+            if (userInput[i].equals(DATE_SEPARATOR.trim())) {
+                date = userInput[i + 1];
+                break;
+            }
+        }
+        if (date.equals("")) {
+            String newDate = getSystemDate();
+            DateTracker.checkIfDateExists(newDate);
+            return newDate;
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
         return formatter.format(localDate);
     }
 
-    public static String getTime(String inputArguments) throws DukeException, DateTimeParseException {
+    public static String getTime(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
         String time = "";
@@ -157,6 +212,7 @@ public class Parser {
         return weight;
     }
 
+    //todo
     public static String getScheduleDescription(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         String description = userInput[0];
@@ -164,6 +220,51 @@ public class Parser {
             throw new DukeException("Please enter a valid description!");
         }
         return description;
+    }
+
+    public static Map<String, int[]> getActivities(String inputArguments) throws DukeException {
+        int indexOfActivitySeparator = inputArguments.indexOf(Parser.ACTIVITY_SEPARATOR);
+        String subSubstringAfterActivitySeparator = "";
+        if (indexOfActivitySeparator != -1) {
+            subSubstringAfterActivitySeparator = inputArguments.substring(
+                    indexOfActivitySeparator).trim();
+            if (isRecurringWorkout(inputArguments)) {
+                subSubstringAfterActivitySeparator = subSubstringAfterActivitySeparator
+                        .replace(RECURRING_FLAG, "").replace(ACTIVITY_SEPARATOR.trim(), "").trim();
+            }
+        }
+        if (subSubstringAfterActivitySeparator.isEmpty()) {
+            return new HashMap<>();
+        } else {
+            return getActivityArguments(subSubstringAfterActivitySeparator.split(MULTIPLE_ACTIVITY_MARKER));
+        }
+    }
+
+    private static Map<String, int[]> getActivityArguments(String[] nonParsedActivities) throws DukeException {
+        Map<String, int[]> outputMap = new HashMap<>();
+        for (String activity : nonParsedActivities) {
+            String[] splitResults = activity.split(ACTIVITY_SPLITTER, 2);
+            if (splitResults.length == 1) {
+                throw new DukeException("Invalid or missing activity splitter \":\" detected.");
+            }
+            String[] quantifierSplitResults = splitResults[1].split(QUANTIFIER_SPLITTER, 2);
+            if (quantifierSplitResults.length == 1 && !WorkoutActivity.isDistanceActivity(splitResults[0])) {
+                throw new DukeException("Invalid or missing activity quantifier \"x\" detected.");
+            }
+            int[] activityQuantifiers;
+            if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
+                activityQuantifiers = new int[]{parseStringToInteger(quantifierSplitResults[0].trim())};
+            } else if (quantifierSplitResults.length == 2) {
+                activityQuantifiers = new int[]{
+                        parseStringToInteger(quantifierSplitResults[0].trim()),
+                        parseStringToInteger(quantifierSplitResults[1].trim())
+                };
+            } else {
+                throw new DukeException("Error getting activity quantifiers.");
+            }
+            outputMap.put(splitResults[0].trim(), activityQuantifiers);
+        }
+        return outputMap;
     }
 
     public static String getHelpDescription(String inputArguments) {
@@ -185,7 +286,6 @@ public class Parser {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
         LocalTime now = LocalTime.now();
         systemTime = now.format(dtf);
-
         return systemTime;
     }
 }
