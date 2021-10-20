@@ -1,24 +1,14 @@
-<<<<<<< HEAD
+Date: 15/10/2021
 Date: 18/10/2021
 Meals
-dc /c 33 /d 18/10/2021 /t 17:53
+risoto /c 260 /d 18/10/2021 /t 21:39
 Fluids
-cc /c 33 /v 0 /d 18/10/2021 /t 17:53
-Date: 12/12/2021
+cola /c 60 /v 0 /d 18/10/2021 /t 21:39
+Date: 19/10/2021
 Meals
-rr /c 44 /d 12/12/2021 /t 14:33
-Date: 13/12/2022
-Fluids
-cccww /c 1223 /v 0 /d 13/12/2022 /t 16:07
+pasta /c 450 /d 19/10/2021 /t 19:00
+pasta /c 400 /d 19/10/2021 /t 21:40
 Meal Library
-dick /c 123
+risoto /c 260
 Fluid Library
-soju /c 1321
-=======
-Date: 12/12/1999
-Meals
-mytwinbrother /c 10000 /d 12/12/1999 /t 10:30
-Date: 18/10/2021
-Meals
-risotto /c 90 /d 18/10/2021 /t 18:02
->>>>>>> master
+cola /c 60
