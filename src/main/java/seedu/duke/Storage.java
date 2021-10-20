@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.gym.ScheduleTracker;
+import seedu.duke.gym.ScheduledWorkout;
 import seedu.duke.gym.WorkoutTracker;
 
 import java.io.File;
@@ -9,17 +10,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 
 
 public class Storage {
 
     protected String filePath;
+    private static final String SCHEDULE_DATA_FILE_PATH = "schedule.txt";
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        initializeScheduleDataFile();
     }
 
-    public void saveAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+    public void saveAllTasks(Fluid fluid, Meal meal,
                              WeightTracker weightTracker) throws IOException {
         String filePath = new File(this.filePath).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
@@ -80,4 +84,30 @@ public class Storage {
         }
         fw.close();
     }
+
+    public static void initializeScheduleDataFile() {
+        File dataFile = new File(SCHEDULE_DATA_FILE_PATH);
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException ioe) {
+                System.out.println("Error during data file creation for ScheduleTracker.");
+            }
+        }
+    }
+
+    public static void writeToScheduleDataFile(String textToWrite) throws IOException {
+        FileWriter fileWriter = new FileWriter(SCHEDULE_DATA_FILE_PATH);
+        fileWriter.write(textToWrite);
+        fileWriter.close();
+    }
+
+    public static void saveScheduleData(ScheduleTracker scheduleTracker) {
+        try {
+            writeToScheduleDataFile(scheduleTracker.getScheduleListAsString());
+        } catch (IOException ioe) {
+            System.out.println("Error during writing to data file for ScheduleTracker.");
+        }
+    }
+
 }

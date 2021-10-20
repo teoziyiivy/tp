@@ -73,13 +73,9 @@ public class CommandManager {
             workoutTracker.listWorkouts();
             break;
         case Keywords.INPUT_ADD_SCHEDULE:
-            scheduleTracker.addScheduledWorkout(inputArguments);
-            break;
         case Keywords.INPUT_DELETE_SCHEDULE:
-            scheduleTracker.deleteScheduledWorkout(inputArguments);
-            break;
         case Keywords.INPUT_LIST_SCHEDULE:
-            scheduleTracker.listScheduledWorkouts(inputArguments);
+            executeScheduleCommand(command, inputArguments);
             break;
         case Keywords.INPUT_DRINKS:
             if (inputArguments != null) {
@@ -146,7 +142,7 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        storage.saveAllTasks(fluid, meal, scheduleTracker, workoutTracker, weightTracker);
+        storage.saveAllTasks(fluid, meal, weightTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
@@ -176,5 +172,23 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
+    }
+
+    public void executeScheduleCommand(String command, String inputArguments) throws DukeException {
+        switch (command) {
+        case Keywords.INPUT_ADD_SCHEDULE:
+            scheduleTracker.addScheduledWorkout(inputArguments);
+            break;
+        case Keywords.INPUT_DELETE_SCHEDULE:
+            scheduleTracker.deleteScheduledWorkout(inputArguments);
+            break;
+        case Keywords.INPUT_LIST_SCHEDULE:
+            scheduleTracker.listScheduledWorkouts(inputArguments);
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+        Storage.saveScheduleData(scheduleTracker);
     }
 }

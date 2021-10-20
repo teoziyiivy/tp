@@ -103,7 +103,7 @@ public class ScheduleTracker {
         }
     }
 
-    public void listAllScheduledWorkouts() throws DukeException {
+    public void listAllScheduledWorkouts() {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
@@ -129,6 +129,19 @@ public class ScheduleTracker {
                 currentIndex++;
             }
         }
+    }
+
+    public String getScheduleListAsString() {
+        String scheduleListAsString = "";
+        for (ScheduledWorkout workout : scheduledWorkouts) {
+            scheduleListAsString += workout.getWorkoutDescription() + Parser.DATE_SEPARATOR
+                    + workout.getWorkoutDate() + Parser.TIME_SEPARATOR + workout.getWorkoutTime();
+            if (workout.isRecurring()) {
+                scheduleListAsString += Parser.RECURRING_FLAG;
+            }
+            scheduleListAsString += System.lineSeparator();
+        }
+        return scheduleListAsString;
     }
 
     public void cleanUpScheduleList() {
