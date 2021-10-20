@@ -25,20 +25,20 @@ public class Storage {
         String currentMeal;
         String currentFluid;
         String header;
-        String customMeal;
-        String customFluid;
+        //String customMeal;
+        //String customFluid;
         String filePath = new File(this.filePath).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
         int headerFlag;
+        header = "Meals" + "\n";
+        Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+        fw.close();
         for (String date : DateTracker.dates) {
-            currentDate = "Date: " + date + "\n";
-            Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
-            fw.close();
             headerFlag = 0;
             for (String m : meal.meals) {
                 if (m.contains(date) && (headerFlag == 0)) {
-                    header = "Meals" + "\n";
-                    Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                    currentDate = "Date: " + date + "\n";
+                    Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
                     fw.close();
                     headerFlag = 1;
                 }
@@ -48,11 +48,16 @@ public class Storage {
                     fw.close();
                 }
             }
+        }
+        header = "Fluids" + "\n";
+        Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+        fw.close();
+        for (String date : DateTracker.dates) {
             headerFlag = 0;
             for (String f : fluid.fluidArray) {
                 if (f.contains(date) && (headerFlag == 0)) {
-                    header = "Fluids" + "\n";
-                    Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+                    currentDate = "Date: " + date + "\n";
+                    Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
                     fw.close();
                     headerFlag = 1;
                 }
@@ -63,6 +68,7 @@ public class Storage {
                 }
             }
         }
+        /*
         headerFlag = 0;
         for (String m : FoodBank.meals) {
             if (headerFlag == 0) {
@@ -87,27 +93,28 @@ public class Storage {
             Files.write(Paths.get(filePath), customFluid.getBytes(), StandardOpenOption.APPEND);
             fw.close();
         }
+
+         */
     }
 
-    /*
-    public void loadTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+
+    public void loadTasksFood(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                           WeightTracker weightTracker) throws IOException {
         String newFilePath = new File(this.filePath).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
-
-        while (s.hasNext()) {
-            if (s.nextLine().equals("Meals")) {
-
+        while(!(s.nextLine().equals("Fluids"))) {
+            textFromFile = s.nextLine();
+            if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
+                meal.meals.add(textFromFile);
             }
         }
         while (s.hasNext()) {
             textFromFile = s.nextLine();
-            loadedTasks.add(textFromFile);
+            if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
+                fluid.fluidArray.add(textFromFile);
+            }
         }
-        System.out.println(Ui.STARTING_MESSAGE);
-        return loadedTasks;
     }
-     */
 }
