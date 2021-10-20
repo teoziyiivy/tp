@@ -87,6 +87,7 @@ class FluidTest {
         assertThrows(NumberFormatException.class, () -> fluid.deleteFluid(input));
     }
 
+    /*
     @Test
     void listFluid() {
         fluidArray = new ArrayList<>();
@@ -100,4 +101,6 @@ class FluidTest {
         Fluid.fluidArray.add("drank water /c 0 /v 200 /d 13/12/2021 /t 12:30");
         assert (Fluid.fluidArray.size() != 0);
     }
+
+     */
 }
