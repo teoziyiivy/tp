@@ -49,6 +49,10 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         assert !Objects.equals(inputArguments, "");
         switch (command) {
+        case Keywords.LIST:
+            assert inputArguments != null;
+            listParser(inputArguments);
+            break;
         case Keywords.LIBRARY:
             assert inputArguments != null;
             foodBankParser(inputArguments);
@@ -159,6 +163,26 @@ public class CommandManager {
             break;
         case Keywords.LIST_MEAL:
             FoodBank.listCustomMeal();
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+    }
+
+    public void listParser(String inputArguments) throws NullPointerException, FoodBankException { //meal [date]
+        String[] splitResults = inputArguments.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        switch (command) {
+        case Keywords.LIST_EVERYTHING:
+            FoodBank.addCustomFluid(inputArguments);
+            break;
+        case Keywords.LIST_MEALS:
+            FoodBank.addCustomFluid(inputArguments);
+            break;
+        case Keywords.LIST_FLUIDS:
+            FoodBank.deleteCustomFluids(inputArguments);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
