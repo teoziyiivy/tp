@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant ":WeightTracker"
+
+->":WeightTracker" : Keywords.INPUT_CHECK_WEIGHT
+activate ":WeightTracker" #Salmon
+":WeightTracker"->":WeightTracker" : readInput(input: String)
+activate ":WeightTracker" #DarkSalmon
+return
+":WeightTracker"->":WeightTracker" : printWeight(input: String)
+activate ":WeightTracker" #DarkSalmon
+":WeightTracker"->":WeightTracker" : generateWeightParameters(inputArguments: String)
+activate ":WeightTracker" #LightSalmon
+return
+return
+return
+@enduml
