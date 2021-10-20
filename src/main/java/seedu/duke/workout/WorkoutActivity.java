@@ -23,8 +23,9 @@ public class WorkoutActivity {
     }
 
     public static boolean isDistanceActivity(String activityDescription) {
-        if (activityDescription.equals(ACTIVITY_SWIMMING)
-                || activityDescription.equals(ACTIVITY_RUNNING) || activityDescription.equals(ACTIVITY_CYCLING)) {
+        if (activityDescription.trim().equals(ACTIVITY_SWIMMING)
+                || activityDescription.trim().equals(ACTIVITY_RUNNING)
+                || activityDescription.trim().equals(ACTIVITY_CYCLING)) {
             return true;
         } else {
             return false;

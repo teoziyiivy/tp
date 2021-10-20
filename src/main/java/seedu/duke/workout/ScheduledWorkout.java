@@ -90,7 +90,7 @@ public class ScheduledWorkout {
                         + "metres" + System.lineSeparator();
             } else {
                 output += a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
-                        + a.getActivitySets() + "reps" + System.lineSeparator();
+                        + a.getActivityReps() + "reps" + System.lineSeparator();
             }
         }
         return output;
