@@ -1,9 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 
@@ -188,7 +188,7 @@ public class CommandManager {
                 date = Parser.getSystemDate();
             }
         } else {
-                date = splitResults[1];
+            date = splitResults[1];
         }
         switch (command) {
         case Keywords.MEAL:
