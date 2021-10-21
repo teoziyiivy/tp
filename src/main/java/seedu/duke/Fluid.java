@@ -117,4 +117,15 @@ public class Fluid extends Tracker {
         }
         return calorieTotal;
     }
+
+    public int getVolume(String date) throws DukeException, FoodBankException {
+        int volumeTotal = 0;
+        for (String fluid : fluidArray) {
+            if (fluid.contains(date)) {
+                generateFluidParameters(fluid);
+                volumeTotal += volume;
+            }
+        }
+        return volumeTotal;
+    }
 }

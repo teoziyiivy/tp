@@ -204,6 +204,10 @@ public class CommandManager {
             int calCount = fluid.getCalories(date) + meal.getCalories(date);
             System.out.println("\n" + "Your total calorie consumption for " + date + " is:" + calCount);
             break;
+        case Keywords.VOLUME:
+            int volCount = fluid.getVolume(date);
+            System.out.println("\n" + "Your total volume consumption for " + date + " is:" + volCount);
+            break;
             /*
         case Keywords.WORKOUT:
             FoodBank.listCustomFluids();
