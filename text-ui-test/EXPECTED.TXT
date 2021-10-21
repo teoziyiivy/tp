@@ -11,7 +11,6 @@ Lets get your fitness journey started! input any commands to get started! Type "
 Lets work hard together in your fitness journey!
 
 Welcome back! Would you like to check your BMI and recommended caloric intake?
-Key in Y/N.
-
-Welcome back! Would you like to load up the records of your fitness journey?
-Key in Y/N.
+Key in y or press enter keystroke to skip!
+Would you like to load up the records of your fitness journey?
+Key in y or press enter keystroke to skip!
