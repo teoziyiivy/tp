@@ -101,6 +101,11 @@ recurring, the workout is either deleted or rescheduled appropriately. Once the 
 This "updating" is done in any method call that outputs something to the user to ensure a correctly sorted and cleaned up
 list is always output to the user. This also ensures the `scheduledWorkouts` ArrayList remains free of overdue workouts.
 
+### Fluid: Class diagram
+![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
+
+Above are the UML class level diagrams of `Fluid`, `FluidExceptions` and `Tracker`. As seen in the diagram, the `Fluid` class is dependent on the `FluidExceptions` and the `Fluid`class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+
 ## Product scope
 ### Target user profile
 Specifically made for people getting into serious fitness routines such as athletes but helpful for general populace.
