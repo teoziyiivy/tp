@@ -76,7 +76,7 @@ variables with the parameters to be printed. Then the `weight` and `date` variab
 printed for the entire list.
 
 ### ScheduleTracker: Class diagram
-![](../diagrams/ScheduleTracker_class.png)
+![diagram-2070120484733536202](https://user-images.githubusercontent.com/69461398/138324203-ea286780-6611-43f4-af77-3ea7cb59a42c.png)
 
 Above are the UML class level diagrams of `ScheduleTracker` and `ScheduledWorkout`. As seen in the diagram, one 
 `ScheduleTracker` object keeps track/is linked to **any** number of `ScheduledWorkout` objects, thus have a 
@@ -88,7 +88,7 @@ the sake of better comprehensibility.
 
 #### ScheduleTracker: Adding scheduled workout
 
-![](../diagrams/ScheduleTracker_add_sequence.png)
+![diagram-18374474381804594155](https://user-images.githubusercontent.com/69461398/138323717-0975d9b3-392a-4c41-99c4-73a8915933be.png)
 
 The UML sequence diagram above shows what happens when the method `addScheduledWorkout(...)` is called. 
 Parameters are generated and a `ScheduledWorkout` object is added into the `scheduledWorkouts` ArrayList.
