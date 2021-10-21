@@ -84,13 +84,11 @@ public class WeightTracker extends Tracker {
     public void addWeight(String input) throws AddWeightException, DateTimeParseException {
         logger.entering(getClass().getName(), "addWeight");
         logger.log(Level.INFO, "going to add a weight and date to the list");
-        generateWeightParameters(input);
-        input = "addweight" + weight + " /d " + date;
-        //added the above line to skip weight input if user is lazy
         if (!input.matches("(.*) /d (.*)")) {
             throw new AddWeightException();
         } else {
-            //weights.add(new WeightTracker(weight, date));
+            generateWeightParameters(input);
+            input = "addweight " + weight + " /d " + date;
             WeightTrackerMessages.printAddWeightResponse(weight, date);
             weightsArray.add(input);
             numberOfWeights += 1;
@@ -111,6 +109,9 @@ public class WeightTracker extends Tracker {
             throw new DeleteWeightIndexException();
         } else {
             String indexToRemove = weightsArray.get(weightIndex - 1);
+            String[] splitLine = indexToRemove.split(" ", 2);
+            String command = splitLine[0];
+            indexToRemove = indexToRemove.replaceAll("^" + command + " ", "");
             generateWeightParameters(indexToRemove);
             System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
                     + weight + " on " + date + ".");
@@ -128,11 +129,17 @@ public class WeightTracker extends Tracker {
         if (numberOfWeights == 0) {
             throw new NoWeightsException();
         } else {
+            int i = 1;
             System.out.println("Here are your recorded weights:");
-            for (int i = 0; i < numberOfWeights; i++) {
-                String indexToPrint = weightsArray.get(i);
-                generateWeightParameters(indexToPrint);
-                System.out.println((i + 1) + ". Weight: " + weight + " on Date: " + date);
+            for (String weights : weightsArray) {
+                String[] splitLine = weights.split(" ", 2);
+                String command = splitLine[0];
+                weights = weights.replaceAll("^" + command + " ", "");
+                generateWeightParameters(weights);
+                System.out.println(i + ". ");
+                System.out.println("Weight: " + weight);
+                System.out.println("Date: " + date);
+                i++;
             }
         }
         logger.exiting(getClass().getName(), "printWeight");

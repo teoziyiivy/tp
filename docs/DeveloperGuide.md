@@ -130,6 +130,7 @@ conveniently accessed via the Command Line Interface (CLI).
 |--------|----------|---------------|------------------|
 |v1.0|fitness enthusiast|record my fitness activities|plan my extensive workout schedule|
 |v1.0|user|update how many calories I have burned through my workouts|keep track of my daily calories|
+|v1.0|athlete|record my weight|keep track of and maintain a competitive weight|
 |v2.0|user|have the app remember my user data|access my data anytime| 
 |v2.0|user|have scheduled workouts in the list to be sorted by the nearest dates|easily keep track of upcoming workouts|
 |v2.0|frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|

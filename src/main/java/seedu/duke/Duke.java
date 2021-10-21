@@ -40,7 +40,7 @@ public class Duke {
             workoutTracker = new WorkoutTracker();
             weightTracker = new WeightTracker();
             userHelp = new UserHelp();
-            storage = new Storage("Food.txt", "Foodbank.txt");
+            storage = new Storage("Food.txt", "Foodbank.txt", "Weight.txt");
             commandManager = new CommandManager(storage, fluid,
                     meal, scheduleTracker, workoutTracker,
                     weightTracker, userHelp);
@@ -51,6 +51,7 @@ public class Duke {
             if (ui.memoryStartup()) {
                 meal.meals = storage.loadMeals();
                 fluid.fluidArray = storage.loadFluids();
+                weightTracker.weightsArray = storage.loadWeights();
                 FoodBank.meals = storage.loadMealLibrary();
                 FoodBank.fluids = storage.loadFluidLibrary();
                 storage.printLoadedLists();

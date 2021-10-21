@@ -139,6 +139,7 @@ public class CommandManager {
         }
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
+        storage.saveWeight(weightTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
