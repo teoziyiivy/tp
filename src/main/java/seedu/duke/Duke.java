@@ -84,7 +84,7 @@ public class Duke {
             } catch (FoodBankException e) {
                 e.printStackTrace();
             } catch (IOException e) {
-                System.out.println("ccc");
+                System.out.println("No saved data found. CLI.ckFit shall create one for you!");
             }
         }
         LogManager.getLogManager().reset();
