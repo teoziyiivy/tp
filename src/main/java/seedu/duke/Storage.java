@@ -1,8 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FluidExceptions;
-import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 
@@ -123,6 +120,9 @@ public class Storage {
                 flag = 1;
             } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
                 meals.add(textFromFile);
+            } else if (textFromFile.contains("Date")) {
+                String date[] = textFromFile.split(" ");
+                DateTracker.checkIfDateExists(date[1]);
             }
         }
         return meals;
@@ -141,23 +141,12 @@ public class Storage {
                 fluids.add(textFromFile);
             } else if (textFromFile.equals("Fluids")) {
                 flag = 1;
+            } else if (textFromFile.contains("Date")) {
+                String date[] = textFromFile.split(" ");
+                DateTracker.checkIfDateExists(date[1]);
             }
         }
         return fluids;
-    }
-
-    public ArrayList<String> loadTasks() throws IOException {
-        String newFilePath = new File(this.filePath).getAbsolutePath();
-        ArrayList<String> loadedTasks = new ArrayList<>();
-        File f = new File(newFilePath);
-        Scanner s = new Scanner(f);
-        String textFromFile;
-        while (s.hasNext()) {
-            textFromFile = s.nextLine();
-            loadedTasks.add(textFromFile);
-        }
-        //System.out.println(Ui.STARTING_MESSAGE);
-        return loadedTasks;
     }
 
     public static void initializeScheduleDataFile() {
@@ -228,10 +217,10 @@ public class Storage {
         String header;
         String customMeal;
         String customFluid;
+    }
 
     public ArrayList<String> loadWorkouts() throws IOException {
         ArrayList<String> workout = new ArrayList<>();
-
         File dataFile = new File(Storage.WORKOUT_DATA_FILE_PATH);
         Scanner fileScanner = new Scanner(dataFile);
         String textFromFile;
