@@ -111,16 +111,18 @@ public class WorkoutTracker {
         }
     }
 
-//    public void listWorkouts(String inputArguments) throws DukeException {
-//        sortWorkoutList();
-//        if (inputArguments == null) {
-//            listWorkoutsOnDate(Parser.getSystemDate());
-//        } else if (inputArguments.equals(INPUT_ALL)) {
-//            listAllWorkouts();
-//        } else {
-//            listWorkoutsOnDate(inputArguments);
-//        }
-//    }
+    /*
+    public void listWorkouts(String inputArguments) throws DukeException {
+        sortWorkoutList();
+        if (inputArguments == null) {
+            listWorkoutsOnDate(Parser.getSystemDate());
+        } else if (inputArguments.equals(INPUT_ALL)) {
+            listAllWorkouts();
+        } else {
+            listWorkoutsOnDate(inputArguments);
+        }
+    }
+     */
 
     public void listAllWorkouts()
             throws DukeException, DateTimeParseException, NumberFormatException {
@@ -163,9 +165,11 @@ public class WorkoutTracker {
         }
     }
 
-//    public void sortWorkoutList() {
-//        DateTracker.sortDateAndTime(workouts);
-//    }
+    /*
+    public void sortWorkoutList() {
+        DateTracker.sortDateAndTime(workouts);
+    }
+     */
 
     public String getWorkoutListAsString() {
         String workoutListAsString = "";
