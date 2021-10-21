@@ -112,17 +112,27 @@ Example of usage:
 
 Command Word: `schedule`
 
-Description: `Adds a new scheduled workout to the list of scheduled workout items.`
+Description: `Adds a new scheduled workout to the list of scheduled workout items with the option to include 
+activity breakdowns.`
 
-Format: `schedule WORKOUT_NAME /d DATE /t TIME`
+Format: `schedule WORKOUT_NAME /d DATE /t TIME /a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ... /r`
 
 * The `WORKOUT_NAME` can contain spaces.
+* The `/a` separator is optional.
+* The `ACTIVITY_NAME` can contain spaces and `:` must follow after it.
+* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in an integer `[DISTANCE]`
+  in metres for the activity.
+* For other `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two integers in the form `[SETS]x[REPS]`.
+* Multiple activities can be entered as long as they are separated by a comma `,`.
+* The `/r` flag at the end is an optional flag for recurrence, which schedules a weekly recurring workout.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 
 Example of usage:
 
-`schedule chest day /d 07/08/2021 /t 15:00`
+`schedule chest day /d 22/12/2021 /t 15:00`, `schedule weekly chest day /d 07/12/2021 /t 13:50 /r`, <br/>
+`schedule weekly chest day /d 07/08/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r`, <br/>
+`schedule triathlon training /d 07/08/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000`
 
 # Delete a meal
 
@@ -231,12 +241,17 @@ Example of usage:
 
 Command Word: `listschedule`
 
-Description: `Lists out all stored scheduled 
-workout descriptions, date and time.`
+Description: `Lists out stored scheduled 
+workout descriptions, date and time as well as their activity breakdowns on a specific date`
+
+Format: `listschedule DATE`
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the schedule for the **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored scheduled workouts will be listed.
 
 Example of usage:
 
-`listschedule`
+`listschedule`, `listschedule 22/10/2021`, `listschedule all`
 
 # Help Commands
 
