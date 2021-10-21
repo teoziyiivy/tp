@@ -28,13 +28,13 @@ public class Calculator {
         bmi = (weight / ((height / 100) ^ 2));
 
         if (bmi < 18.5) {
-            getBmiOutcome = "Underweight";
+            getBmiOutcome = "You are underweight";
         } else if ((bmi >= 18.5) && (bmi < 24.9)) {
-            getBmiOutcome = "Normal weight";
+            getBmiOutcome = "You are currently at the optimal weight";
         } else if ((bmi >= 25) && (bmi < 29.9)) {
-            getBmiOutcome = "Overweight";
+            getBmiOutcome = "You are currently overweight";
         } else {
-            getBmiOutcome = "Obesity";
+            getBmiOutcome = "You are currently obese. Let CLI.ckFit help!";
         }
         System.out.println(getBmiOutcome);
     }
