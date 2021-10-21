@@ -5,7 +5,41 @@ The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.co
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Ui(User Interface): Class diagram
+
+### Design & implementation
+The proposed Ui class has the class level attributes of sex, weight, height, age and activityLevel. It consists of 3 
+methods that in turn reference from different classes.
+
+It implements the following operations:
+
+* welcomeMessage()
+* getInfo()
+* memoryStartup()
+
+These operations will be illustrated throught UML diagrams.
+
+### Printing the welcome message
+The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported
+from Clickfitmessages class.
+
+###Getting BMI and recommended daily caloric intake
+![Imgur](https://i.imgur.com/TZbe6Qh.png)
+
+the user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
+The calculator takes in the following inputs as shown in the UML diagram through the instantiating of a new calculator
+object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
+daily caloric intake through getIdealCalories().
+
+###Get summary of all info stored in text files
+The user is next greeted with a second prompt that asks whether he or she wishes to get a summary of all meals, fluids 
+and workouts he has eaten or completed.
+memoryStartup() is used to return a Boolean value. If it returns ture, it enters an if-loop in Duke class which calls 
+the method printLoadedLists() in Storage class. In storage class, the text files(storage) of Meal, Fluid and Workout 
+classes are first converted
+to arrayLists, which are converted to arrayLists, which are then referenced by PrintLoadedLists() to be formatted and
+printed as a summary of all stored information iu the text files.
+
 
 ### WeightTracker: Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
