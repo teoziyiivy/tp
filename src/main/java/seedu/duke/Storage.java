@@ -141,20 +141,6 @@ public class Storage {
         return fluids;
     }
 
-    public ArrayList<String> loadTasks() throws IOException {
-        String newFilePath = new File(this.filePath).getAbsolutePath();
-        ArrayList<String> loadedTasks = new ArrayList<>();
-        File f = new File(newFilePath);
-        Scanner s = new Scanner(f);
-        String textFromFile;
-        while (s.hasNext()) {
-            textFromFile = s.nextLine();
-            loadedTasks.add(textFromFile);
-        }
-        //System.out.println(Ui.STARTING_MESSAGE);
-        return loadedTasks;
-    }
-
     public static void initializeScheduleDataFile() {
         File dataFile = new File(SCHEDULE_DATA_FILE_PATH);
         if (!dataFile.exists()) {

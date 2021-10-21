@@ -79,7 +79,6 @@ public class Ui {
             System.out.println(MEMORY_STARTUP_Y_INPUT);
             System.out.println("What would you like to start with?");
             return true;
-
         } else if (uiInput.equals("N")) {
             System.out.println(MEMORY_STARTUP_N_INPUT);
             System.out.println("What would you like to start with?");
@@ -88,6 +87,4 @@ public class Ui {
             throw new LoadException();
         }
     }
-
-
 }
