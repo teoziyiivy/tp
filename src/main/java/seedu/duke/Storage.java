@@ -16,6 +16,7 @@ import java.util.Scanner;
 import static seedu.duke.ClickfitMessages.MEAL_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.FLUID_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.WORKOUT_PRINT_FORMAT;
+import static seedu.duke.ClickfitMessages.WEIGHT_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.ENDLINE_PRINT_FORMAT;
 
 public class Storage {
@@ -127,12 +128,11 @@ public class Storage {
                     headerFlag = 1;
                 }
                 if (w.contains(date)) {
-                    String[] splitLine = w.split(" ", 2);
-                    String command = splitLine[0];
-                    w = w.replaceAll("^" + command + " ", "");
-                    currentWeight = "Weight: " + String.valueOf(Parser.getWeight(w)) + "\n";
-                    Files.write(Paths.get(filePath), currentWeight.getBytes(), StandardOpenOption.APPEND);
-                    fw.close();
+                    if (w.contains(date)) {
+                        currentWeight = w + "\n";
+                        Files.write(Paths.get(filePath), currentWeight.getBytes(), StandardOpenOption.APPEND);
+                        fw.close();
+                    }
                 }
             }
         }
@@ -178,6 +178,27 @@ public class Storage {
             }
         }
         return fluids;
+    }
+
+    public ArrayList<String> loadWeights() throws IOException {
+        ArrayList<String> weights = new ArrayList<>();
+        String newFilePath = new File(this.weightFile).getAbsolutePath();
+        File f = new File(newFilePath);
+        Scanner s = new Scanner(f);
+        String textFromFile;
+        int flag = 0;
+        while (s.hasNext()) {
+            textFromFile = s.nextLine();
+            if (flag == 1) {
+                weights.add(textFromFile);
+            } else if (textFromFile.equals("Weights")) {
+                flag = 1;
+            } else if (textFromFile.contains("Date")) {
+                String[] date = textFromFile.split(" ");
+                DateTracker.checkIfDateExists(date[1]);
+            }
+        }
+        return weights;
     }
 
     public ArrayList<String> loadMealLibrary() throws IOException {
@@ -379,6 +400,18 @@ public class Storage {
         }
     }
 
+    public void weightSummary() {
+        int i = 0;
+        try {
+            for (String ignored : loadWeights()) {
+                i++;
+            }
+            System.out.println(System.lineSeparator() + "Total number of weights = " + i);
+        } catch (IOException e) {
+            System.out.println("Error during printing arrayList");
+        }
+    }
+
     public void workoutSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -419,6 +452,9 @@ public class Storage {
         System.out.println(ENDLINE_PRINT_FORMAT);
         System.out.println(WORKOUT_PRINT_FORMAT);
         workoutSummary();
+        System.out.println(ENDLINE_PRINT_FORMAT);
+        System.out.println(WEIGHT_PRINT_FORMAT);
+        weightSummary();
         System.out.println(ENDLINE_PRINT_FORMAT);
         System.out.println(System.lineSeparator() + "Updated as of: "
                 + Parser.getSystemDate() + " " + Parser.getSystemTime());

@@ -51,6 +51,7 @@ public class Duke {
             if (ui.memoryStartup()) {
                 meal.meals = storage.loadMeals();
                 fluid.fluidArray = storage.loadFluids();
+                weightTracker.weightsArray = storage.loadWeights();
                 FoodBank.meals = storage.loadMealLibrary();
                 FoodBank.fluids = storage.loadFluidLibrary();
                 storage.printLoadedLists();

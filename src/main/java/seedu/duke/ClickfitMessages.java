@@ -86,5 +86,8 @@ public class ClickfitMessages {
     public static final String WORKOUT_PRINT_FORMAT = System.lineSeparator() + "Workout Summary:"
             + System.lineSeparator() + "======================";
 
+    public static final String WEIGHT_PRINT_FORMAT = System.lineSeparator() + "Weight Summary:"
+            + System.lineSeparator() + "======================";
+
     public static final String ENDLINE_PRINT_FORMAT = "======================";
 }
