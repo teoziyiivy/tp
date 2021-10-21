@@ -1,5 +1,7 @@
 package seedu.duke.workout;
 
+import seedu.duke.ClickfitMessages;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -86,14 +88,16 @@ public class ScheduledWorkout {
         if (activities.isEmpty()) {
             return output + "nil" + System.lineSeparator();
         }
+        int currentIndex = 1;
         for (WorkoutActivity a : activities) {
             if (a.isDistanceActivity()) {
-                output += a.getActivityDescription() + ": " + a.getActivityDistance()
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivityDistance()
                         + "metres" + System.lineSeparator();
             } else {
-                output += a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
                         + a.getActivityReps() + "reps" + System.lineSeparator();
             }
+            currentIndex++;
         }
         return output;
     }

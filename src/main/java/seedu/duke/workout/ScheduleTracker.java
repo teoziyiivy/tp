@@ -1,5 +1,6 @@
 package seedu.duke.workout;
 
+import seedu.duke.ClickfitMessages;
 import seedu.duke.Duke;
 import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
@@ -154,7 +155,7 @@ public class ScheduleTracker {
 
     public void listAllScheduledWorkouts() {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
-        System.out.println("FULL WORKOUT SCHEDULE:" + System.lineSeparator());
+        System.out.println("Full Workout Schedule:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
@@ -170,12 +171,14 @@ public class ScheduleTracker {
         ArrayList<ScheduledWorkout> filteredScheduleList = (ArrayList<ScheduledWorkout>) scheduledWorkouts.stream()
                 .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
         if (filteredScheduleList.isEmpty()) {
-            System.out.println("Workout schedule is empty on that the date: " + inputArguments);
+            System.out.println("Workout schedule is empty on the date: " + inputArguments);
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("WORKOUT SCHEDULE FOR TODAY:" + System.lineSeparator());
+                System.out.println("Workout schedule for today:" + System.lineSeparator()
+                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             } else {
-                System.out.println("WORKOUT SCHEDULE ON " + inputArguments + ":" + System.lineSeparator());
+                System.out.println("Workout schedule on " + inputArguments + ":" + System.lineSeparator()
+                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             }
             int currentIndex = 1;
             for (ScheduledWorkout workout : filteredScheduleList) {
