@@ -17,7 +17,7 @@ public class ScheduledWorkout {
     private boolean isRecurring;
 
     public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime,
-                            Map<String, int[]> activityMap, boolean isRecurring) {
+                            Map<String, ArrayList<Integer>> activityMap, boolean isRecurring) {
         this.workoutDescription = workoutDescription;
         this.workoutDate = workoutDate;
         this.workoutTime = workoutTime;
@@ -26,16 +26,16 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
-//        if (!activityMap.isEmpty()) {
-//            for (entry : activityMap.entrySet()) {
-//                activities.add(
-//                        new WorkoutActivity(
-//                                entry.getKey(), entry.getValue(),
-//                                WorkoutActivity.isDistanceActivity(entry.getKey())
-//                        )
-//                );
-//            }
-//        }
+        if (!activityMap.isEmpty()) {
+            for (var entry : activityMap.entrySet()) {
+                activities.add(
+                        new WorkoutActivity(
+                                entry.getKey(), entry.getValue(),
+                                WorkoutActivity.isDistanceActivity(entry.getKey())
+                        )
+                );
+            }
+        }
     }
 
     public ArrayList<WorkoutActivity> getActivities() {
@@ -82,17 +82,19 @@ public class ScheduledWorkout {
     public String getActivitiesAsString() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
-            return output + "nil" + System.lineSeparator();
+            return output + "nil" + System.lineSeparator() + "____________________________";
         }
+        int currentIndex = 1;
         for (WorkoutActivity a : activities) {
             if (a.isDistanceActivity()) {
-                output += a.getActivityDescription() + ": " + a.getActivityDistance()
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivityDistance()
                         + "metres" + System.lineSeparator();
             } else {
-                output += a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
                         + a.getActivityReps() + "reps" + System.lineSeparator();
             }
+            currentIndex++;
         }
-        return output;
+        return output + "____________________________";
     }
 }
