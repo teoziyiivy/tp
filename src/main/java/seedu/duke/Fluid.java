@@ -36,7 +36,6 @@ public class Fluid extends Tracker {
         time = Parser.getTime(inputArguments);
     }
 
-    //drank coke /c 60 /v 200 /d 12/12/2021 /t 10:30
     public void addFluid(String inputArguments) throws DukeException, FluidExceptions, FoodBankException {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
@@ -84,7 +83,7 @@ public class Fluid extends Tracker {
             totalVolume = 0;
             fluidNumber = 0;
             for (String fluid : fluidArray) {
-                if (fluid.contains(date)) {  //listfluid wont work cuz of date check
+                if (fluid.contains(date)) {
                     generateFluidParameters(fluid);
                     System.out.println(i + ". " + description);
                     System.out.println("Calories: " + calories);
