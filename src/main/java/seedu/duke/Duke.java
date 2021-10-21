@@ -7,7 +7,6 @@ import seedu.duke.exceptions.LoadException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
@@ -28,11 +27,11 @@ public class Duke {
     private DateTracker dateTracker;
     private Storage storage;
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FoodBankException, FluidExceptions {
         new Duke().run();
     }
 
-    public Duke() {
+    public Duke() throws DukeException, FoodBankException, FluidExceptions {
         try {
             meal = new Meal();
             ui = new Ui();
@@ -41,7 +40,7 @@ public class Duke {
             workoutTracker = new WorkoutTracker();
             weightTracker = new WeightTracker();
             userHelp = new UserHelp();
-            storage = new Storage("Food.txt");
+            storage = new Storage("Food.txt", "Foodbank.txt");
             commandManager = new CommandManager(storage, fluid,
                     meal, scheduleTracker, workoutTracker,
                     weightTracker, userHelp);
@@ -52,6 +51,8 @@ public class Duke {
             if (ui.memoryStartup()) {
                 meal.meals = storage.loadMeals();
                 fluid.fluidArray = storage.loadFluids();
+                FoodBank.meals = storage.loadMealLibrary();
+                FoodBank.fluids = storage.loadFluidLibrary();
                 storage.printLoadedLists();
                 System.out.println("What would you like to start with?");
             }

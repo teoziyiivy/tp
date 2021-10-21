@@ -73,9 +73,7 @@ public class CommandManager {
             meal.deleteMeal(inputArguments);
             DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
             break;
-        case Keywords.LIST_MEAL:
-            meal.listMeals("aa");
-            break;
+
         case Keywords.INPUT_ADD_WORKOUT:
         case Keywords.INPUT_DELETE_WORKOUT:
         case Keywords.INPUT_LIST_WORKOUT:
@@ -90,6 +88,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
+                    DateTracker.sortTime(fluid.fluidArray);
                 } catch (FluidExceptions | FoodBankException e) {
                     System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
@@ -103,16 +102,11 @@ public class CommandManager {
                     System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
+                    DateTracker.deleteDateFromList(inputArguments, fluid, meal,
+                            scheduleTracker, workoutTracker, weightTracker);
                 }
             } else {
                 System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
-            }
-            break;
-        case Keywords.LIST_DRINKS:
-            if (fluid.fluidArray.size() == 0) {
-                System.out.println(ClickfitMessages.FLUID_LIST_ERROR);
-            } else {
-                fluid.listFluid("dd");
             }
             break;
         case Keywords.INPUT_ADD_WEIGHT:
@@ -143,7 +137,8 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        storage.saveAllTasks(fluid, meal, weightTracker);
+        storage.saveFood(fluid, meal);
+        storage.saveLibrary();
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
@@ -175,10 +170,9 @@ public class CommandManager {
         }
     }
 
-    public void listParser(String inputArguments) throws NullPointerException, FoodBankException {
+    public void listParser(String inputArguments) throws NullPointerException, FoodBankException, DukeException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
-        //inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         String date;
         if (splitResults.length == 1) {
             if (command.contains("/")) {
@@ -196,6 +190,14 @@ public class CommandManager {
             break;
         case Keywords.FLUID:
             fluid.listFluid(date);
+            break;
+        case Keywords.CALORIES:
+            int calCount = fluid.getCalories(date) + meal.getCalories(date);
+            System.out.println("\n" + "Your total calorie consumption for " + date + " is: " + calCount + " calories.");
+            break;
+        case Keywords.VOLUME:
+            int volCount = fluid.getVolume(date);
+            System.out.println("\n" + "Your total volume consumption for " + date + " is: " + volCount + " ml.");
             break;
             /*
         case Keywords.WORKOUT:
@@ -241,7 +243,7 @@ public class CommandManager {
             workoutTracker.deleteWorkout(inputArguments);
             break;
         case Keywords.INPUT_LIST_WORKOUT:
-            workoutTracker.listWorkouts(inputArguments);
+            //workoutTracker.listWorkouts(inputArguments);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -254,5 +256,6 @@ public class CommandManager {
         meal.listMeals(date);
         System.out.println("");
         fluid.listFluid(date);
+        System.out.println("");
     }
 }

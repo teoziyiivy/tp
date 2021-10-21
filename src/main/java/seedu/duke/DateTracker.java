@@ -1,21 +1,21 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class DateTracker {
-    protected static ArrayList<String> dates; //static
+    protected static ArrayList<String> dates;
 
     public DateTracker() {
-        dates = new ArrayList<>(); //constructor is not static
+        dates = new ArrayList<>();
     }
 
     public static void checkIfDateExists(String newDate) {
@@ -42,9 +42,8 @@ public class DateTracker {
         });
     }
 
-    public static void deleteDateFromList(String inputArguments, Fluid fluid,
-                                          Meal meal, ScheduleTracker scheduleTracker,
-                                          WorkoutTracker workoutTracker,
+    public static void deleteDateFromList(String inputArguments, Fluid fluid, Meal meal,
+                                          ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                                           WeightTracker weightTracker) throws DukeException {
         String date = Parser.getDate(inputArguments);
         for (String m : meal.meals) {
@@ -61,7 +60,7 @@ public class DateTracker {
     }
 
     public static void sortDateAndTime(ArrayList<String> list) {
-        Collections.sort(list, new Comparator<>() {
+        Collections.sort(list, new Comparator<String>() {
             public int compare(String o1, String o2) {
                 LocalDateTime o1DateTime = LocalDateTime.of(
                         LocalDate.parse(Parser.getDateNoDateTracker(o1), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
@@ -74,3 +73,4 @@ public class DateTracker {
         });
     }
 }
+
