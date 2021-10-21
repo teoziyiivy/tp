@@ -118,7 +118,7 @@ public class Storage {
             } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
                 meals.add(textFromFile);
             } else if (textFromFile.contains("Date")) {
-                String date[] = textFromFile.split(" ");
+                String[] date = textFromFile.split(" ");
                 DateTracker.checkIfDateExists(date[1]);
             }
         }
@@ -139,7 +139,7 @@ public class Storage {
             } else if (textFromFile.equals("Fluids")) {
                 flag = 1;
             } else if (textFromFile.contains("Date")) {
-                String date[] = textFromFile.split(" ");
+                String[] date = textFromFile.split(" ");
                 DateTracker.checkIfDateExists(date[1]);
             }
         }
@@ -160,7 +160,7 @@ public class Storage {
             } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
                 meals.add(textFromFile);
             } else if (textFromFile.contains("Date")) {
-                String date[] = textFromFile.split(" ");
+                String[] date = textFromFile.split(" ");
                 DateTracker.checkIfDateExists(date[1]);
             }
         }
@@ -181,7 +181,7 @@ public class Storage {
             } else if (textFromFile.equals("Fluids")) {
                 flag = 1;
             } else if (textFromFile.contains("Date")) {
-                String date[] = textFromFile.split(" ");
+                String[] date = textFromFile.split(" ");
                 DateTracker.checkIfDateExists(date[1]);
             }
         }

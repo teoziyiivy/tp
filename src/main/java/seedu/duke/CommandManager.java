@@ -102,7 +102,8 @@ public class CommandManager {
                     System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
-                    DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
+                    DateTracker.deleteDateFromList(inputArguments, fluid, meal,
+                            scheduleTracker, workoutTracker, weightTracker);
                 }
             } else {
                 System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
