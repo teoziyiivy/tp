@@ -58,14 +58,14 @@ the sake of better comprehensibility.
 
 The UML sequence diagram above shows what happens when the method `addScheduledWorkout(...)` is called. 
 Parameters are generated and a `ScheduledWorkout` object is added into the `scheduledWorkouts` ArrayList.
-This is achieved by a few method calls which are omitted from this diagram. The main focus is on `cleanUpScheduleList()`. 
+There are a few method calls which are omitted from this diagram. The main focus is on `cleanUpScheduleList()`. 
 Once called, **if** there are any overdue workouts, a `loop` is entered and calls `updateOrDeleteScheduledWorkout(...)` 
 repeatedly until the `loop` condition is satisfied. Essentially, depending on whether the overdue workout detected is 
 recurring, the workout is either deleted or rescheduled appropriately. Once the `loop` block exits, `sortScheduleList()` is called and the 
 `scheduledWorkouts` is sorted in *ascending* order of `DateTime`
 
 This "updating" is done in any method call that outputs something to the user to ensure a correctly sorted and cleaned up
-list is output to the user. This also ensures the `scheduledWorkouts` ArrayList remains free of overdue workouts.
+list is always output to the user. This also ensures the `scheduledWorkouts` ArrayList remains free of overdue workouts.
 
 ## Product scope
 ### Target user profile
