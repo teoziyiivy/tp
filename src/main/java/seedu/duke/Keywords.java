@@ -24,6 +24,8 @@ public class Keywords {
     public static final String LIST = "list";
     public static final String MEAL = "meals";
     public static final String FLUID = "fluids";
+    public static final String CALORIES = "calories";
+    public static final String VOLUME = "volume";
     public static final String WEIGHT = "weights";
     public static final String WORKOUT = "workouts";
     public static final String SCHEDULE = "schedules";

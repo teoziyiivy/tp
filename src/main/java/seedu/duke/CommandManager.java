@@ -1,11 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.FluidExceptions;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -88,6 +88,7 @@ public class CommandManager {
             if (inputArguments != null) {
                 try {
                     fluid.addFluid(inputArguments);
+                    DateTracker.sortTime(fluid.fluidArray);
                 } catch (FluidExceptions | FoodBankException e) {
                     System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
                 }
@@ -101,6 +102,7 @@ public class CommandManager {
                     System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
                 } else {
                     fluid.deleteFluid(inputArguments);
+                    DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
                 }
             } else {
                 System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
@@ -112,7 +114,7 @@ public class CommandManager {
             } catch (DukeException e) {
                 return;
             } catch (DateTimeParseException e) {
-                weightTracker.printAddWeightException();
+                WeightTrackerMessages.printAddWeightException();
             }
             break;
         case Keywords.INPUT_DELETE_WEIGHT:
@@ -166,10 +168,9 @@ public class CommandManager {
         }
     }
 
-    public void listParser(String inputArguments) throws NullPointerException, FoodBankException {
+    public void listParser(String inputArguments) throws NullPointerException, FoodBankException, DukeException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
-        //inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         String date;
         if (splitResults.length == 1) {
             if (command.contains("/")) {
@@ -179,7 +180,7 @@ public class CommandManager {
                 date = Parser.getSystemDate();
             }
         } else {
-                date = splitResults[1];
+            date = splitResults[1];
         }
         switch (command) {
         case Keywords.MEAL:
@@ -187,6 +188,14 @@ public class CommandManager {
             break;
         case Keywords.FLUID:
             fluid.listFluid(date);
+            break;
+        case Keywords.CALORIES:
+            int calCount = fluid.getCalories(date) + meal.getCalories(date);
+            System.out.println("\n" + "Your total calorie consumption for " + date + " is: " + calCount + " calories.");
+            break;
+        case Keywords.VOLUME:
+            int volCount = fluid.getVolume(date);
+            System.out.println("\n" + "Your total volume consumption for " + date + " is: " + volCount + " ml.");
             break;
             /*
         case Keywords.WORKOUT:
@@ -232,7 +241,7 @@ public class CommandManager {
             workoutTracker.deleteWorkout(inputArguments);
             break;
         case Keywords.INPUT_LIST_WORKOUT:
-            workoutTracker.listWorkouts(inputArguments);
+            //workoutTracker.listWorkouts(inputArguments);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

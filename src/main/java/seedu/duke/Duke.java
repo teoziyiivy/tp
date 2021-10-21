@@ -1,9 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.*;
-import seedu.duke.gym.ScheduleTracker;
-import seedu.duke.gym.WorkoutTracker;
-
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.LoadException;
+import seedu.duke.exceptions.MealException;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
@@ -24,11 +27,11 @@ public class Duke {
     private DateTracker dateTracker;
     private Storage storage;
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FoodBankException, FluidExceptions {
         new Duke().run();
     }
 
-    public Duke() {
+    public Duke() throws DukeException, FoodBankException, FluidExceptions {
         try {
             meal = new Meal();
             ui = new Ui();
@@ -48,6 +51,8 @@ public class Duke {
             if (ui.memoryStartup()) {
                 meal.meals = storage.loadMeals();
                 fluid.fluidArray = storage.loadFluids();
+                storage.printLoadedLists();
+                System.out.println("What would you like to start with?");
             }
         } catch (LoadException e) {
             System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
@@ -70,7 +75,7 @@ public class Duke {
                 System.out.println(ClickfitMessages.INCORRECT_INPUT);
             } catch (DukeException ignored) {
                 continue;
-            }  catch (MealException e) {
+            } catch (MealException e) {
                 System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (FluidExceptions e) {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);

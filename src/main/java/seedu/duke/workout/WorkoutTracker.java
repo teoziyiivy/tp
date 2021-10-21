@@ -1,10 +1,9 @@
-package seedu.duke.gym;
+package seedu.duke.workout;
 
 import seedu.duke.DateTracker;
 import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
-import seedu.duke.Tracker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class WorkoutTracker extends Tracker {
+public class WorkoutTracker {
     protected ArrayList<String> workouts;
     protected String workoutDescription;
     protected int caloriesBurned;
@@ -67,7 +66,7 @@ public class WorkoutTracker extends Tracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for workout.");
         workoutDescription = Parser.getDescription(inputArguments);
         caloriesBurned = Parser.getCaloriesBurnedForWorkout(inputArguments);
-        workoutDate = Parser.getDate(inputArguments);
+        workoutDate = Parser.getDateNoDateTracker(inputArguments);
         workoutTime = Parser.getTime(inputArguments);
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully generated parameters for workout.");
     }
@@ -87,7 +86,7 @@ public class WorkoutTracker extends Tracker {
         String updatedArguments = workoutDescription + Parser.CALORIE_SEPARATOR + caloriesBurned
                 + Parser.DATE_SEPARATOR + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
         workouts.add(updatedArguments);
-        sortWorkoutList();
+        //sortWorkoutList();
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
 
@@ -112,16 +111,16 @@ public class WorkoutTracker extends Tracker {
         }
     }
 
-    public void listWorkouts(String inputArguments) throws DukeException {
-        sortWorkoutList();
-        if (inputArguments == null) {
-            listWorkoutsOnDate(Parser.getSystemDate());
-        } else if (inputArguments.equals(INPUT_ALL)) {
-            listAllWorkouts();
-        } else {
-            listWorkoutsOnDate(inputArguments);
-        }
-    }
+//    public void listWorkouts(String inputArguments) throws DukeException {
+//        sortWorkoutList();
+//        if (inputArguments == null) {
+//            listWorkoutsOnDate(Parser.getSystemDate());
+//        } else if (inputArguments.equals(INPUT_ALL)) {
+//            listAllWorkouts();
+//        } else {
+//            listWorkoutsOnDate(inputArguments);
+//        }
+//    }
 
     public void listAllWorkouts()
             throws DukeException, DateTimeParseException, NumberFormatException {
@@ -164,9 +163,9 @@ public class WorkoutTracker extends Tracker {
         }
     }
 
-    public void sortWorkoutList() {
-        DateTracker.sortDateAndTime(workouts);
-    }
+//    public void sortWorkoutList() {
+//        DateTracker.sortDateAndTime(workouts);
+//    }
 
     public String getWorkoutListAsString() {
         String workoutListAsString = "";
