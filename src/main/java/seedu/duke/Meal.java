@@ -77,24 +77,42 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(),"deleteMeal");
     }
 
-    public void listMeals() throws FoodBankException {
+    public void listMeals(String date) throws FoodBankException {
         assert mealNumber != 0;
         logger.entering(getClass().getName(),"listMeals");
         int i = 1;
         logger.log(Level.INFO, "entering for loop");
+        totalCalories = 0;
+        mealNumber = 0;
         for (String meal : meals) {
-            logger.log(Level.INFO, "generating meal parameters");
-            generateMealParameters(meal);
-            logger.log(Level.INFO, "meal parameters generated");
-            System.out.println(i + ". " + description);
-            System.out.println("Calories: " + calories);
-            System.out.println("Date: " + date);
-            System.out.println("Time: " + time + "\n");
-            i += 1;
+            if (meal.contains(date)) {
+                logger.log(Level.INFO, "generating meal parameters");
+                generateMealParameters(meal);
+                logger.log(Level.INFO, "meal parameters generated");
+                System.out.println(i + ". " + description);
+                System.out.println("Calories: " + calories);
+                System.out.println("Date: " + date);
+                System.out.println("Time: " + time + "\n");
+                i += 1;
+                totalCalories += calories;
+                mealNumber += 1;
+            }
         }
         System.out.println("Total number of meals: " + mealNumber);
         System.out.println("Total calories: " + totalCalories);
         logger.log(Level.INFO,"meal list printed");
         logger.exiting(getClass().getName(),"listMeal");
     }
+
+    public int getCalories(String date) throws FoodBankException {
+        int calorieTotal = 0;
+        for (String meal : meals) {
+            if (meal.contains(date)) {
+                generateMealParameters(meal);
+                calorieTotal += calories;
+            }
+        }
+        return calorieTotal;
+    }
 }
+
