@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class ScheduledWorkout {
@@ -17,7 +18,7 @@ public class ScheduledWorkout {
     private boolean isRecurring;
 
     public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime,
-                            Map<String, int[]> activityMap, boolean isRecurring) {
+                            Map<String, ArrayList<Integer>> activityMap, boolean isRecurring) {
         this.workoutDescription = workoutDescription;
         this.workoutDate = workoutDate;
         this.workoutTime = workoutTime;

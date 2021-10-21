@@ -88,7 +88,14 @@ public class ScheduleTracker {
         String workoutDescription = generatedParameters[0];
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
-        Map<String, int[]> activityMap = Parser.getActivities(inputArguments);
+        Map<String, ArrayList<Integer>> activityMap;
+        try {
+            activityMap = Parser.getActivities(inputArguments);
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("Please enter a single integer [distance in metres] for distance based "
+                    + "activities(swimming/running/cycling). E.g. running:8000" + "" + System.lineSeparator()
+                    + "Enter two integers [set]x[reps]" + " for everything else. E.g. bench press:3x12");
+        }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
         scheduledWorkouts.add(
                 new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout)
@@ -200,11 +207,17 @@ public class ScheduleTracker {
             activityString.append(Parser.ACTIVITY_SEPARATOR);
             int currentIndex = 0;
             for (WorkoutActivity activity : workout.getActivities()) {
-                activityString.append(activity.getActivityDescription())
-                        .append(Parser.ACTIVITY_SPLITTER)
-                        .append(activity.getActivitySets())
-                        .append(Parser.QUANTIFIER_SPLITTER)
-                        .append(activity.getActivityReps());
+                if (activity.isDistanceActivity()) {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivityDistance());
+                } else {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivitySets())
+                            .append(Parser.QUANTIFIER_SPLITTER)
+                            .append(activity.getActivityReps());
+                }
                 currentIndex++;
                 activityString.append(
                         (currentIndex < workout.getActivities().size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");

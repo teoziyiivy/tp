@@ -51,7 +51,7 @@ public class WorkoutTracker {
             }
             try {
                 addWorkout(currentLine, true);
-            } catch (DukeException | DateTimeParseException e) {
+            } catch (DukeException | DateTimeParseException | NumberFormatException e) {
                 isDataLoadCorrectly = false;
             }
         }
