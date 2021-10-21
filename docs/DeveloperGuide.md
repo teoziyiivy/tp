@@ -67,6 +67,14 @@ recurring, the workout is either deleted or rescheduled appropriately. Once the 
 This "updating" is done in any method call that outputs something to the user to ensure a correctly sorted and cleaned up
 list is always output to the user. This also ensures the `scheduledWorkouts` ArrayList remains free of overdue workouts.
 
+#### Meal: Class Diagram
+
+![](https://user-images.githubusercontent.com/69350459/138307467-cef8cdd8-06ce-4284-92b5-9fe5e1ef50ef.png)
+
+Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
+the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+
+
 ## Product scope
 ### Target user profile
 Specifically made for people getting into serious fitness routines such as athletes but helpful for general populace.
