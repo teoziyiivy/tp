@@ -1,16 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.LoadException;
-
-import java.util.Objects;
 import java.util.Scanner;
-
 import static seedu.duke.ClickfitMessages.MESSAGE_A;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
+import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_N_INPUT;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
-import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
+import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
 
 public class Ui {
 
@@ -47,7 +43,7 @@ public class Ui {
         System.out.println(CALCULATOR_PROMPT);
         String uiInput = uiScanner.nextLine();
 
-        if (uiInput.trim().equals("Y")) {
+        if (uiInput.trim().equals("y")) {
             System.out.println("what is your SEX : M / F ?");
             uiInput = uiScanner.nextLine();
             sex = uiInput;
@@ -67,21 +63,20 @@ public class Ui {
             Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
             calculator.getBmi();
             calculator.getIdealCalories();
+        } else if (uiInput.isEmpty()) {
+            System.out.println(System.lineSeparator());
         }
-
     }
 
     public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput = uiScanner.nextLine();
-        assert !Objects.equals(uiInput, "");
-        if (uiInput.equals("Y")) {
+        if (uiInput.equals("y")) {
             System.out.println(MEMORY_STARTUP_Y_INPUT);
-            System.out.println("What would you like to start with?");
             return true;
-        } else if (uiInput.equals("N")) {
+        } else if (uiInput.isEmpty()) {
             System.out.println(MEMORY_STARTUP_N_INPUT);
-            System.out.println("What would you like to start with?");
+            System.out.println(System.lineSeparator() + "What would you like to do?");
             return false;
         } else {
             throw new LoadException();
