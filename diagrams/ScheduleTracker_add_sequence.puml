@@ -1,28 +1,30 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 participant ":ScheduleTracker"
-participant ":ScheduledWorkout"
 
 ->":ScheduleTracker" : addScheduledWorkout(inputArguments: String)
 activate ":ScheduleTracker" #FFBBBB
 
 ":ScheduleTracker"->":ScheduleTracker" : generateParameters(inputArguments: String)
 activate ":ScheduleTracker" #DarkSalmon
-return String[3]
+return generatedParameters: String[]
 
-":ScheduleTracker"->":ScheduleTracker" : scheduledWorkouts.add(scheduledWorkout : ScheduleWorkout)
-activate ":ScheduleTracker" #DarkSalmon
-return
+create ":ScheduledWorkout"
+":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.add(scheduledWorkout: ScheduledWorkout)
+activate ":ScheduledWorkout"
+":ScheduledWorkout"-->":ScheduleTracker"
+deactivate ":ScheduledWorkout"
 
-":ScheduleTracker"->":ScheduleTracker" : cleanUpScheduleList
+":ScheduleTracker"->":ScheduleTracker" : cleanUpScheduleList()
+
 activate ":ScheduleTracker" #DarkSalmon
 
 loop \tno more overdue workouts\t
     note left : Take note that a workout is "overdue" \nif its scheduled date is before the current date
-    ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
+    ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(\n\tscheduledWorkout: ScheduledWorkout,\n\tcurrentDate: LocalDate)
     activate ":ScheduleTracker" #IndianRed
     alt \tisRecurringWorkout\t
-        ":ScheduleTracker"->":ScheduleTracker" : rescheduleRecurringWorkout(scheduledWorkout : ScheduleWorkout, currentDate: LocalDate)
+        ":ScheduleTracker"->":ScheduleTracker" : rescheduleRecurringWorkout(\n\tscheduledWorkout: ScheduledWorkout,\n\tcurrentDate: LocalDate)
         activate ":ScheduleTracker" #LightSalmon
         ":ScheduleTracker"->":ScheduledWorkout" : incrementWorkoutDate(days: long)
         |||
@@ -33,7 +35,7 @@ loop \tno more overdue workouts\t
     else else
         ":ScheduleTracker"->":ScheduleTracker" : deleteWorkout()
         activate ":ScheduleTracker" #LightSalmon
-        ":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.remove(scheduledWorkout : ScheduleWorkout)
+        ":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.remove(\n\tscheduledWorkout: ScheduledWorkout)
         activate ":ScheduledWorkout"
         destroy ":ScheduledWorkout"
         return

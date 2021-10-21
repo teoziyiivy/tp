@@ -86,7 +86,7 @@ public class WorkoutTracker {
         String updatedArguments = workoutDescription + Parser.CALORIE_SEPARATOR + caloriesBurned
                 + Parser.DATE_SEPARATOR + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
         workouts.add(updatedArguments);
-        sortWorkoutList();
+        //sortWorkoutList();
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
 
@@ -111,6 +111,7 @@ public class WorkoutTracker {
         }
     }
 
+    /*
     public void listWorkouts(String inputArguments) throws DukeException {
         sortWorkoutList();
         if (inputArguments == null) {
@@ -121,6 +122,7 @@ public class WorkoutTracker {
             listWorkoutsOnDate(inputArguments);
         }
     }
+     */
 
     public void listAllWorkouts()
             throws DukeException, DateTimeParseException, NumberFormatException {
@@ -163,8 +165,24 @@ public class WorkoutTracker {
         }
     }
 
+    /*
     public void sortWorkoutList() {
         DateTracker.sortDateAndTime(workouts);
+    }
+     */
+
+    public int getCaloriesBurned(String date) throws DukeException {
+        ArrayList<String> filteredWorkoutList = (ArrayList<String>) workouts.stream()
+                .filter((t) -> Parser.getDateNoDateTracker(t).equals(date)).collect(Collectors.toList());
+        int totalCaloriesBurned = 0;
+        if (filteredWorkoutList.isEmpty()) {
+            return 0;
+        } else {
+            for (String workout : workouts) {
+                totalCaloriesBurned += Parser.getCaloriesBurnedForWorkout(workout);
+            }
+            return totalCaloriesBurned;
+        }
     }
 
     public String getWorkoutListAsString() {

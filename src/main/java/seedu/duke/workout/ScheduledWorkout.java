@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class ScheduledWorkout {
@@ -27,6 +26,7 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
+        /*
         if (!activityMap.isEmpty()) {
             for (var entry : activityMap.entrySet()) {
                 activities.add(
@@ -37,6 +37,7 @@ public class ScheduledWorkout {
                 );
             }
         }
+         */
     }
 
     public ArrayList<WorkoutActivity> getActivities() {
@@ -83,17 +84,19 @@ public class ScheduledWorkout {
     public String getActivitiesAsString() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
-            return output + "nil" + System.lineSeparator();
+            return output + "nil" + System.lineSeparator() + "____________________________";
         }
+        int currentIndex = 1;
         for (WorkoutActivity a : activities) {
             if (a.isDistanceActivity()) {
-                output += a.getActivityDescription() + ": " + a.getActivityDistance()
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivityDistance()
                         + "metres" + System.lineSeparator();
             } else {
-                output += a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
-                        + a.getActivitySets() + "reps" + System.lineSeparator();
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
+                        + a.getActivityReps() + "reps" + System.lineSeparator();
             }
+            currentIndex++;
         }
-        return output;
+        return output + "____________________________";
     }
 }

@@ -16,9 +16,9 @@ public class ClickfitMessages {
             + "brought to you by Jiewen, Vishal, Pragyan, Ivy and Edward."
             + System.lineSeparator() + "See you soon!";
 
-    public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Welcome back! Would you "
+    public static final String MEMORY_STARTUP_PROMPT = "Would you "
             + "like to load up the records of your fitness journey?" + System.lineSeparator()
-            + "Key in Y/N.";
+            + "Key in y or press enter keystroke to skip!";
 
     public static final String INCORRECT_INPUT = System.lineSeparator() + "CLI.ckFit has detected a "
             + "wrong input, kindly check your inputs or type \"help commands\" for input examples.";
@@ -75,5 +75,16 @@ public class ClickfitMessages {
 
     public static final String CALCULATOR_PROMPT = System.lineSeparator() + "Welcome back! Would you "
             + "like to check your BMI and recommended caloric intake?" + System.lineSeparator()
-            + "Key in Y/N.";
+            + "Key in y or press enter keystroke to skip!";
+
+    public static final String MEAL_PRINT_FORMAT = System.lineSeparator() + "Meal Summary:"
+            + System.lineSeparator() + "======================";
+
+    public static final String FLUID_PRINT_FORMAT = System.lineSeparator() + "Fluid Summary:"
+            + System.lineSeparator() + "======================";
+
+    public static final String WORKOUT_PRINT_FORMAT = System.lineSeparator() + "Workout Summary:"
+            + System.lineSeparator() + "======================";
+
+    public static final String ENDLINE_PRINT_FORMAT = "======================";
 }

@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 
 class MealTest {
 
+    /*
     @Test
     void addMeal1() {
         Meal meal = new Meal();
@@ -17,6 +18,7 @@ class MealTest {
             meal.addMeal(input);
         });
     }
+     */
 
     @Test
     void addMeal2() {
@@ -36,6 +38,7 @@ class MealTest {
         });
     }
 
+    /*
     @Test
     void deleteMeal1() throws MealException, FoodBankException {
         Meal meal = new Meal();
@@ -46,4 +49,5 @@ class MealTest {
             meal.deleteMeal(deleteInput);
         });
     }
+     */
 }
