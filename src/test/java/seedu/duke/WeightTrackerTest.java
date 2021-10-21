@@ -8,14 +8,13 @@ import seedu.duke.exceptions.DeleteWeightIndexException;
 import seedu.duke.exceptions.NoWeightsException;
 
 public class WeightTrackerTest {
-    /*
+
     @Test
     void addWeight() {
         WeightTracker weights = new WeightTracker();
         String input = "addweight";
         Assertions.assertThrows(AddWeightException.class, () -> weights.addWeight(input));
     }
-     */
 
     @Test
     void deleteWeight() {
@@ -36,4 +35,5 @@ public class WeightTrackerTest {
         WeightTracker weights = new WeightTracker();
         Assertions.assertThrows(NoWeightsException.class, weights::printWeight);
     }
+
 }

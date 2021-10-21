@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 
@@ -21,12 +22,14 @@ public class Storage {
 
     protected String foodFile;
     protected String libraryFile;
+    protected String weightFile;
     public static final String SCHEDULE_DATA_FILE_PATH = "scheduleData.txt";
     public static final String WORKOUT_DATA_FILE_PATH = "workoutData.txt";
 
-    public Storage(String foodFile, String libraryFile) {
+    public Storage(String foodFile, String libraryFile, String weightFile) {
         this.foodFile = foodFile;
         this.libraryFile = libraryFile;
+        this.weightFile = weightFile;
         initializeScheduleDataFile();
         initializeWorkoutDataFile();
     }
@@ -101,6 +104,37 @@ public class Storage {
             customFluid = f + "\n";
             Files.write(Paths.get(filePath), customFluid.getBytes(), StandardOpenOption.APPEND);
             fw.close();
+        }
+    }
+
+    public void saveWeight(WeightTracker weight) throws IOException, DukeException {
+        String currentDate;
+        String currentWeight;
+        String header;
+        String filePath = new File(this.weightFile).getAbsolutePath();
+        FileWriter fw = new FileWriter(filePath, false);
+        int headerFlag;
+        header = "Weights" + "\n";
+        Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+        fw.close();
+        for (String date : DateTracker.dates) {
+            headerFlag = 0;
+            for (String w : weight.weightsArray) {
+                if (w.contains(date) && (headerFlag == 0)) {
+                    currentDate = "Date: " + date + "\n";
+                    Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
+                    fw.close();
+                    headerFlag = 1;
+                }
+                if (w.contains(date)) {
+                    String[] splitLine = w.split(" ", 2);
+                    String command = splitLine[0];
+                    w = w.replaceAll("^" + command + " ", "");
+                    currentWeight = "Weight: " + String.valueOf(Parser.getWeight(w)) + "\n";
+                    Files.write(Paths.get(filePath), currentWeight.getBytes(), StandardOpenOption.APPEND);
+                    fw.close();
+                }
+            }
         }
     }
 
