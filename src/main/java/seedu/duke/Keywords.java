@@ -16,7 +16,17 @@ public class Keywords {
     public static final String INPUT_CHECK_WEIGHT = "checkweight";
     public static final String INPUT_BYE = "bye";
     public static final String DELETE_MEAL = "deletemeal";
-    public static final String LIST_MEAL = "listmeal";
+    public static final String LIST_MEAL = "listmeals";
     public static final String INPUT_HELP = "help";
-
+    public static final String ADD_FLUID = "addfluid";
+    public static final String ADD_MEAL = "addmeal";
+    public static final String LIBRARY = "library";
+    public static final String LIST = "list";
+    public static final String MEAL = "meals";
+    public static final String FLUID = "fluids";
+    public static final String CALORIES = "calories";
+    public static final String VOLUME = "volume";
+    public static final String WEIGHT = "weights";
+    public static final String WORKOUT = "workouts";
+    public static final String SCHEDULE = "schedules";
 }
