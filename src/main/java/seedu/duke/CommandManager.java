@@ -73,9 +73,7 @@ public class CommandManager {
             meal.deleteMeal(inputArguments);
             DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
             break;
-        case Keywords.LIST_MEAL:
-            meal.listMeals("aa");
-            break;
+
         case Keywords.INPUT_ADD_WORKOUT:
         case Keywords.INPUT_DELETE_WORKOUT:
         case Keywords.INPUT_LIST_WORKOUT:
@@ -106,13 +104,6 @@ public class CommandManager {
                 }
             } else {
                 System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
-            }
-            break;
-        case Keywords.LIST_DRINKS:
-            if (fluid.fluidArray.size() == 0) {
-                System.out.println(ClickfitMessages.FLUID_LIST_ERROR);
-            } else {
-                fluid.listFluid("dd");
             }
             break;
         case Keywords.INPUT_ADD_WEIGHT:
