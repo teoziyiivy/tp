@@ -85,6 +85,8 @@ public class WeightTracker extends Tracker {
         logger.entering(getClass().getName(), "addWeight");
         logger.log(Level.INFO, "going to add a weight and date to the list");
         generateWeightParameters(input);
+        input = "addweight" + weight + " /d " + date;
+        //added the above line to skip weight input if user is lazy
         if (!input.matches("(.*) /d (.*)")) {
             throw new AddWeightException();
         } else {

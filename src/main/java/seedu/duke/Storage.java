@@ -12,6 +12,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.duke.ClickfitMessages.MEAL_PRINT_FORMAT;
+import static seedu.duke.ClickfitMessages.FLUID_PRINT_FORMAT;
+import static seedu.duke.ClickfitMessages.WORKOUT_PRINT_FORMAT;
+import static seedu.duke.ClickfitMessages.ENDLINE_PRINT_FORMAT;
+
 public class Storage {
 
     protected String filePath;
@@ -103,7 +108,7 @@ public class Storage {
     }
 
     public ArrayList<String> loadMeals() throws IOException {
-        System.out.println("fuck");
+        //System.out.println("fuck");
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(this.filePath).getAbsolutePath();
         File f = new File(newFilePath);
@@ -209,5 +214,138 @@ public class Storage {
         } catch (IOException ioe) {
             System.out.println("Error during writing to data file for WorkoutTracker.");
         }
+    }
+
+    public ArrayList<String> loadWorkouts() throws IOException {
+        ArrayList<String> workout = new ArrayList<>();
+
+        File dataFile = new File(Storage.WORKOUT_DATA_FILE_PATH);
+        Scanner fileScanner = new Scanner(dataFile);
+        String textFromFile;
+        int flag = 0;
+        while ((fileScanner.hasNext())) {
+            textFromFile = fileScanner.nextLine();
+            if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
+                workout.add(textFromFile);
+            }
+        }
+        return workout;
+    }
+
+    public void mealSummary() {
+        int totalCalories = 0;
+        int i = 1;
+        try {
+            for (String m : loadMeals()) {
+                if (m.contains("[")) {
+                    String[] descriptor = m.substring(1).split(" /c ");
+                    String[] calorie = descriptor[1].split(" /d ");
+                    String description = descriptor[0];
+                    System.out.println(i + ". " + description);
+                    String calorieIndiv = calorie[0];
+                    totalCalories += Integer.parseInt(calorieIndiv);
+                    i++;
+                } else {
+                    String[] descriptor = m.split(" /c ");
+                    String[] calorie = descriptor[1].split(" /d ");
+                    String description = descriptor[0];
+                    System.out.println(i + ". " + description);
+                    String calorieIndiv = calorie[0];
+                    totalCalories += Integer.parseInt(calorieIndiv);
+                    i++;
+                }
+            }
+            System.out.println(System.lineSeparator() + "Total number of meals = " + (i - 1));
+            System.out.println("Total calories = " + totalCalories);
+
+        } catch (IOException e) {
+            System.out.println("Error during printing arrayList");
+        }
+    }
+
+    public void fluidSummary() {
+        int totalCalories = 0;
+        int totalVolume = 0;
+        int i = 1;
+        try {
+            for (String f : loadFluids()) {
+                if (f.contains("[")) {
+                    String[] descriptor = f.substring(1).split(" /c ");
+                    String[] calorie = descriptor[1].split(" /v ");
+                    String[] volumeSplitter = calorie[1].split(" /d ");
+                    String description = descriptor[0];
+                    System.out.println(i + ". " + description);
+                    String calorieIndiv = calorie[0];
+                    String volumeIndiv = volumeSplitter[0];
+                    totalCalories += Integer.parseInt(calorieIndiv);
+                    totalVolume += Integer.parseInt((volumeIndiv));
+                    i++;
+                } else {
+                    String[] descriptor = f.split(" /c ");
+                    String[] calorie = descriptor[1].split(" /v ");
+                    String[] volumeSplitter = calorie[1].split(" /d ");
+                    String description = descriptor[0];
+                    System.out.println(i + ". " + description);
+                    String calorieIndiv = calorie[0];
+                    String volumeIndiv = volumeSplitter[0];
+                    totalCalories += Integer.parseInt(calorieIndiv);
+                    totalVolume += Integer.parseInt((volumeIndiv));
+                    i++;
+                }
+            }
+            if (totalVolume > 0) {
+                System.out.println("Total volume consumed = " + totalVolume);
+            } else {
+                System.out.println(System.lineSeparator() + "Total variety of drinks = " + (i - 1));
+            }
+            System.out.println("Total calories = " + totalCalories);
+        } catch (IOException e) {
+            System.out.println("Error during printing arrayList");
+        }
+    }
+
+    public void workoutSummary() {
+        int totalCalories = 0;
+        int i = 1;
+        try {
+            for (String w : loadWorkouts()) {
+                if (w.contains("[")) {
+                    String[] descriptor = w.substring(1).split(" /c ");
+                    String[] calorie = descriptor[1].split(" /d ");
+                    String description = descriptor[0];
+                    System.out.println(i + ". " + description);
+                    String calorieIndiv = calorie[0];
+                    totalCalories += Integer.parseInt(calorieIndiv);
+                    i++;
+                } else {
+                    String[] descriptor = w.split(" /c ");
+                    String[] calorie = descriptor[1].split(" /d ");
+                    String description = descriptor[0];
+                    System.out.println(i + ". " + description);
+                    String calorieIndiv = calorie[0];
+                    totalCalories += Integer.parseInt(calorieIndiv);
+                    i++;
+                }
+            }
+            System.out.println(System.lineSeparator() + "Completed Workouts = " + (i - 1));
+            System.out.println("Total calories burned = " + totalCalories);
+
+        } catch (IOException e) {
+            System.out.println("Error during printing arrayList");
+        }
+    }
+
+    public void printLoadedLists() {
+        System.out.println(MEAL_PRINT_FORMAT);
+        mealSummary();
+        System.out.println(ENDLINE_PRINT_FORMAT);
+        System.out.println(FLUID_PRINT_FORMAT);
+        fluidSummary();
+        System.out.println(ENDLINE_PRINT_FORMAT);
+        System.out.println(WORKOUT_PRINT_FORMAT);
+        workoutSummary();
+        System.out.println(ENDLINE_PRINT_FORMAT);
+        System.out.println(System.lineSeparator() + "Updated as of: "
+                + Parser.getSystemDate() + " " + Parser.getSystemTime());
     }
 }
