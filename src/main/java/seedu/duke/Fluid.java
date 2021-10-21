@@ -5,8 +5,6 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +36,6 @@ public class Fluid extends Tracker {
         time = Parser.getTime(inputArguments);
     }
 
-    //drank coke /c 60 /v 200 /d 12/12/2021 /t 10:30
     public void addFluid(String inputArguments) throws DukeException, FluidExceptions, FoodBankException {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
@@ -107,5 +104,27 @@ public class Fluid extends Tracker {
             return;
         }
         logr.exiting(getClass().getName(), "listFluid");
+    }
+
+    public int getCalories(String date) throws DukeException, FoodBankException {
+        int calorieTotal = 0;
+        for (String fluid : fluidArray) {
+            if (fluid.contains(date)) {
+                generateFluidParameters(fluid);
+                calorieTotal += calories;
+            }
+        }
+        return calorieTotal;
+    }
+
+    public int getVolume(String date) throws DukeException, FoodBankException {
+        int volumeTotal = 0;
+        for (String fluid : fluidArray) {
+            if (fluid.contains(date)) {
+                generateFluidParameters(fluid);
+                volumeTotal += volume;
+            }
+        }
+        return volumeTotal;
     }
 }

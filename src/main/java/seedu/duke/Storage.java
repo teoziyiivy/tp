@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 
@@ -108,7 +111,6 @@ public class Storage {
     }
 
     public ArrayList<String> loadMeals() throws IOException {
-        //System.out.println("fuck");
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(this.filePath).getAbsolutePath();
         File f = new File(newFilePath);
@@ -215,6 +217,17 @@ public class Storage {
             System.out.println("Error during writing to data file for WorkoutTracker.");
         }
     }
+
+    public void loadAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
+                             WeightTracker weightTracker) throws IOException {
+        String filePath = new File(this.filePath).getAbsolutePath();
+        FileWriter fw = new FileWriter(filePath, false);
+        String currentDate;
+        String currentMeal;
+        String currentFluid;
+        String header;
+        String customMeal;
+        String customFluid;
 
     public ArrayList<String> loadWorkouts() throws IOException {
         ArrayList<String> workout = new ArrayList<>();

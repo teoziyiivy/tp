@@ -103,5 +103,16 @@ public class Meal extends Tracker {
         logger.log(Level.INFO,"meal list printed");
         logger.exiting(getClass().getName(),"listMeal");
     }
+
+    public int getCalories(String date) throws FoodBankException {
+        int calorieTotal = 0;
+        for (String meal : meals) {
+            if (meal.contains(date)) {
+                generateMealParameters(meal);
+                calorieTotal += calories;
+            }
+        }
+        return calorieTotal;
+    }
 }
 
