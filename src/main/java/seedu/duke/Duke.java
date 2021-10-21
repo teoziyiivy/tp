@@ -1,12 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.LoadException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.LoadException;
 import seedu.duke.exceptions.MealException;
+import seedu.duke.workout.ScheduleTracker;
+import seedu.duke.workout.WorkoutTracker;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
@@ -51,6 +51,8 @@ public class Duke {
             if (ui.memoryStartup()) {
                 meal.meals = storage.loadMeals();
                 fluid.fluidArray = storage.loadFluids();
+                storage.printLoadedLists();
+                System.out.println("What would you like to start with?");
             }
         } catch (LoadException e) {
             System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
