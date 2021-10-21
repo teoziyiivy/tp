@@ -1,6 +1,6 @@
 package seedu.duke.workout;
 
-import seedu.duke.Duke;
+import seedu.duke.ClickfitMessages;
 import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
@@ -89,7 +89,7 @@ public class ScheduleTracker {
         String workoutDescription = generatedParameters[0];
         String workoutDate = generatedParameters[1];
         String workoutTime = generatedParameters[2];
-        Map<String, int[]> activityMap;
+        Map<String, ArrayList<Integer>> activityMap;
         try {
             activityMap = Parser.getActivities(inputArguments);
         } catch (NumberFormatException nfe) {
@@ -154,7 +154,7 @@ public class ScheduleTracker {
 
     public void listAllScheduledWorkouts() {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
-        System.out.println("FULL WORKOUT SCHEDULE:" + System.lineSeparator());
+        System.out.println("Full Workout Schedule:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
@@ -170,12 +170,14 @@ public class ScheduleTracker {
         ArrayList<ScheduledWorkout> filteredScheduleList = (ArrayList<ScheduledWorkout>) scheduledWorkouts.stream()
                 .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
         if (filteredScheduleList.isEmpty()) {
-            System.out.println("Workout schedule is empty on that the date: " + inputArguments);
+            System.out.println("Workout schedule is empty on the date: " + inputArguments);
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("WORKOUT SCHEDULE FOR TODAY:" + System.lineSeparator());
+                System.out.println("Workout schedule for today:" + System.lineSeparator()
+                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             } else {
-                System.out.println("WORKOUT SCHEDULE ON " + inputArguments + ":" + System.lineSeparator());
+                System.out.println("Workout schedule on " + inputArguments + ":" + System.lineSeparator()
+                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             }
             int currentIndex = 1;
             for (ScheduledWorkout workout : filteredScheduleList) {
@@ -208,11 +210,17 @@ public class ScheduleTracker {
             activityString.append(Parser.ACTIVITY_SEPARATOR);
             int currentIndex = 0;
             for (WorkoutActivity activity : workout.getActivities()) {
-                activityString.append(activity.getActivityDescription())
-                        .append(Parser.ACTIVITY_SPLITTER)
-                        .append(activity.getActivitySets())
-                        .append(Parser.QUANTIFIER_SPLITTER)
-                        .append(activity.getActivityReps());
+                if (activity.isDistanceActivity()) {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivityDistance());
+                } else {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivitySets())
+                            .append(Parser.QUANTIFIER_SPLITTER)
+                            .append(activity.getActivityReps());
+                }
                 currentIndex++;
                 activityString.append(
                         (currentIndex < workout.getActivities().size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
