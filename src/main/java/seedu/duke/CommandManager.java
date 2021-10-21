@@ -136,7 +136,8 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        storage.saveAllTasks(fluid, meal, weightTracker);
+        storage.saveFood(fluid, meal);
+        storage.saveLibrary();
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
@@ -254,5 +255,6 @@ public class CommandManager {
         meal.listMeals(date);
         System.out.println("");
         fluid.listFluid(date);
+        System.out.println("");
     }
 }

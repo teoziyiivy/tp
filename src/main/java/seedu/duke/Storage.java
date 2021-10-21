@@ -19,25 +19,24 @@ import static seedu.duke.ClickfitMessages.ENDLINE_PRINT_FORMAT;
 
 public class Storage {
 
-    protected String filePath;
+    protected String foodFile;
+    protected String libraryFile;
     public static final String SCHEDULE_DATA_FILE_PATH = "scheduleData.txt";
     public static final String WORKOUT_DATA_FILE_PATH = "workoutData.txt";
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String foodFile, String libraryFile) {
+        this.foodFile = foodFile;
+        this.libraryFile = libraryFile;
         initializeScheduleDataFile();
         initializeWorkoutDataFile();
     }
 
-    public void saveAllTasks(Fluid fluid, Meal meal,
-                             WeightTracker weightTracker) throws IOException {
+    public void saveFood(Fluid fluid, Meal meal) throws IOException {
         String currentDate;
         String currentMeal;
         String currentFluid;
         String header;
-        //String customMeal;
-        //String customFluid;
-        String filePath = new File(this.filePath).getAbsolutePath();
+        String filePath = new File(this.foodFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
         int headerFlag;
         header = "Meals" + "\n";
@@ -78,38 +77,36 @@ public class Storage {
                 }
             }
         }
-        /*
-        headerFlag = 0;
+    }
+
+    public void saveLibrary() throws IOException {
+        String customMeal;
+        String customFluid;
+        String header;
+        String filePath = new File(this.libraryFile).getAbsolutePath();
+        FileWriter fw = new FileWriter(filePath, false);
+        header = "Meals" + "\n";
+        Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+        fw.close();
         for (String m : FoodBank.meals) {
-            if (headerFlag == 0) {
-                header = "Meal Library" + "\n";
-                Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
-                fw.close();
-                headerFlag = 1;
-            }
             customMeal = m + "\n";
             Files.write(Paths.get(filePath), customMeal.getBytes(), StandardOpenOption.APPEND);
             fw.close();
+
         }
-        headerFlag = 0;
+        header = "Fluids" + "\n";
+        Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
+        fw.close();
         for (String f : FoodBank.fluids) {
-            if (headerFlag == 0) {
-                header = "Fluid Library" + "\n";
-                Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
-                fw.close();
-                headerFlag = 1;
-            }
             customFluid = f + "\n";
             Files.write(Paths.get(filePath), customFluid.getBytes(), StandardOpenOption.APPEND);
             fw.close();
         }
-
-         */
     }
 
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
-        String newFilePath = new File(this.filePath).getAbsolutePath();
+        String newFilePath = new File(this.foodFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -130,7 +127,49 @@ public class Storage {
 
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
-        String newFilePath = new File(this.filePath).getAbsolutePath();
+        String newFilePath = new File(this.foodFile).getAbsolutePath();
+        File f = new File(newFilePath);
+        Scanner s = new Scanner(f);
+        String textFromFile;
+        int flag = 0;
+        while (s.hasNext()) {
+            textFromFile = s.nextLine();
+            if ((flag == 1) && (textFromFile.contains(Parser.CALORIE_SEPARATOR))) {
+                fluids.add(textFromFile);
+            } else if (textFromFile.equals("Fluids")) {
+                flag = 1;
+            } else if (textFromFile.contains("Date")) {
+                String date[] = textFromFile.split(" ");
+                DateTracker.checkIfDateExists(date[1]);
+            }
+        }
+        return fluids;
+    }
+
+    public ArrayList<String> loadMealLibrary() throws IOException {
+        ArrayList<String> meals = new ArrayList<>();
+        String newFilePath = new File(this.libraryFile).getAbsolutePath();
+        File f = new File(newFilePath);
+        Scanner s = new Scanner(f);
+        String textFromFile;
+        int flag = 0;
+        while ((s.hasNext()) && (flag == 0)) {
+            textFromFile = s.nextLine();
+            if (textFromFile.equals("Fluids")) {
+                flag = 1;
+            } else if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
+                meals.add(textFromFile);
+            } else if (textFromFile.contains("Date")) {
+                String date[] = textFromFile.split(" ");
+                DateTracker.checkIfDateExists(date[1]);
+            }
+        }
+        return meals;
+    }
+
+    public ArrayList<String> loadFluidLibrary() throws IOException {
+        ArrayList<String> fluids = new ArrayList<>();
+        String newFilePath = new File(this.libraryFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -209,7 +248,7 @@ public class Storage {
 
     public void loadAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                              WeightTracker weightTracker) throws IOException {
-        String filePath = new File(this.filePath).getAbsolutePath();
+        String filePath = new File(this.foodFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
         String currentDate;
         String currentMeal;
