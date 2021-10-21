@@ -23,7 +23,7 @@ These operations will be illustrated throught UML diagrams.
 The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported
 from Clickfitmessages class.
 
-###Getting BMI and recommended daily caloric intake
+### Getting BMI and recommended daily caloric intake
 ![Imgur](https://i.imgur.com/TZbe6Qh.png)
 
 the user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
@@ -31,7 +31,7 @@ The calculator takes in the following inputs as shown in the UML diagram through
 object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
 daily caloric intake through getIdealCalories().
 
-###Get summary of all info stored in text files
+### Get summary of all info stored in text files
 The user is next greeted with a second prompt that asks whether he or she wishes to get a summary of all meals, fluids 
 and workouts he has eaten or completed.
 memoryStartup() is used to return a Boolean value. If it returns ture, it enters an if-loop in Duke class which calls 
