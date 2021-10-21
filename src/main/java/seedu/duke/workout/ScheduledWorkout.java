@@ -26,8 +26,9 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
+        /*
         if (!activityMap.isEmpty()) {
-            for (var entry : activityMap.entrySet()) {
+            for (entry : activityMap.entrySet()) {
                 activities.add(
                         new WorkoutActivity(
                                 entry.getKey(), entry.getValue(),
@@ -36,6 +37,7 @@ public class ScheduledWorkout {
                 );
             }
         }
+             */
     }
 
     public ArrayList<WorkoutActivity> getActivities() {

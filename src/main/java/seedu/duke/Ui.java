@@ -1,9 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.LoadException;
-import java.util.Objects;
 import java.util.Scanner;
-import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 import static seedu.duke.ClickfitMessages.MESSAGE_A;
 import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
@@ -68,17 +66,14 @@ public class Ui {
         } else if (uiInput.isEmpty()) {
             System.out.println(System.lineSeparator());
         }
-
     }
 
     public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput = uiScanner.nextLine();
-        //assert !Objects.equals(uiInput, "");
         if (uiInput.equals("y")) {
             System.out.println(MEMORY_STARTUP_Y_INPUT);
             return true;
-
         } else if (uiInput.isEmpty()) {
             System.out.println(MEMORY_STARTUP_N_INPUT);
             System.out.println(System.lineSeparator() + "What would you like to do?");
@@ -87,6 +82,4 @@ public class Ui {
             throw new LoadException();
         }
     }
-
-
 }
