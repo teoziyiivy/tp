@@ -5,6 +5,7 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.LoadException;
 import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.ScheduleException;
 import seedu.duke.workout.ScheduleTracker;
 import seedu.duke.workout.WorkoutTracker;
 import java.io.IOException;
@@ -78,6 +79,8 @@ public class Duke {
                 System.out.println(ClickfitMessages.INCORRECT_INPUT);
             } catch (DukeException ignored) {
                 continue;
+            } catch (ScheduleException e) {
+                System.out.println(e.getMessage());
             } catch (MealException e) {
                 System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (FluidExceptions e) {

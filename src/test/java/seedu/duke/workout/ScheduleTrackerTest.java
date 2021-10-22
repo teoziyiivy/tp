@@ -3,6 +3,7 @@ package seedu.duke.workout;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.ScheduleException;
 
 
 import java.time.format.DateTimeParseException;
@@ -42,7 +43,7 @@ class ScheduleTrackerTest {
 
 
     @Test
-    void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException {
+    void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException, ScheduleException {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput1 = "test /d 07/07/2022 /t 17:59";
         st.addScheduledWorkout(argumentInput1, false); //must be non empty list

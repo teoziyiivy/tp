@@ -4,6 +4,8 @@ import seedu.duke.ClickfitMessages;
 import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
+import seedu.duke.exceptions.InvalidActivityFormatException;
+import seedu.duke.exceptions.ScheduleException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,20 +32,23 @@ public class ScheduleTracker {
     public ScheduleTracker() {
         scheduledWorkouts = new ArrayList<>();
         SCHEDULE_TRACKER_LOGGER.setLevel(Level.SEVERE);
-        try {
-            loadScheduleData();//for now auto-load, later on just call scheduleTracker.loadScheduleData() if user wants
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to locate ScheduleTracker data file.");
-        }
+        loadScheduleData();
+
     }
 
-    public void loadScheduleData() throws FileNotFoundException {
+    public void loadScheduleData() {
         File dataFile = new File(Storage.SCHEDULE_DATA_FILE_PATH);
         // short circuit preload if file is empty
         if (dataFile.length() == 0) {
             return;
         }
-        Scanner fileScanner = new Scanner(dataFile);
+        Scanner fileScanner;
+        try {
+            fileScanner = new Scanner(dataFile);
+        } catch (FileNotFoundException e) {
+            System.out.println(ClickfitMessages.SCHEDULE_DATA_NOT_FOUND);
+            return;
+        }
         String currentLine = "";
         boolean isDataLoadCorrectly = true;
         while (fileScanner.hasNext()) {
@@ -54,13 +59,12 @@ public class ScheduleTracker {
             }
             try {
                 addScheduledWorkout(currentLine, true);
-            } catch (DukeException | DateTimeParseException e) {
+            } catch (DukeException | DateTimeParseException | ScheduleException e) {
                 isDataLoadCorrectly = false;
             }
         }
         if (!isDataLoadCorrectly) {
-            System.out.println("There were some errors during loading of ScheduleTracker data, "
-                    + "some data may have been lost");
+            System.out.println(ClickfitMessages.INCORRECT_LOADING_SCHEDULE_DATA);
         }
         cleanUpScheduleList();
     }
@@ -77,7 +81,7 @@ public class ScheduleTracker {
     }
 
     public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage)
-            throws DukeException, DateTimeParseException, NumberFormatException {
+            throws DukeException, DateTimeParseException, NumberFormatException, ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
@@ -93,9 +97,7 @@ public class ScheduleTracker {
         try {
             activityMap = Parser.getActivities(inputArguments);
         } catch (NumberFormatException nfe) {
-            throw new DukeException("Please enter a single integer [distance in metres] for distance based "
-                    + "activities(swimming/running/cycling). E.g. running:8000" + "" + System.lineSeparator()
-                    + "Enter two integers [set]x[reps]" + " for everything else. E.g. bench press:3x12");
+            throw new InvalidActivityFormatException();
         }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
         scheduledWorkouts.add(
@@ -173,7 +175,7 @@ public class ScheduleTracker {
             System.out.println("Workout schedule is empty on the date: " + inputArguments);
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("Workout schedule for today:" + System.lineSeparator()
+                System.out.println("Today's workout schedule:" + System.lineSeparator()
                         + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             } else {
                 System.out.println("Workout schedule on " + inputArguments + ":" + System.lineSeparator()
