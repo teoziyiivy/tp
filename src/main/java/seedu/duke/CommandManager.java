@@ -198,7 +198,7 @@ public class CommandManager {
             int calCount = fluid.getCalories(date) + meal.getCalories(date);
             int caloriesBurned = workoutTracker.getCaloriesBurned(date);
             int netCalories = calCount - caloriesBurned;
-            System.out.println("\n" + "Your total calorie consumption for " + date + " is: " + calCount + " calories.");
+            System.out.println("\nYour total calorie consumption for " + date + " is: " + calCount + " calories.");
             System.out.println("Your total calories burned for " + date + " is: " + caloriesBurned + " calories.");
             System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
             break;
@@ -253,10 +253,14 @@ public class CommandManager {
         Storage.saveWorkoutData(workoutTracker);
     }
 
-    public void listEverything(String date) throws NullPointerException, FoodBankException {
+    public void listEverything(String date) throws NullPointerException, FoodBankException, DukeException {
         meal.listMeals(date);
-        System.out.println("");
+        System.out.println();
         fluid.listFluid(date);
-        System.out.println("");
+        System.out.println();
+        workoutTracker.listWorkouts(date);
+        System.out.println();
+        scheduleTracker.listScheduledWorkouts(date);
+        System.out.println();
     }
 }
