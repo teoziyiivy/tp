@@ -5,7 +5,7 @@ autonumber
 
 participant ":WeightTracker"
 
-->":WeightTracker" : Keywords.INPUT_CHECK_WEIGHT
+->":WeightTracker" : Keywords.INPUT_LIST_WEIGHT
 activate ":WeightTracker" #Salmon
 ":WeightTracker"->":WeightTracker" : readInput(input: String)
 activate ":WeightTracker" #DarkSalmon
