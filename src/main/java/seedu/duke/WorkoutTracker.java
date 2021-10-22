@@ -1,19 +1,14 @@
-package seedu.duke.workout;
+package seedu.duke;
 
-import seedu.duke.DateTracker;
-import seedu.duke.Storage;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.Parser;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+//@@author arvejw
 public class WorkoutTracker {
     protected ArrayList<String> workouts;
     protected String workoutDescription;
@@ -27,38 +22,6 @@ public class WorkoutTracker {
     public WorkoutTracker() {
         this.workouts = new ArrayList<>();
         WORKOUT_TRACKER_LOGGER.setLevel(Level.SEVERE);
-        try {
-            loadWorkoutData(); //auto-load for now, wait till integration then just call .loadWorkoutData elsewhere
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to locate ScheduleTracker data file.");
-        }
-    }
-
-    public void loadWorkoutData() throws FileNotFoundException {
-        File dataFile = new File(Storage.WORKOUT_DATA_FILE_PATH);
-        // short circuit preload if file is empty
-        if (dataFile.length() == 0) {
-            return;
-        }
-        Scanner fileScanner = new Scanner(dataFile);
-        String currentLine = "";
-        boolean isDataLoadCorrectly = true;
-        while (fileScanner.hasNext()) {
-            currentLine = fileScanner.nextLine();
-            // if any empty lines, skip to next iteration of the while loop
-            if (currentLine.isEmpty()) {
-                continue;
-            }
-            try {
-                addWorkout(currentLine, true);
-            } catch (DukeException | DateTimeParseException | NumberFormatException e) {
-                isDataLoadCorrectly = false;
-            }
-        }
-        if (!isDataLoadCorrectly) {
-            System.out.println("There were some errors during loading of WorkoutTracker data, "
-                    + System.lineSeparator() + "some data may have been lost or loaded incorrectly.");
-        }
     }
 
     public void generateWorkoutParameters(String inputArguments)
@@ -86,7 +49,7 @@ public class WorkoutTracker {
         String updatedArguments = workoutDescription + Parser.CALORIE_SEPARATOR + caloriesBurned
                 + Parser.DATE_SEPARATOR + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
         workouts.add(updatedArguments);
-        //sortWorkoutList();
+        sortWorkoutList();
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
 
@@ -111,25 +74,22 @@ public class WorkoutTracker {
         }
     }
 
-    /*
+
     public void listWorkouts(String inputArguments) throws DukeException {
+        emptyWorkoutListCheck();
         sortWorkoutList();
-        if (inputArguments == null) {
-            listWorkoutsOnDate(Parser.getSystemDate());
-        } else if (inputArguments.equals(INPUT_ALL)) {
+        if (inputArguments.equals(INPUT_ALL)) {
             listAllWorkouts();
         } else {
             listWorkoutsOnDate(inputArguments);
         }
     }
-     */
 
     public void listAllWorkouts()
             throws DukeException, DateTimeParseException, NumberFormatException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list workouts.");
-        emptyWorkoutListCheck();
         assert workouts.size() > 0 : "List should be non empty at this point";
-        System.out.println("ALL WORKOUTS:" + System.lineSeparator());
+        System.out.println("All recorded workouts:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         int currentIndex = 1;
         for (String workout : workouts) {
             generateWorkoutParameters(workout);
@@ -146,30 +106,31 @@ public class WorkoutTracker {
         ArrayList<String> filteredWorkoutList = (ArrayList<String>) workouts.stream()
                 .filter((t) -> Parser.getDate(t).equals(inputArguments)).collect(Collectors.toList());
         if (filteredWorkoutList.isEmpty()) {
-            System.out.println("No workouts recorded on that the date: " + inputArguments);
+            System.out.println("No workouts recorded on the date: " + inputArguments);
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("WORKOUTS TODAY:" + System.lineSeparator());
+                System.out.println("Workouts recorded today" + System.lineSeparator());
             } else {
-                System.out.println("WORKOUTS ON " + inputArguments + ":" + System.lineSeparator());
+                System.out.println("Workouts recorded on " + inputArguments + ":" + System.lineSeparator());
             }
             int currentIndex = 1;
+            int totalCaloriesBurned = 0;
             for (String workout : filteredWorkoutList) {
                 generateWorkoutParameters(workout);
                 System.out.println(currentIndex + ". " + workoutDescription);
                 System.out.println("Calories burned: " + caloriesBurned);
                 System.out.println("Date: " + workoutDate);
-                System.out.println("Time: " + workoutTime + "\n");
+                System.out.println("Time: " + workoutTime + System.lineSeparator());
+                totalCaloriesBurned += caloriesBurned;
                 currentIndex++;
             }
+            System.out.println("Total calories burned: " + totalCaloriesBurned);
         }
     }
 
-    /*
     public void sortWorkoutList() {
         DateTracker.sortDateAndTime(workouts);
     }
-     */
 
     public int getCaloriesBurned(String date) throws DukeException {
         ArrayList<String> filteredWorkoutList = (ArrayList<String>) workouts.stream()
@@ -183,14 +144,6 @@ public class WorkoutTracker {
             }
             return totalCaloriesBurned;
         }
-    }
-
-    public String getWorkoutListAsString() {
-        String workoutListAsString = "";
-        for (String workout : workouts) {
-            workoutListAsString += workout + System.lineSeparator();
-        }
-        return workoutListAsString;
     }
 
     public void nullArgumentCheck(String inputArguments) throws DukeException {
