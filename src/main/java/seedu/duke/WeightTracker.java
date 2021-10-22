@@ -5,6 +5,7 @@ import seedu.duke.exceptions.DeleteWeightException;
 import seedu.duke.exceptions.DeleteWeightIndexException;
 import seedu.duke.exceptions.NoWeightsException;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.NoFoundWeightsException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -21,6 +22,10 @@ public class WeightTracker extends Tracker {
     public WeightTracker() {
         this.weightsArray = new ArrayList<>();
         this.numberOfWeights = 0;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void generateWeightParameters(String inputArguments) {
@@ -45,12 +50,13 @@ public class WeightTracker extends Tracker {
         String command = splitLine[0];
         input = input.replaceAll("^" + command + " ", "");
         switch (command) {
-        case "listweights":
+        case "checkweight":
             try {
-                printWeight();
-            } catch (NoWeightsException e) {
-                logger.log(Level.WARNING, "caught empty list error", e);
-                WeightTrackerMessages.printNoWeightsException();
+                findWeightDate(input);
+            } catch (NoFoundWeightsException e) {
+                logger.log(Level.WARNING, "caught no corresponding weights"
+                        + " for input date found error", e);
+                WeightTrackerMessages.printNoFoundWeightsException();
             }
             break;
         case "addweight":
@@ -137,5 +143,24 @@ public class WeightTracker extends Tracker {
         }
         logger.exiting(getClass().getName(), "printWeight");
         logger.log(Level.INFO, "end of processing printweight command");
+    }
+
+    public void findWeightDate(String line) throws NoFoundWeightsException {
+        if (!line.matches("(.*)/(.*)/(.*)")) {
+            throw new NoFoundWeightsException();
+        }
+        String foundList = "Here are your weights for that day:";
+        int weightsFound = 0;
+        for (int i = 1; i <= weightsArray.size(); ++i) {
+            if (weightsArray.get(i - 1).contains(line)) {
+                weightsFound += 1;
+                generateWeightParameters(weightsArray.get(i - 1));
+                foundList = foundList + "\n" + i + ". " + weight;
+            }
+        }
+        if (weightsFound == 0) {
+            throw new NoFoundWeightsException();
+        }
+        System.out.println(foundList);
     }
 }

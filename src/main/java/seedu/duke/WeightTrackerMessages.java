@@ -28,4 +28,8 @@ public class WeightTrackerMessages {
     public static void printNoWeightsException() {
         System.out.println("CLI.ckFit has no recorded weights.");
     }
+
+    public static void printNoFoundWeightsException() {
+        System.out.println("CLI.ckFit did not find any corresponding weights for that date.");
+    }
 }

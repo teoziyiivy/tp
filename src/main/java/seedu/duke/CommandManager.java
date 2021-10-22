@@ -109,6 +109,7 @@ public class CommandManager {
             }
             break;
         case Keywords.INPUT_ADD_WEIGHT:
+        case Keywords.INPUT_CHECK_WEIGHT:
         case Keywords.INPUT_DELETE_WEIGHT:
             try {
                 weightTracker.readInput(input);
