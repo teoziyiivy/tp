@@ -1,4 +1,6 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
+
+import seedu.duke.Parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 
+//@@author arvejw
 public class ScheduledWorkout {
     private String workoutDescription;
     private ArrayList<WorkoutActivity> activities;
@@ -36,10 +39,6 @@ public class ScheduledWorkout {
                 );
             }
         }
-    }
-
-    public ArrayList<WorkoutActivity> getActivities() {
-        return activities;
     }
 
     public String getWorkoutDescription() {
@@ -79,7 +78,7 @@ public class ScheduledWorkout {
         return isRecurring ? "recurring " : "";
     }
 
-    public String getActivitiesAsString() {
+    public String getActivitiesAsStringToPrint() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
             return output + "nil" + System.lineSeparator() + "____________________________";
@@ -95,6 +94,41 @@ public class ScheduledWorkout {
             }
             currentIndex++;
         }
-        return output + "____________________________";
+        return output + System.lineSeparator() + "____________________________";
+    }
+
+    public String getScheduledWorkoutAsString() {
+        String output = workoutDescription + Parser.DATE_SEPARATOR
+                + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
+        output += getActivitiesAsString();
+        if (isRecurring) {
+            output += Parser.RECURRING_FLAG;
+        }
+        return output;
+    }
+
+    private String getActivitiesAsString() {
+        StringBuilder activityString = new StringBuilder();
+        if (!activities.isEmpty()) {
+            activityString.append(Parser.ACTIVITY_SEPARATOR);
+            int currentIndex = 0;
+            for (WorkoutActivity activity : activities) {
+                if (activity.isDistanceActivity()) {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivityDistance());
+                } else {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivitySets())
+                            .append(Parser.QUANTIFIER_SPLITTER)
+                            .append(activity.getActivityReps());
+                }
+                currentIndex++;
+                activityString.append(
+                        (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+            }
+        }
+        return activityString.toString();
     }
 }
