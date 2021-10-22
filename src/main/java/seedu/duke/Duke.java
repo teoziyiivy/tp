@@ -6,8 +6,8 @@ import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.LoadException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.ScheduleException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
+import seedu.duke.schedule.ScheduleTracker;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
@@ -55,6 +55,8 @@ public class Duke {
                 weightTracker.weightsArray = storage.loadWeights();
                 FoodBank.meals = storage.loadMealLibrary();
                 FoodBank.fluids = storage.loadFluidLibrary();
+                workoutTracker.workouts = storage.loadWorkouts();
+                scheduleTracker.loadScheduleData();
                 storage.printLoadedLists();
                 System.out.println("What would you like to start with?");
             }

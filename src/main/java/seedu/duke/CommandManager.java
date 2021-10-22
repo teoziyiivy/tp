@@ -3,11 +3,9 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.InvalidActivityFormatException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.ScheduleException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
+import seedu.duke.schedule.ScheduleTracker;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -250,7 +248,6 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        Storage.saveWorkoutData(workoutTracker);
     }
 
     public void listEverything(String date) throws NullPointerException, FoodBankException, DukeException {

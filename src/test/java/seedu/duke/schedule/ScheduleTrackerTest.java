@@ -1,4 +1,4 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
 
 import org.junit.jupiter.api.Test;
 

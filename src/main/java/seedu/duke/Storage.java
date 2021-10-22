@@ -1,8 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
+import seedu.duke.schedule.ScheduleTracker;
+import seedu.duke.schedule.ScheduledWorkout;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -138,6 +138,30 @@ public class Storage {
         }
     }
 
+    public static void saveWorkoutData(WorkoutTracker workoutTracker) throws IOException {
+        String fileAsString = Files.readString(Paths.get(WORKOUT_DATA_FILE_PATH));
+        FileWriter fw = new FileWriter(WORKOUT_DATA_FILE_PATH, true);
+        for (String w : workoutTracker.workouts) {
+            if (fileAsString.contains(w)) {
+                continue;
+            }
+            fw.write(w + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void saveScheduleData(ScheduleTracker scheduleTracker) throws IOException {
+        String fileAsString = Files.readString(Paths.get(SCHEDULE_DATA_FILE_PATH));
+        FileWriter fw = new FileWriter(SCHEDULE_DATA_FILE_PATH, true);
+        for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
+            if (fileAsString.contains(w.getScheduledWorkoutAsString())) {
+                continue;
+            }
+            fw.write(w.getScheduledWorkoutAsString() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(this.foodFile).getAbsolutePath();
@@ -243,6 +267,22 @@ public class Storage {
         return fluids;
     }
 
+    public ArrayList<String> loadWorkouts() throws IOException {
+        ArrayList<String> workout = new ArrayList<>();
+        File dataFile = new File(WORKOUT_DATA_FILE_PATH);
+        Scanner fileScanner = new Scanner(dataFile);
+        String textFromFile;
+        int flag = 0;
+        while ((fileScanner.hasNext())) {
+            textFromFile = fileScanner.nextLine();
+            if (Parser.containsCalorieSeparator(textFromFile) && Parser.containsDateSeparator(textFromFile)
+                    && Parser.containsTimeSeparator(textFromFile)) {
+                workout.add(textFromFile);
+            }
+        }
+        return workout;
+    }
+
     public static void initializeScheduleDataFile() {
         File dataFile = new File(SCHEDULE_DATA_FILE_PATH);
         if (!dataFile.exists()) {
@@ -260,17 +300,7 @@ public class Storage {
         fileWriter.close();
     }
 
-    public static void saveScheduleData(ScheduleTracker scheduleTracker) {
-        if (scheduleTracker == null) {
-            System.out.println("Unable to find ScheduleTracker object.");
-            return;
-        }
-        try {
-            writeToScheduleDataFile(scheduleTracker.getScheduleListAsString());
-        } catch (IOException ioe) {
-            System.out.println("Error during writing to data file for ScheduleTracker.");
-        }
-    }
+
 
     public static void initializeWorkoutDataFile() {
         File dataFile = new File(WORKOUT_DATA_FILE_PATH);
@@ -280,24 +310,6 @@ public class Storage {
             } catch (IOException ioe) {
                 System.out.println("Error during data file creation for WorkoutTracker.");
             }
-        }
-    }
-
-    public static void writeToWorkoutDataFile(String textToWrite) throws IOException {
-        FileWriter fileWriter = new FileWriter(WORKOUT_DATA_FILE_PATH);
-        fileWriter.write(textToWrite);
-        fileWriter.close();
-    }
-
-    public static void saveWorkoutData(WorkoutTracker workoutTracker) {
-        if (workoutTracker == null) {
-            System.out.println("Unable to find WorkoutTracker object.");
-            return;
-        }
-        try {
-            writeToWorkoutDataFile(workoutTracker.getWorkoutListAsString());
-        } catch (IOException ioe) {
-            System.out.println("Error during writing to data file for WorkoutTracker.");
         }
     }
 
@@ -313,20 +325,7 @@ public class Storage {
         String customFluid;
     }
 
-    public ArrayList<String> loadWorkouts() throws IOException {
-        ArrayList<String> workout = new ArrayList<>();
-        File dataFile = new File(Storage.WORKOUT_DATA_FILE_PATH);
-        Scanner fileScanner = new Scanner(dataFile);
-        String textFromFile;
-        int flag = 0;
-        while ((fileScanner.hasNext())) {
-            textFromFile = fileScanner.nextLine();
-            if (textFromFile.contains(Parser.CALORIE_SEPARATOR)) {
-                workout.add(textFromFile);
-            }
-        }
-        return workout;
-    }
+
 
     public void mealSummary() {
         int totalCalories = 0;
