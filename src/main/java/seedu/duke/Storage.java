@@ -109,24 +109,15 @@ public class Storage {
     }
 
     public void saveWeight(WeightTracker weight) throws IOException, DukeException {
-        String currentDate;
         String currentWeight;
         String header;
         String filePath = new File(this.weightFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
-        int headerFlag;
         header = "Weights" + "\n";
         Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
         fw.close();
         for (String date : DateTracker.dates) {
-            headerFlag = 0;
             for (String w : weight.weightsArray) {
-                if (w.contains(date) && (headerFlag == 0)) {
-                    currentDate = "Date: " + date + "\n";
-                    Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
-                    fw.close();
-                    headerFlag = 1;
-                }
                 if (w.contains(date)) {
                     if (w.contains(date)) {
                         currentWeight = w + "\n";
@@ -217,9 +208,6 @@ public class Storage {
                 weights.add(textFromFile);
             } else if (textFromFile.equals("Weights")) {
                 flag = 1;
-            } else if (textFromFile.contains("Date")) {
-                String[] date = textFromFile.split(" ");
-                DateTracker.checkIfDateExists(date[1]);
             }
         }
         return weights;
