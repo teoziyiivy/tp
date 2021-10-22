@@ -1,5 +1,6 @@
 package seedu.duke;
 
+//@@author teoziyiivy
 public class WeightTrackerMessages {
     public static void printGenerateParametersException() {
         System.out.println("CLI.ckFit could not generate your parameters.");
