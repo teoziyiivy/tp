@@ -45,7 +45,7 @@ public class WeightTracker extends Tracker {
         String command = splitLine[0];
         input = input.replaceAll("^" + command + " ", "");
         switch (command) {
-        case "checkweight":
+        case "listweights":
             try {
                 printWeight();
             } catch (NoWeightsException e) {
@@ -88,7 +88,6 @@ public class WeightTracker extends Tracker {
             throw new AddWeightException();
         } else {
             generateWeightParameters(input);
-            input = "addweight " + weight + " /d " + date;
             WeightTrackerMessages.printAddWeightResponse(weight, date);
             weightsArray.add(input);
             numberOfWeights += 1;
@@ -108,11 +107,7 @@ public class WeightTracker extends Tracker {
         if (weightIndex > numberOfWeights) {
             throw new DeleteWeightIndexException();
         } else {
-            String indexToRemove = weightsArray.get(weightIndex - 1);
-            String[] splitLine = indexToRemove.split(" ", 2);
-            String command = splitLine[0];
-            indexToRemove = indexToRemove.replaceAll("^" + command + " ", "");
-            generateWeightParameters(indexToRemove);
+            generateWeightParameters(input);
             System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
                     + weight + " on " + date + ".");
             weightsArray.remove(weightIndex - 1);
@@ -132,9 +127,6 @@ public class WeightTracker extends Tracker {
             int i = 1;
             System.out.println("Here are your recorded weights:");
             for (String weights : weightsArray) {
-                String[] splitLine = weights.split(" ", 2);
-                String command = splitLine[0];
-                weights = weights.replaceAll("^" + command + " ", "");
                 generateWeightParameters(weights);
                 System.out.println(i + ". ");
                 System.out.println("Weight: " + weight);
