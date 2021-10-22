@@ -119,7 +119,7 @@ public class CommandManager {
             }
             break;
         case Keywords.INPUT_DELETE_WEIGHT:
-        case Keywords.INPUT_CHECK_WEIGHT:
+        case Keywords.INPUT_LIST_WEIGHT:
             try {
                 weightTracker.readInput(input);
             } catch (DukeException e) {
@@ -139,6 +139,7 @@ public class CommandManager {
         }
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
+        storage.saveWeight(weightTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {

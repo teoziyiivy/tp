@@ -226,6 +226,14 @@ Example of usage:
 
 # List weights
 
+Command Words:`listweights`
+
+Description: `Lists all weight entries made.`
+
+Example of usage:
+
+`listweights`
+
 # List workouts
 
 Command Word:`listworkout`
