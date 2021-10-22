@@ -107,7 +107,8 @@ public class WeightTracker extends Tracker {
         if (weightIndex > numberOfWeights) {
             throw new DeleteWeightIndexException();
         } else {
-            generateWeightParameters(input);
+            String weightToDelete = weightsArray.get(weightIndex - 1);
+            generateWeightParameters(weightToDelete);
             System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
                     + weight + " on " + date + ".");
             weightsArray.remove(weightIndex - 1);

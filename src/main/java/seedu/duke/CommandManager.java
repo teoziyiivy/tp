@@ -5,6 +5,7 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.ScheduleException;
+import seedu.duke.exceptions.NoWeightsException;
 import seedu.duke.schedule.ScheduleTracker;
 
 import java.io.IOException;
@@ -108,20 +109,13 @@ public class CommandManager {
             }
             break;
         case Keywords.INPUT_ADD_WEIGHT:
+        case Keywords.INPUT_DELETE_WEIGHT:
             try {
                 weightTracker.readInput(input);
             } catch (DukeException e) {
                 return;
             } catch (DateTimeParseException e) {
                 WeightTrackerMessages.printAddWeightException();
-            }
-            break;
-        case Keywords.INPUT_DELETE_WEIGHT:
-        case Keywords.INPUT_LIST_WEIGHT:
-            try {
-                weightTracker.readInput(input);
-            } catch (DukeException e) {
-                return;
             }
             break;
         case Keywords.INPUT_HELP:
@@ -210,11 +204,13 @@ public class CommandManager {
         case Keywords.SCHEDULE:
             scheduleTracker.listScheduledWorkouts(date);
             break;
-            /*
         case Keywords.WEIGHT:
-            FoodBank.deleteCustomMeal(inputArguments);
+            try {
+                weightTracker.printWeight();
+            } catch (NoWeightsException e) {
+                WeightTrackerMessages.printNoWeightsException();
+            }
             break;
-             */
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
