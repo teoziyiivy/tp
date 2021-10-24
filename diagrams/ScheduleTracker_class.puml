@@ -18,7 +18,7 @@ class ScheduledWorkout {
 -workoutDateTime: LocalDateTime
 -isRecurring: boolean
 
-+ScheduledWorkout(workoutDescription: String, \n\tworkoutDate: String, workoutTime: String, \n\tisRecurring: boolean)
++ScheduledWorkout(workoutDescription: String, \n\tworkoutDate: String, workoutTime: String, \n\tactivityMap: Map<String, ArrayList<Integer>>  \n\tisRecurring: boolean)
 +incrementWorkoutDate(): void
 }
 
@@ -31,7 +31,7 @@ private String activityDescription;
     -activityReps: int
 
     +WorkoutActivity(activityDescription: String,
-     \tactivityQuantifier: int[ ],\n\tisDistanceActivity: boolean)
+     \tactivityQuantifier: ArrayList<Integer>,\n\tisDistanceActivity: boolean)
 }
 
 ScheduleTracker -->  "[0..*] scheduledWorkouts" ScheduledWorkout

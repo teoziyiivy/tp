@@ -4,8 +4,8 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.workout.ScheduleTracker;
-import seedu.duke.workout.WorkoutTracker;
+import seedu.duke.exceptions.ScheduleException;
+import seedu.duke.schedule.ScheduleTracker;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -41,7 +41,7 @@ public class CommandManager {
 
     public void commandChecker() throws DukeException, NullPointerException,
             MealException, FluidExceptions,
-            FoodBankException, IOException {
+            FoodBankException, IOException, ScheduleException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -76,12 +76,10 @@ public class CommandManager {
 
         case Keywords.INPUT_ADD_WORKOUT:
         case Keywords.INPUT_DELETE_WORKOUT:
-        case Keywords.INPUT_LIST_WORKOUT:
             executeWorkoutCommand(command, inputArguments);
             break;
         case Keywords.INPUT_ADD_SCHEDULE:
         case Keywords.INPUT_DELETE_SCHEDULE:
-        case Keywords.INPUT_LIST_SCHEDULE:
             executeScheduleCommand(command, inputArguments);
             break;
         case Keywords.INPUT_DRINKS:
@@ -119,7 +117,7 @@ public class CommandManager {
             }
             break;
         case Keywords.INPUT_DELETE_WEIGHT:
-        case Keywords.INPUT_CHECK_WEIGHT:
+        case Keywords.INPUT_LIST_WEIGHT:
             try {
                 weightTracker.readInput(input);
             } catch (DukeException e) {
@@ -139,6 +137,9 @@ public class CommandManager {
         }
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
+        storage.saveWeight(weightTracker);
+        storage.saveScheduleData(scheduleTracker);
+        storage.saveWorkoutData(workoutTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
@@ -193,19 +194,23 @@ public class CommandManager {
             break;
         case Keywords.CALORIES:
             int calCount = fluid.getCalories(date) + meal.getCalories(date);
-            System.out.println("\n" + "Your total calorie consumption for " + date + " is: " + calCount + " calories.");
+            int caloriesBurned = workoutTracker.getCaloriesBurned(date);
+            int netCalories = calCount - caloriesBurned;
+            System.out.println("\nYour total calorie consumption for " + date + " is: " + calCount + " calories.");
+            System.out.println("Your total calories burned for " + date + " is: " + caloriesBurned + " calories.");
+            System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
             break;
         case Keywords.VOLUME:
             int volCount = fluid.getVolume(date);
             System.out.println("\n" + "Your total volume consumption for " + date + " is: " + volCount + " ml.");
             break;
-            /*
         case Keywords.WORKOUT:
-            FoodBank.listCustomFluids();
+            workoutTracker.listWorkouts(date);
             break;
         case Keywords.SCHEDULE:
-            FoodBank.addCustomMeal(inputArguments);
+            scheduleTracker.listScheduledWorkouts(date);
             break;
+            /*
         case Keywords.WEIGHT:
             FoodBank.deleteCustomMeal(inputArguments);
             break;
@@ -216,7 +221,8 @@ public class CommandManager {
         }
     }
 
-    public void executeScheduleCommand(String command, String inputArguments) throws DukeException {
+    public void executeScheduleCommand(String command, String inputArguments)
+            throws DukeException, ScheduleException {
         switch (command) {
         case Keywords.INPUT_ADD_SCHEDULE:
             scheduleTracker.addScheduledWorkout(inputArguments, false);
@@ -224,14 +230,10 @@ public class CommandManager {
         case Keywords.INPUT_DELETE_SCHEDULE:
             scheduleTracker.deleteScheduledWorkout(inputArguments);
             break;
-        case Keywords.INPUT_LIST_SCHEDULE:
-            scheduleTracker.listScheduledWorkouts(inputArguments);
-            break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        Storage.saveScheduleData(scheduleTracker);
     }
 
     public void executeWorkoutCommand(String command, String inputArguments) throws DukeException {
@@ -242,20 +244,20 @@ public class CommandManager {
         case Keywords.INPUT_DELETE_WORKOUT:
             workoutTracker.deleteWorkout(inputArguments);
             break;
-        case Keywords.INPUT_LIST_WORKOUT:
-            //workoutTracker.listWorkouts(inputArguments);
-            break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        Storage.saveWorkoutData(workoutTracker);
     }
 
-    public void listEverything(String date) throws NullPointerException, FoodBankException {
+    public void listEverything(String date) throws NullPointerException, FoodBankException, DukeException {
         meal.listMeals(date);
-        System.out.println("");
+        System.out.println();
         fluid.listFluid(date);
-        System.out.println("");
+        System.out.println();
+        workoutTracker.listWorkouts(date);
+        System.out.println();
+        scheduleTracker.listScheduledWorkouts(date);
+        System.out.println();
     }
 }
