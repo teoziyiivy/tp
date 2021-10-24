@@ -2,9 +2,9 @@ package seedu.duke;
 
 public class Calculator {
 
-    protected int height;
-    protected int weight;
-    protected int bmi;
+    protected double height;
+    protected double weight;
+    protected double bmi;
     protected int idealCalories;
     protected int age;
     protected String sex;
@@ -25,7 +25,7 @@ public class Calculator {
     public void getBmi() {
         System.out.println(System.lineSeparator() + "Your BMI outcome is " + System.lineSeparator());
         String getBmiOutcome;
-        bmi = (weight / ((height / 100) ^ 2));
+        bmi = (weight / ((height / 100) * (height / 100)));
 
         if (bmi < 18.5) {
             getBmiOutcome = "You are underweight";
