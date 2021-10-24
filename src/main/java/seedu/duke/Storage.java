@@ -10,7 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.Set;
+
 import static seedu.duke.ClickfitMessages.MEAL_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.FLUID_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.WORKOUT_PRINT_FORMAT;
@@ -19,8 +22,8 @@ import static seedu.duke.ClickfitMessages.ENDLINE_PRINT_FORMAT;
 
 public class Storage {
 
-    public static final String SCHEDULE_DATA_FILE_PATH = "Schedule.txt";
-    public static final String WORKOUT_DATA_FILE_PATH = "Workout.txt";
+    public static final String SCHEDULE_FILE_PATH = "Schedule.txt";
+    public static final String WORKOUT_FILE_PATH = "Workout.txt";
     public static final String foodFile = "Food.txt";
     public static final String libraryFile = "FoodBank.txt";
     public static final String weightFile = "Weight.txt";
@@ -29,8 +32,8 @@ public class Storage {
         initializeFoodFile();
         initializeFoodBankFile();
         initializeWeightFile();
-        initializeScheduleDataFile();
-        initializeWorkoutDataFile();
+        initializeScheduleFile();
+        initializeWorkoutFile();
     }
 
     public void saveFood(Fluid fluid, Meal meal) throws IOException {
@@ -136,28 +139,40 @@ public class Storage {
         }
     }
 
-    public void saveWorkoutData(WorkoutTracker workoutTracker) throws IOException {
-        String fileAsString = Files.readString(Paths.get(WORKOUT_DATA_FILE_PATH));
-        FileWriter fw = new FileWriter(WORKOUT_DATA_FILE_PATH, true);
-        for (String w : workoutTracker.workouts) {
-            if (fileAsString.contains(w)) {
-                continue;
-            }
-            fw.write(w + System.lineSeparator());
+    //@@author arvejw
+    public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
+        FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);
+        Set<String> workoutSet = new LinkedHashSet<>(workoutTracker.workouts);
+        workoutSet.addAll(loadWorkouts());
+        ArrayList<String> workouts = new ArrayList<>(workoutSet);
+        DateTracker.sortDateAndTime(workouts);
+        FileWriter fileCleaner = new FileWriter(WORKOUT_FILE_PATH, false);
+        fileCleaner.write("");
+        fileCleaner.close();
+        for (String w : workouts) {
+            fileWriter.write(w + System.lineSeparator());
         }
-        fw.close();
+        fileWriter.close();
     }
 
-    public void saveScheduleData(ScheduleTracker scheduleTracker) throws IOException {
-        String fileAsString = Files.readString(Paths.get(SCHEDULE_DATA_FILE_PATH));
-        FileWriter fw = new FileWriter(SCHEDULE_DATA_FILE_PATH, true);
+    //@@author arvejw
+    public void saveSchedule(ScheduleTracker scheduleTracker) throws IOException {
+        FileWriter fileWriter = new FileWriter(SCHEDULE_FILE_PATH, true);
+        ArrayList<String> currentScheduleStringList = new ArrayList<>();
         for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
-            if (fileAsString.contains(w.getScheduledWorkoutAsString())) {
-                continue;
-            }
-            fw.write(w.getScheduledWorkoutAsString() + System.lineSeparator());
+            currentScheduleStringList.add(w.getScheduledWorkoutAsString());
         }
-        fw.close();
+        Set<String> scheduleSet = new LinkedHashSet<>(currentScheduleStringList);
+        scheduleSet.addAll(loadSchedule());
+        ArrayList<String> schedule = new ArrayList<>(scheduleSet);
+        DateTracker.sortDateAndTime(schedule);
+        FileWriter fileCleaner = new FileWriter(SCHEDULE_FILE_PATH, false);
+        fileCleaner.write("");
+        fileCleaner.close();
+        for (String s : schedule) {
+            fileWriter.write(s + System.lineSeparator());
+        }
+        fileWriter.close();
     }
 
     public ArrayList<String> loadMeals() throws IOException {
@@ -265,13 +280,13 @@ public class Storage {
         return fluids;
     }
 
+    //@@author arvejw
     public ArrayList<String> loadWorkouts() throws IOException {
         ArrayList<String> workout = new ArrayList<>();
-        File dataFile = new File(WORKOUT_DATA_FILE_PATH);
+        File dataFile = new File(WORKOUT_FILE_PATH);
         Scanner fileScanner = new Scanner(dataFile);
         String textFromFile;
-        int flag = 0;
-        while ((fileScanner.hasNext())) {
+        while (fileScanner.hasNext()) {
             textFromFile = fileScanner.nextLine();
             if (Parser.containsCalorieSeparator(textFromFile) && Parser.containsDateSeparator(textFromFile)
                     && Parser.containsTimeSeparator(textFromFile)) {
@@ -281,8 +296,24 @@ public class Storage {
         return workout;
     }
 
-    public static void initializeScheduleDataFile() {
-        File dataFile = new File(SCHEDULE_DATA_FILE_PATH);
+    //@@author arvejw
+    public ArrayList<String> loadSchedule() throws IOException {
+        ArrayList<String> schedule = new ArrayList<>();
+        File dataFile = new File(SCHEDULE_FILE_PATH);
+        Scanner fileScanner = new Scanner(dataFile);
+        String textFromFile;
+        while (fileScanner.hasNext()) {
+            textFromFile = fileScanner.nextLine();
+            if (Parser.containsDateSeparator(textFromFile) && Parser.containsTimeSeparator(textFromFile)) {
+                schedule.add(textFromFile);
+            }
+        }
+        return schedule;
+    }
+
+    //@@author arvejw
+    public static void initializeScheduleFile() {
+        File dataFile = new File(SCHEDULE_FILE_PATH);
         if (!dataFile.exists()) {
             try {
                 dataFile.createNewFile();
@@ -325,16 +356,9 @@ public class Storage {
         }
     }
 
-    public static void writeToScheduleDataFile(String textToWrite) throws IOException {
-        FileWriter fileWriter = new FileWriter(SCHEDULE_DATA_FILE_PATH);
-        fileWriter.write(textToWrite);
-        fileWriter.close();
-    }
-
-
-
-    public static void initializeWorkoutDataFile() {
-        File dataFile = new File(WORKOUT_DATA_FILE_PATH);
+    //@@author arvejw
+    public static void initializeWorkoutFile() {
+        File dataFile = new File(WORKOUT_FILE_PATH);
         if (!dataFile.exists()) {
             try {
                 dataFile.createNewFile();

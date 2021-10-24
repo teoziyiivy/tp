@@ -2,7 +2,15 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.schedule.GetActivityException;
+import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
+import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
+import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
+import seedu.duke.exceptions.schedule.ScheduleException;
+import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.WorkoutActivity;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -90,18 +98,21 @@ public class Parser {
         }
     }
 
-    public static int getCaloriesBurnedForWorkout(String inputArguments)
-            throws DukeException, NumberFormatException {
+    public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
-        for (int i = 1; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
-                calories = parseStringToInteger(userInput[i + 1]);
+                try {
+                    calories = parseStringToInteger(userInput[i + 1]);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new NumberFormatException();
+                }
             }
         }
         if (calories < 0) {
-            throw new DukeException("Negative calories");
+            throw new NegativeWorkoutCalorieException();
         } else {
             return calories;
         }
@@ -123,7 +134,7 @@ public class Parser {
         return volume;
     }
 
-    public static String getDescription(String inputArguments) throws DukeException {
+    public static String getDescription(String inputArguments) {
         String[] userInput;
         if (containsCalorieSeparator(inputArguments)) {
             userInput = inputArguments.split(CALORIE_SEPARATOR);
@@ -200,17 +211,18 @@ public class Parser {
         return weight;
     }
 
-    //todo
-    public static String getScheduleDescription(String inputArguments) throws DukeException {
+    //@@author arvejw
+    public static String getScheduleDescription(String inputArguments) throws ScheduleException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         String description = userInput[0];
         if (userInput.length == 1) {
-            throw new DukeException("Please enter a valid description!");
+            throw new InvalidScheduleDescriptionException();
         }
         return description;
     }
 
-    public static Map<String, ArrayList<Integer>> getActivities(String inputArguments) throws DukeException {
+    //@@author arvejw
+    public static Map<String, ArrayList<Integer>> getActivities(String inputArguments) throws ScheduleException {
         int indexOfActivitySeparator = inputArguments.indexOf(Parser.ACTIVITY_SEPARATOR);
         String subSubstringAfterActivitySeparator = "";
         if (indexOfActivitySeparator != -1) {
@@ -231,26 +243,27 @@ public class Parser {
         }
     }
 
+    //@@author arvejw
     private static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
-            throws DukeException {
+            throws ScheduleException {
         Map<String, ArrayList<Integer>> outputMap = new HashMap<>();
         for (String activity : nonParsedActivities) {
             String[] splitResults = activity.split(ACTIVITY_SPLITTER, 2);
             if (splitResults.length == 1) {
-                throw new DukeException("Invalid or missing activity splitter \":\" detected.");
+                throw new MissingActivitySplitterException();
             }
             String[] quantifierSplitResults = splitResults[1].split(QUANTIFIER_SPLITTER, 2);
             if (quantifierSplitResults.length == 1 && !WorkoutActivity.isDistanceActivity(splitResults[0])) {
-                throw new DukeException("Invalid or missing activity quantifier \"x\" detected.");
+                throw new MissingActivityQuantifierException();
             }
-            ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();;
+            ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
                 activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
             } else if (quantifierSplitResults.length == 2) {
                 activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
                 activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
             } else {
-                throw new DukeException("Error getting activity quantifiers.");
+                throw new GetActivityException();
             }
             outputMap.put(splitResults[0].trim(), activityQuantifiers);
         }

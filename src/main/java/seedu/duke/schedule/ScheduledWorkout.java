@@ -11,6 +11,7 @@ import java.util.Map;
 
 //@@author arvejw
 public class ScheduledWorkout {
+
     private String workoutDescription;
     private ArrayList<WorkoutActivity> activities;
     private String workoutDate;
