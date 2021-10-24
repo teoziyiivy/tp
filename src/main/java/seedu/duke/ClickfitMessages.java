@@ -60,6 +60,9 @@ public class ClickfitMessages {
     public static final String TIME_ERROR = "Please enter your time in the right format. "
             + "It should be \"HH:MM\"";
 
+    public static final String DATE_TIME_ERROR = "Please enter your date and time in the right format. "
+            + "It should be \"DD/MM/YYYY\" and \"HH:MM\" respectively.";
+
     public static final String NAME_ERROR = "Please enter the name or description of your meal/fluid";
 
     public static final String NUMBER_ERROR = "Please enter the calories/volume properly";
@@ -103,4 +106,7 @@ public class ClickfitMessages {
     public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
             + "its associated calories is stored"
             + "within your library";
+
+    public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
+            + "workouts and has deleted/rescheduled them!";
 }

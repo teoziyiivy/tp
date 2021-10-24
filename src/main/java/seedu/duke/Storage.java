@@ -32,8 +32,8 @@ public class Storage {
         initializeFoodFile();
         initializeFoodBankFile();
         initializeWeightFile();
-        initializeScheduleDataFile();
-        initializeWorkoutDataFile();
+        initializeScheduleFile();
+        initializeWorkoutFile();
     }
 
     public void saveFood(Fluid fluid, Meal meal) throws IOException {
@@ -139,6 +139,7 @@ public class Storage {
         }
     }
 
+    //@@author arvejw
     public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);
         Set<String> workoutSet = new LinkedHashSet<>(workoutTracker.workouts);
@@ -154,6 +155,7 @@ public class Storage {
         fileWriter.close();
     }
 
+    //@@author arvejw
     public void saveSchedule(ScheduleTracker scheduleTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(SCHEDULE_FILE_PATH, true);
         ArrayList<String> currentScheduleStringList = new ArrayList<>();
@@ -278,6 +280,7 @@ public class Storage {
         return fluids;
     }
 
+    //@@author arvejw
     public ArrayList<String> loadWorkouts() throws IOException {
         ArrayList<String> workout = new ArrayList<>();
         File dataFile = new File(WORKOUT_FILE_PATH);
@@ -293,6 +296,7 @@ public class Storage {
         return workout;
     }
 
+    //@@author arvejw
     public ArrayList<String> loadSchedule() throws IOException {
         ArrayList<String> schedule = new ArrayList<>();
         File dataFile = new File(SCHEDULE_FILE_PATH);
@@ -307,7 +311,8 @@ public class Storage {
         return schedule;
     }
 
-    public static void initializeScheduleDataFile() {
+    //@@author arvejw
+    public static void initializeScheduleFile() {
         File dataFile = new File(SCHEDULE_FILE_PATH);
         if (!dataFile.exists()) {
             try {
@@ -351,7 +356,8 @@ public class Storage {
         }
     }
 
-    public static void initializeWorkoutDataFile() {
+    //@@author arvejw
+    public static void initializeWorkoutFile() {
         File dataFile = new File(WORKOUT_FILE_PATH);
         if (!dataFile.exists()) {
             try {

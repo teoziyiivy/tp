@@ -1,4 +1,4 @@
-package seedu.duke.exceptions;
+package seedu.duke.exceptions.schedule;
 
 public class InvalidActivityFormatException extends ScheduleException {
     @Override
