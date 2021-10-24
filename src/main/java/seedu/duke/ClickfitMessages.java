@@ -2,6 +2,8 @@ package seedu.duke;
 
 public class ClickfitMessages {
 
+    public static final String INITIAL_PROMPT = "What would you like to start with?";
+
     public static final String MESSAGE_A = System.lineSeparator() + "Lets get your fitness journey "
             + "started! input any commands to get started! Type \"help commands\" to get started! "
             + "If you want to read the UG, type in \"help UG\"!" + System.lineSeparator()
@@ -95,4 +97,10 @@ public class ClickfitMessages {
 
     public static final String INCORRECT_LOADING_SCHEDULE_DATA =
             "There were some errors during loading of ScheduleTracker data, some data may have been lost";
+
+    public static final String IO_EXCEPTION_MESSAGE = "Error when loading data from files";
+
+    public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
+            + "its associated calories is stored"
+            + "within your library";
 }

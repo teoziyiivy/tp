@@ -11,7 +11,7 @@ public class Calculator {
     protected int activityLevel;
     protected double multiplier;
 
-    public Calculator(String sex, int weight, int height, int age, int activityLevel) {
+    public Calculator(String sex, double weight, double height, int age, int activityLevel) {
         this.height = height;
         this.weight = weight;
         this.age = age;
