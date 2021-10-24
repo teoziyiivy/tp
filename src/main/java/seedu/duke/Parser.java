@@ -2,12 +2,13 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.workout.WorkoutActivity;
+import seedu.duke.schedule.WorkoutActivity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -222,7 +223,7 @@ public class Parser {
         return description;
     }
 
-    public static Map<String, int[]> getActivities(String inputArguments) throws DukeException {
+    public static Map<String, ArrayList<Integer>> getActivities(String inputArguments) throws DukeException {
         int indexOfActivitySeparator = inputArguments.indexOf(Parser.ACTIVITY_SEPARATOR);
         String subSubstringAfterActivitySeparator = "";
         if (indexOfActivitySeparator != -1) {
@@ -231,6 +232,9 @@ public class Parser {
             if (isRecurringWorkout(inputArguments)) {
                 subSubstringAfterActivitySeparator = subSubstringAfterActivitySeparator
                         .replace(RECURRING_FLAG, "").replace(ACTIVITY_SEPARATOR.trim(), "").trim();
+            } else {
+                subSubstringAfterActivitySeparator = subSubstringAfterActivitySeparator
+                        .replace(ACTIVITY_SEPARATOR.trim(), "").trim();
             }
         }
         if (subSubstringAfterActivitySeparator.isEmpty()) {
@@ -240,8 +244,9 @@ public class Parser {
         }
     }
 
-    private static Map<String, int[]> getActivityArguments(String[] nonParsedActivities) throws DukeException {
-        Map<String, int[]> outputMap = new HashMap<>();
+    private static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
+            throws DukeException {
+        Map<String, ArrayList<Integer>> outputMap = new HashMap<>();
         for (String activity : nonParsedActivities) {
             String[] splitResults = activity.split(ACTIVITY_SPLITTER, 2);
             if (splitResults.length == 1) {
@@ -251,14 +256,12 @@ public class Parser {
             if (quantifierSplitResults.length == 1 && !WorkoutActivity.isDistanceActivity(splitResults[0])) {
                 throw new DukeException("Invalid or missing activity quantifier \"x\" detected.");
             }
-            int[] activityQuantifiers;
+            ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();;
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
-                activityQuantifiers = new int[]{parseStringToInteger(quantifierSplitResults[0].trim())};
+                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
             } else if (quantifierSplitResults.length == 2) {
-                activityQuantifiers = new int[]{
-                        parseStringToInteger(quantifierSplitResults[0].trim()),
-                        parseStringToInteger(quantifierSplitResults[1].trim())
-                };
+                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
             } else {
                 throw new DukeException("Error getting activity quantifiers.");
             }

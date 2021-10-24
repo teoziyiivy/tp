@@ -1,5 +1,8 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
 
+import java.util.ArrayList;
+
+//@@author arvejw
 public class WorkoutActivity {
     private String activityDescription;
     private boolean isDistanceActivity = false;
@@ -11,14 +14,15 @@ public class WorkoutActivity {
     public static final String ACTIVITY_CYCLING = "cycling";
 
 
-    public WorkoutActivity(String activityDescription, int[] activityQuantifier, boolean isDistanceActivity) {
+    public WorkoutActivity(String activityDescription,
+                           ArrayList<Integer> activityQuantifier, boolean isDistanceActivity) {
         this.activityDescription = activityDescription;
         if (isDistanceActivity) {
-            activityDistance = activityQuantifier[0];
+            activityDistance = activityQuantifier.get(0);
             this.isDistanceActivity = true;
         } else {
-            activitySets = activityQuantifier[0];
-            activityReps = activityQuantifier[1];
+            activitySets = activityQuantifier.get(0);
+            activityReps = activityQuantifier.get(1);
         }
     }
 

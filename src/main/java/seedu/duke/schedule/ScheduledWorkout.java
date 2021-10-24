@@ -1,4 +1,6 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
+
+import seedu.duke.Parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 
+//@@author arvejw
 public class ScheduledWorkout {
     private String workoutDescription;
     private ArrayList<WorkoutActivity> activities;
@@ -17,7 +20,7 @@ public class ScheduledWorkout {
     private boolean isRecurring;
 
     public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime,
-                            Map<String, int[]> activityMap, boolean isRecurring) {
+                            Map<String, ArrayList<Integer>> activityMap, boolean isRecurring) {
         this.workoutDescription = workoutDescription;
         this.workoutDate = workoutDate;
         this.workoutTime = workoutTime;
@@ -26,9 +29,8 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
-        /*
         if (!activityMap.isEmpty()) {
-            for (entry : activityMap.entrySet()) {
+            for (var entry : activityMap.entrySet()) {
                 activities.add(
                         new WorkoutActivity(
                                 entry.getKey(), entry.getValue(),
@@ -37,11 +39,6 @@ public class ScheduledWorkout {
                 );
             }
         }
-             */
-    }
-
-    public ArrayList<WorkoutActivity> getActivities() {
-        return activities;
     }
 
     public String getWorkoutDescription() {
@@ -81,20 +78,57 @@ public class ScheduledWorkout {
         return isRecurring ? "recurring " : "";
     }
 
-    public String getActivitiesAsString() {
+    public String getActivitiesAsStringToPrint() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
-            return output + "nil" + System.lineSeparator();
+            return output + "nil" + System.lineSeparator() + "____________________________";
         }
+        int currentIndex = 1;
         for (WorkoutActivity a : activities) {
             if (a.isDistanceActivity()) {
-                output += a.getActivityDescription() + ": " + a.getActivityDistance()
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivityDistance()
                         + "metres" + System.lineSeparator();
             } else {
-                output += a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
+                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
                         + a.getActivityReps() + "reps" + System.lineSeparator();
             }
+            currentIndex++;
+        }
+        return output + System.lineSeparator() + "____________________________";
+    }
+
+    public String getScheduledWorkoutAsString() {
+        String output = workoutDescription + Parser.DATE_SEPARATOR
+                + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
+        output += getActivitiesAsString();
+        if (isRecurring) {
+            output += Parser.RECURRING_FLAG;
         }
         return output;
+    }
+
+    private String getActivitiesAsString() {
+        StringBuilder activityString = new StringBuilder();
+        if (!activities.isEmpty()) {
+            activityString.append(Parser.ACTIVITY_SEPARATOR);
+            int currentIndex = 0;
+            for (WorkoutActivity activity : activities) {
+                if (activity.isDistanceActivity()) {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivityDistance());
+                } else {
+                    activityString.append(activity.getActivityDescription())
+                            .append(Parser.ACTIVITY_SPLITTER)
+                            .append(activity.getActivitySets())
+                            .append(Parser.QUANTIFIER_SPLITTER)
+                            .append(activity.getActivityReps());
+                }
+                currentIndex++;
+                activityString.append(
+                        (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+            }
+        }
+        return activityString.toString();
     }
 }
