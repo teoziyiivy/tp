@@ -17,3 +17,6 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 workoutData.txt
 scheduleData.txt
+Food.txt
+Foodbank.txt
+Weight.txt

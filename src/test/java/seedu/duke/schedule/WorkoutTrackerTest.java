@@ -1,6 +1,7 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.WorkoutTracker;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
 
