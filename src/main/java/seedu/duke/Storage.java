@@ -20,17 +20,14 @@ import static seedu.duke.ClickfitMessages.WEIGHT_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.ENDLINE_PRINT_FORMAT;
 
 public class Storage {
-
-    protected String foodFile;
-    protected String libraryFile;
-    protected String weightFile;
     public static final String SCHEDULE_DATA_FILE_PATH = "scheduleData.txt";
     public static final String WORKOUT_DATA_FILE_PATH = "workoutData.txt";
+    public static final String foodFile = "Food.txt";
+    public static final String libraryFile = "Foodbank.txt";
+    public static final String weightFile = "Weight.txt";
 
-    public Storage(String foodFile, String libraryFile, String weightFile) {
-        this.foodFile = foodFile;
-        this.libraryFile = libraryFile;
-        this.weightFile = weightFile;
+    public Storage() {
+
         initializeScheduleDataFile();
         initializeWorkoutDataFile();
     }
@@ -40,7 +37,7 @@ public class Storage {
         String currentMeal;
         String currentFluid;
         String header;
-        String filePath = new File(this.foodFile).getAbsolutePath();
+        String filePath = new File(foodFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
         int headerFlag;
         header = "Meals" + "\n";
@@ -87,7 +84,7 @@ public class Storage {
         String customMeal;
         String customFluid;
         String header;
-        String filePath = new File(this.libraryFile).getAbsolutePath();
+        String filePath = new File(libraryFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
         header = "Meals" + "\n";
         Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
@@ -112,7 +109,7 @@ public class Storage {
         String currentDate;
         String currentWeight;
         String header;
-        String filePath = new File(this.weightFile).getAbsolutePath();
+        String filePath = new File(weightFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
         int headerFlag;
         header = "Weights" + "\n";
@@ -138,7 +135,7 @@ public class Storage {
         }
     }
 
-    public static void saveWorkoutData(WorkoutTracker workoutTracker) throws IOException {
+    public void saveWorkoutData(WorkoutTracker workoutTracker) throws IOException {
         String fileAsString = Files.readString(Paths.get(WORKOUT_DATA_FILE_PATH));
         FileWriter fw = new FileWriter(WORKOUT_DATA_FILE_PATH, true);
         for (String w : workoutTracker.workouts) {
@@ -150,7 +147,7 @@ public class Storage {
         fw.close();
     }
 
-    public static void saveScheduleData(ScheduleTracker scheduleTracker) throws IOException {
+    public void saveScheduleData(ScheduleTracker scheduleTracker) throws IOException {
         String fileAsString = Files.readString(Paths.get(SCHEDULE_DATA_FILE_PATH));
         FileWriter fw = new FileWriter(SCHEDULE_DATA_FILE_PATH, true);
         for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
@@ -164,7 +161,7 @@ public class Storage {
 
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
-        String newFilePath = new File(this.foodFile).getAbsolutePath();
+        String newFilePath = new File(foodFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -185,7 +182,7 @@ public class Storage {
 
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
-        String newFilePath = new File(this.foodFile).getAbsolutePath();
+        String newFilePath = new File(foodFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -206,7 +203,7 @@ public class Storage {
 
     public ArrayList<String> loadWeights() throws IOException {
         ArrayList<String> weights = new ArrayList<>();
-        String newFilePath = new File(this.weightFile).getAbsolutePath();
+        String newFilePath = new File(weightFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -227,7 +224,7 @@ public class Storage {
 
     public ArrayList<String> loadMealLibrary() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
-        String newFilePath = new File(this.libraryFile).getAbsolutePath();
+        String newFilePath = new File(libraryFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -248,7 +245,7 @@ public class Storage {
 
     public ArrayList<String> loadFluidLibrary() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
-        String newFilePath = new File(this.libraryFile).getAbsolutePath();
+        String newFilePath = new File(libraryFile).getAbsolutePath();
         File f = new File(newFilePath);
         Scanner s = new Scanner(f);
         String textFromFile;
@@ -312,20 +309,6 @@ public class Storage {
             }
         }
     }
-
-    public void loadAllTasks(Fluid fluid, Meal meal, ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
-                             WeightTracker weightTracker) throws IOException {
-        String filePath = new File(this.foodFile).getAbsolutePath();
-        FileWriter fw = new FileWriter(filePath, false);
-        String currentDate;
-        String currentMeal;
-        String currentFluid;
-        String header;
-        String customMeal;
-        String customFluid;
-    }
-
-
 
     public void mealSummary() {
         int totalCalories = 0;
