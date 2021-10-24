@@ -156,7 +156,8 @@ public class WeightTracker extends Tracker {
             if (weightsArray.get(i - 1).contains(line)) {
                 weightsFound += 1;
                 generateWeightParameters(weightsArray.get(i - 1));
-                foundList = foundList + "\n" + i + ". " + weight;
+                foundList = foundList + "\n" + weightsFound + ". " + weight
+                        + " (index: " + i + ")";
             }
         }
         if (weightsFound == 0) {
