@@ -86,5 +86,13 @@ public class ClickfitMessages {
     public static final String WORKOUT_PRINT_FORMAT = System.lineSeparator() + "Workout Summary:"
             + System.lineSeparator() + "======================";
 
+    public static final String WEIGHT_PRINT_FORMAT = System.lineSeparator() + "Weight Summary:"
+            + System.lineSeparator() + "======================";
+
     public static final String ENDLINE_PRINT_FORMAT = "======================";
+
+    public static final String SCHEDULE_DATA_NOT_FOUND = "Unable to locate ScheduleTracker data file.";
+
+    public static final String INCORRECT_LOADING_SCHEDULE_DATA =
+            "There were some errors during loading of ScheduleTracker data, some data may have been lost";
 }
