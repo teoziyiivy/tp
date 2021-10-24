@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.schedule.WorkoutActivity;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -21,15 +20,10 @@ public class Parser {
     public static final String RECURRING_FLAG = " /r";
     public static final String VOLUME_SEPARATOR = " /v ";
     public static final String ACTIVITY_SEPARATOR = " /a ";
-    public static final String NO_INPUT_ACTIVITY = "nil";
     public static final String MULTIPLE_ACTIVITY_MARKER = ",";
     public static final String ACTIVITY_SPLITTER = ":";
     public static final String QUANTIFIER_SPLITTER = "x";
     public static final String SPACE_SEPARATOR = " ";
-
-    public static boolean containsVolumeSeparator(String inputArguments) {
-        return inputArguments.contains(VOLUME_SEPARATOR);
-    }
 
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
@@ -43,10 +37,6 @@ public class Parser {
         return inputArguments.contains(CALORIE_SEPARATOR);
     }
 
-    public static boolean containsActivitySeparator(String inputArguments) {
-        return inputArguments.contains(ACTIVITY_SEPARATOR);
-    }
-
     public static boolean isRecurringWorkout(String inputArguments) {
         String[] splitResults = inputArguments.split(RECURRING_FLAG, 2);
         if (splitResults.length == 1) {
@@ -55,10 +45,15 @@ public class Parser {
         return splitResults[1].isEmpty(); // true if /r flag is at the end of the string
     }
 
-
     public static int parseStringToInteger(String input) throws NumberFormatException {
         return Integer.parseInt(input);
     }
+
+    /*
+    public static double parseStringToDouble(String input) throws NumberFormatException {
+        return Double.parseDouble(input);
+    }
+     */
 
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
@@ -160,9 +155,7 @@ public class Parser {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
-        //Keeps throwing NullPointerException so like half the JUnits fail assertion due to wrong Exception thrown
-        //static method requires static attribute created non static DateTracker constructor
-        DateTracker.checkIfDateExists(formatter.format(localDate)); //this is causing JUnits to fail
+        DateTracker.checkIfDateExists(formatter.format(localDate));
         return formatter.format(localDate);
     }
 
@@ -176,14 +169,7 @@ public class Parser {
                 break;
             }
         }
-        if (date.equals("")) {
-            String newDate = getSystemDate();
-            DateTracker.checkIfDateExists(newDate);
-            return newDate;
-        }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date, formatter);
-        return formatter.format(localDate);
+        return date;
     }
 
     public static String getTime(String inputArguments) throws DateTimeParseException {
@@ -204,6 +190,7 @@ public class Parser {
         return properTime;
     }
 
+    // implement double
     public static int getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         int weight = parseStringToInteger(userInput[0]);
@@ -268,11 +255,6 @@ public class Parser {
             outputMap.put(splitResults[0].trim(), activityQuantifiers);
         }
         return outputMap;
-    }
-
-    public static String getHelpDescription(String inputArguments) {
-        String description = inputArguments;
-        return description;
     }
 
     public static String getSystemDate() {
