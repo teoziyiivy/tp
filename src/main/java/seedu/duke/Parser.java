@@ -95,9 +95,13 @@ public class Parser {
         int calories = 0;
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
-        for (int i = 1; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
-                calories = parseStringToInteger(userInput[i + 1]);
+                try {
+                    calories = parseStringToInteger(userInput[i + 1]);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new NumberFormatException();
+                }
             }
         }
         if (calories < 0) {

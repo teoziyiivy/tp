@@ -89,8 +89,8 @@ public class CommandManager {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
         storage.saveWeight(weightTracker);
-        storage.saveScheduleData(scheduleTracker);
-        storage.saveWorkoutData(workoutTracker);
+        storage.saveSchedule(scheduleTracker);
+        storage.saveWorkout(workoutTracker);
     }
 
     public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {

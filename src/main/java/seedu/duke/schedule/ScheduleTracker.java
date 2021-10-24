@@ -40,8 +40,7 @@ public class ScheduleTracker {
     }
 
     public void loadScheduleData() {
-        File dataFile = new File(Storage.SCHEDULE_DATA_FILE_PATH);
-        // short circuit preload if file is empty
+        File dataFile = new File(Storage.SCHEDULE_FILE_PATH);
         if (dataFile.length() == 0) {
             return;
         }
@@ -56,7 +55,6 @@ public class ScheduleTracker {
         boolean isDataLoadCorrectly = true;
         while (fileScanner.hasNext()) {
             currentLine = fileScanner.nextLine();
-            // if any empty lines, skip to next iteration of the while loop
             if (currentLine.isEmpty()) {
                 continue;
             }
