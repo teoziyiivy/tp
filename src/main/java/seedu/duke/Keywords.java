@@ -2,14 +2,9 @@ package seedu.duke;
 
 public class Keywords {
     public static final String INPUT_ADD_WORKOUT = "workout";
-    public static final String INPUT_DELETE_WORKOUT = "deleteworkout";
-    public static final String INPUT_ADD_SCHEDULE = "schedule";
-    public static final String INPUT_DELETE_SCHEDULE = "deleteschedule";
     public static final String DELETE_DRINKS = "deletefluid";
     public static final String LIST_DRINKS = "listfluids";
     public static final String INPUT_ADD_WEIGHT = "addweight";
-    public static final String INPUT_DELETE_WEIGHT = "deleteweight";
-    public static final String INPUT_LIST_WEIGHT = "listweights";
     public static final String INPUT_BYE = "bye";
     public static final String DELETE_MEAL = "deletemeal";
     public static final String LIST_MEAL = "listmeals";
@@ -30,6 +25,4 @@ public class Keywords {
     public static final String MEAL = "meal";
     public static final String FLUID = "fluid";
     public static final String DELETE = "delete";
-
-
 }

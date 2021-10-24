@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +11,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static seedu.duke.ClickfitMessages.MEAL_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.FLUID_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.WORKOUT_PRINT_FORMAT;
@@ -20,14 +18,17 @@ import static seedu.duke.ClickfitMessages.WEIGHT_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.ENDLINE_PRINT_FORMAT;
 
 public class Storage {
-    public static final String SCHEDULE_DATA_FILE_PATH = "scheduleData.txt";
-    public static final String WORKOUT_DATA_FILE_PATH = "workoutData.txt";
+
+    public static final String SCHEDULE_DATA_FILE_PATH = "Schedule.txt";
+    public static final String WORKOUT_DATA_FILE_PATH = "Workout.txt";
     public static final String foodFile = "Food.txt";
-    public static final String libraryFile = "Foodbank.txt";
+    public static final String libraryFile = "FoodBank.txt";
     public static final String weightFile = "Weight.txt";
 
     public Storage() {
-
+        initializeFoodFile();
+        initializeFoodBankFile();
+        initializeWeightFile();
         initializeScheduleDataFile();
         initializeWorkoutDataFile();
     }
@@ -287,6 +288,39 @@ public class Storage {
                 dataFile.createNewFile();
             } catch (IOException ioe) {
                 System.out.println("Error during data file creation for ScheduleTracker.");
+            }
+        }
+    }
+
+    public static void initializeFoodFile() {
+        File dataFile = new File(foodFile);
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException ioe) {
+                System.out.println("Error during data file creation for meals and fluids.");
+            }
+        }
+    }
+
+    public static void initializeFoodBankFile() {
+        File dataFile = new File(libraryFile);
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException ioe) {
+                System.out.println("Error during data file creation for meals and fluids.");
+            }
+        }
+    }
+
+    public static void initializeWeightFile() {
+        File dataFile = new File(weightFile);
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException ioe) {
+                System.out.println("Error during data file creation for meals and fluids.");
             }
         }
     }

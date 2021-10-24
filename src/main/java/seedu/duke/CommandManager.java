@@ -1,14 +1,19 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.ScheduleException;
 import seedu.duke.schedule.ScheduleTracker;
-
+import seedu.duke.exceptions.DeleteWeightException;
+import seedu.duke.exceptions.DeleteWeightIndexException;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class CommandManager {
+
     protected ScheduleTracker scheduleTracker;
     protected WorkoutTracker workoutTracker;
     protected Meal meal;
@@ -116,6 +121,7 @@ public class CommandManager {
             break;
         }
     }
+
     public void listParser(String inputArguments) throws NullPointerException, FoodBankException, DukeException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
@@ -175,18 +181,23 @@ public class CommandManager {
         switch (command) {
         case Keywords.MEAL:
             meal.addMeal(inputArguments);
+            DateTracker.sortDateAndTime(meal.meals);
             break;
         case Keywords.FLUID:
             fluid.addFluid(inputArguments);
+            DateTracker.sortDateAndTime(fluid.fluidArray);
             break;
         case Keywords.WORKOUT:
             workoutTracker.addWorkout(inputArguments, false);
+            // Sorting needs to be updated
+            DateTracker.sortDateAndTime(workoutTracker.workouts);
             break;
         case Keywords.SCHEDULE:
             scheduleTracker.addScheduledWorkout(inputArguments, false);
             break;
         case Keywords.WEIGHT:
             weightTracker.readInput(inputArguments);
+            DateTracker.sortDate(weightTracker.weightsArray);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -235,7 +246,7 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-        DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
+        DateTracker.deleteDateFromList(inputArguments, fluid, meal, workoutTracker, weightTracker);
     }
 
     public void listEverything(String date) throws NullPointerException, FoodBankException, DukeException {

@@ -1,12 +1,17 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.ScheduleException;
 import seedu.duke.schedule.ScheduleTracker;
-
+import seedu.duke.exceptions.DeleteWeightException;
+import seedu.duke.exceptions.DeleteWeightIndexException;
+import seedu.duke.exceptions.LoadException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
-
 import static seedu.duke.ClickfitMessages.IO_EXCEPTION_MESSAGE;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 
@@ -39,7 +44,6 @@ public class Duke {
             userHelp = new UserHelp();
             storage = new Storage();
             foodbank = new FoodBank();
-            dateTracker = new DateTracker();
             ui.welcomeMessage();
             ui.getInfo();
             if (ui.memoryStartup()) {

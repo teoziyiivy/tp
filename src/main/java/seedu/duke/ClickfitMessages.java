@@ -100,7 +100,7 @@ public class ClickfitMessages {
 
     public static final String IO_EXCEPTION_MESSAGE = "Error when loading data from files";
 
-    public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with its associated calories is stored" +
-            "within your library";
-
+    public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
+            + "its associated calories is stored"
+            + "within your library";
 }

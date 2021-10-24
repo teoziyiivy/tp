@@ -29,7 +29,7 @@ public class WorkoutTracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for workout.");
         workoutDescription = Parser.getDescription(inputArguments);
         caloriesBurned = Parser.getCaloriesBurnedForWorkout(inputArguments);
-        workoutDate = Parser.getDateNoDateTracker(inputArguments);
+        workoutDate = Parser.getDate(inputArguments);
         workoutTime = Parser.getTime(inputArguments);
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully generated parameters for workout.");
     }
