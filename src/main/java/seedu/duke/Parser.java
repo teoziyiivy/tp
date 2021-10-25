@@ -57,11 +57,9 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
-    /*
     public static double parseStringToDouble(String input) throws NumberFormatException {
         return Double.parseDouble(input);
     }
-     */
 
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
@@ -202,9 +200,9 @@ public class Parser {
     }
 
     // implement double
-    public static int getWeight(String inputArguments) throws DukeException {
+    public static double getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
-        int weight = parseStringToInteger(userInput[0]);
+        double weight = parseStringToDouble(userInput[0]);
         if (weight < 0) {
             throw new DukeException("Negative weight");
         }

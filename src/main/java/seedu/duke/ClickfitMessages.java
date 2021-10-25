@@ -109,4 +109,15 @@ public class ClickfitMessages {
 
     public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
             + "workouts and has deleted/rescheduled them!";
+
+    public static final String WEIGHT_ADD_FORMAT_ERROR = "CLI.ckFit encountered a problem adding your weight."
+            + System.lineSeparator() + "Please follow the format: addweight <weight> /d <DD/MM/YYYY>";
+
+    public static final String WEIGHT_DELETE_FORMAT_ERROR = "CLI.ckFit encountered a problem deleting your weight."
+            + System.lineSeparator() + "Please follow the format: deleteweight <index>";
+
+    public static final String WEIGHT_DELETE_INDEX_ERROR = "CLI.ckFit encountered a problem deleting your weight."
+            + System.lineSeparator() + "Please ensure the index is within the list.";
+
+    public static final String WEIGHT_EMPTY_ERROR = "CLI.ckFit has no recorded weights.";
 }
