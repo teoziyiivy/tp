@@ -73,37 +73,52 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "deleteFluid");
     }
 
-    public void listFluid(String date) {
-        logr.entering(getClass().getName(), "listFluid");
-        assert fluidArray.size() != 0 : "Fluid array should not be empty";
-        try {
-            logr.info("going to print fluid list");
+    public void listFluids(String date) throws FoodBankException, DukeException {
+        logr.entering(getClass().getName(), "listFluids");
+        if (date.equals("all")) {
             int i = 1;
             totalCalories = 0;
-            totalVolume = 0;
+            fluidNumber = 0;
+            for (String fluid : fluidArray) {
+                logr.log(Level.INFO, "generating fluid parameters");
+                generateFluidParameters(fluid);
+                logr.log(Level.INFO, "fluid parameters generated");
+                System.out.println(i + ". " + description);
+                System.out.println("Calories: " + calories);
+                System.out.println("Volume: " + volume);
+                System.out.println("Date: " + date);
+                System.out.println("Time: " + time + "\n");
+                i += 1;
+                totalCalories += calories;
+                fluidNumber += 1;
+            }
+        } else {
+            assert fluidNumber != 0;
+            logr.entering(getClass().getName(), "listFluids");
+            int i = 1;
+            logr.log(Level.INFO, "entering for loop");
+            totalCalories = 0;
             fluidNumber = 0;
             for (String fluid : fluidArray) {
                 if (fluid.contains(date)) {
+                    logr.log(Level.INFO, "generating fluid parameters");
                     generateFluidParameters(fluid);
+                    logr.log(Level.INFO, "fluid parameters generated");
                     System.out.println(i + ". " + description);
                     System.out.println("Calories: " + calories);
                     System.out.println("Volume: " + volume);
                     System.out.println("Date: " + date);
                     System.out.println("Time: " + time + "\n");
-                    i++;
+                    i += 1;
                     totalCalories += calories;
-                    totalVolume += volume;
+                    fluidNumber += 1;
                 }
             }
-            fluidNumber = i - 1;
-            System.out.println("Total number of fluids: " + fluidNumber);
-            System.out.println("Total calories: " + totalCalories);
-            System.out.println("Total volume: " + totalVolume);
-            logr.info("finished printing fluid list");
-        } catch (ArrayIndexOutOfBoundsException | DukeException | FoodBankException e) {
-            return;
         }
-        logr.exiting(getClass().getName(), "listFluid");
+        System.out.println("Total number of fluids: " + fluidNumber);
+        System.out.println("Total calories: " + totalCalories);
+        logr.log(Level.INFO, "fluid list printed");
+        logr.exiting(getClass().getName(), "listFluids");
     }
 
     public int getCalories(String date) throws DukeException, FoodBankException {

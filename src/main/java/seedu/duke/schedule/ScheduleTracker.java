@@ -2,10 +2,13 @@ package seedu.duke.schedule;
 
 import seedu.duke.ClickfitMessages;
 import seedu.duke.Storage;
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.Parser;
-import seedu.duke.exceptions.InvalidActivityFormatException;
-import seedu.duke.exceptions.ScheduleException;
+import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
+import seedu.duke.exceptions.schedule.DeleteScheduleException;
+import seedu.duke.exceptions.schedule.MissingScheduleDescriptionException;
+import seedu.duke.exceptions.schedule.MissingScheduleSeparatorException;
+import seedu.duke.exceptions.schedule.ScheduleException;
+import seedu.duke.exceptions.schedule.ScheduleNullArgumentException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 
 //@@author arvejw
 public class ScheduleTracker {
+
     private ArrayList<ScheduledWorkout> scheduledWorkouts;
     private static final int LOWER_BOUND_INDEX_NON_EMPTY_LIST_ONES_INDEXING = 1;
     private static final int FIRST_INDEX_IN_LIST = 0;
@@ -40,8 +44,7 @@ public class ScheduleTracker {
     }
 
     public void loadScheduleData() {
-        File dataFile = new File(Storage.SCHEDULE_DATA_FILE_PATH);
-        // short circuit preload if file is empty
+        File dataFile = new File(Storage.SCHEDULE_FILE_PATH);
         if (dataFile.length() == 0) {
             return;
         }
@@ -56,24 +59,22 @@ public class ScheduleTracker {
         boolean isDataLoadCorrectly = true;
         while (fileScanner.hasNext()) {
             currentLine = fileScanner.nextLine();
-            // if any empty lines, skip to next iteration of the while loop
             if (currentLine.isEmpty()) {
                 continue;
             }
             try {
-                addScheduledWorkout(currentLine, true);
-            } catch (DukeException | DateTimeParseException | ScheduleException e) {
+                addScheduledWorkout(currentLine, true, false);
+            } catch (DateTimeParseException | ScheduleException e) {
                 isDataLoadCorrectly = false;
             }
         }
+        cleanUpScheduleList();
         if (!isDataLoadCorrectly) {
             System.out.println(ClickfitMessages.INCORRECT_LOADING_SCHEDULE_DATA);
         }
-        cleanUpScheduleList();
     }
 
-    public String[] generateScheduledWorkoutParameters(String inputArguments)
-            throws DukeException, DateTimeParseException {
+    public String[] generateScheduledWorkoutParameters(String inputArguments) throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for scheduled workout.");
         String workoutDescription = Parser.getScheduleDescription(inputArguments);
         String workoutDate = Parser.getDateNoDateTracker(inputArguments);
@@ -83,8 +84,8 @@ public class ScheduleTracker {
         return generatedParameters;
     }
 
-    public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage)
-            throws DukeException, DateTimeParseException, NumberFormatException, ScheduleException {
+    public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage, boolean isCleanUp)
+            throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
@@ -112,7 +113,9 @@ public class ScheduleTracker {
                     + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
                     + workoutTime + ".");
         }
-        cleanUpScheduleList();
+        if (isCleanUp) {
+            cleanUpScheduleList();
+        }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout to schedule.");
     }
 
@@ -122,11 +125,14 @@ public class ScheduleTracker {
         return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound);
     }
 
-    public void deleteScheduledWorkout(String inputArguments) throws DukeException, NumberFormatException {
+    public void deleteScheduledWorkout(String inputArguments) throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete scheduled workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
-        emptyScheduledWorkoutListCheck();
+        if (isScheduledWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
+            return;
+        }
         assert scheduledWorkouts.size() > 0 : "List should be non empty at this point";
         int workoutNumber = Parser.parseStringToInteger(inputArguments);
         int workoutIndex = workoutNumber - 1; // 0-indexing
@@ -137,16 +143,18 @@ public class ScheduleTracker {
                     + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
                     + " at " + workoutToDelete.getWorkoutTime() + "!");
             scheduledWorkouts.remove(workoutIndex);
-            cleanUpScheduleList();
             SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted scheduled workout.");
         } else {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Failed to delete scheduled workout.");
-            throw new DukeException("Failed to delete that workout! Please enter an Integer within range.");
+            throw new DeleteScheduleException();
         }
     }
 
-    public void listScheduledWorkouts(String inputArguments) throws DukeException {
-        emptyScheduledWorkoutListCheck();
+    public void listScheduledWorkouts(String inputArguments) throws ScheduleException {
+        if (isScheduledWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
+            return;
+        }
         cleanUpScheduleList();
         if (inputArguments.equals(INPUT_ALL)) {
             listAllScheduledWorkouts();
@@ -185,7 +193,8 @@ public class ScheduleTracker {
             int currentIndex = 1;
             int workoutCount = 0;
             for (ScheduledWorkout workout : filteredScheduleList) {
-                System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
+                System.out.println(currentIndex + ". "
+                        + workout.getWorkoutDescription() + workout.isRecurringStatus());
                 System.out.println("Date: " + workout.getWorkoutDate());
                 System.out.println("Time: " + workout.getWorkoutTime());
                 System.out.println(workout.getActivitiesAsStringToPrint());
@@ -197,7 +206,7 @@ public class ScheduleTracker {
     }
 
     public void cleanUpScheduleList() {
-        if (scheduledWorkouts.isEmpty()) {
+        if (isScheduledWorkoutListEmpty()) {
             return;
         }
         sortScheduleList();
@@ -215,8 +224,7 @@ public class ScheduleTracker {
             }
         }
         if (isAnyWorkoutUpdatedOrDeleted) {
-            System.out.println("CLI.ckFit has detected some overdue scheduled "
-                    + "workouts and has deleted/rescheduled them!");
+            System.out.println(ClickfitMessages.DELETE_OR_UPDATE_SCHEDULE_MESSAGE);
         }
     }
 
@@ -224,7 +232,7 @@ public class ScheduleTracker {
         if (scheduledWorkout.isRecurring()) {
             rescheduleRecurringWorkout(scheduledWorkout, currentDate);
         } else {
-            scheduledWorkouts.remove(scheduledWorkouts.indexOf(scheduledWorkout));
+            scheduledWorkouts.remove(scheduledWorkout);
         }
         sortScheduleList();
     }
@@ -240,35 +248,29 @@ public class ScheduleTracker {
         scheduledWorkouts.sort(Comparator.comparing(ScheduledWorkout::getWorkoutDateTime));
     }
 
-    public void nullArgumentCheck(String inputArguments) throws DukeException {
+    public void nullArgumentCheck(String inputArguments) throws ScheduleException {
         if (inputArguments == null) {
-            SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "User input argument(s) is null.");
-            throw new DukeException("Please enter arguments in the format: schedule [workout_description] "
-                    + "/d [dd/mm/yyyy] /t [hh:mm]");
+            SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "User input argument is null.");
+            throw new ScheduleNullArgumentException();
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "User input argument(s) is not null.");
     }
 
-    public void scheduledWorkoutSeparatorCheck(String inputArguments) throws DukeException {
+    public void scheduledWorkoutSeparatorCheck(String inputArguments) throws ScheduleException {
         boolean areSeparatorsCorrect = Parser.containsDateSeparator(inputArguments)
                 && Parser.containsTimeSeparator(inputArguments);
         if (!areSeparatorsCorrect) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Separators in user input are missing or invalid.");
-            throw new DukeException("Invalid or missing separator... " + System.lineSeparator()
-                    + "Please enter in the format: schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]");
+            throw new MissingScheduleSeparatorException();
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Separators in user input are correct.");
     }
 
-    public void emptyScheduledWorkoutListCheck() throws DukeException {
-        if (scheduledWorkouts.isEmpty()) {
-            SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Schedule list is empty.");
-            throw new DukeException("Scheduled Workout list is empty!");
-        }
-        SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Schedule list is not empty.");
+    public boolean isScheduledWorkoutListEmpty() {
+        return scheduledWorkouts.isEmpty();
     }
 
-    public void missingDescriptionCheck(String inputArguments) throws DukeException {
+    public void missingDescriptionCheck(String inputArguments) throws ScheduleException {
         int indexOfFirstDateSeparator = inputArguments.indexOf(Parser.DATE_SEPARATOR.trim());
         String subStringBeforeDateSeparator = "";
         if (indexOfFirstDateSeparator != -1) { // date separator not found
@@ -278,8 +280,7 @@ public class ScheduleTracker {
         }
         if (subStringBeforeDateSeparator.isEmpty()) {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
-            throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
-                    + "Please enter a description for your workout!");
+            throw new MissingScheduleDescriptionException();
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Description is present in user input arguments.");
     }

@@ -4,15 +4,22 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.ScheduleException;
+import seedu.duke.exceptions.schedule.ScheduleException;
+import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
+import seedu.duke.exceptions.DeleteWeightException;
+import seedu.duke.exceptions.DeleteWeightIndexException;
+import seedu.duke.exceptions.NoWeightsException;
+import seedu.duke.exceptions.AddWeightException;
 
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class CommandManager {
+
     protected ScheduleTracker scheduleTracker;
     protected WorkoutTracker workoutTracker;
     protected Meal meal;
@@ -39,9 +46,13 @@ public class CommandManager {
         this.storage = storage;
     }
 
-    public void commandChecker() throws DukeException, NullPointerException,
+    public void commandChecker() throws
+            DukeException, NullPointerException,
             MealException, FluidExceptions,
-            FoodBankException, IOException, ScheduleException {
+            FoodBankException, IOException,
+            ScheduleException, AddWeightException,
+            DeleteWeightException, DeleteWeightIndexException,
+            WorkoutException, NoWeightsException {
         String input = scanner.nextLine();
         System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
@@ -50,10 +61,8 @@ public class CommandManager {
         assert !Objects.equals(inputArguments, "");
         switch (command) {
         case Keywords.LIST:
-            assert inputArguments != null;
-            if (splitResults.length == 1) {
+            if (inputArguments == null) {
                 listEverything(Parser.getSystemDate());
-                // list everything for that day- send today's date as a parameter
             } else {
                 listParser(inputArguments);
             }
@@ -62,67 +71,13 @@ public class CommandManager {
             assert inputArguments != null;
             foodBankParser(inputArguments);
             break;
-        case Keywords.INPUT_MEAL:
-            if (splitResults.length == 1) {
-                throw new MealException();
-            }
-            meal.addMeal(inputArguments);
-            DateTracker.sortTime(meal.meals);
+        case Keywords.ADD:
+            assert inputArguments != null;
+            addParser(inputArguments);
             break;
-        case Keywords.DELETE_MEAL:
-            meal.deleteMeal(inputArguments);
-            DateTracker.deleteDateFromList(inputArguments, fluid, meal, scheduleTracker, workoutTracker, weightTracker);
-            break;
-
-        case Keywords.INPUT_ADD_WORKOUT:
-        case Keywords.INPUT_DELETE_WORKOUT:
-            executeWorkoutCommand(command, inputArguments);
-            break;
-        case Keywords.INPUT_ADD_SCHEDULE:
-        case Keywords.INPUT_DELETE_SCHEDULE:
-            executeScheduleCommand(command, inputArguments);
-            break;
-        case Keywords.INPUT_DRINKS:
-            if (inputArguments != null) {
-                try {
-                    fluid.addFluid(inputArguments);
-                    DateTracker.sortTime(fluid.fluidArray);
-                } catch (FluidExceptions | FoodBankException e) {
-                    System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
-                }
-            } else {
-                throw new FluidExceptions();
-            }
-            break;
-        case Keywords.DELETE_DRINKS:
-            if (inputArguments != null) {
-                if (fluid.fluidArray.size() == 0) {
-                    System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
-                } else {
-                    fluid.deleteFluid(inputArguments);
-                    DateTracker.deleteDateFromList(inputArguments, fluid, meal,
-                            scheduleTracker, workoutTracker, weightTracker);
-                }
-            } else {
-                System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
-            }
-            break;
-        case Keywords.INPUT_ADD_WEIGHT:
-            try {
-                weightTracker.readInput(input);
-            } catch (DukeException e) {
-                return;
-            } catch (DateTimeParseException e) {
-                WeightTrackerMessages.printAddWeightException();
-            }
-            break;
-        case Keywords.INPUT_DELETE_WEIGHT:
-        case Keywords.INPUT_LIST_WEIGHT:
-            try {
-                weightTracker.readInput(input);
-            } catch (DukeException e) {
-                return;
-            }
+        case Keywords.DELETE:
+            assert inputArguments != null;
+            deleteParser(inputArguments);
             break;
         case Keywords.INPUT_HELP:
             UserHelp.generateUserHelpParameters(inputArguments);
@@ -135,14 +90,19 @@ public class CommandManager {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
+        saveEverything();
+    }
+
+    public void saveEverything() throws IOException {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
         storage.saveWeight(weightTracker);
-        storage.saveScheduleData(scheduleTracker);
-        storage.saveWorkoutData(workoutTracker);
+        storage.saveSchedule(scheduleTracker);
+        storage.saveWorkout(workoutTracker);
     }
 
-    public void foodBankParser(String inputArguments) throws NullPointerException, FoodBankException {
+    public void foodBankParser(String inputArguments) throws
+            NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
@@ -171,64 +131,53 @@ public class CommandManager {
         }
     }
 
-    public void listParser(String inputArguments) throws NullPointerException, FoodBankException, DukeException {
+    public void listParser(String inputArguments) throws
+            NullPointerException, FoodBankException,
+            DukeException, ScheduleException,
+            WorkoutException, NoWeightsException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         String date;
         if (splitResults.length == 1) {
             if (command.contains("/")) {
-                listEverything(command);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(command, formatter);
+                date = formatter.format(localDate);
+                listEverything(date);
                 return;
             } else {
                 date = Parser.getSystemDate();
             }
         } else {
             date = splitResults[1];
+            if (!date.equals("all")) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(date, formatter);
+                date = formatter.format(localDate);
+            }
         }
         switch (command) {
-        case Keywords.MEAL:
+        case Keywords.MEALS:
             meal.listMeals(date);
             break;
-        case Keywords.FLUID:
-            fluid.listFluid(date);
+        case Keywords.FLUIDS:
+            fluid.listFluids(date);
             break;
         case Keywords.CALORIES:
-            int calCount = fluid.getCalories(date) + meal.getCalories(date);
-            int caloriesBurned = workoutTracker.getCaloriesBurned(date);
-            int netCalories = calCount - caloriesBurned;
-            System.out.println("\nYour total calorie consumption for " + date + " is: " + calCount + " calories.");
-            System.out.println("Your total calories burned for " + date + " is: " + caloriesBurned + " calories.");
-            System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
+            listCalories(date);
             break;
         case Keywords.VOLUME:
             int volCount = fluid.getVolume(date);
             System.out.println("\n" + "Your total volume consumption for " + date + " is: " + volCount + " ml.");
             break;
-        case Keywords.WORKOUT:
+        case Keywords.WORKOUTS:
             workoutTracker.listWorkouts(date);
             break;
         case Keywords.SCHEDULE:
             scheduleTracker.listScheduledWorkouts(date);
             break;
-            /*
-        case Keywords.WEIGHT:
-            FoodBank.deleteCustomMeal(inputArguments);
-            break;
-             */
-        default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            break;
-        }
-    }
-
-    public void executeScheduleCommand(String command, String inputArguments)
-            throws DukeException, ScheduleException {
-        switch (command) {
-        case Keywords.INPUT_ADD_SCHEDULE:
-            scheduleTracker.addScheduledWorkout(inputArguments, false);
-            break;
-        case Keywords.INPUT_DELETE_SCHEDULE:
-            scheduleTracker.deleteScheduledWorkout(inputArguments);
+        case Keywords.WEIGHTS:
+            weightTracker.listWeights(date);
             break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -236,28 +185,108 @@ public class CommandManager {
         }
     }
 
-    public void executeWorkoutCommand(String command, String inputArguments) throws DukeException {
+    private void listCalories(String date) throws
+            DukeException, FoodBankException,
+            WorkoutException {
+        int calCount = fluid.getCalories(date) + meal.getCalories(date);
+        int caloriesBurned = workoutTracker.getCaloriesBurned(date);
+        int netCalories = calCount - caloriesBurned;
+        System.out.println(System.lineSeparator() + "Your total calorie consumption for "
+                + date + " is: " + calCount + " calories.");
+        System.out.println("Your total calories burned for " + date + " is: " + caloriesBurned + " calories.");
+        System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
+    }
+
+    public void addParser(String input) throws
+            NullPointerException, FoodBankException,
+            DukeException, MealException,
+            FluidExceptions, ScheduleException,
+            WorkoutException, AddWeightException {
+        String[] splitResults = input.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
-        case Keywords.INPUT_ADD_WORKOUT:
+        case Keywords.MEAL:
+            meal.addMeal(inputArguments);
+            DateTracker.sortDateAndTime(meal.meals);
+            break;
+        case Keywords.FLUID:
+            fluid.addFluid(inputArguments);
+            DateTracker.sortDateAndTime(fluid.fluidArray);
+            break;
+        case Keywords.WORKOUT:
             workoutTracker.addWorkout(inputArguments, false);
+            DateTracker.sortDateAndTime(workoutTracker.workouts);
             break;
-        case Keywords.INPUT_DELETE_WORKOUT:
+        case Keywords.SCHEDULE:
+            scheduleTracker.addScheduledWorkout(inputArguments, false, true);
+            break;
+        case Keywords.WEIGHT:
+            weightTracker.addWeight(inputArguments);
+            DateTracker.sortDate(weightTracker.weightsArray);
+            break;
+        default:
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+    }
+
+    public void deleteParser(String input) throws NullPointerException,
+            FoodBankException, DukeException,
+            ScheduleException,
+            WorkoutException,
+            DeleteWeightException,
+            DeleteWeightIndexException {
+        String[] splitResults = input.trim().split(" ", 2);
+        command = splitResults[0];
+        inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
+        switch (command) {
+        case Keywords.MEAL:
+            // DO delete list size check within class
+            meal.deleteMeal(inputArguments);
+            break;
+        case Keywords.FLUID:
+            // Do within class
+            if (inputArguments != null) {
+                if (fluid.fluidArray.size() == 0) {
+                    System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
+                } else {
+                    fluid.deleteFluid(inputArguments);
+                }
+            } else {
+                System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
+            }
+            break;
+        case Keywords.WORKOUT:
             workoutTracker.deleteWorkout(inputArguments);
             break;
+        case Keywords.SCHEDULE:
+            scheduleTracker.deleteScheduledWorkout(inputArguments);
+            break;
+        case Keywords.WEIGHT:
+            if (inputArguments == null) {
+                throw new DeleteWeightException();
+            }
+            weightTracker.deleteWeight(inputArguments);
+            break;
         default:
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
+        DateTracker.deleteDateFromList(inputArguments, fluid, meal, workoutTracker, weightTracker);
     }
 
-    public void listEverything(String date) throws NullPointerException, FoodBankException, DukeException {
+    public void listEverything(String date) throws
+            NullPointerException, FoodBankException,
+            NoWeightsException, DukeException, WorkoutException, ScheduleException {
         meal.listMeals(date);
         System.out.println();
-        fluid.listFluid(date);
+        fluid.listFluids(date);
+        System.out.println();
+        weightTracker.listWeights(date);
         System.out.println();
         workoutTracker.listWorkouts(date);
         System.out.println();
         scheduleTracker.listScheduledWorkouts(date);
-        System.out.println();
     }
 }

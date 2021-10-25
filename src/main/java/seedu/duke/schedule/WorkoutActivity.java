@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 //@@author arvejw
 public class WorkoutActivity {
+
     private String activityDescription;
     private boolean isDistanceActivity = false;
     private int activityDistance;
