@@ -97,13 +97,13 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println(ClickfitMessages.IO_EXCEPTION_MESSAGE);
             } catch (DeleteWeightIndexException e) {
-                //
+                System.out.println(ClickfitMessages.WEIGHT_DELETE_INDEX_ERROR);
             } catch (DeleteWeightException e) {
-                //
+                System.out.println(ClickfitMessages.WEIGHT_DELETE_FORMAT_ERROR);
             } catch (NoWeightsException e) {
-                //
+                System.out.println(ClickfitMessages.WEIGHT_EMPTY_ERROR);
             } catch (AddWeightException e ) {
-                //
+                System.out.println(ClickfitMessages.WEIGHT_ADD_FORMAT_ERROR);
             }
         }
         LogManager.getLogManager().reset();
