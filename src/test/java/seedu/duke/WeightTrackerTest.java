@@ -12,8 +12,7 @@ public class WeightTrackerTest {
     @Test
     void addWeight() {
         WeightTracker weights = new WeightTracker();
-        String input = "addweight";
-        Assertions.assertThrows(AddWeightException.class, () -> weights.addWeight(input));
+        Assertions.assertThrows(NullPointerException.class, () -> weights.addWeight(null));
     }
 
     @Test
@@ -27,7 +26,7 @@ public class WeightTrackerTest {
     void deleteWeightIndex() {
         WeightTracker weights = new WeightTracker();
         String input = "1";
-        Assertions.assertThrows(DeleteWeightIndexException.class, () -> weights.deleteWeight(input));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> weights.deleteWeight(input));
     }
 
     @Test

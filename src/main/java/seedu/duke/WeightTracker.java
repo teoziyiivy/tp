@@ -44,8 +44,14 @@ public class WeightTracker extends Tracker {
         generateWeightParameters(input);
         logger.log(Level.INFO, "weight parameters generated");
 
-        if (!input.matches("(.*) /d (.*)")) {
+        if (!input.matches("(.*)")) {
             throw new AddWeightException();
+        } else if (!input.matches("(.*) /d (.*)")) {
+            input = weight + " /d " + date;
+            WeightTrackerMessages.printAddWeightResponse(weight, date);
+            weightsArray.add(input);
+            numberOfWeights += 1;
+            assert numberOfWeights > 0 : "number of logged weights should be more than zero";
         } else {
             WeightTrackerMessages.printAddWeightResponse(weight, date);
             weightsArray.add(input);
@@ -59,17 +65,18 @@ public class WeightTracker extends Tracker {
     public void deleteWeight(String input) throws DeleteWeightException, DeleteWeightIndexException {
         logger.entering(getClass().getName(), "deleteWeight");
         logger.log(Level.INFO, "going to remove a weight and date from the list");
+        numberOfWeights = weightsArray.size();
         if (input.isEmpty() || input.matches("deleteweight")) {
             throw new DeleteWeightException();
         }
-        int weightIndex = Parser.parseStringToInteger(input);
+        int weightIndex = Parser.parseStringToInteger(input) - 1;
         if (weightIndex > numberOfWeights) {
             throw new DeleteWeightIndexException();
         } else {
             generateWeightParameters(weightsArray.get(weightIndex));
             System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
                     + weight + " on " + date + ".");
-            weightsArray.remove(weightIndex - 1);
+            weightsArray.remove(weightIndex);
             numberOfWeights--;
             assert numberOfWeights >= 0 : "number of logged weights should be more than or equal to zero";
         }
@@ -78,6 +85,7 @@ public class WeightTracker extends Tracker {
     }
 
     public void listWeights(String date) throws NoWeightsException {
+        numberOfWeights = weightsArray.size();
         if (numberOfWeights == 0) {
             throw new NoWeightsException();
         } else if (date.equals("all")) {
