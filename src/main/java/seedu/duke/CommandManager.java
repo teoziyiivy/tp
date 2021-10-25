@@ -151,7 +151,7 @@ public class CommandManager {
             meal.listMeals(date);
             break;
         case Keywords.FLUIDS:
-            fluid.listFluid(date);
+            fluid.listFluids(date);
             break;
         case Keywords.CALORIES:
             listCalories(date);
@@ -269,10 +269,10 @@ public class CommandManager {
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             ScheduleException, WorkoutException,
-            NoWeightsException {
+            NoWeightsException, DukeException {
         meal.listMeals(date);
         System.out.println();
-        fluid.listFluid(date);
+        fluid.listFluids(date);
         System.out.println();
         workoutTracker.listWorkouts(date);
         System.out.println();
