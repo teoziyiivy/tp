@@ -5,7 +5,7 @@ public class WeightTrackerMessages {
         System.out.println("CLI.ckFit could not generate your parameters.");
     }
 
-    public static void printAddWeightResponse(int weight, String date) {
+    public static void printAddWeightResponse(double weight, String date) {
         System.out.println("Noted! CLI.ckFit has recorded your weight as "
                 + weight + " on " + date + ". Check back for your progress!");
     }

@@ -9,6 +9,8 @@ import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.exceptions.DeleteWeightException;
 import seedu.duke.exceptions.DeleteWeightIndexException;
+import seedu.duke.exceptions.NoWeightsException;
+import seedu.duke.exceptions.AddWeightException;
 import seedu.duke.exceptions.LoadException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -97,6 +99,10 @@ public class Duke {
             } catch (DeleteWeightIndexException e) {
                 //
             } catch (DeleteWeightException e) {
+                //
+            } catch (NoWeightsException e) {
+                //
+            } catch (AddWeightException e ) {
                 //
             }
         }

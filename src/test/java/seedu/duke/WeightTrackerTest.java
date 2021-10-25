@@ -30,10 +30,12 @@ public class WeightTrackerTest {
         Assertions.assertThrows(DeleteWeightIndexException.class, () -> weights.deleteWeight(input));
     }
 
+    /*
     @Test
     void checkWeightIndex() {
         WeightTracker weights = new WeightTracker();
-        Assertions.assertThrows(NoWeightsException.class, weights::printWeight);
+        Assertions.assertThrows(NoWeightsException.class, weights::listWeights);
     }
+     */
 
 }
