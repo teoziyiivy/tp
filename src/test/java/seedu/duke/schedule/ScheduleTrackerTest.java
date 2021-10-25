@@ -1,8 +1,9 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.schedule.ScheduleException;
 
 
 import java.time.format.DateTimeParseException;
@@ -16,7 +17,7 @@ class ScheduleTrackerTest {
     @Test
     void nullArgumentCheck_NullInput_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
-        assertThrows(DukeException.class, () -> st.nullArgumentCheck(null));
+        assertThrows(ScheduleException.class, () -> st.nullArgumentCheck(null));
     }
 
     @Test
@@ -29,20 +30,20 @@ class ScheduleTrackerTest {
     void scheduledWorkoutSeparatorCheck_MissingSeparator_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 17:59";
-        assertThrows(DukeException.class, () -> st.scheduledWorkoutSeparatorCheck(argumentInput));
+        assertThrows(ScheduleException.class, () -> st.scheduledWorkoutSeparatorCheck(argumentInput));
     }
 
     @Test
     void deleteScheduledWorkout_outOfRange_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
-        assertThrows(DukeException.class, () -> st.deleteScheduledWorkout("-10"));
-        assertThrows(DukeException.class, () -> st.deleteScheduledWorkout("123"));
+        assertThrows(ScheduleException.class, () -> st.deleteScheduledWorkout("-10"));
+        assertThrows(ScheduleException.class, () -> st.deleteScheduledWorkout("123"));
     }
 
 
 
     @Test
-    void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException {
+    void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException, ScheduleException {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput1 = "test /d 07/07/2022 /t 17:59";
         st.addScheduledWorkout(argumentInput1, false); //must be non empty list
@@ -54,7 +55,7 @@ class ScheduleTrackerTest {
     void addScheduledWorkout_missingSeparator_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 17:59";
-        assertThrows(DukeException.class, () -> st.addScheduledWorkout(argumentInput, false));
+        assertThrows(ScheduleException.class, () -> st.addScheduledWorkout(argumentInput, false));
     }
 
     @Test
@@ -75,6 +76,6 @@ class ScheduleTrackerTest {
     void missingDescriptionCheck_missingDescription_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = " /d 07/07/2022 /t 07:59";
-        assertThrows(DukeException.class, () -> st.missingDescriptionCheck(argumentInput));
+        assertThrows(ScheduleException.class, () -> st.missingDescriptionCheck(argumentInput));
     }
 }

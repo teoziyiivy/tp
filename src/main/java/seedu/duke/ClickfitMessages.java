@@ -2,6 +2,8 @@ package seedu.duke;
 
 public class ClickfitMessages {
 
+    public static final String INITIAL_PROMPT = "What would you like to start with?";
+
     public static final String MESSAGE_A = System.lineSeparator() + "Lets get your fitness journey "
             + "started! input any commands to get started! Type \"help commands\" to get started! "
             + "If you want to read the UG, type in \"help UG\"!" + System.lineSeparator()
@@ -58,6 +60,9 @@ public class ClickfitMessages {
     public static final String TIME_ERROR = "Please enter your time in the right format. "
             + "It should be \"HH:MM\"";
 
+    public static final String DATE_TIME_ERROR = "Please enter your date and time in the right format. "
+            + "It should be \"DD/MM/YYYY\" and \"HH:MM\" respectively.";
+
     public static final String NAME_ERROR = "Please enter the name or description of your meal/fluid";
 
     public static final String NUMBER_ERROR = "Please enter the calories/volume properly";
@@ -86,5 +91,33 @@ public class ClickfitMessages {
     public static final String WORKOUT_PRINT_FORMAT = System.lineSeparator() + "Workout Summary:"
             + System.lineSeparator() + "======================";
 
+    public static final String WEIGHT_PRINT_FORMAT = System.lineSeparator() + "Weight Summary:"
+            + System.lineSeparator() + "======================";
+
     public static final String ENDLINE_PRINT_FORMAT = "======================";
+
+    public static final String SCHEDULE_DATA_NOT_FOUND = "Unable to locate ScheduleTracker data file.";
+
+    public static final String INCORRECT_LOADING_SCHEDULE_DATA =
+            "There were some errors during loading of ScheduleTracker data, some data may have been lost";
+
+    public static final String IO_EXCEPTION_MESSAGE = "Error when loading data from files";
+
+    public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
+            + "its associated calories is stored"
+            + "within your library";
+
+    public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
+            + "workouts and has deleted/rescheduled them!";
+
+    public static final String WEIGHT_ADD_FORMAT_ERROR = "CLI.ckFit encountered a problem adding your weight."
+            + System.lineSeparator() + "Please follow the format: addweight <weight> /d <DD/MM/YYYY>";
+
+    public static final String WEIGHT_DELETE_FORMAT_ERROR = "CLI.ckFit encountered a problem deleting your weight."
+            + System.lineSeparator() + "Please follow the format: deleteweight <index>";
+
+    public static final String WEIGHT_DELETE_INDEX_ERROR = "CLI.ckFit encountered a problem deleting your weight."
+            + System.lineSeparator() + "Please ensure the index is within the list.";
+
+    public static final String WEIGHT_EMPTY_ERROR = "CLI.ckFit has no recorded weights.";
 }

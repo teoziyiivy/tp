@@ -1,8 +1,8 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.WorkoutTracker;
+import seedu.duke.exceptions.workout.WorkoutException;
 
 import java.time.format.DateTimeParseException;
 
@@ -14,8 +14,8 @@ class WorkoutTrackerTest {
 
     @Test
     void nullArgumentCheck_NullInput_exceptionThrow() {
-        ScheduleTracker wt = new ScheduleTracker();
-        assertThrows(DukeException.class, () -> wt.nullArgumentCheck(null));
+        WorkoutTracker wt = new WorkoutTracker();
+        assertThrows(WorkoutException.class, () -> wt.nullArgumentCheck(null));
     }
 
     @Test
@@ -25,7 +25,7 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() throws DukeException, FoodBankException {
+    void isCompletedWorkoutNumberWithinRange_inputWithinRange_success() throws WorkoutException {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput, true);
@@ -35,12 +35,12 @@ class WorkoutTrackerTest {
     @Test
     void deleteWorkout_outOfRange_exceptionThrow() {
         WorkoutTracker wt = new WorkoutTracker();
-        assertThrows(DukeException.class, () -> wt.deleteWorkout("-10"));
-        assertThrows(DukeException.class, () -> wt.deleteWorkout("123"));
+        assertThrows(WorkoutException.class, () -> wt.deleteWorkout("-10"));
+        assertThrows(WorkoutException.class, () -> wt.deleteWorkout("123"));
     }
 
     @Test
-    void deleteWorkout_nonInteger_exceptionThrow() throws DukeException, FoodBankException {
+    void deleteWorkout_nonInteger_exceptionThrow() throws WorkoutException {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput1 = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput1, true);
@@ -73,6 +73,6 @@ class WorkoutTrackerTest {
     void missingDescriptionCheck_missingDescription_exceptionThrow() {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "  /c 123 /d 07/07/2021 /t 07:59";
-        assertThrows(DukeException.class, () -> wt.missingDescriptionCheck(argumentInput));
+        assertThrows(WorkoutException.class, () -> wt.missingDescriptionCheck(argumentInput));
     }
 }

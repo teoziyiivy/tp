@@ -1,9 +1,10 @@
-package seedu.duke.workout;
+package seedu.duke.schedule;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
+//@@author arvejw
 public class WorkoutActivity {
+
     private String activityDescription;
     private boolean isDistanceActivity = false;
     private int activityDistance;
