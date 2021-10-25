@@ -219,7 +219,7 @@ public class CommandManager {
             DateTracker.sortDateAndTime(workoutTracker.workouts);
             break;
         case Keywords.SCHEDULE:
-            scheduleTracker.addScheduledWorkout(inputArguments, false);
+            scheduleTracker.addScheduledWorkout(inputArguments, false, true);
             break;
         case Keywords.WEIGHT:
             weightTracker.addWeight(inputArguments);
@@ -278,24 +278,15 @@ public class CommandManager {
 
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
-            NoWeightsException, DukeException {
+            NoWeightsException, DukeException, WorkoutException, ScheduleException {
         meal.listMeals(date);
         System.out.println();
         fluid.listFluids(date);
         System.out.println();
         weightTracker.listWeights(date);
         System.out.println();
-        //todo: dont make empty list an exception
-        try {
-            workoutTracker.listWorkouts(date);
-        } catch (WorkoutException e) {
-            System.out.println(e.getMessage());
-        }
+        workoutTracker.listWorkouts(date);
         System.out.println();
-        try {
-            scheduleTracker.listScheduledWorkouts(date);
-        } catch (ScheduleException e) {
-            System.out.println(e.getMessage());
-        }
+        scheduleTracker.listScheduledWorkouts(date);
     }
 }
