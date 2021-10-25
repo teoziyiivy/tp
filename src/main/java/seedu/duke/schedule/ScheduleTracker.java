@@ -3,7 +3,6 @@ package seedu.duke.schedule;
 import seedu.duke.ClickfitMessages;
 import seedu.duke.Storage;
 import seedu.duke.Parser;
-import seedu.duke.exceptions.schedule.EmptyScheduleListException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.DeleteScheduleException;
 import seedu.duke.exceptions.schedule.MissingScheduleDescriptionException;
@@ -64,15 +63,15 @@ public class ScheduleTracker {
                 continue;
             }
             try {
-                addScheduledWorkout(currentLine, true);
+                addScheduledWorkout(currentLine, true, false);
             } catch (DateTimeParseException | ScheduleException e) {
                 isDataLoadCorrectly = false;
             }
         }
+        cleanUpScheduleList();
         if (!isDataLoadCorrectly) {
             System.out.println(ClickfitMessages.INCORRECT_LOADING_SCHEDULE_DATA);
         }
-        cleanUpScheduleList();
     }
 
     public String[] generateScheduledWorkoutParameters(String inputArguments) throws ScheduleException {
@@ -85,7 +84,7 @@ public class ScheduleTracker {
         return generatedParameters;
     }
 
-    public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage)
+    public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage, boolean isCleanUp)
             throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add scheduled workout.");
         nullArgumentCheck(inputArguments);
@@ -114,7 +113,9 @@ public class ScheduleTracker {
                     + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
                     + workoutTime + ".");
         }
-        cleanUpScheduleList();
+        if (isCleanUp) {
+            cleanUpScheduleList();
+        }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout to schedule.");
     }
 
@@ -128,7 +129,10 @@ public class ScheduleTracker {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete scheduled workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
-        emptyScheduledWorkoutListCheck();
+        if (isScheduledWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
+            return;
+        }
         assert scheduledWorkouts.size() > 0 : "List should be non empty at this point";
         int workoutNumber = Parser.parseStringToInteger(inputArguments);
         int workoutIndex = workoutNumber - 1; // 0-indexing
@@ -139,7 +143,6 @@ public class ScheduleTracker {
                     + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
                     + " at " + workoutToDelete.getWorkoutTime() + "!");
             scheduledWorkouts.remove(workoutIndex);
-            cleanUpScheduleList();
             SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted scheduled workout.");
         } else {
             SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Failed to delete scheduled workout.");
@@ -148,7 +151,10 @@ public class ScheduleTracker {
     }
 
     public void listScheduledWorkouts(String inputArguments) throws ScheduleException {
-        emptyScheduledWorkoutListCheck();
+        if (isScheduledWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
+            return;
+        }
         cleanUpScheduleList();
         if (inputArguments.equals(INPUT_ALL)) {
             listAllScheduledWorkouts();
@@ -200,7 +206,7 @@ public class ScheduleTracker {
     }
 
     public void cleanUpScheduleList() {
-        if (scheduledWorkouts.isEmpty()) {
+        if (isScheduledWorkoutListEmpty()) {
             return;
         }
         sortScheduleList();
@@ -226,7 +232,7 @@ public class ScheduleTracker {
         if (scheduledWorkout.isRecurring()) {
             rescheduleRecurringWorkout(scheduledWorkout, currentDate);
         } else {
-            scheduledWorkouts.remove(scheduledWorkouts.indexOf(scheduledWorkout));
+            scheduledWorkouts.remove(scheduledWorkout);
         }
         sortScheduleList();
     }
@@ -260,12 +266,8 @@ public class ScheduleTracker {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Separators in user input are correct.");
     }
 
-    public void emptyScheduledWorkoutListCheck() throws ScheduleException {
-        if (scheduledWorkouts.isEmpty()) {
-            SCHEDULE_TRACKER_LOGGER.log(Level.WARNING, "Schedule list is empty.");
-            throw new EmptyScheduleListException();
-        }
-        SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Schedule list is not empty.");
+    public boolean isScheduledWorkoutListEmpty() {
+        return scheduledWorkouts.isEmpty();
     }
 
     public void missingDescriptionCheck(String inputArguments) throws ScheduleException {

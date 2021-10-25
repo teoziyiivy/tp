@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.duke.exceptions.workout.DeleteWorkoutException;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.workout.EmptyWorkoutListException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.MissingWorkoutDescriptionException;
 import seedu.duke.exceptions.workout.WorkoutException;
@@ -59,7 +58,10 @@ public class WorkoutTracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
-        emptyWorkoutListCheck();
+        if (isWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
+            return;
+        }
         assert workouts.size() > 0 : "List should be non empty at this point";
         int workoutNumber = Parser.parseStringToInteger(inputArguments);
         int workoutIndex = workoutNumber - 1; // 0-indexing
@@ -78,7 +80,10 @@ public class WorkoutTracker {
 
 
     public void listWorkouts(String inputArguments) throws WorkoutException {
-        emptyWorkoutListCheck();
+        if (isWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
+            return;
+        }
         if (inputArguments.equals(INPUT_ALL)) {
             listAllWorkouts();
         } else {
@@ -110,9 +115,11 @@ public class WorkoutTracker {
                     + ClickfitMessages.DATE_ERROR);
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("Workouts recorded today" + System.lineSeparator());
+                System.out.println("Workouts recorded today:"
+                        + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             } else {
-                System.out.println("Workouts recorded on " + inputArguments + ":" + System.lineSeparator());
+                System.out.println("Workouts recorded on " + inputArguments + ":"
+                        + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             }
             int currentIndex = 1;
             int totalCaloriesBurned = 0;
@@ -125,7 +132,8 @@ public class WorkoutTracker {
                 totalCaloriesBurned += caloriesBurned;
                 currentIndex++;
             }
-            System.out.println("Total calories burned: " + totalCaloriesBurned);
+            System.out.println("Total calories burned: " + totalCaloriesBurned + System.lineSeparator()
+                    + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         }
     }
 
@@ -151,12 +159,8 @@ public class WorkoutTracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "User input argument(s) is not null.");
     }
 
-    public void emptyWorkoutListCheck() throws WorkoutException {
-        if (workouts.isEmpty()) {
-            WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Workout list is empty.");
-            throw new EmptyWorkoutListException();
-        }
-        WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Workout list is not empty.");
+    public boolean isWorkoutListEmpty() {
+        return workouts.isEmpty();
     }
 
     public boolean isWorkoutNumberWithinRange(int workoutNumber) {

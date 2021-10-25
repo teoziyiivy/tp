@@ -34,8 +34,10 @@ class ScheduleTrackerTest {
     }
 
     @Test
-    void deleteScheduledWorkout_outOfRange_exceptionThrow() {
+    void deleteScheduledWorkout_outOfRange_exceptionThrow() throws ScheduleException {
         ScheduleTracker st = new ScheduleTracker();
+        String argumentInput1 = "test /d 07/07/2022 /t 17:59";
+        st.addScheduledWorkout(argumentInput1, false, true); //must be non empty list
         assertThrows(ScheduleException.class, () -> st.deleteScheduledWorkout("-10"));
         assertThrows(ScheduleException.class, () -> st.deleteScheduledWorkout("123"));
     }
@@ -46,7 +48,7 @@ class ScheduleTrackerTest {
     void deleteScheduledWorkout_nonInteger_exceptionThrow() throws DukeException, ScheduleException {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput1 = "test /d 07/07/2022 /t 17:59";
-        st.addScheduledWorkout(argumentInput1, false); //must be non empty list
+        st.addScheduledWorkout(argumentInput1, false, true); //must be non empty list
         String argumentInput2 = "@!$!@$!";
         assertThrows(NumberFormatException.class, () -> st.deleteScheduledWorkout(argumentInput2));
     }
@@ -55,21 +57,21 @@ class ScheduleTrackerTest {
     void addScheduledWorkout_missingSeparator_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 17:59";
-        assertThrows(ScheduleException.class, () -> st.addScheduledWorkout(argumentInput, false));
+        assertThrows(ScheduleException.class, () -> st.addScheduledWorkout(argumentInput, false, true));
     }
 
     @Test
     void addScheduledWorkout_invalidDateFormat_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07-07-2022 /t 17:59";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput, false));
+        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput, false, true));
     }
 
     @Test
     void addScheduledWorkout_invalidTimeFormat_exceptionThrow() {
         ScheduleTracker st = new ScheduleTracker();
         String argumentInput = "test /d 07/07/2022 /t 7pm";
-        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput, false));
+        assertThrows(DateTimeParseException.class, () -> st.addScheduledWorkout(argumentInput, false, true));
     }
 
     @Test
