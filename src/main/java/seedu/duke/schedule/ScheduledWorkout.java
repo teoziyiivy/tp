@@ -29,16 +29,16 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
-        if (!activityMap.isEmpty()) {
-            for (var entry : activityMap.entrySet()) {
-                activities.add(
-                        new WorkoutActivity(
-                                entry.getKey(), entry.getValue(),
-                                WorkoutActivity.isDistanceActivity(entry.getKey())
-                        )
-                );
-            }
-        }
+//        if (!activityMap.isEmpty()) {
+//            for (var entry : activityMap.entrySet()) {
+//                activities.add(
+//                        new WorkoutActivity(
+//                                entry.getKey(), entry.getValue(),
+//                                WorkoutActivity.isDistanceActivity(entry.getKey())
+//                        )
+//                );
+//            }
+//        }
     }
 
     public String getWorkoutDescription() {

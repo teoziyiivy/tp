@@ -20,23 +20,22 @@ It allows you to track your meals, fluid intakes, recipes, calories and exercise
 Command | Format of input
 ------------ | -------------
 [**Add meal**](#adding-a-meal)| `ate <MEAL_NAME> /c <MEAL_CALORIES> /d <DATE> /t <TIME>`
-[**Add fluid**](#adding-fluids)| `drank <FLUID_NAME> /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
+[**Add fluid**](#adding-fluids)| `add fluid <FLUID NAME> /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
 [**Add weight**](#adding-weight)| `addweight <WEIGHT> /d <DATE>`
 [**Add workout**](#adding-workout)| `workout <WORKOUT_NAME> /c <CALORIES_BURNT> /d <DATE> /t <TIME>`
 [**Add scheduled workout**](#adding-scheduled-workout)| `schedule <WORKOUT_NAME> /d <DATE> /t <TIME>`
-[**Remove meal**](#delete-a-meal)| `deletemeal <INDEX>`
-[**Remove fluid**](#delete-fluids)| `deletefluid <INDEX>`
-[**Remove weight**](#delete-weight)| `deleteweight <INDEX>`
-[**Remove workout**](#delete-workout)| `deleteworkout <INDEX>`
+[**Remove meal**](#delete-a-meal)| `delete meal <INDEX>`
+[**Remove fluid**](#delete-fluids)| `delete fluid <INDEX>`
+[**Remove weight**](#delete-weight)| `delete weight <INDEX>`
+[**Remove workout**](#delete-workout)| `delete workout <INDEX>`
 [**Remove scheduled workout**](#delete-workout-schedule)| `deleteschedule <INDEX>`
-[**List meals**](#list-meals)| `listmeals`
-[**List fluids**](#list-fluids)| `listfluids`
-[**List weights**](#list-weights)| `listweights`
-[**List workouts**](#list-workouts)| `listworkouts`
+[**List meals**](#list-meals)| `list meals <DATE>`
+[**List fluids**](#list-fluids)| `list fluids <DATE>`
+[**List weights**](#list-weights)| `list weights <DATE>`
+[**List workouts**](#list-workouts)| `list workouts <DATE>`
 [**List scheduled workouts**](#list-scheduled-workouts)| `listschedule`
 [**Access user help**](#help-Commands)| `help commands`
 [**Access user guide**](#help-UG)| `help UG`
-
 
 # *Features:*
 
@@ -60,11 +59,11 @@ Example of usage:
 
 # Adding fluids
 
-Command Word: `drank`
+Command Word: `add fluid`
 
 Description: `Adds a new fluid to the list of fluid items.`
 
-Format: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
+Format: `add fluid {FLUID NAME} /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
 
 * The `FLUID_NAME` can contain spaces.
 * The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
@@ -74,15 +73,21 @@ Format: `drank FLUID_NAME /c FLUID_CALORIES /v VOLUME /d DATE /t TIME`
 
 Example of usage:
 
-`drank milk /c 180 /d 08/09/2021 /t 07:40`
+`add fluid milk /c 180 /v 100 /d 08/09/2021 /t 07:40`
+
+Expected outcome:
+
+```
+Noted! CLI.ckFit has recorded your drink of milk of 180 calories and 100 ml on 08/09/2021 07:40.
+```
 
 # Adding weight
 
-Command Word: `addweight`
+Command Word: `add weight`
 
 Description: `Adds a new weight to the list of weight items.`
 
-Format: `addweight WEIGHT /d DATE`
+Format: `add weight WEIGHT /d DATE`
 
 * The `WEIGHT` cannot contain spaces.
 * The `DATE` is in dd/mm/yyyy.
@@ -136,110 +141,125 @@ Example of usage:
 
 # Delete a meal
 
-Command Word: `deletemeal`
+Command Word: `delete meal`
 
 Description: `Remove a meal from the list of meal items.`
 
-Format: `deletemeal INDEX`
+Format: `delete meal INDEX`
 
 * The `INDEX` can only contain integers from the list.
 
 * Example of usage:
 
-`deletemeal 1`
+`delete meal 1`
 
 # Delete fluids
 
-Command Word: `deletefluid`
+Command Word: `delete fluid`
 
-Description: `Remove a fluid from the list of fluid items.`
+Description: `Removes a fluid from the list of fluid items.`
 
-Format: `deletefluid INDEX`
+Format: `delete fluid {INDEX OF FLUID}`
 
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
 
-`deletefluid 2`
+`delete fluid 2`
 
 # Delete weight
 
-Command Word:`deleteweight`
+Command Word:`delete weight`
 
 Description: `Remove a weight from the list of weight items.`
 
-Format: `deleteweight INDEX`
+Format: `delete weight INDEX`
 
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
 
-`deleteweight 1`
+`delete weight 1`
 
 # Delete workout
 
-Command Word:`deleteworkout`
+Command Word:`delete workout`
 
 Description: `Remove a workout from the list of workout items.`
 
-Format: `deleteworkout INDEX`
+Format: `delete workout INDEX`
 
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
 
-`deleteworkout 3`
+`delete workout 3`
 
 # Delete workout schedule
 
-Command Word: `deleteschedule`
+Command Word: `delete schedule`
 
 Description: `Remove a workout from the list of workout items.`
 
-Format: `deleteschedule INDEX`
+Format: `delete schedule INDEX`
 
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
 
-`deleteschedule 3`
+`delete schedule 3`
 
 # List meals
 
-Command Word: `listmeals`
+Command Word: `list meals <DATE>`
 
-Description: `Lists all meal entries made.`
+Description: `Lists all meal entries made for that specific date.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
 
 Example of usage:
 
-`listmeals`
+`list meals`
 
 # List fluids
 
-Command Words:`listfluids`
+Command Words:`list fluids <DATE>`
 
-Description: `Lists all fluid entries made.`
+Description: `Lists all fluid entries made for that specific date.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
 
 Example of usage:
 
-`listfluids`
+`list fluids`
 
 # List weights
 
-Command Words:`listweights`
+Command Words:`list weights <DATE>`
 
-Description: `Lists all weight entries made.`
+Description: `Lists all weight entries made for that specific date.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
 
 Example of usage:
 
-`listweights`
+`list weights`
 
 # List workouts
 
 Command Word:`listworkout`
 
-Description: `Lists out all stored workout descriptions, 
-calories burned, date and time.`
+Description: `Lists out all stored workout descriptions, calories burned, date and time.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
 
 Example of usage:
 
