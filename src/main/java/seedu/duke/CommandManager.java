@@ -166,7 +166,7 @@ public class CommandManager {
         case Keywords.SCHEDULE:
             scheduleTracker.listScheduledWorkouts(date);
             break;
-        case Keywords.WEIGHT:
+        case Keywords.WEIGHTS:
             weightTracker.listWeights(date);
             break;
         default:
