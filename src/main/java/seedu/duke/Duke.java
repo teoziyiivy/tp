@@ -3,15 +3,19 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.LoadException;
 import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.ScheduleException;
+import seedu.duke.exceptions.schedule.ScheduleException;
+import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
-
+import seedu.duke.exceptions.DeleteWeightException;
+import seedu.duke.exceptions.DeleteWeightIndexException;
+import seedu.duke.exceptions.NoWeightsException;
+import seedu.duke.exceptions.AddWeightException;
+import seedu.duke.exceptions.LoadException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
-
+import static seedu.duke.ClickfitMessages.IO_EXCEPTION_MESSAGE;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 
 @SuppressWarnings("ALL")
@@ -41,12 +45,8 @@ public class Duke {
             workoutTracker = new WorkoutTracker();
             weightTracker = new WeightTracker();
             userHelp = new UserHelp();
-            storage = new Storage("Food.txt", "Foodbank.txt", "Weight.txt");
-            commandManager = new CommandManager(storage, fluid,
-                    meal, scheduleTracker, workoutTracker,
-                    weightTracker, userHelp);
+            storage = new Storage();
             foodbank = new FoodBank();
-            dateTracker = new DateTracker();
             ui.welcomeMessage();
             ui.getInfo();
             if (ui.memoryStartup()) {
@@ -58,12 +58,15 @@ public class Duke {
                 workoutTracker.workouts = storage.loadWorkouts();
                 scheduleTracker.loadScheduleData();
                 storage.printLoadedLists();
-                System.out.println("What would you like to start with?");
+                System.out.println(ClickfitMessages.INITIAL_PROMPT);
             }
+            commandManager = new CommandManager(storage, fluid,
+                    meal, scheduleTracker, workoutTracker,
+                    weightTracker, userHelp);
         } catch (LoadException e) {
             System.out.println(MEMORY_STARTUP_INCORRECT_INPUT);
         } catch (IOException e) {
-            System.out.println("ccc");
+            System.out.println(IO_EXCEPTION_MESSAGE);
         }
     }
 
@@ -74,23 +77,33 @@ public class Duke {
                 System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {
-                System.out.println(ClickfitMessages.DATE_ERROR);
+                System.out.println(ClickfitMessages.DATE_TIME_ERROR);
             } catch (NumberFormatException e) {
                 System.out.println(ClickfitMessages.NUMBER_ERROR);
             } catch (NullPointerException e) {
                 System.out.println(ClickfitMessages.INCORRECT_INPUT);
             } catch (DukeException ignored) {
-                continue;
-            } catch (ScheduleException e) {
-                System.out.println(e.getMessage());
+                System.out.println("I'm sorry!");
+            } catch (ScheduleException se) {
+                System.out.println(se.getMessage());
+            } catch (WorkoutException we) {
+                System.out.println(we.getMessage());
             } catch (MealException e) {
                 System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
             } catch (FluidExceptions e) {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
             } catch (FoodBankException e) {
-                e.printStackTrace();
+                System.out.println(ClickfitMessages.FOOD_BANK_EXCEPTION_MESSAGE);
             } catch (IOException e) {
-                System.out.println("No saved data found. CLI.ckFit shall create one for you!");
+                System.out.println(ClickfitMessages.IO_EXCEPTION_MESSAGE);
+            } catch (DeleteWeightIndexException e) {
+                System.out.println(ClickfitMessages.WEIGHT_DELETE_INDEX_ERROR);
+            } catch (DeleteWeightException e) {
+                System.out.println(ClickfitMessages.WEIGHT_DELETE_FORMAT_ERROR);
+            } catch (NoWeightsException e) {
+                System.out.println(ClickfitMessages.WEIGHT_EMPTY_ERROR);
+            } catch (AddWeightException e) {
+                System.out.println(ClickfitMessages.WEIGHT_ADD_FORMAT_ERROR);
             }
         }
         LogManager.getLogManager().reset();
