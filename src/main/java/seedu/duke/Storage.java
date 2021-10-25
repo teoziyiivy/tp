@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
 import java.io.File;
@@ -109,7 +108,7 @@ public class Storage {
         }
     }
 
-    public void saveWeight(WeightTracker weight) throws IOException, DukeException {
+    public void saveWeight(WeightTracker weight) throws IOException {
         String currentWeight;
         String header;
         String filePath = new File(weightFile).getAbsolutePath();

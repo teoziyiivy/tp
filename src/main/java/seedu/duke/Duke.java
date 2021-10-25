@@ -102,7 +102,7 @@ public class Duke {
                 System.out.println(ClickfitMessages.WEIGHT_DELETE_FORMAT_ERROR);
             } catch (NoWeightsException e) {
                 System.out.println(ClickfitMessages.WEIGHT_EMPTY_ERROR);
-            } catch (AddWeightException e ) {
+            } catch (AddWeightException e) {
                 System.out.println(ClickfitMessages.WEIGHT_ADD_FORMAT_ERROR);
             }
         }
