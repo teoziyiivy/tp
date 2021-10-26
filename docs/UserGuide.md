@@ -39,7 +39,7 @@ indicator of the user's progress
   - [**List meals**](#list-meals)
   - [**List fluids**](#list-fluids)
   - [**List weights**](#list-weights)
-- ####Help
+- #### Help
   - [**Access user help**](#help-Commands)
   - [**Access user guide**](#help-UG)
 
