@@ -1,5 +1,6 @@
 package seedu.duke;
 
+//@@author { ALL}
 public class ClickfitMessages {
 
     public static final String INITIAL_PROMPT = "What would you like to start with?";
