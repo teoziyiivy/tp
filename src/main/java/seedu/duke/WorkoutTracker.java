@@ -1,8 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.workout.DeleteWorkoutException;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
+import seedu.duke.exceptions.workout.MissingWorkoutDescriptionException;
+import seedu.duke.exceptions.workout.WorkoutException;
+import seedu.duke.exceptions.workout.WorkoutNullArgumentException;
 
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,18 +28,16 @@ public class WorkoutTracker {
         WORKOUT_TRACKER_LOGGER.setLevel(Level.SEVERE);
     }
 
-    public void generateWorkoutParameters(String inputArguments)
-            throws DukeException, DateTimeParseException, NumberFormatException {
+    public void generateWorkoutParameters(String inputArguments) throws WorkoutException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for workout.");
         workoutDescription = Parser.getDescription(inputArguments);
         caloriesBurned = Parser.getCaloriesBurnedForWorkout(inputArguments);
-        workoutDate = Parser.getDateNoDateTracker(inputArguments);
+        workoutDate = Parser.getDate(inputArguments);
         workoutTime = Parser.getTime(inputArguments);
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully generated parameters for workout.");
     }
 
-    public void addWorkout(String inputArguments, boolean isSquelchAddMessage)
-            throws DukeException, DateTimeParseException, NumberFormatException {
+    public void addWorkout(String inputArguments, boolean isSquelchAddMessage) throws WorkoutException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and add workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
@@ -49,35 +51,39 @@ public class WorkoutTracker {
         String updatedArguments = workoutDescription + Parser.CALORIE_SEPARATOR + caloriesBurned
                 + Parser.DATE_SEPARATOR + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
         workouts.add(updatedArguments);
-        sortWorkoutList();
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
 
-    public void deleteWorkout(String inputArguments) throws DukeException, NumberFormatException {
+    public void deleteWorkout(String inputArguments) throws WorkoutException, DukeException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete workout.");
         nullArgumentCheck(inputArguments);
         assert inputArguments != null : "Exception should already been thrown if argument is null";
-        emptyWorkoutListCheck();
+        if (isWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
+            return;
+        }
         assert workouts.size() > 0 : "List should be non empty at this point";
         int workoutNumber = Parser.parseStringToInteger(inputArguments);
         int workoutIndex = workoutNumber - 1; // 0-indexing
         if (isWorkoutNumberWithinRange(workoutNumber)) {
             generateWorkoutParameters(workouts.get(workoutIndex));
             System.out.println("Noted! CLI.ckFit has successfully deleted your recorded workout of description \""
-                    + workoutDescription + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
-                    + caloriesBurned + " calories!");
+                    + workoutDescription + "\" on " + workoutDate + " at " + workoutTime + System.lineSeparator()
+                    + " where you burned " + caloriesBurned + " calories!");
             workouts.remove(workoutIndex);
             WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted workout.");
         } else {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Failed to delete workout.");
-            throw new DukeException("Failed to delete that workout! Please enter an Integer within range.");
+            throw new DeleteWorkoutException();
         }
     }
 
 
-    public void listWorkouts(String inputArguments) throws DukeException {
-        emptyWorkoutListCheck();
-        sortWorkoutList();
+    public void listWorkouts(String inputArguments) throws WorkoutException {
+        if (isWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
+            return;
+        }
         if (inputArguments.equals(INPUT_ALL)) {
             listAllWorkouts();
         } else {
@@ -85,8 +91,7 @@ public class WorkoutTracker {
         }
     }
 
-    public void listAllWorkouts()
-            throws DukeException, DateTimeParseException, NumberFormatException {
+    public void listAllWorkouts() throws WorkoutException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list workouts.");
         assert workouts.size() > 0 : "List should be non empty at this point";
         System.out.println("All recorded workouts:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
@@ -102,16 +107,19 @@ public class WorkoutTracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
     }
 
-    public void listWorkoutsOnDate(String inputArguments) throws DukeException {
+    public void listWorkoutsOnDate(String inputArguments) throws WorkoutException {
         ArrayList<String> filteredWorkoutList = (ArrayList<String>) workouts.stream()
                 .filter((t) -> Parser.getDate(t).equals(inputArguments)).collect(Collectors.toList());
         if (filteredWorkoutList.isEmpty()) {
-            System.out.println("No workouts recorded on the date: " + inputArguments);
+            System.out.println("No workouts recorded on the date: " + inputArguments + System.lineSeparator()
+                    + ClickfitMessages.DATE_ERROR);
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("Workouts recorded today" + System.lineSeparator());
+                System.out.println("Workouts recorded today:"
+                        + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             } else {
-                System.out.println("Workouts recorded on " + inputArguments + ":" + System.lineSeparator());
+                System.out.println("Workouts recorded on " + inputArguments + ":"
+                        + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
             }
             int currentIndex = 1;
             int totalCaloriesBurned = 0;
@@ -124,15 +132,12 @@ public class WorkoutTracker {
                 totalCaloriesBurned += caloriesBurned;
                 currentIndex++;
             }
-            System.out.println("Total calories burned: " + totalCaloriesBurned);
+            System.out.println("Total calories burned: " + totalCaloriesBurned + System.lineSeparator()
+                    + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         }
     }
 
-    public void sortWorkoutList() {
-        DateTracker.sortDateAndTime(workouts);
-    }
-
-    public int getCaloriesBurned(String date) throws DukeException {
+    public int getCaloriesBurned(String date) throws WorkoutException {
         ArrayList<String> filteredWorkoutList = (ArrayList<String>) workouts.stream()
                 .filter((t) -> Parser.getDateNoDateTracker(t).equals(date)).collect(Collectors.toList());
         int totalCaloriesBurned = 0;
@@ -146,20 +151,16 @@ public class WorkoutTracker {
         }
     }
 
-    public void nullArgumentCheck(String inputArguments) throws DukeException {
+    public void nullArgumentCheck(String inputArguments) throws WorkoutException {
         if (inputArguments == null) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "User input argument(s) is null.");
-            throw new DukeException("Please enter an argument!");
+            throw new WorkoutNullArgumentException();
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "User input argument(s) is not null.");
     }
 
-    public void emptyWorkoutListCheck() throws DukeException {
-        if (workouts.isEmpty()) {
-            WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Workout list is empty.");
-            throw new DukeException("Workout list is empty!");
-        }
-        WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Workout list is not empty.");
+    public boolean isWorkoutListEmpty() {
+        return workouts.isEmpty();
     }
 
     public boolean isWorkoutNumberWithinRange(int workoutNumber) {
@@ -168,18 +169,17 @@ public class WorkoutTracker {
         return (workoutNumber >= lowerBound) && (workoutNumber <= upperBound);
     }
 
-    public void missingDescriptionCheck(String inputArguments) throws DukeException {
+    public void missingDescriptionCheck(String inputArguments) throws WorkoutException {
         int indexOfFirstCalorieSeparator = inputArguments.indexOf(Parser.CALORIE_SEPARATOR.trim());
         String subStringBeforeCalorieSeparator = "";
         if (indexOfFirstCalorieSeparator != -1) { // calorie separator not found
             subStringBeforeCalorieSeparator = inputArguments.substring(0, indexOfFirstCalorieSeparator).trim();
         } else {
-            throw new DukeException("Missing calorie separator /c");
+            throw new MissingWorkoutCalorieSeparatorException();
         }
         if (subStringBeforeCalorieSeparator.isEmpty()) {
             WORKOUT_TRACKER_LOGGER.log(Level.WARNING, "Description is missing in user input arguments.");
-            throw new DukeException("I am sorry... it appears the description is missing." + System.lineSeparator()
-                    + "Please enter a workout description!");
+            throw new MissingWorkoutDescriptionException();
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Description is present in user input arguments.");
     }
