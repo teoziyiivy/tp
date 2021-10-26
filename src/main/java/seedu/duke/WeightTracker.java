@@ -1,9 +1,9 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.AddWeightException;
-import seedu.duke.exceptions.DeleteWeightException;
-import seedu.duke.exceptions.DeleteWeightIndexException;
-import seedu.duke.exceptions.NoWeightsException;
+import seedu.duke.exceptions.weight.AddWeightException;
+import seedu.duke.exceptions.weight.DeleteWeightException;
+import seedu.duke.exceptions.weight.DeleteWeightIndexException;
+import seedu.duke.exceptions.weight.NoWeightsException;
 import seedu.duke.exceptions.DukeException;
 
 import java.time.format.DateTimeParseException;
@@ -31,7 +31,7 @@ public class WeightTracker extends Tracker {
             weight = Parser.getWeight(inputArguments);
             date = Parser.getDate(inputArguments);
         } catch (NumberFormatException | DukeException e) {
-            WeightTrackerMessages.printGenerateParametersException();
+            System.out.println(ClickfitMessages.WEIGHT_PARAMETERS_ERROR);
         }
         logger.exiting(getClass().getName(), "generateWeightParameters");
         logger.log(Level.INFO, "end of generating weight parameters");
@@ -44,7 +44,7 @@ public class WeightTracker extends Tracker {
         generateWeightParameters(input);
         logger.log(Level.INFO, "weight parameters generated");
 
-        if (!input.matches("(.*)")) {
+        if (input.isEmpty()) {
             throw new AddWeightException();
         } else if (!input.matches("(.*) /d (.*)")) {
             input = weight + " /d " + date;
@@ -74,8 +74,7 @@ public class WeightTracker extends Tracker {
             throw new DeleteWeightIndexException();
         } else {
             generateWeightParameters(weightsArray.get(weightIndex));
-            System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
-                    + weight + " on " + date + ".");
+            WeightTrackerMessages.printDeleteWeightResponse(weight, date);
             weightsArray.remove(weightIndex);
             numberOfWeights--;
             assert numberOfWeights >= 0 : "number of logged weights should be more than or equal to zero";
@@ -105,7 +104,7 @@ public class WeightTracker extends Tracker {
                 logger.log(Level.INFO, "generating weight parameters");
                 generateWeightParameters(weights);
                 logger.log(Level.INFO, "weight parameters generated");
-                System.out.println(i + ". ");
+                System.out.print(i + ". ");
                 System.out.println("Weight: " + weight);
                 i++;
                 numberOfSpecificWeights++;
@@ -123,9 +122,9 @@ public class WeightTracker extends Tracker {
         System.out.println("Here are your recorded weights:");
         for (String weights : weightsArray) {
             generateWeightParameters(weights);
-            System.out.println(i + ". ");
-            System.out.println("Weight: " + weight);
-            System.out.println("Date: " + date + System.lineSeparator());
+            System.out.print(i + ". ");
+            System.out.print(" Weight: " + weight + " ");
+            System.out.println(" Date: " + date + System.lineSeparator());
             i++;
         }
         System.out.println("Total number of weights: " + (i - 1));

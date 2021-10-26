@@ -124,4 +124,6 @@ public class ClickfitMessages {
     public static final String EMPTY_SCHEDULE_LIST_MESSAGE = "Your workout schedule is empty";
 
     public static final String EMPTY_WORKOUT_LIST_MESSAGE = "Your workout list is empty";
+
+    public static final String WEIGHT_PARAMETERS_ERROR = "CLI.ckFit could not generate your parameters.";
 }
