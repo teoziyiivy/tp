@@ -15,6 +15,7 @@ import java.util.logging.LogManager;
 import static seedu.duke.ClickfitMessages.IO_EXCEPTION_MESSAGE;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 
+//@@author {ALL }
 @SuppressWarnings("ALL")
 public class Duke {
     private Meal meal;

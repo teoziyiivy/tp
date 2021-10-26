@@ -8,6 +8,7 @@ import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_N_INPUT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
 
+//@@author { E/V}
 public class Ui {
 
     private Scanner uiScanner;

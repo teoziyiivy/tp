@@ -3,6 +3,8 @@
 ## Acknowledgements
 The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/)
 
+Adapted from https://se-education.org/addressbook-level2/DeveloperGuide.html
+
 ## Ui(User Interface): Class diagram
 
 ### Design & implementation
@@ -129,11 +131,11 @@ conveniently accessed via the Command Line Interface (CLI).
 |v2.0|frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|
 |v2.0|serious athlete|breakdown my workout into smaller activities|track things like sets, reps and distance|
 
+
 ## Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed (Java has backward compatibility).
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
    be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary

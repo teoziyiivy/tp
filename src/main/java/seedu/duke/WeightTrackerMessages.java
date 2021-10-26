@@ -1,5 +1,6 @@
 package seedu.duke;
 
+//@@author {I }
 public class WeightTrackerMessages {
     public static void printAddWeightResponse(double weight, String date) {
         System.out.println("Noted! CLI.ckFit has recorded your weight as "

@@ -5,12 +5,12 @@ import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.schedule.ScheduleException;
-import seedu.duke.exceptions.workout.WorkoutException;
-import seedu.duke.schedule.ScheduleTracker;
+import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightIndexException;
 import seedu.duke.exceptions.weight.NoWeightsException;
-import seedu.duke.exceptions.weight.AddWeightException;
+import seedu.duke.exceptions.workout.WorkoutException;
+import seedu.duke.schedule.ScheduleTracker;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
+//@@author { E}
 public class CommandManager {
 
     protected ScheduleTracker scheduleTracker;
@@ -97,8 +98,8 @@ public class CommandManager {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
         storage.saveWeight(weightTracker);
-//      storage.saveScheduleData(scheduleTracker);
-//      storage.saveWorkoutData(workoutTracker);
+        storage.saveSchedule(scheduleTracker);
+        storage.saveWorkout(workoutTracker);
     }
 
     public void foodBankParser(String inputArguments) throws
