@@ -39,6 +39,9 @@ to arrayLists, which are converted to arrayLists, which are then referenced by P
 printed as a summary of all stored information iu the text files.
 
 
+### Meal: Listing Meals
+![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
+
 ### WeightTracker: Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
 

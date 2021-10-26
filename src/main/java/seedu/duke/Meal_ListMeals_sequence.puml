@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant "meal:Meal"
+    ->"meal:Meal" : "listMeals(date: String)"
+    activate "meal:Meal" #FFBBBB
+    alt date.equals("all")
+    |||
+    loop Until no more meals
+    "meal:Meal"->"meal:Meal" : generateMealParameters(inputArguments: String)
+    activate "meal:Meal" #FFBBBB
+    return
+    |||
+    end
+    |||
+    else
+    |||
+    loop Until no more meals
+    |||
+    opt meal.contains(date)
+    "meal:Meal"->"meal:Meal" : generateMealParameters(inputArguments: String)
+    activate "meal:Meal" #FFBBBB
+    return
+    |||
+    end
+    |||
+    end
+    |||
+    end
+    deactivate "meal:Meal"
+    |||
+@enduml
