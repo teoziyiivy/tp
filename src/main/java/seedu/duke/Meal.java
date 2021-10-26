@@ -40,7 +40,7 @@ public class Meal extends Tracker {
 
     public void addMeal(String inputArguments)
             throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
-        logger.entering(getClass().getName(),"addMeal");
+        logger.entering(getClass().getName(), "addMeal");
         logger.log(Level.INFO, "generating meal parameters");
 
         generateMealParameters(inputArguments);
@@ -56,14 +56,14 @@ public class Meal extends Tracker {
         inputArguments = description + " /c " + calories + " /d " + date + " /t " + time;
         meals.add(inputArguments);
         mealNumber += 1;
-        logger.log(Level.INFO,"meal has been added to meal list");
-        logger.exiting(getClass().getName(),"addMeal");
+        logger.log(Level.INFO, "meal has been added to meal list");
+        logger.exiting(getClass().getName(), "addMeal");
     }
 
     public void deleteMeal(String inputArguments)
             throws DateTimeParseException, NumberFormatException, FoodBankException {
         assert mealNumber != 0;
-        logger.entering(getClass().getName(),"deleteMeal");
+        logger.entering(getClass().getName(), "deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
         logger.log(Level.INFO, "generating meal parameters");
         generateMealParameters(meals.get(mealIndex));
@@ -71,21 +71,18 @@ public class Meal extends Tracker {
         meals.remove(mealIndex);
         mealNumber -= 1;
         totalCalories -= calories;
-        logger.log(Level.INFO,"meal has been deleted from meal list");
+        logger.log(Level.INFO, "meal has been deleted from meal list");
         System.out.println(description + " will be removed from your list of meals consumed. You now "
                 + "have " + totalCalories + " left!\n");
-        logger.exiting(getClass().getName(),"deleteMeal");
+        logger.exiting(getClass().getName(), "deleteMeal");
     }
 
     public void listMeals(String date) throws FoodBankException {
-        assert mealNumber != 0;
-        logger.entering(getClass().getName(),"listMeals");
-        int i = 1;
-        logger.log(Level.INFO, "entering for loop");
-        totalCalories = 0;
-        mealNumber = 0;
-        for (String meal : meals) {
-            if (meal.contains(date)) {
+        if (date.equals("all")) {
+            int i = 1;
+            totalCalories = 0;
+            mealNumber = 0;
+            for (String meal : meals) {
                 logger.log(Level.INFO, "generating meal parameters");
                 generateMealParameters(meal);
                 logger.log(Level.INFO, "meal parameters generated");
@@ -97,11 +94,32 @@ public class Meal extends Tracker {
                 totalCalories += calories;
                 mealNumber += 1;
             }
+        } else {
+            assert mealNumber != 0;
+            logger.entering(getClass().getName(), "listMeals");
+            int i = 1;
+            logger.log(Level.INFO, "entering for loop");
+            totalCalories = 0;
+            mealNumber = 0;
+            for (String meal : meals) {
+                if (meal.contains(date)) {
+                    logger.log(Level.INFO, "generating meal parameters");
+                    generateMealParameters(meal);
+                    logger.log(Level.INFO, "meal parameters generated");
+                    System.out.println(i + ". " + description);
+                    System.out.println("Calories: " + calories);
+                    System.out.println("Date: " + date);
+                    System.out.println("Time: " + time + "\n");
+                    i += 1;
+                    totalCalories += calories;
+                    mealNumber += 1;
+                }
+            }
         }
         System.out.println("Total number of meals: " + mealNumber);
         System.out.println("Total calories: " + totalCalories);
-        logger.log(Level.INFO,"meal list printed");
-        logger.exiting(getClass().getName(),"listMeal");
+        logger.log(Level.INFO, "meal list printed");
+        logger.exiting(getClass().getName(), "listMeal");
     }
 
     public int getCalories(String date) throws FoodBankException {

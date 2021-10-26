@@ -13,6 +13,8 @@ import seedu.duke.exceptions.NoWeightsException;
 import seedu.duke.exceptions.AddWeightException;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -91,7 +93,7 @@ public class CommandManager {
         saveEverything();
     }
 
-    public void saveEverything() throws IOException,DukeException {
+    public void saveEverything() throws IOException {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
         storage.saveWeight(weightTracker);
@@ -138,20 +140,28 @@ public class CommandManager {
         String date;
         if (splitResults.length == 1) {
             if (command.contains("/")) {
-                listEverything(command);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(command, formatter);
+                date = formatter.format(localDate);
+                listEverything(date);
                 return;
             } else {
                 date = Parser.getSystemDate();
             }
         } else {
             date = splitResults[1];
+            if (!date.equals("all")) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(date, formatter);
+                date = formatter.format(localDate);
+            }
         }
         switch (command) {
         case Keywords.MEALS:
             meal.listMeals(date);
             break;
         case Keywords.FLUIDS:
-            fluid.listFluid(date);
+            fluid.listFluids(date);
             break;
         case Keywords.CALORIES:
             listCalories(date);
@@ -209,7 +219,7 @@ public class CommandManager {
             DateTracker.sortDateAndTime(workoutTracker.workouts);
             break;
         case Keywords.SCHEDULE:
-            scheduleTracker.addScheduledWorkout(inputArguments, false);
+            scheduleTracker.addScheduledWorkout(inputArguments, false, true);
             break;
         case Keywords.WEIGHT:
             weightTracker.addWeight(inputArguments);
@@ -223,8 +233,6 @@ public class CommandManager {
 
     public void deleteParser(String input) throws NullPointerException,
             FoodBankException, DukeException,
-            MealException,
-            FluidExceptions,
             ScheduleException,
             WorkoutException,
             DeleteWeightException,
@@ -256,7 +264,9 @@ public class CommandManager {
             scheduleTracker.deleteScheduledWorkout(inputArguments);
             break;
         case Keywords.WEIGHT:
-            // Need to fix delete weight method in Weight tracker
+            if (inputArguments == null) {
+                throw new DeleteWeightException();
+            }
             weightTracker.deleteWeight(inputArguments);
             break;
         default:
@@ -268,16 +278,15 @@ public class CommandManager {
 
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
-            ScheduleException, WorkoutException,
-            NoWeightsException {
+            NoWeightsException, DukeException, WorkoutException, ScheduleException {
         meal.listMeals(date);
         System.out.println();
-        fluid.listFluid(date);
+        fluid.listFluids(date);
+        System.out.println();
+        weightTracker.listWeights(date);
         System.out.println();
         workoutTracker.listWorkouts(date);
         System.out.println();
         scheduleTracker.listScheduledWorkouts(date);
-        System.out.println();
-        weightTracker.listWeights(date);
     }
 }
