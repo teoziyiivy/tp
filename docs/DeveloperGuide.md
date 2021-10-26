@@ -15,16 +15,15 @@ It implements the following operations:
 * getInfo()
 * memoryStartup()
 
-These operations will be illustrated throught UML diagrams.
+These operations will be illustrated through UML diagrams.
 
 ### Printing the welcome message
-The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported
-from Clickfitmessages class.
+The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported from Clickfitmessages class.
 
 ### Getting BMI and recommended daily caloric intake
 ![Imgur](https://i.imgur.com/TZbe6Qh.png)
 
-the user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
+The user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
 The calculator takes in the following inputs as shown in the UML diagram through the instantiating of a new calculator
 object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
 daily caloric intake through getIdealCalories().
@@ -37,7 +36,6 @@ the method printLoadedLists() in Storage class. In storage class, the text files
 classes are first converted
 to arrayLists, which are converted to arrayLists, which are then referenced by PrintLoadedLists() to be formatted and
 printed as a summary of all stored information iu the text files.
-
 
 ### WeightTracker: Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
