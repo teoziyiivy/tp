@@ -1,9 +1,7 @@
 # Developer Guide
 
 ## Acknowledgements
-The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/), ...
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/)
 
 ## Ui(User Interface): Class diagram
 
@@ -81,7 +79,9 @@ printed for the entire list.
 Above are the UML class level diagrams of `ScheduleTracker` and `ScheduledWorkout`. As seen in the diagram, one 
 `ScheduleTracker` object keeps track/is linked to **any** number of `ScheduledWorkout` objects, thus have a 
 multiplicity of `0..*`. This association forms through a private attribute `scheduledWorkouts` which is of type 
-`ArrayList<ScheduledWorkout>`. Each `ScheduledWorkout` object also has a private attribute called `activities` which is 
+`ArrayList<ScheduledWorkout>`. 
+
+Each `ScheduledWorkout` object also has a private attribute called `activities` which is 
 of type `ArrayList<WorkoutActivity>` where `activities` keeps track of **any** number of `WorkoutActivity` objects.
 Do note that **not all** class attributes and methods are present in the diagram for 
 the sake of better comprehensibility.
@@ -93,6 +93,7 @@ the sake of better comprehensibility.
 The UML sequence diagram above shows what happens when the method `addScheduledWorkout(...)` is called. 
 Parameters are generated and a `ScheduledWorkout` object is added into the `scheduledWorkouts` ArrayList.
 There are a few method calls which are omitted from this diagram. The main focus is on `cleanUpScheduleList()`. 
+
 Once called, **if** there are any overdue workouts, a `loop` is entered and calls `updateOrDeleteScheduledWorkout(...)` 
 repeatedly until the `loop` condition is satisfied. Essentially, depending on whether the overdue workout detected is 
 recurring, the workout is either deleted or rescheduled appropriately. Once the `loop` block exits, `sortScheduleList()` is called and the 
@@ -135,14 +136,49 @@ conveniently accessed via the Command Line Interface (CLI).
 |v2.0|user|have scheduled workouts in the list to be sorted by the nearest dates|easily keep track of upcoming workouts|
 |v2.0|frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|
 |v2.0|serious athlete|breakdown my workout into smaller activities|track things like sets, reps and distance|
+
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed (Java has backward compatibility).
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+   be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
-* *glossary item* - Definition
+* *recurring workouts* - workouts that are scheduled ***weekly***
+* *overdue workouts* - workouts whose dates are before the current date
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### I/O tests
+#### Windows
+
+1. Open a terminal window in the test folder
+
+2. Run the `runtests.bat` script
+
+3. If the script reports that there is no difference between ACTUAL.TXT and EXPECTED.TXT, the test has passed
+
+#### Mac/Unix/Linux
+
+1. Open a terminal window in the test folder
+
+2. Run the `runtests.sh` script
+
+3. If the script reports that there is no difference between ACTUAL.TXT and EXPECTED.TXT, the test has passed
+
+### JUnit tests
+1. In IntelliJ, right-click on the test folder and choose Run 'All Tests'
+
+### Troubleshooting test failures
+**Q:** How do I examine the exact differences between ACTUAL.TXT and EXPECTED.TXT? <br/>
+**A:** You can use a diff/merge tool e.g. file compare (fc) on Windows
+
+**Q:** The two files look exactly the same, but the test script reports they are different.<br/>
+**A:** This can happen because the line endings used by Windows is different from Unix-based OSes. 
+Convert the ACTUAL.TXT to the format used by your OS using some utility.
+
+**Q:** Test fails during the only for the first time.<br/>
+**A:** The output of the very first test run could be slightly different because the program creates a new storage file. 
+Tests should pass from the 2nd run onwards.

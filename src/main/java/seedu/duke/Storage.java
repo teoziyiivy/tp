@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
@@ -177,6 +179,10 @@ public class Storage {
         fileCleaner.write("");
         fileCleaner.close();
         for (String s : schedule) {
+            if (LocalDate.parse(Parser.getDateNoDateTracker(s),
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy")).isBefore(LocalDate.now())) {
+                continue;
+            }
             fileWriter.write(s + System.lineSeparator());
         }
         fileWriter.close();
