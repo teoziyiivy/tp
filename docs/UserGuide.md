@@ -1,11 +1,21 @@
 # User Guide
 ## Introduction
 
-CLI.ckFit is a comprehensive workout client with the two main components of a workout diary and a calorie manager with <br/>
-the peripherals being weight tracking and BMI/recommended caloric intake calculator. These features can be conveniently accessed via the Command Line Interface (CLI).
+CLI.ckFit is a desktop based fitness app with the two main components of a calorie manager and a workout schedule 
+manager. For a more comprehensive user experience, CLI.ckFit also supports weight tracking and both a BMI and 
+recommended caloric intake calculator. The calculators give the user an idea of his current fitness level, and the other 
+features allow the user to work from his base fitness level to his goal.
 
 ## Quick Start
+1. The BMI calculator and recommended caloric intake calculator gives the user an idea of where his current fitness 
+level stands. Users can also choose to skip using the calculators by entering the appropriate keystrokes.
+2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
+to track the calories burned.
+3. Workout schedule manager also allows the user to schedule future workouts
+4. For the long term outlook, weight tracker lets the user monitor his weight over the length of usage of CLI.ckFit as an 
+indicator of the user's progress
 
+## Technical Start Up
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CLI.ckFit` from [here](http://link.to/duke).
 3. Go to the folder you saved the CLIckFit.jar file and note the absolute file path.
@@ -14,36 +24,46 @@ the peripherals being weight tracking and BMI/recommended caloric intake calcula
 5. Navigate to the folder where the CLIckFit.jar file is stored.
 6. Execute java -jar CLIckFit.jar in the terminal, and the application will start running.
 
-## Command Summary
-*Psssstttttt click on the commands to skip sections!*
+## Table of Contents
 
-Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
+### Calorie Manager
+- #### Add 
+  - [**Add meal**](#adding-a-meal)
+  - [**Add fluid**](#adding-fluids)
+  - [**Add weight**](#adding-weight)
+- #### Delete
+  - [**Remove meal**](#delete-a-meal)
+  - [**Remove fluid**](#delete-a-fluids)
+  - [**Remove weight**](#delete-a-weight)
+- #### List
+  - [**List meals**](#list-meals)
+  - [**List fluids**](#list-fluids)
+  - [**List weights**](#list-weights)
+- #### Help
+  - [**Access user help**](#help-commands)
+  - [**Access user guide**](#help-ug)
 
-Command | Format of input
------------- | -------------
-[**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES> /d DATE> /t TIME>`
-[**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES> /v VOLUME /d DATE /t TIME>`
-[**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
-[**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
-[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`
-[**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
-[**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
-[**Remove meal**](#delete-a-meal)| `delete meal INDEX`
-[**Remove fluid**](#delete-a-fluids)| `delete fluid INDEX`
-[**Remove weight**](#delete-a-weight)| `delete weight INDEX`
-[**Remove workout**](#delete-a-workout)| `delete workout INDEX`
-[**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`
-[**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`
-[**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`
-[**List meals**](#list-meals)| `list meals DATE`
-[**List fluids**](#list-fluids)| `list fluids DATE`
-[**List weights**](#list-weights)| `list weights DATE`
-[**List workouts**](#list-workouts)| `list workouts DATE`
-[**List scheduled workouts**](#list-scheduled-workouts)| `list schedule DATE`
-[**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
-[**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
-[**Access user help**](#help-Commands)| `help commands`
-[**Access user guide**](#help-UG)| `help UG`
+### Workout Schedule Manager
+- #### Add
+  - [**Add workout**](#adding-workout)
+  - [**Add scheduled workout**](#adding-scheduled-workout)
+- #### Delete
+  - [**Remove workout**](#delete-a-workout)
+  - [**Remove scheduled workout**](#delete-a-scheduled-workout)
+- #### List
+    - [**List workouts**](#list-workouts)
+    - [**List scheduled workouts**](#list-scheduled-workouts)
+
+### Library Manager
+- #### Add
+  - [**Add meal to library**](#adding-meal-to-library)
+  - [**Add fluid to library**](#adding-fluid-to-library)
+- #### Delete
+    - [**Remove meal from library**](#delete-a-meal-from-library)
+    - [**Remove fluid from library**](#delete-a-fluid-from-library)
+- #### List
+    - [**List meals from library**](#list-meals-stored-in-library)
+    - [**List fluids from library**](#list-fluids-stored-in-library)
 
 
 # *Features:*
@@ -406,3 +426,34 @@ A: Transfer the data text files located in the same directory as your CLIckFit.j
 to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your
 data will then be loaded from the text files when you run CLIckFit.jar on your new computer.
 
+## Command Summary
+*Psssstttttt click on the commands to skip sections!*
+
+Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
+
+
+Command | Format of input
+------------ | -------------
+[**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES> /d DATE> /t TIME>`
+[**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES> /v VOLUME /d DATE /t TIME>`
+[**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
+[**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
+[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`
+[**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
+[**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
+[**Remove meal**](#delete-a-meal)| `delete meal INDEX`
+[**Remove fluid**](#delete-a-fluids)| `delete fluid INDEX`
+[**Remove weight**](#delete-a-weight)| `delete weight INDEX`
+[**Remove workout**](#delete-a-workout)| `delete workout INDEX`
+[**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`
+[**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`
+[**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`
+[**List meals**](#list-meals)| `list meals DATE`
+[**List fluids**](#list-fluids)| `list fluids DATE`
+[**List weights**](#list-weights)| `list weights DATE`
+[**List workouts**](#list-workouts)| `list workouts DATE`
+[**List scheduled workouts**](#list-scheduled-workouts)| `list schedule DATE`
+[**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
+[**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
+[**Access user help**](#help-Commands)| `help commands`
+[**Access user guide**](#help-UG)| `help UG`

@@ -120,4 +120,8 @@ public class ClickfitMessages {
             + System.lineSeparator() + "Please ensure the index is within the list.";
 
     public static final String WEIGHT_EMPTY_ERROR = "CLI.ckFit has no recorded weights.";
+
+    public static final String EMPTY_SCHEDULE_LIST_MESSAGE = "Your workout schedule is empty";
+
+    public static final String EMPTY_WORKOUT_LIST_MESSAGE = "Your workout list is empty";
 }
