@@ -125,6 +125,29 @@ public class Storage {
         }
     }
 
+//    public void saveWorkoutData(WorkoutTracker workoutTracker) throws IOException {
+//        String fileAsString = Files.readString(Paths.get(WORKOUT_DATA_FILE_PATH));
+//        FileWriter fw = new FileWriter(WORKOUT_DATA_FILE_PATH, true);
+//        for (String w : workoutTracker.workouts) {
+//            if (fileAsString.contains(w)) {
+//                continue;
+//            }
+//            fw.write(w + System.lineSeparator());
+//        }
+//        fw.close();
+//    }
+//
+//    public void saveScheduleData(ScheduleTracker scheduleTracker) throws IOException {
+//        String fileAsString = Files.readString(Paths.get(SCHEDULE_DATA_FILE_PATH));
+//        FileWriter fw = new FileWriter(SCHEDULE_DATA_FILE_PATH, true);
+//        for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
+//            if (fileAsString.contains(w.getScheduledWorkoutAsString())) {
+//                continue;
+//            }
+//            fw.write(w.getScheduledWorkoutAsString() + System.lineSeparator());
+//        }
+//        fw.close();
+//    }
     //@@author arvejw
     public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);

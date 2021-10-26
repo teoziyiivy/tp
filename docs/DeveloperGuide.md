@@ -15,16 +15,15 @@ It implements the following operations:
 * getInfo()
 * memoryStartup()
 
-These operations will be illustrated throught UML diagrams.
+These operations will be illustrated through UML diagrams.
 
 ### Printing the welcome message
-The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported
-from Clickfitmessages class.
+The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported from Clickfitmessages class.
 
 ### Getting BMI and recommended daily caloric intake
 ![Imgur](https://i.imgur.com/TZbe6Qh.png)
 
-the user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
+The user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
 The calculator takes in the following inputs as shown in the UML diagram through the instantiating of a new calculator
 object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
 daily caloric intake through getIdealCalories().
@@ -41,6 +40,7 @@ printed as a summary of all stored information iu the text files.
 
 ### Meal: Listing Meals
 ![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
+
 
 ### WeightTracker: Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
@@ -112,11 +112,17 @@ list is always output to the user. This also ensures the `scheduledWorkouts` Arr
 Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
 the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
-### Fluid: Class diagram
+#### Fluid: Class diagram
 
 ![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
 
 Above are the UML class level diagrams of `Fluid`, `FluidExceptions` and `Tracker`. As seen in the diagram, the `Fluid` class is dependent on the `FluidExceptions` and the `Fluid`class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+
+#### Fluid: Adding weight sequence diagram
+![](https://user-images.githubusercontent.com/69446495/138881867-cff1b0a7-e836-43dd-b654-5b7db96ea1a3.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `add fluid`.
+`generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. These variables are then concatenated together as a string called `inputArguments` and added to the `fluidArray` list.
 
 ## Product scope
 ### Target user profile

@@ -24,6 +24,38 @@ indicator of the user's progress
 5. Navigate to the folder where the CLIckFit.jar file is stored.
 6. Execute java -jar CLIckFit.jar in the terminal, and the application will start running.
 
+<<<<<<< HEAD
+## Command Summary
+*Psssstttttt click on the commands to skip sections!*
+
+Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
+
+Command | Format of input
+------------ | -------------
+[**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES> /d DATE> /t TIME>`
+[**Add fluid**](#adding-a-fluid)| `add fluid FLUID_NAME </c FLUID_CALORIES> /v VOLUME /d DATE /t TIME>`
+[**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
+[**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
+[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`
+[**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
+[**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
+[**Remove meal**](#delete-a-meal)| `delete meal INDEX`
+[**Remove fluid**](#delete-a-fluids)| `delete fluid INDEX`
+[**Remove weight**](#delete-a-weight)| `delete weight INDEX`
+[**Remove workout**](#delete-a-workout)| `delete workout INDEX`
+[**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`
+[**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`
+[**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`
+[**List meals**](#list-meals)| `list meals DATE`
+[**List fluids**](#list-fluids)| `list fluids DATE`
+[**List weights**](#list-weights)| `list weights DATE`
+[**List workouts**](#list-workouts)| `list workouts DATE`
+[**List scheduled workouts**](#list-scheduled-workouts)| `list schedule DATE`
+[**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
+[**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
+[**Access user help**](#help-Commands)| `help commands`
+[**Access user guide**](#help-UG)| `help UG`
+=======
 ## Table of Contents
 
 ### Calorie Manager
@@ -64,7 +96,7 @@ indicator of the user's progress
 - #### List
     - [**List meals from library**](#list-meals-stored-in-library)
     - [**List fluids from library**](#list-fluids-stored-in-library)
-
+>>>>>>> 399308c9546ce9f5cb5d8612211d870e0b5e8cdc
 
 # *Features:*
 
@@ -94,7 +126,11 @@ Command Word: `add fluid`
 
 Description: `Adds a new fluid to the list of fluid items.`
 
+<<<<<<< HEAD
+Format: `add fluid {FLUID NAME} /c <FLUID_CALORIES> /v <VOLUME> /d <DATE> /t <TIME>`
+=======
 Format: `add fluid FLUID NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 * The `FLUID_NAME` can contain spaces.
 * The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
@@ -105,6 +141,15 @@ Format: `add fluid FLUID NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 Example of usage:
 
 `add fluid milk /c 180 /v 100 /d 08/09/2021 /t 07:40`
+<<<<<<< HEAD
+
+Expected outcome:
+
+```
+Noted! CLI.ckFit has recorded your drink of milk of 180 calories and 100 ml on 08/09/2021 07:40.
+```
+=======
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 ## Adding weight
 
@@ -112,7 +157,11 @@ Command Word: `add weight`
 
 Description: `Adds a new weight to the list of weight items.`
 
+<<<<<<< HEAD
+Format: `add weight WEIGHT /d DATE`
+=======
 Format: `add weight WEIGHT </d DATE>`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 * The `WEIGHT` cannot contain spaces.
 * The `DATE` is in dd/mm/yyyy.
@@ -186,6 +235,8 @@ Description: Adds a new meal to the library.
 
 Format: `library addmeal MEAL_NAME /c MEAL_CALORIES`
 
+<<<<<<< HEAD
+=======
 * The MEAL_NAME can contain spaces.
 * The MEAL_CALORIES can only contain positive integers inclusive of 0.
 
@@ -210,6 +261,7 @@ Example of usage:
 
 ## Delete a meal
 
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 Command Word: `delete meal`
 
 Description: `Remove a meal from the list of meal items.`
@@ -220,15 +272,19 @@ Format: `delete meal INDEX`
 
 * Example of usage:
 
-`deletemeal 1`
+`delete meal 1`
 
 ## Delete a fluids
 
 Command Word: `delete fluid`
 
-Description: `Remove a fluid from the list of fluid items.`
+Description: `Removes a fluid from the list of fluid items.`
 
+<<<<<<< HEAD
+Format: `delete fluid {INDEX OF FLUID}`
+=======
 Format: `delete fluid INDEX`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 * The `INDEX` can only contain integers from the list.
 
@@ -238,7 +294,11 @@ Example of usage:
 
 ## Delete a weight
 
+<<<<<<< HEAD
+Command Word:`delete weight`
+=======
 Command word: `delete weight`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Description: Deletes a meal from the list of meals.
 
@@ -249,9 +309,17 @@ Format: `delete weight INDEX`
 Example of usage:
 `delete weight 2`
 
+<<<<<<< HEAD
+`delete weight 1`
+
+# Delete workout
+
+Command Word:`delete workout`
+=======
 ## Delete a workout
 
 Command Word: `delete workout`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Description: `Remove a workout from the list of workout items.`
 
@@ -270,7 +338,11 @@ Command Word: `delete schedule`
 Description: `Remove a workout from the list of workout items.`
 
 Format: `delete schedule INDEX`
+<<<<<<< HEAD
+
+=======
 * Use `list schedule all` to determine the index of the scheduled workout you wish to delete.
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
@@ -279,6 +351,15 @@ Example of usage:
 
 ## Delete a meal from library
 
+<<<<<<< HEAD
+Command Word: `list meals <DATE>`
+
+Description: `Lists all meal entries made for that specific date.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
+=======
 Command word: `library deletemeal`
 
 Description: Deletes a meal from the library.
@@ -297,29 +378,61 @@ Description: Deletes a fluid from the library.
 
 Format: `library deletefluid INDEX`
 * Use `library listfluids` to determine the index of the meal you wish to delete.
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Example of usage:
 `library deletefluid 2`
 
 ## List meals
 
+<<<<<<< HEAD
+`list meals`
+=======
 Command word: `list meals`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Description: Lists all meals as per the user's specifications.
 
+<<<<<<< HEAD
+Command Words:`list fluids <DATE>`
+
+Description: `Lists all fluid entries made for that specific date.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
+=======
 Format: `list meals DATE`
 
 * The `DATE` is in dd/mm/yyyy.
 * If `DATE` is left empty, the meals recorded **today** will be returned.
 * If the word `all` is written in place of `DATE`, **ALL** stored meals will be listed.
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Example of usage:
 `list meals`, `list meals 22/10/2021`, `list meals all`
 
+<<<<<<< HEAD
+`list fluids`
+=======
 ## List fluids
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Command Words: `list fluids DATE`
 
+<<<<<<< HEAD
+Command Words:`list weights <DATE>`
+
+Description: `Lists all weight entries made for that specific date.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
+
+Example of usage:
+
+`list weights`
+=======
 Description: `Lists all fluid entries made for that specific date.`
 
 * The `DATE` is in dd/mm/yyyy.
@@ -333,6 +446,7 @@ Example of usage:
 ## List weights
 
 Command Words:`list weights`
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Description: `Lists weight entries made depending on date`
 
@@ -349,6 +463,13 @@ Example of usage:
 
 Command Word:`list workouts`
 
+<<<<<<< HEAD
+Description: `Lists out all stored workout descriptions, calories burned, date and time.`
+
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty, the weights recorded **today** will be returned.
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
+=======
 Description: `Lists out all stored workout descriptions, 
 calories burned, date and time depending on date`
 
@@ -357,6 +478,7 @@ Format: `list workouts DATE`
 * If `DATE` is left empty, the workouts recorded **today** will be returned.
 * If the word `all` is written in place of `DATE`, **ALL** stored workouts will be listed.
 
+>>>>>>> 13fb449e5d74bb84353e55ddec226dc2289b850b
 
 Example of usage:
 
