@@ -40,8 +40,8 @@ indicator of the user's progress
   - [**List fluids**](#list-fluids)
   - [**List weights**](#list-weights)
 - #### Help
-  - [**Access user help**](#help-Commands)
-  - [**Access user guide**](#help-UG)
+  - [**Access user help**](#help-commands)
+  - [**Access user guide**](#help-ug)
 
 ### Workout Schedule Manager
 - #### Add
