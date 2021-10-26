@@ -15,16 +15,15 @@ It implements the following operations:
 * getInfo()
 * memoryStartup()
 
-These operations will be illustrated throught UML diagrams.
+These operations will be illustrated through UML diagrams.
 
 ### Printing the welcome message
-The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported
-from Clickfitmessages class.
+The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported from Clickfitmessages class.
 
 ### Getting BMI and recommended daily caloric intake
 ![Imgur](https://i.imgur.com/TZbe6Qh.png)
 
-the user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
+The user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
 The calculator takes in the following inputs as shown in the UML diagram through the instantiating of a new calculator
 object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
 daily caloric intake through getIdealCalories().
@@ -39,39 +38,26 @@ to arrayLists, which are converted to arrayLists, which are then referenced by P
 printed as a summary of all stored information iu the text files.
 
 
-### WeightTracker: Class diagram
-![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
+### Meal: Listing Meals
+![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
 
-Above are the UML class level diagrams of `WeightTrackerMessages`, `WeightTracker` and `Tracker`. As seen in
-the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` and the `WeightTracker` 
-class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+
+### WeightTracker: Class diagram
+![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138873653-d5db5c99-1f22-4c68-86af-188f1ea2c593.png)
+
+Above are the UML class level diagrams of `WeightTracker`, `WeightTrackerMessages`, `Tracker` and relevant exception classes. 
+As seen in the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` class and inherits from the 
+`Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.
+This class diagram has been simplified for better readability.
 
 #### WeightTracker: Adding weight
-![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/138136616-37fd90e1-4158-4006-85d8-708593153cde.png)
+![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/138879720-3c3632c5-0765-4215-a2f8-5df7eea45277.png)
 
 The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
-The `WeightTracker` class calls the `readInput` function which reads the input and calls the `addWeight` 
-function which calls the `generateWeightParameters` function which updates the `weight` and `date` 
-variables. Then the `weight` and `date` variables are added to weight array list and 
-`printAddWeightResponse` is called from the `WeightTrackerMessages` class.
-
-#### WeightTracker: Deleting weight
-![WeightTracker_delete_sequence](https://user-images.githubusercontent.com/69446729/138136415-6ae09524-9712-494f-8792-3f945f0601d8.png)
-
-The UML sequence diagram above shows what happens when the input command is recognised as `deleteweight`.
-The `WeightTracker` class calls the `readInput` function which reads the input and calls the `deleteWeight`
-function which calls the `generateWeightParameters` function which updates the `weight` and `date`
-variables with the index parameters to be deleted. Then the `weight` and `date` variables are deleted 
-from the weight array list.
-
-#### WeightTracker: Checking weights
-![WeightTracker_check_sequence](https://user-images.githubusercontent.com/69446729/138136750-30b7e949-e156-4d88-9ebf-3446c31d7284.png)
-
-The UML sequence diagram above shows what happens when the input command is recognised as `checkweight`.
-The `WeightTracker` class calls the `readInput` function which reads the input and calls the `checkWeight`
-function which calls the `generateWeightParameters` function which updates the `weight` and `date`
-variables with the parameters to be printed. Then the `weight` and `date` variables are 
-printed for the entire list.
+The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date` 
+variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
+is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
+when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
 
 ### ScheduleTracker: Class diagram
 ![diagram-2070120484733536202](https://user-images.githubusercontent.com/69461398/138324203-ea286780-6611-43f4-af77-3ea7cb59a42c.png)
@@ -109,11 +95,17 @@ list is always output to the user. This also ensures the `scheduledWorkouts` Arr
 Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
 the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
-### Fluid: Class diagram
+#### Fluid: Class diagram
 
 ![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
 
 Above are the UML class level diagrams of `Fluid`, `FluidExceptions` and `Tracker`. As seen in the diagram, the `Fluid` class is dependent on the `FluidExceptions` and the `Fluid`class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+
+#### Fluid: Adding weight sequence diagram
+![](https://user-images.githubusercontent.com/69446495/138881867-cff1b0a7-e836-43dd-b654-5b7db96ea1a3.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `add fluid`.
+`generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. These variables are then concatenated together as a string called `inputArguments` and added to the `fluidArray` list.
 
 ## Product scope
 ### Target user profile
