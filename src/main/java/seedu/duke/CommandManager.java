@@ -7,10 +7,10 @@ import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
-import seedu.duke.exceptions.DeleteWeightException;
-import seedu.duke.exceptions.DeleteWeightIndexException;
-import seedu.duke.exceptions.NoWeightsException;
-import seedu.duke.exceptions.AddWeightException;
+import seedu.duke.exceptions.weight.DeleteWeightException;
+import seedu.duke.exceptions.weight.DeleteWeightIndexException;
+import seedu.duke.exceptions.weight.NoWeightsException;
+import seedu.duke.exceptions.weight.AddWeightException;
 
 import java.io.IOException;
 import java.time.LocalDate;

@@ -7,10 +7,7 @@ import seedu.duke.exceptions.MealException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
-import seedu.duke.exceptions.DeleteWeightException;
-import seedu.duke.exceptions.DeleteWeightIndexException;
-import seedu.duke.exceptions.NoWeightsException;
-import seedu.duke.exceptions.AddWeightException;
+import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.LoadException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -96,14 +93,8 @@ public class Duke {
                 System.out.println(ClickfitMessages.FOOD_BANK_EXCEPTION_MESSAGE);
             } catch (IOException e) {
                 System.out.println(ClickfitMessages.IO_EXCEPTION_MESSAGE);
-            } catch (DeleteWeightIndexException e) {
-                System.out.println(ClickfitMessages.WEIGHT_DELETE_INDEX_ERROR);
-            } catch (DeleteWeightException e) {
-                System.out.println(ClickfitMessages.WEIGHT_DELETE_FORMAT_ERROR);
-            } catch (NoWeightsException e) {
-                System.out.println(ClickfitMessages.WEIGHT_EMPTY_ERROR);
-            } catch (AddWeightException e) {
-                System.out.println(ClickfitMessages.WEIGHT_ADD_FORMAT_ERROR);
+            } catch (WeightException weighte) {
+                System.out.println(weighte.getMessage());
             }
         }
         LogManager.getLogManager().reset();
