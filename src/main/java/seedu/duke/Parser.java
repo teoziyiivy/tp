@@ -33,18 +33,22 @@ public class Parser {
     public static final String QUANTIFIER_SPLITTER = "x";
     public static final String SPACE_SEPARATOR = " ";
 
+    //@@author { I}
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
     }
 
+    //@@author { I}
     public static boolean containsTimeSeparator(String inputArguments) {
         return inputArguments.contains(TIME_SEPARATOR);
     }
 
+    //@@author { I}
     public static boolean containsCalorieSeparator(String inputArguments) {
         return inputArguments.contains(CALORIE_SEPARATOR);
     }
 
+    //@@author { J}
     public static boolean isRecurringWorkout(String inputArguments) {
         String[] splitResults = inputArguments.split(RECURRING_FLAG, 2);
         if (splitResults.length == 1) {
@@ -53,14 +57,17 @@ public class Parser {
         return splitResults[1].isEmpty(); // true if /r flag is at the end of the string
     }
 
+    //@@author { I}
     public static int parseStringToInteger(String input) throws NumberFormatException {
         return Integer.parseInt(input);
     }
 
+    //@@author { I}
     public static double parseStringToDouble(String input) throws NumberFormatException {
         return Double.parseDouble(input);
     }
 
+    //@@author {V }
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
             return true;
@@ -73,6 +80,7 @@ public class Parser {
         }
     }
 
+    //@@author { V}
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
@@ -96,6 +104,7 @@ public class Parser {
         }
     }
 
+    //@@author { J}
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
@@ -116,6 +125,7 @@ public class Parser {
         }
     }
 
+    //@@author {P}
     public static int getVolume(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
@@ -132,6 +142,7 @@ public class Parser {
         return volume;
     }
 
+    //@@author { I}
     public static String getDescription(String inputArguments) {
         String[] userInput;
         if (containsCalorieSeparator(inputArguments)) {
@@ -147,6 +158,7 @@ public class Parser {
         return description;
     }
 
+    //@@author { I}
     public static String getDate(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
@@ -168,6 +180,7 @@ public class Parser {
         return formatter.format(localDate);
     }
 
+    //@@author { I}
     public static String getDateNoDateTracker(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
@@ -181,6 +194,7 @@ public class Parser {
         return date;
     }
 
+    //@@author { I}
     public static String getTime(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
@@ -200,6 +214,7 @@ public class Parser {
     }
 
     // implement double
+    //@@author { I}
     public static double getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         double weight = parseStringToDouble(userInput[0]);
@@ -268,6 +283,7 @@ public class Parser {
         return outputMap;
     }
 
+    //@@author { P}
     public static String getSystemDate() {
         String systemDate = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault());
@@ -277,6 +293,7 @@ public class Parser {
         return systemDate;
     }
 
+    //@@author { P}
     public static String getSystemTime() {
         String systemTime = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
