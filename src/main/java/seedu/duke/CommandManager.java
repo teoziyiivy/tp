@@ -97,8 +97,8 @@ public class CommandManager {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
         storage.saveWeight(weightTracker);
-        storage.saveSchedule(scheduleTracker);
-        storage.saveWorkout(workoutTracker);
+//      storage.saveScheduleData(scheduleTracker);
+//      storage.saveWorkoutData(workoutTracker);
     }
 
     public void foodBankParser(String inputArguments) throws
@@ -278,7 +278,8 @@ public class CommandManager {
 
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
-            NoWeightsException, DukeException, WorkoutException, ScheduleException {
+            ScheduleException, WorkoutException,
+            NoWeightsException, DukeException {
         meal.listMeals(date);
         System.out.println();
         fluid.listFluids(date);
