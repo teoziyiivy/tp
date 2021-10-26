@@ -3,6 +3,8 @@
 ## Acknowledgements
 The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/)
 
+Adapted from https://se-education.org/addressbook-level2/DeveloperGuide.html
+
 ## Ui(User Interface): Class diagram
 
 ### Design & implementation
@@ -43,38 +45,21 @@ printed as a summary of all stored information iu the text files.
 
 
 ### WeightTracker: Class diagram
-![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138136839-8e4f117b-beb0-47bb-830a-55c58076b946.png)
+![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138873653-d5db5c99-1f22-4c68-86af-188f1ea2c593.png)
 
-Above are the UML class level diagrams of `WeightTrackerMessages`, `WeightTracker` and `Tracker`. As seen in
-the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` and the `WeightTracker` 
-class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
+Above are the UML class level diagrams of `WeightTracker`, `WeightTrackerMessages`, `Tracker` and relevant exception classes. 
+As seen in the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` class and inherits from the 
+`Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.
+This class diagram has been simplified for better readability.
 
 #### WeightTracker: Adding weight
-![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/138136616-37fd90e1-4158-4006-85d8-708593153cde.png)
+![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/138879720-3c3632c5-0765-4215-a2f8-5df7eea45277.png)
 
 The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
-The `WeightTracker` class calls the `readInput` function which reads the input and calls the `addWeight` 
-function which calls the `generateWeightParameters` function which updates the `weight` and `date` 
-variables. Then the `weight` and `date` variables are added to weight array list and 
-`printAddWeightResponse` is called from the `WeightTrackerMessages` class.
-
-#### WeightTracker: Deleting weight
-![WeightTracker_delete_sequence](https://user-images.githubusercontent.com/69446729/138136415-6ae09524-9712-494f-8792-3f945f0601d8.png)
-
-The UML sequence diagram above shows what happens when the input command is recognised as `deleteweight`.
-The `WeightTracker` class calls the `readInput` function which reads the input and calls the `deleteWeight`
-function which calls the `generateWeightParameters` function which updates the `weight` and `date`
-variables with the index parameters to be deleted. Then the `weight` and `date` variables are deleted 
-from the weight array list.
-
-#### WeightTracker: Checking weights
-![WeightTracker_check_sequence](https://user-images.githubusercontent.com/69446729/138136750-30b7e949-e156-4d88-9ebf-3446c31d7284.png)
-
-The UML sequence diagram above shows what happens when the input command is recognised as `checkweight`.
-The `WeightTracker` class calls the `readInput` function which reads the input and calls the `checkWeight`
-function which calls the `generateWeightParameters` function which updates the `weight` and `date`
-variables with the parameters to be printed. Then the `weight` and `date` variables are 
-printed for the entire list.
+The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date` 
+variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
+is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
+when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
 
 ### ScheduleTracker: Class diagram
 ![diagram-2070120484733536202](https://user-images.githubusercontent.com/69461398/138324203-ea286780-6611-43f4-af77-3ea7cb59a42c.png)
@@ -146,11 +131,11 @@ conveniently accessed via the Command Line Interface (CLI).
 |v2.0|frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|
 |v2.0|serious athlete|breakdown my workout into smaller activities|track things like sets, reps and distance|
 
+
 ## Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed (Java has backward compatibility).
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
    be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary

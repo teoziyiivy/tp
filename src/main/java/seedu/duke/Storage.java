@@ -37,6 +37,7 @@ public class Storage {
         initializeWorkoutFile();
     }
 
+    //@@author {V }
     public void saveFood(Fluid fluid, Meal meal) throws IOException {
         String currentDate;
         String currentMeal;
@@ -85,6 +86,7 @@ public class Storage {
         }
     }
 
+    //@@author { V}
     public void saveLibrary() throws IOException {
         String customMeal;
         String customFluid;
@@ -110,6 +112,7 @@ public class Storage {
         }
     }
 
+    //@@author { I}
     public void saveWeight(WeightTracker weight) throws IOException {
         String currentWeight;
         String header;
@@ -125,29 +128,6 @@ public class Storage {
         }
     }
 
-//    public void saveWorkoutData(WorkoutTracker workoutTracker) throws IOException {
-//        String fileAsString = Files.readString(Paths.get(WORKOUT_DATA_FILE_PATH));
-//        FileWriter fw = new FileWriter(WORKOUT_DATA_FILE_PATH, true);
-//        for (String w : workoutTracker.workouts) {
-//            if (fileAsString.contains(w)) {
-//                continue;
-//            }
-//            fw.write(w + System.lineSeparator());
-//        }
-//        fw.close();
-//    }
-//
-//    public void saveScheduleData(ScheduleTracker scheduleTracker) throws IOException {
-//        String fileAsString = Files.readString(Paths.get(SCHEDULE_DATA_FILE_PATH));
-//        FileWriter fw = new FileWriter(SCHEDULE_DATA_FILE_PATH, true);
-//        for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
-//            if (fileAsString.contains(w.getScheduledWorkoutAsString())) {
-//                continue;
-//            }
-//            fw.write(w.getScheduledWorkoutAsString() + System.lineSeparator());
-//        }
-//        fw.close();
-//    }
     //@@author arvejw
     public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);
@@ -188,6 +168,7 @@ public class Storage {
         fileWriter.close();
     }
 
+    //@@author {P }
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -209,6 +190,7 @@ public class Storage {
         return meals;
     }
 
+    //@@author {P }
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -230,6 +212,7 @@ public class Storage {
         return fluids;
     }
 
+    //@@author { I}
     public ArrayList<String> loadWeights() throws IOException {
         ArrayList<String> weights = new ArrayList<>();
         String newFilePath = new File(weightFile).getAbsolutePath();
@@ -248,6 +231,7 @@ public class Storage {
         return weights;
     }
 
+    //@@author { V}
     public ArrayList<String> loadMealLibrary() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
@@ -269,6 +253,7 @@ public class Storage {
         return meals;
     }
 
+    //@@author {P }
     public ArrayList<String> loadFluidLibrary() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
@@ -333,6 +318,7 @@ public class Storage {
         }
     }
 
+    //@@author {V }
     public static void initializeFoodFile() {
         File dataFile = new File(foodFile);
         if (!dataFile.exists()) {
@@ -344,6 +330,7 @@ public class Storage {
         }
     }
 
+    //@@author { I}
     public static void initializeFoodBankFile() {
         File dataFile = new File(libraryFile);
         if (!dataFile.exists()) {
@@ -355,6 +342,7 @@ public class Storage {
         }
     }
 
+    //@@author {I }
     public static void initializeWeightFile() {
         File dataFile = new File(weightFile);
         if (!dataFile.exists()) {
@@ -378,6 +366,7 @@ public class Storage {
         }
     }
 
+    //@@author { E}
     public void mealSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -409,6 +398,7 @@ public class Storage {
         }
     }
 
+    //@@author {E }
     public void fluidSummary() {
         int totalCalories = 0;
         int totalVolume = 0;
@@ -450,6 +440,7 @@ public class Storage {
         }
     }
 
+    //@@author {I }
     public void weightSummary() {
         int i = 0;
         try {
@@ -462,6 +453,7 @@ public class Storage {
         }
     }
 
+    //@@author { E}
     public void workoutSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -493,6 +485,7 @@ public class Storage {
         }
     }
 
+    //@@author {E }
     public void printLoadedLists() {
         System.out.println(MEAL_PRINT_FORMAT);
         mealSummary();
