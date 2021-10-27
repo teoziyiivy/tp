@@ -32,21 +32,31 @@ public class ClickfitMessages {
             + "has detected a wrong input, kindly type in either a \"Y\" or a \"N\".";
 
     public static final String HELP_COMMANDS =
-            System.lineSeparator() + "ScheduleDescription:"
-                    + System.lineSeparator()
-                    + "<command> <description> /d <date> /t <time>"
-                    + System.lineSeparator() + "\n"
-                    + "Fluids:"
-                    + System.lineSeparator()
-                    + "<command> <description> /c <calories> /v <volume> /d <date> /t <time>"
-                    + System.lineSeparator() + "\n"
-                    + "Add weight:"
-                    + System.lineSeparator()
-                    + "<command> <weight> /d <date>"
-                    + System.lineSeparator() + "\n"
-                    + "All else:" + System.lineSeparator()
-                    + "<command> <description> /c <calories> /d <date> /t <time>";
-
+        "[**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`"
+            + "[**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`"
+            + "[**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`"
+            + "[**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`"
+            + "[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`"
+            + "[**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`"
+            + "[**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`"
+            + "[**Remove meal**](#delete-a-meal)| `delete meal INDEX`"
+            + "[**Remove fluid**](#delete-a-fluid)| `delete fluid INDEX`"
+            + "[**Remove weight**](#delete-a-weight)| `delete weight INDEX`"
+            + "[**Remove workout**](#delete-a-workout)| `delete workout INDEX`"
+            + "[**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`"
+            +  "[**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`"
+            +  "[**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`"
+            + "[**List meals**](#list-meals)| `list meals <DATE>`"
+            + "[**List fluids**](#list-fluids)| `list fluids <DATE>`"
+            + "[**List weights**](#list-weights)| `list weights <DATE>`"
+            + "[**List workouts**](#list-workouts)| `list workouts <DATE>`"
+            + "[**List calories**](#list-calories)| `list calories <DATE>`"
+            + "[**List volume**](#list-volume)| `list calories <DATE>`"
+            + "[**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`"
+            + "[**List meals from library**](#list-meals-stored-in-library)| `library listmeals`"
+            + "[**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`"
+            + "[**Access user help**](#help-commands)| `help commands`"
+            + "[**Access user guide**](#help-ug)| `help UG`";
 
     public static final String HELP_UG = "Here is the link to our User Guide! "
             + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";

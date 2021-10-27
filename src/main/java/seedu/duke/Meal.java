@@ -2,8 +2,6 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.meal.EmptyMealListException;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoMealDescriptionException;

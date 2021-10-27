@@ -2,8 +2,6 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.fluid.FluidExceptions;
 
 import java.util.ArrayList;
 
