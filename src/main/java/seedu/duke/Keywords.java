@@ -1,5 +1,6 @@
 package seedu.duke;
 
+//@@author { ALL}
 public class Keywords {
     public static final String INPUT_ADD_WORKOUT = "workout";
     public static final String DELETE_DRINKS = "deletefluid";
