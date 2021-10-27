@@ -1,9 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.schedule.NoScheduleIndexException;
 import seedu.duke.exceptions.workout.DeleteWorkoutException;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.MissingWorkoutDescriptionException;
+import seedu.duke.exceptions.workout.NoWorkoutIndexException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.exceptions.workout.WorkoutNullArgumentException;
 
@@ -54,9 +56,11 @@ public class WorkoutTracker {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
 
-    public void deleteWorkout(String inputArguments) throws WorkoutException, DukeException {
+    public void deleteWorkout(String inputArguments) throws WorkoutException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete workout.");
-        nullArgumentCheck(inputArguments);
+        if (inputArguments == null) {
+            throw new NoWorkoutIndexException();
+        }
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         if (isWorkoutListEmpty()) {
             System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
