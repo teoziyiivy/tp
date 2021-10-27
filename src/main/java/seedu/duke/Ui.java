@@ -22,7 +22,7 @@ public class Ui {
     protected int height;
     protected int age;
     protected int activityLevel;
-
+    protected int correctInput = 0;
 
     public Ui() {
         uiScanner = new Scanner(System.in);
@@ -129,7 +129,6 @@ public class Ui {
         String uiInput;
         boolean flag = false;
         boolean result = false;
-
         while (!flag) {
             uiInput = uiScanner.nextLine();
             if (uiInput.isEmpty()) {
@@ -147,5 +146,4 @@ public class Ui {
         }
         return result;
     }
-
 }

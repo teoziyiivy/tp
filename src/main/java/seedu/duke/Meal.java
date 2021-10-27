@@ -2,11 +2,12 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.meal.EmptyMealListException;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoMealDescriptionException;
 import seedu.duke.exceptions.meal.NoSuchMealIndexException;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,7 +23,6 @@ public class Meal extends Tracker {
     protected String time;
     protected int totalCalories;
     private static Logger logger = Logger.getLogger("MealTrackerLogger");
-
 
     public Meal() {
         this.meals = new ArrayList<>();
