@@ -1,9 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-
+import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
+import seedu.duke.exceptions.fluid.InvalidFluidDescription;
+import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
+import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,21 +32,28 @@ public class Fluid extends Tracker {
         logr.setLevel(Level.SEVERE);
     }
 
-    public void generateFluidParameters(String inputArguments) throws DukeException, FoodBankException {
-        description = Parser.getDescription(inputArguments);
-        calories = Parser.getCalories(inputArguments);
-        volume = Parser.getVolume(inputArguments);
-        date = Parser.getDate(inputArguments);
-        time = Parser.getTime(inputArguments);
+    public void generateFluidParameters(String inputArguments) throws FoodBankException, FluidExceptions {
+        try {
+            description = Parser.getDescription(inputArguments);
+            calories = Parser.getCalories(inputArguments);
+            volume = Parser.getVolume(inputArguments);
+            date = Parser.getDate(inputArguments);
+            time = Parser.getTime(inputArguments);
+        } catch (DukeException e) {
+            throw new InvalidFluidDescription();
+        }
     }
 
     public void addFluid(String inputArguments) throws DukeException, FluidExceptions, FoodBankException {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
+        if (inputArguments == null) {
+            throw new InvalidFluidDescription();
+        }
         generateFluidParameters(inputArguments);
         logr.info("end of generating fluid parameters");
-        if ((description.equals("") || Parser.containsSeparators(description))) {
-            throw new FluidExceptions();
+        if (description.equals("") || Parser.containsSeparators(description)) {
+            throw new InvalidFluidDescription();
         }
         inputArguments = description + " /c " + calories + " /v " + volume + " /d " + date + " /t " + time;
         fluidArray.add(inputArguments);
@@ -56,14 +66,24 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "addFluid");
     }
 
-    public void deleteFluid(String inputArguments) throws DukeException, FoodBankException {
+    public void deleteFluid(String inputArguments) throws FoodBankException, FluidExceptions {
         logr.entering(getClass().getName(), "deleteFluid");
+        if (inputArguments == null) {
+            throw new NoDeleteFluidIndexException();
+        }
+        if (fluidArray.size() == 0 ) {
+            throw new DeleteEmptyFluidListException();
+        }
         assert fluidArray.size() != 0 : "Fluid array should not be empty";
         int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
+        if ((taskNumber < 0) || (taskNumber > (fluidNumber - 1))) {
+            throw new NoFluidToDelete();
+        }
         logr.info("task number obtained from user input");
         logr.info("going to generate fluid parameters from user input");
         generateFluidParameters(fluidArray.get(taskNumber));
         logr.info("end of generating fluid parameters");
+
         fluidArray.remove(taskNumber);
         logr.info("fluid intake has been removed");
         fluidNumber -= 1;
@@ -74,7 +94,10 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "deleteFluid");
     }
 
-    public void listFluids(String date) throws FoodBankException, DukeException {
+    public void listFluids(String date) throws FoodBankException, FluidExceptions {
+        if (fluidArray.size() == 0) {
+            System.out.println("Your fluid list is empty.");
+        }
         logr.entering(getClass().getName(), "listFluids");
         if (date.equals("all")) {
             int i = 1;
@@ -122,7 +145,7 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "listFluids");
     }
 
-    public int getCalories(String date) throws DukeException, FoodBankException {
+    public int getCalories(String date) throws FoodBankException, FluidExceptions {
         int calorieTotal = 0;
         for (String fluid : fluidArray) {
             if (fluid.contains(date)) {
@@ -133,7 +156,7 @@ public class Fluid extends Tracker {
         return calorieTotal;
     }
 
-    public int getVolume(String date) throws DukeException, FoodBankException {
+    public int getVolume(String date) throws FoodBankException, FluidExceptions {
         int volumeTotal = 0;
         for (String fluid : fluidArray) {
             if (fluid.contains(date)) {

@@ -7,6 +7,7 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.DeleteScheduleException;
 import seedu.duke.exceptions.schedule.MissingScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingScheduleSeparatorException;
+import seedu.duke.exceptions.schedule.NoScheduleIndexException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.schedule.ScheduleNullArgumentException;
 
@@ -127,7 +128,9 @@ public class ScheduleTracker {
 
     public void deleteScheduledWorkout(String inputArguments) throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete scheduled workout.");
-        nullArgumentCheck(inputArguments);
+        if (inputArguments == null) {
+            throw new NoScheduleIndexException();
+        }
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         if (isScheduledWorkoutListEmpty()) {
             System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
