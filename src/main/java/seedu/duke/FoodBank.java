@@ -11,7 +11,8 @@ public class FoodBank {
     protected static String description;
     protected static int totalMeals;
     protected static int totalFluids;
-  
+
+    //@@author {V }
     public FoodBank() {
         meals = new ArrayList<>();
         fluids = new ArrayList<>();
@@ -19,6 +20,7 @@ public class FoodBank {
         totalFluids = 0;
     }
 
+    //@@author {P }
     public static void generateParameters(String inputArguments) throws FoodBankException {
         try {
             calories = Parser.getCalories(inputArguments);
@@ -28,6 +30,7 @@ public class FoodBank {
         }
     }
 
+    //@@author {P }
     public static void addCustomFluid(String inputArguments) throws FoodBankException {
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
@@ -38,6 +41,7 @@ public class FoodBank {
                 + " You now have " + totalFluids + " fluids!\n");
     }
 
+    //@@author { P}
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
         int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
         generateParameters(fluids.get(taskNumber));
@@ -47,6 +51,7 @@ public class FoodBank {
                 + " You now have " + totalFluids + " fluids left!\n");
     }
 
+    //@@author {P }
     public static void listCustomFluids() throws FoodBankException {
         int i = 1;
         for (String fluid : fluids) {
@@ -58,6 +63,7 @@ public class FoodBank {
         System.out.println("Total number of fluids in library: " + totalFluids);
     }
 
+    //@@author { V}
     public static void listCustomMeal() throws FoodBankException {
         int i = 1;
         for (String meal : meals) {
@@ -69,6 +75,7 @@ public class FoodBank {
         System.out.println("Total number of meals in library: " + totalMeals);
     }
 
+    //@@author {V }
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
@@ -78,6 +85,7 @@ public class FoodBank {
                 + " calories, will be added to your library of meals. You now have " + totalMeals + " meals!\n");
     }
 
+    //@@author { V}
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
         generateParameters(meals.get(mealIndex));
@@ -87,6 +95,7 @@ public class FoodBank {
                 + totalMeals + " meals left!\n");
     }
 
+    //@@author { P}
     public static int findCalories(String name) throws FoodBankException {
         for (String meal : meals) {
             generateParameters(meal);
