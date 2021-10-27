@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.workout.DeleteWorkoutException;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;

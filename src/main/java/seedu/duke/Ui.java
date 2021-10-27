@@ -20,7 +20,7 @@ public class Ui {
     protected int height;
     protected int age;
     protected int activityLevel;
-
+    protected int correctInput = 0;
 
     public Ui() {
         uiScanner = new Scanner(System.in);
@@ -73,9 +73,11 @@ public class Ui {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput = uiScanner.nextLine();
         if (uiInput.equals("y")) {
+            correctInput = 1;
             System.out.println(MEMORY_STARTUP_Y_INPUT);
             return true;
         } else if (uiInput.isEmpty()) {
+            correctInput = 1;
             System.out.println(MEMORY_STARTUP_N_INPUT);
             System.out.println(System.lineSeparator() + "What would you like to do?");
             return false;

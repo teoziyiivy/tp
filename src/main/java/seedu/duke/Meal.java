@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Meal extends Tracker {
         logger.setLevel(Level.SEVERE);
     }
 
-    public void generateMealParameters(String inputArguments) throws FoodBankException {
+    public void generateMealParameters(String inputArguments) {
         try {
             calories = Parser.getCalories(inputArguments);
             description = Parser.getDescription(inputArguments);

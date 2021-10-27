@@ -75,10 +75,6 @@ public class ClickfitMessages {
 
     public static final String FLUID_DELETE_ERROR = "You have no existing fluid entries to delete.";
 
-    public static final String FLUID_DELETE_FORMAT_ERROR = "Please enter in the format: deletefluid [entry_number]";
-
-    public static final String FLUID_LIST_ERROR = "You have no fluid entries yet.";
-
     public static final String CALCULATOR_PROMPT = System.lineSeparator() + "Welcome back! Would you "
             + "like to check your BMI and recommended caloric intake?" + System.lineSeparator()
             + "Key in y or press enter keystroke to skip!";
@@ -127,4 +123,6 @@ public class ClickfitMessages {
     public static final String EMPTY_WORKOUT_LIST_MESSAGE = "Your workout list is empty";
 
     public static final String WEIGHT_PARAMETERS_ERROR = "CLI.ckFit could not generate your parameters.";
+
+    public static final String DONT_UNDERSTAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 }

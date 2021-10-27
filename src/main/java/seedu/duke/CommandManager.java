@@ -1,9 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FluidExceptions;
+import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
@@ -88,7 +90,7 @@ public class CommandManager {
             System.out.println(ClickfitMessages.CREDITS);
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(ClickfitMessages.DONT_UNDERSTAND);
             break;
         }
         saveEverything();
@@ -103,12 +105,15 @@ public class CommandManager {
     }
 
     public void foodBankParser(String inputArguments) throws
-            NullPointerException, FoodBankException {
+            NullPointerException, FoodBankException, InvalidFluidDescription {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.ADD_FLUID:
+        if (splitResults.length == 1) {
+            throw new InvalidFluidDescription();
+        }
             FoodBank.addCustomFluid(inputArguments);
             break;
         case Keywords.DELETE_DRINKS:
@@ -127,15 +132,14 @@ public class CommandManager {
             FoodBank.listCustomMeal();
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(ClickfitMessages.DONT_UNDERSTAND);
             break;
         }
     }
 
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException,
-            DukeException, ScheduleException,
-            WorkoutException, NoWeightsException {
+            ScheduleException, WorkoutException, NoWeightsException, FluidExceptions {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         String date;
@@ -181,14 +185,13 @@ public class CommandManager {
             weightTracker.listWeights(date);
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(ClickfitMessages.DONT_UNDERSTAND);
             break;
         }
     }
 
     private void listCalories(String date) throws
-            DukeException, FoodBankException,
-            WorkoutException {
+            FoodBankException, WorkoutException, FluidExceptions {
         int calCount = fluid.getCalories(date) + meal.getCalories(date);
         int caloriesBurned = workoutTracker.getCaloriesBurned(date);
         int netCalories = calCount - caloriesBurned;
@@ -227,7 +230,7 @@ public class CommandManager {
             DateTracker.sortDate(weightTracker.weightsArray);
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(ClickfitMessages.DONT_UNDERSTAND);
             break;
         }
     }
@@ -237,26 +240,16 @@ public class CommandManager {
             ScheduleException,
             WorkoutException,
             DeleteWeightException,
-            DeleteWeightIndexException {
+            DeleteWeightIndexException, FluidExceptions {
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
-            // DO delete list size check within class
             meal.deleteMeal(inputArguments);
             break;
         case Keywords.FLUID:
-            // Do within class
-            if (inputArguments != null) {
-                if (fluid.fluidArray.size() == 0) {
-                    System.out.println(ClickfitMessages.FLUID_DELETE_ERROR);
-                } else {
-                    fluid.deleteFluid(inputArguments);
-                }
-            } else {
-                System.out.println(ClickfitMessages.FLUID_DELETE_FORMAT_ERROR);
-            }
+            fluid.deleteFluid(inputArguments);
             break;
         case Keywords.WORKOUT:
             workoutTracker.deleteWorkout(inputArguments);
@@ -271,7 +264,7 @@ public class CommandManager {
             weightTracker.deleteWeight(inputArguments);
             break;
         default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(ClickfitMessages.DONT_UNDERSTAND);
             break;
         }
         DateTracker.deleteDateFromList(inputArguments, fluid, meal, workoutTracker, weightTracker);
@@ -280,7 +273,7 @@ public class CommandManager {
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             ScheduleException, WorkoutException,
-            NoWeightsException, DukeException {
+            NoWeightsException, FluidExceptions {
         meal.listMeals(date);
         System.out.println();
         fluid.listFluids(date);

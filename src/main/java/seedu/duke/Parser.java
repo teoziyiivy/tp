@@ -25,7 +25,7 @@ public class Parser {
     public static final String DATE_SEPARATOR = " /d ";
     public static final String TIME_SEPARATOR = " /t ";
     public static final String CALORIE_SEPARATOR = " /c ";
-    public static final String RECURRING_FLAG = " /r";
+    public static final String RECURRING_FLAG = " /r ";
     public static final String VOLUME_SEPARATOR = " /v ";
     public static final String ACTIVITY_SEPARATOR = " /a ";
     public static final String MULTIPLE_ACTIVITY_MARKER = ",";
@@ -86,6 +86,9 @@ public class Parser {
         int calories = 0;
         if (!containsCalorieSeparator(inputArguments)) {
             String description = getDescription(inputArguments);
+            if (Parser.containsSeparators(description)) {
+                throw new DukeException("");
+            }
             calories = FoodBank.findCalories(description);
             return calories;
         } else {
@@ -103,6 +106,7 @@ public class Parser {
             }
         }
     }
+
 
     //@@author { J}
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
