@@ -1,12 +1,10 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.MealException;
-import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.meal.MealException;
+import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
@@ -142,7 +140,7 @@ public class CommandManager {
 
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException,
-            ScheduleException, WorkoutException, NoWeightsException, FluidExceptions {
+            ScheduleException, WorkoutException, NoWeightsException, FluidExceptions,
             DukeException, ScheduleException,
             WorkoutException, NoWeightsException, MealException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
@@ -196,7 +194,7 @@ public class CommandManager {
     }
 
     private void listCalories(String date) throws
-            FoodBankException, WorkoutException, FluidExceptions {
+            FoodBankException, WorkoutException, FluidExceptions,
             DukeException, FoodBankException,
             WorkoutException, MealException {
         int calCount = fluid.getCalories(date) + meal.getCalories(date);
@@ -249,7 +247,7 @@ public class CommandManager {
             FoodBankException, DukeException,
             ScheduleException,
             WorkoutException,
-            DeleteWeightException, MealException
+            DeleteWeightException, MealException,
             DeleteWeightIndexException, FluidExceptions {
 
         String[] splitResults = input.trim().split(" ", 2);
@@ -287,7 +285,7 @@ public class CommandManager {
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             ScheduleException, WorkoutException,
-            NoWeightsException, DukeException, MealException
+            NoWeightsException, DukeException, MealException,
             NoWeightsException, FluidExceptions {
         meal.listMeals(date);
         System.out.println();
