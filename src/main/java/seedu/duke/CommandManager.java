@@ -3,7 +3,9 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.meal.MealException;
+import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
+import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
@@ -135,7 +137,7 @@ public class CommandManager {
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException,
             DukeException, ScheduleException,
-            WorkoutException, NoWeightsException {
+            WorkoutException, NoWeightsException, MealException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         String date;
@@ -188,7 +190,7 @@ public class CommandManager {
 
     private void listCalories(String date) throws
             DukeException, FoodBankException,
-            WorkoutException {
+            WorkoutException, MealException {
         int calCount = fluid.getCalories(date) + meal.getCalories(date);
         int caloriesBurned = workoutTracker.getCaloriesBurned(date);
         int netCalories = calCount - caloriesBurned;
@@ -208,6 +210,9 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
+            if (splitResults.length == 1) {
+                throw new NoMealDetailsException();
+            }
             meal.addMeal(inputArguments);
             DateTracker.sortDateAndTime(meal.meals);
             break;
@@ -237,13 +242,16 @@ public class CommandManager {
             ScheduleException,
             WorkoutException,
             DeleteWeightException,
-            DeleteWeightIndexException {
+            DeleteWeightIndexException,
+            MealException {
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
-            // DO delete list size check within class
+            if (splitResults.length == 1) {
+                throw new NoDeleteMealIndexException();
+            }
             meal.deleteMeal(inputArguments);
             break;
         case Keywords.FLUID:
@@ -280,7 +288,7 @@ public class CommandManager {
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             ScheduleException, WorkoutException,
-            NoWeightsException, DukeException {
+            NoWeightsException, DukeException, MealException {
         meal.listMeals(date);
         System.out.println();
         fluid.listFluids(date);

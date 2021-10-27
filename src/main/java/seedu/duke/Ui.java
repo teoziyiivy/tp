@@ -42,31 +42,62 @@ public class Ui {
 
     public void getInfo() {
         System.out.println(CALCULATOR_PROMPT);
-        String uiInput = uiScanner.nextLine();
+        String uiInput;
+        boolean answerIsCorrect = false;
+        boolean flag = false;
+        while (!flag) {
+            uiInput = uiScanner.nextLine();
+            if (uiInput.isEmpty()) {
+                System.out.println(System.lineSeparator());
+                return;
+            } else if (uiInput.trim().equals("y")) {
+                flag = true;
+            } else {
+                System.out.println(ClickfitMessages.INCORRECT_INPUT);
+            }
+        }
 
-        if (uiInput.trim().equals("y")) {
+        while (!answerIsCorrect) {
             System.out.println("what is your SEX : M / F ?");
             uiInput = uiScanner.nextLine();
             sex = uiInput;
+            if (sex.equals("M") || sex.equals("F")) {
+                answerIsCorrect = true;
+            }
+        }
+        answerIsCorrect = false;
+        while (!answerIsCorrect) {
             System.out.println("what is your weight in kg?");
             uiInput = uiScanner.nextLine();
             weight = Integer.parseInt(uiInput);
+            answerIsCorrect = true;
+        }
+        answerIsCorrect = false;
+        while (!answerIsCorrect) {
             System.out.println("what is your height in cm?");
             uiInput = uiScanner.nextLine();
             height = Integer.parseInt(uiInput);
+            answerIsCorrect = true;
+        }
+        answerIsCorrect = false;
+        while (!answerIsCorrect) {
             System.out.println("what is your age in years?");
             uiInput = uiScanner.nextLine();
             age = Integer.parseInt(uiInput);
+            answerIsCorrect = true;
+        }
+        answerIsCorrect = false;
+        while (!answerIsCorrect) {
             System.out.println("what is your activity level from a scale of 1 - 5?");
             uiInput = uiScanner.nextLine();
             activityLevel = Integer.parseInt(uiInput);
-
-            Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
-            calculator.getBmi();
-            calculator.getIdealCalories();
-        } else if (uiInput.isEmpty()) {
-            System.out.println(System.lineSeparator());
+            if ((activityLevel > 0 ) && (activityLevel < 6)) {
+                answerIsCorrect = true;
+            }
         }
+        Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
+        calculator.getBmi();
+        calculator.getIdealCalories();
     }
 
     public boolean memoryStartup() throws LoadException {

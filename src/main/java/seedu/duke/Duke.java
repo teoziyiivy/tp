@@ -3,7 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.MealException;
+import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
@@ -87,7 +87,7 @@ public class Duke {
             } catch (WorkoutException we) {
                 System.out.println(we.getMessage());
             } catch (MealException e) {
-                System.out.println(ClickfitMessages.MEAL_NAME_ERROR);
+                System.out.println(e.getMessage());
             } catch (FluidExceptions e) {
                 System.out.println(ClickfitMessages.FLUID_ADD_FORMAT_ERROR);
             } catch (FoodBankException e) {
