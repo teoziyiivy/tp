@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.meal.NoMealDescriptionException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
@@ -106,7 +107,6 @@ public class Parser {
             }
         }
     }
-
 
     //@@author { J}
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
