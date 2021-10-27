@@ -2,11 +2,9 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FluidExceptions;
-import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

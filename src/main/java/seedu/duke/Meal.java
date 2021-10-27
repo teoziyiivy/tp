@@ -3,7 +3,11 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
 import seedu.duke.exceptions.MealException;
-
+import seedu.duke.exceptions.fluid.FluidExceptions;
+import seedu.duke.exceptions.meal.EmptyMealListException;
+import seedu.duke.exceptions.meal.MealException;
+import seedu.duke.exceptions.meal.NoMealDescriptionException;
+import seedu.duke.exceptions.meal.NoSuchMealIndexException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -20,7 +24,6 @@ public class Meal extends Tracker {
     protected int totalCalories;
     private static Logger logger = Logger.getLogger("MealTrackerLogger");
 
-
     public Meal() {
         this.meals = new ArrayList<>();
         this.mealNumber = 0;
@@ -28,14 +31,14 @@ public class Meal extends Tracker {
         logger.setLevel(Level.SEVERE);
     }
 
-    public void generateMealParameters(String inputArguments) throws FoodBankException {
+    public void generateMealParameters(String inputArguments) throws FoodBankException, MealException {
         try {
             calories = Parser.getCalories(inputArguments);
             description = Parser.getDescription(inputArguments);
             date = Parser.getDate(inputArguments);
             time = Parser.getTime(inputArguments);
-        } catch (DukeException | FoodBankException e) {
-            System.out.println("run away");
+        } catch (DukeException e) {
+            throw new NoMealDescriptionException();
         }
     }
 
@@ -43,9 +46,7 @@ public class Meal extends Tracker {
             throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
         logger.entering(getClass().getName(), "addMeal");
         logger.log(Level.INFO, "generating meal parameters");
-
         generateMealParameters(inputArguments);
-
         if (Parser.containsSeparators(description)) {
             throw new MealException();
         }
@@ -62,10 +63,17 @@ public class Meal extends Tracker {
     }
 
     public void deleteMeal(String inputArguments)
-            throws DateTimeParseException, NumberFormatException, FoodBankException {
-        assert mealNumber != 0;
+            throws DateTimeParseException, NumberFormatException, FoodBankException, MealException {
+        mealNumber = meals.size();
+        if (meals.size() == 0) {
+            throw new EmptyMealListException();
+        }
+        //assert mealNumber != 0;
         logger.entering(getClass().getName(), "deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        if ((mealIndex < 0) || (mealIndex > (mealNumber-1))) {
+            throw new NoSuchMealIndexException();
+        }
         logger.log(Level.INFO, "generating meal parameters");
         generateMealParameters(meals.get(mealIndex));
         logger.log(Level.INFO, "meal parameters generated");
@@ -78,7 +86,10 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(), "deleteMeal");
     }
 
-    public void listMeals(String date) throws FoodBankException {
+    public void listMeals(String date) throws FoodBankException, MealException {
+        if (meals.size() == 0) {
+            System.out.println("Your meal list is empty!");
+        }
         if (date.equals("all")) {
             int i = 1;
             totalCalories = 0;
@@ -123,7 +134,7 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(), "listMeal");
     }
 
-    public int getCalories(String date) throws FoodBankException {
+    public int getCalories(String date) throws FoodBankException, MealException {
         int calorieTotal = 0;
         for (String meal : meals) {
             if (meal.contains(date)) {
