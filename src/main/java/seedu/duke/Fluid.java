@@ -1,9 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.fluid.*;
 import seedu.duke.exceptions.FoodBankException;
-
+import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
+import seedu.duke.exceptions.fluid.InvalidFluidDescription;
+import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
+import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
