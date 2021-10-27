@@ -10,16 +10,12 @@ public class ClickfitMessages {
             + "If you want to read the UG, type in \"help UG\"!" + System.lineSeparator()
             + "Lets work hard together in your fitness journey!";
 
-    public static final String MESSAGE_B = System.lineSeparator() + "Welcome back! Ready to mark "
-            + "another day of progress? As said before, type \"help commands\" "
-            + "if you get dizzy from all that fitness training!";
-
     public static final String CREDITS = System.lineSeparator() + "Thank you for the hardwork today. "
             + "CLI.ckFit wishes you a good day" + System.lineSeparator() + "Team CLI.ckFit is proudly "
             + "brought to you by Jiewen, Vishal, Pragyan, Ivy and Edward."
             + System.lineSeparator() + "See you soon!";
 
-    public static final String MEMORY_STARTUP_PROMPT = "Would you "
+    public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Would you "
             + "like to load up the records of your fitness journey?" + System.lineSeparator()
             + "Key in y or press enter keystroke to skip!";
 
