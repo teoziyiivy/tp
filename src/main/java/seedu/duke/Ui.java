@@ -67,7 +67,7 @@ public class Ui {
             }
         }
         answerIsCorrect = false;
-
+     
         while (!answerIsCorrect) {
             System.out.println("what is your weight in kg? Enter an integer!");
             uiInput = uiScanner.nextLine();

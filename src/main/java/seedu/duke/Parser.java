@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.meal.NoMealDescriptionException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
@@ -25,7 +26,7 @@ public class Parser {
     public static final String DATE_SEPARATOR = " /d ";
     public static final String TIME_SEPARATOR = " /t ";
     public static final String CALORIE_SEPARATOR = " /c ";
-    public static final String RECURRING_FLAG = " /r";
+    public static final String RECURRING_FLAG = " /r ";
     public static final String VOLUME_SEPARATOR = " /v ";
     public static final String ACTIVITY_SEPARATOR = " /a ";
     public static final String MULTIPLE_ACTIVITY_MARKER = ",";
@@ -85,7 +86,10 @@ public class Parser {
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
         if (!containsCalorieSeparator(inputArguments)) {
-            String description = getDescription(inputArguments);
+            String description = getDescription(inputArguments); // description = /c 60
+            if (Parser.containsSeparators(description)) {
+                throw new DukeException("");
+            }
             calories = FoodBank.findCalories(description);
             return calories;
         } else {
