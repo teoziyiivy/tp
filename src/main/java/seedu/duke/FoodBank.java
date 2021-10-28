@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+
 import java.util.ArrayList;
 
 public class FoodBank {

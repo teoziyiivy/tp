@@ -86,7 +86,7 @@ public class Parser {
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
         if (!containsCalorieSeparator(inputArguments)) {
-            String description = getDescription(inputArguments); // description = /c 60
+            String description = getDescription(inputArguments);
             if (Parser.containsSeparators(description)) {
                 throw new DukeException("");
             }

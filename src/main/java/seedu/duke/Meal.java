@@ -23,7 +23,6 @@ public class Meal extends Tracker {
     protected int totalCalories;
     private static Logger logger = Logger.getLogger("MealTrackerLogger");
 
-
     public Meal() {
         this.meals = new ArrayList<>();
         this.mealNumber = 0;
@@ -71,7 +70,7 @@ public class Meal extends Tracker {
         //assert mealNumber != 0;
         logger.entering(getClass().getName(), "deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
-        if ((mealIndex < 0) || (mealIndex > (mealNumber-1))) {
+        if ((mealIndex < 0) || (mealIndex > (mealNumber - 1))) {
             throw new NoSuchMealIndexException();
         }
         logger.log(Level.INFO, "generating meal parameters");
