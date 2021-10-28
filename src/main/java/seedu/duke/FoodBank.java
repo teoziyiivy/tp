@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.FoodBankException;
+
 import java.util.ArrayList;
 
 public class FoodBank {
@@ -25,7 +26,7 @@ public class FoodBank {
         try {
             calories = Parser.getCalories(inputArguments);
             description = Parser.getDescription(inputArguments);
-        } catch (DukeException e) {
+        } catch (DukeException e ) {
             System.out.println("run away");
         }
     }
