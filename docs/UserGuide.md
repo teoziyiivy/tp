@@ -71,7 +71,7 @@ completed three sets of 12 reps.
   - [**List fluids**](#list-fluids)
   - [**List weights**](#list-weights)
   - [**List calories**](#list-calories)
-  - [**List volume**](#list-volumes)
+  - [**List volumes**](#list-volumes)
 - #### Help
   - [**Access user help**](#help-command)
 
@@ -490,8 +490,9 @@ data will then be loaded from the text files when you run CLIckFit.jar on your n
 ## Command Summary
 *Psssstttttt click on the commands to skip sections!*
 
-Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
+* Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
 
+* You can only omit putting calories if you have already saved the meal/fluid in their respective libraries.
 
 Command | Format of input
 ------------ | -------------
