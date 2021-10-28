@@ -136,7 +136,7 @@ public class CommandManager {
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException,
             ScheduleException, WorkoutException, NoWeightsException, FluidExceptions,
-            DukeException, ScheduleException,
+            DukeException, ScheduleException, WeightException,
             WorkoutException, NoWeightsException, MealException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
@@ -279,7 +279,7 @@ public class CommandManager {
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             ScheduleException, WorkoutException,
-            MealException, FluidExceptions {
+            MealException, FluidExceptions, WeightException {
         meal.listMeals(date);
         System.out.println();
         fluid.listFluids(date);
