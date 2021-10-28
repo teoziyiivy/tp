@@ -54,13 +54,6 @@ number of repetitions. For example, you do 12 squats and rest. Then
 you do another 12 squats, rest, and then another 12. You have now
 completed three sets of 12 reps.
 
-Quick response hotline:
-
-Vishal +65 9457 #### 24/7 gym buddy and trainer
-
-or
-
-https://www.instagram.com/thebuffessor/?hl=en
 
 ## Table of Contents
 
@@ -78,10 +71,9 @@ https://www.instagram.com/thebuffessor/?hl=en
   - [**List fluids**](#list-fluids)
   - [**List weights**](#list-weights)
   - [**List calories**](#list-calories)
-  - [**List volume**](#list-volume)
+  - [**List volume**](#list-volumes)
 - #### Help
-  - [**Access user help**](#help-commands)
-  - [**Access user guide**](#help-ug)
+  - [**Access user help**](#help-command)
 
 ### Workout Manager
 - #### Add
@@ -439,6 +431,23 @@ Example of usage:
 
 `list schedule`, `list schedule 22/10/2021`, `list schedule all`
 
+## List Volumes
+
+Command Word: `list volumes`
+
+Description: List volumes of all fluids consumed for a specific date
+
+Format: `list volumes <DATE>`
+
+## List Calories
+
+Command Word: `list calories`
+
+Description:  List total number of calories consumed, total number of calories burned and net calories
+for a chosen date
+
+Format: `list calories <DATE> `
+
 ## List meals stored in library
 
 Command Word: `library listmeals`
@@ -455,41 +464,16 @@ Description: Lists all fluids stored in the library.
 
 Format: `library listfluids`
 
-## List Volume
+## Help Command
 
-Command Word: ` `
+Command Word: `help`
 
-Description: 
-
-Format: ` `
-
-## List Calories
-
-Command Word: ` `
-
-Description: 
-
-Format: ` `
-
-## Help Commands
-
-Command Word: `help commands`
-
-Description: Lists out the formats of input for meal, fluid, gym and weight commands.
+Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and 
+provides the hyperlink to the user guide for more tech-savvy users to read.
 
 Example of usage:
 
-`help commands`
-
-## Help UG
-
-Command Word: `help UG`
-
-Description: Provides the hyperlink to the user guide for more tech-savvy users to read.
-
-Example of usage:
-
-`help UG`
+`help`
 
 ## FAQ
 
@@ -530,9 +514,9 @@ Command | Format of input
 [**List weights**](#list-weights)| `list weights <DATE>`
 [**List workouts**](#list-workouts)| `list workouts <DATE>`
 [**List calories**](#list-calories)| `list calories <DATE>`
-[**List volume**](#list-volume)| `list calories <DATE>`
+[**List volume**](#list-volumes)| `list calories <DATE>`
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
-[**Access user help**](#help-commands)| `help commands`
-[**Access user guide**](#help-ug)| `help UG`
+[**Access user help**](#help-command)| `help`
+
