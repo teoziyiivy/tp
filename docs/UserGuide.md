@@ -54,7 +54,6 @@ number of repetitions. For example, you do 12 squats and rest. Then
 you do another 12 squats, rest, and then another 12. You have now
 completed three sets of 12 reps.
 
-
 ## Table of Contents
 
 ### Calorie Manager
@@ -481,7 +480,7 @@ Q: Are the commands case-sensitive?
 
 A: Yes, please follow the specified casing. All commands are to be in lower-case. 
 
-Q: How do I transfer my CLIckFit data and all associated data to another computer?
+Q: How do I transfer my CLIckFit data to another computer?
 
 A: Transfer the data text files located in the same directory as your CLIckFit.jar file over
 to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your
@@ -500,7 +499,7 @@ Command | Format of input
 [**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 [**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
 [**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
-[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`
+[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 [**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
 [**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
 [**Remove meal**](#delete-a-meal)| `delete meal INDEX`
