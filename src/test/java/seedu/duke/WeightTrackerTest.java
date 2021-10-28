@@ -2,7 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.weight.AddWeightException;
+import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightIndexException;
 
@@ -12,7 +12,7 @@ public class WeightTrackerTest {
     void addWeight() {
         WeightTracker weights = new WeightTracker();
         String input = "";
-        Assertions.assertThrows(AddWeightException.class, () -> weights.addWeight(input));
+        Assertions.assertThrows(WeightException.class, () -> weights.addWeight(input));
     }
 
     @Test
