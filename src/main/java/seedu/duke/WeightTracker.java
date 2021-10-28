@@ -1,9 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightIndexException;
-import seedu.duke.exceptions.weight.NoWeightsException;
 import seedu.duke.exceptions.DukeException;
 
 import java.time.format.DateTimeParseException;
@@ -25,36 +25,33 @@ public class WeightTracker extends Tracker {
         logger.setLevel(Level.SEVERE);
     }
 
-    public void generateWeightParameters(String inputArguments) {
+    public void generateWeightParameters(String inputArguments) throws WeightException {
         try {
             logger.entering(getClass().getName(), "generateWeightParameters");
             logger.log(Level.INFO, "going to generate weight and date parameters from user input");
             weight = Parser.getWeight(inputArguments);
             date = Parser.getDate(inputArguments);
-        } catch (NumberFormatException | DukeException e) {
+        } catch (NumberFormatException e) {
             System.out.println(ClickfitMessages.WEIGHT_PARAMETERS_ERROR);
+        } catch (DukeException e) {
+            throw new WeightException();
         }
         logger.exiting(getClass().getName(), "generateWeightParameters");
         logger.log(Level.INFO, "end of generating weight parameters");
     }
 
-    public void addWeight(String input) throws AddWeightException, DateTimeParseException {
+    public void addWeight(String input) throws WeightException, DateTimeParseException {
         logger.entering(getClass().getName(), "addWeight");
         logger.log(Level.INFO, "going to add a weight and date to the list");
-
+        numberOfWeights = weightsArray.size();
         generateWeightParameters(input);
         logger.log(Level.INFO, "weight parameters generated");
 
-        if (input.isEmpty()) {
+        if (input == null) {
             throw new AddWeightException();
-        } else if (!input.matches("(.*) /d (.*)")) {
-            input = weight + " /d " + date;
-            WeightTrackerMessages.printAddWeightResponse(weight, date);
-            weightsArray.add(input);
-            numberOfWeights += 1;
-            assert numberOfWeights > 0 : "number of logged weights should be more than zero";
         } else {
             WeightTrackerMessages.printAddWeightResponse(weight, date);
+            input = weight + " /d " + date;
             weightsArray.add(input);
             numberOfWeights += 1;
             assert numberOfWeights > 0 : "number of logged weights should be more than zero";
@@ -63,15 +60,15 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of processing addweight command");
     }
 
-    public void deleteWeight(String input) throws DeleteWeightException, DeleteWeightIndexException {
+    public void deleteWeight(String input) throws WeightException {
         logger.entering(getClass().getName(), "deleteWeight");
         logger.log(Level.INFO, "going to remove a weight and date from the list");
         numberOfWeights = weightsArray.size();
-        if (input.isEmpty() || input.matches("deleteweight")) {
+        if (input.isEmpty() || input.matches("delete weight")) {
             throw new DeleteWeightException();
         }
         int weightIndex = Parser.parseStringToInteger(input) - 1;
-        if (weightIndex > numberOfWeights) {
+        if ((weightIndex < 0) || (weightIndex > numberOfWeights - 1)) {
             throw new DeleteWeightIndexException();
         } else {
             generateWeightParameters(weightsArray.get(weightIndex));
@@ -84,10 +81,10 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of processing deleteweight command");
     }
 
-    public void listWeights(String date) throws NoWeightsException {
+    public void listWeights(String date) throws WeightException {
         numberOfWeights = weightsArray.size();
         if (numberOfWeights == 0) {
-            throw new NoWeightsException();
+            System.out.println(ClickfitMessages.WEIGHT_EMPTY_ERROR);
         } else if (date.equals("all")) {
             listAllWeights();
         } else {
@@ -95,7 +92,7 @@ public class WeightTracker extends Tracker {
         }
     }
 
-    public void listSpecificWeights(String date) {
+    public void listSpecificWeights(String date) throws WeightException {
         logger.entering(getClass().getName(), "listSpecificWeights");
         logger.log(Level.INFO, "going to list specific logged weights and dates");
         int i = 1;
@@ -116,7 +113,7 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of processing listSpecificWeights command");
     }
 
-    public void listAllWeights() {
+    public void listAllWeights() throws WeightException {
         logger.entering(getClass().getName(), "listAllWeights");
         logger.log(Level.INFO, "going to list all logged weights and dates");
         int i = 1;

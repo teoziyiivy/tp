@@ -1,11 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.meal.EmptyMealListException;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoMealDescriptionException;
 import seedu.duke.exceptions.meal.NoSuchMealIndexException;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -69,7 +70,7 @@ public class Meal extends Tracker {
         //assert mealNumber != 0;
         logger.entering(getClass().getName(), "deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
-        if ((mealIndex < 0) || (mealIndex > (mealNumber-1))) {
+        if ((mealIndex < 0) || (mealIndex > (mealNumber - 1))) {
             throw new NoSuchMealIndexException();
         }
         logger.log(Level.INFO, "generating meal parameters");

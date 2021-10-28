@@ -1,11 +1,16 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FoodBankException;
-
+import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
+import seedu.duke.exceptions.foodbank.EmptyMealBankException;
+import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
+import seedu.duke.exceptions.foodbank.NoFoodFoundException;
+import seedu.duke.exceptions.foodbank.NoFoodIndexException;
 import java.util.ArrayList;
 
 public class FoodBank {
+
     protected static ArrayList<String> meals;
     protected static ArrayList<String> fluids;
     protected static int calories;
@@ -26,15 +31,21 @@ public class FoodBank {
         try {
             calories = Parser.getCalories(inputArguments);
             description = Parser.getDescription(inputArguments);
-        } catch (DukeException e ) {
+        } catch (DukeException e) {
             System.out.println("run away");
         }
     }
 
     //@@author {P }
     public static void addCustomFluid(String inputArguments) throws FoodBankException {
+        if (inputArguments == null) {
+            throw new EmptyFoodDescription();
+        }
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
+        if (Parser.containsSeparators(description)) {
+            throw new FoodBankException();
+        }
         fluids.add(inputArguments);
         totalFluids += 1;
         System.out.println(description + ", which has " + calories
@@ -44,6 +55,12 @@ public class FoodBank {
 
     //@@author { P}
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
+        if (inputArguments == null) {
+            throw new NoFoodIndexException();
+        }
+        if (fluids.size() == 0) {
+            throw new EmptyFluidBankException();
+        }
         int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
         generateParameters(fluids.get(taskNumber));
         fluids.remove(taskNumber);
@@ -54,6 +71,9 @@ public class FoodBank {
 
     //@@author {P }
     public static void listCustomFluids() throws FoodBankException {
+        if (fluids.size() == 0) {
+            System.out.println("Your fluids library is empty!");
+        }
         int i = 1;
         for (String fluid : fluids) {
             generateParameters(fluid);
@@ -66,6 +86,9 @@ public class FoodBank {
 
     //@@author { V}
     public static void listCustomMeal() throws FoodBankException {
+        if (meals.size() == 0) {
+            System.out.println("Your meals library is empty!");
+        }
         int i = 1;
         for (String meal : meals) {
             generateParameters(meal);
@@ -78,6 +101,9 @@ public class FoodBank {
 
     //@@author {V }
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
+        if (inputArguments == null) {
+            throw new EmptyFoodDescription();
+        }
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
         meals.add(inputArguments);
@@ -88,6 +114,12 @@ public class FoodBank {
 
     //@@author { V}
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
+        if (inputArguments == null) {
+            throw new NoFoodIndexException();
+        }
+        if (meals.size() == 0) {
+            throw new EmptyMealBankException();
+        }
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
         generateParameters(meals.get(mealIndex));
         meals.remove(mealIndex);
@@ -110,6 +142,6 @@ public class FoodBank {
                 return calories;
             }
         }
-        throw new FoodBankException();
+        throw new NoFoodFoundException();
     }
 }

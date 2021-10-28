@@ -54,14 +54,6 @@ number of repetitions. For example, you do 12 squats and rest. Then
 you do another 12 squats, rest, and then another 12. You have now
 completed three sets of 12 reps.
 
-Quick response hotline:
-
-Vishal +65 9457 #### 24/7 gym buddy and trainer
-
-or
-
-https://www.instagram.com/thebuffessor/?hl=en
-
 ## Table of Contents
 
 ### Calorie Manager
@@ -78,10 +70,9 @@ https://www.instagram.com/thebuffessor/?hl=en
   - [**List fluids**](#list-fluids)
   - [**List weights**](#list-weights)
   - [**List calories**](#list-calories)
-  - [**List volume**](#list-volume)
+  - [**List volumes**](#list-volumes)
 - #### Help
-  - [**Access user help**](#help-commands)
-  - [**Access user guide**](#help-ug)
+  - [**Access user help**](#help-command)
 
 ### Workout Manager
 - #### Add
@@ -439,6 +430,23 @@ Example of usage:
 
 `list schedule`, `list schedule 22/10/2021`, `list schedule all`
 
+## List Volumes
+
+Command Word: `list volumes`
+
+Description: List volumes of all fluids consumed for a specific date
+
+Format: `list volumes <DATE>`
+
+## List Calories
+
+Command Word: `list calories`
+
+Description:  List total number of calories consumed, total number of calories burned and net calories
+for a chosen date
+
+Format: `list calories <DATE> `
+
 ## List meals stored in library
 
 Command Word: `library listmeals`
@@ -455,41 +463,16 @@ Description: Lists all fluids stored in the library.
 
 Format: `library listfluids`
 
-## List Volume
+## Help Command
 
-Command Word: ` `
+Command Word: `help`
 
-Description: 
-
-Format: ` `
-
-## List Calories
-
-Command Word: ` `
-
-Description: 
-
-Format: ` `
-
-## Help Commands
-
-Command Word: `help commands`
-
-Description: Lists out the formats of input for meal, fluid, gym and weight commands.
+Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and 
+provides the hyperlink to the user guide for more tech-savvy users to read.
 
 Example of usage:
 
-`help commands`
-
-## Help UG
-
-Command Word: `help UG`
-
-Description: Provides the hyperlink to the user guide for more tech-savvy users to read.
-
-Example of usage:
-
-`help UG`
+`help`
 
 ## FAQ
 
@@ -497,7 +480,7 @@ Q: Are the commands case-sensitive?
 
 A: Yes, please follow the specified casing. All commands are to be in lower-case. 
 
-Q: How do I transfer my CLIckFit data and all associated data to another computer?
+Q: How do I transfer my CLIckFit data to another computer?
 
 A: Transfer the data text files located in the same directory as your CLIckFit.jar file over
 to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your
@@ -506,8 +489,9 @@ data will then be loaded from the text files when you run CLIckFit.jar on your n
 ## Command Summary
 *Psssstttttt click on the commands to skip sections!*
 
-Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
+* Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
 
+* You can only omit putting calories if you have already saved the meal/fluid in their respective libraries.
 
 Command | Format of input
 ------------ | -------------
@@ -515,7 +499,7 @@ Command | Format of input
 [**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 [**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
 [**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
-[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`
+[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 [**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
 [**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
 [**Remove meal**](#delete-a-meal)| `delete meal INDEX`
@@ -530,9 +514,9 @@ Command | Format of input
 [**List weights**](#list-weights)| `list weights <DATE>`
 [**List workouts**](#list-workouts)| `list workouts <DATE>`
 [**List calories**](#list-calories)| `list calories <DATE>`
-[**List volume**](#list-volume)| `list calories <DATE>`
+[**List volume**](#list-volumes)| `list calories <DATE>`
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
-[**Access user help**](#help-commands)| `help commands`
-[**Access user guide**](#help-ug)| `help UG`
+[**Access user help**](#help-command)| `help`
+

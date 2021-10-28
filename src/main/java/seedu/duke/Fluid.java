@@ -1,12 +1,13 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.NoFluidToDelete;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +72,7 @@ public class Fluid extends Tracker {
         if (inputArguments == null) {
             throw new NoDeleteFluidIndexException();
         }
-        if (fluidArray.size() == 0 ) {
+        if (fluidArray.size() == 0) {
             throw new DeleteEmptyFluidListException();
         }
         assert fluidArray.size() != 0 : "Fluid array should not be empty";
@@ -96,7 +97,7 @@ public class Fluid extends Tracker {
 
     public void listFluids(String date) throws FoodBankException, FluidExceptions {
         if (fluidArray.size() == 0) {
-            System.out.println("Your fluid list is empty.");
+            System.out.println("Your fluid list is empty!");
         }
         logr.entering(getClass().getName(), "listFluids");
         if (date.equals("all")) {

@@ -1,8 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.meal.NoMealDescriptionException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
@@ -26,7 +25,7 @@ public class Parser {
     public static final String DATE_SEPARATOR = " /d ";
     public static final String TIME_SEPARATOR = " /t ";
     public static final String CALORIE_SEPARATOR = " /c ";
-    public static final String RECURRING_FLAG = " /r ";
+    public static final String RECURRING_FLAG = " /r";
     public static final String VOLUME_SEPARATOR = " /v ";
     public static final String ACTIVITY_SEPARATOR = " /a ";
     public static final String MULTIPLE_ACTIVITY_MARKER = ",";
@@ -221,6 +220,9 @@ public class Parser {
     //@@author { I}
     public static double getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
+        if (!userInput[0].matches("^\\d+(\\.\\d+)?")) {
+            throw new DukeException("Invalid weight!");
+        }
         double weight = parseStringToDouble(userInput[0]);
         if (weight < 0) {
             throw new DukeException("Negative weight");
