@@ -33,7 +33,7 @@ public class ClickfitMessages {
 
     public static final String HELP_COMMANDS =
             "parameters encapsulated by angle brackets \"< >\" are optional" + System.lineSeparator()
-                    + "NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your meal library already."
+                    + "NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your meal library."
                     + System.lineSeparator()
             + System.lineSeparator() + "[Add meal] | `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`"
             + System.lineSeparator() + "[Add fluid] | `add fluid FLUID_NAME </c FLUID_CALORIES "
@@ -73,37 +73,28 @@ public class ClickfitMessages {
     public static final String DATE_ERROR = "Please enter your date in the right format. "
             + "It should be \"DD/MM/YYYY\"";
 
-    public static final String TIME_ERROR = "Please enter your time in the right format. "
-            + "It should be \"HH:MM\"";
-
     public static final String DATE_TIME_ERROR = "Please enter your date and time in the right format. "
             + "It should be \"DD/MM/YYYY\" and \"HH:MM\" respectively.";
 
-    public static final String NAME_ERROR = "Please enter the name or description of your meal/fluid";
-
-    public static final String NUMBER_ERROR = "Please enter the calories/volume properly";
-
-    public static final String MEAL_NAME_ERROR = "Please enter the name of your meal";
+    public static final String NUMBER_ERROR = "Please enter a positive integer.";
 
     public static final String FLUID_ADD_FORMAT_ERROR = "Please enter in the format: drank [fluid_name]"
             + " /c [calorie_intake] " + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]";
-
-    public static final String FLUID_DELETE_ERROR = "You have no existing fluid entries to delete.";
 
     public static final String CALCULATOR_PROMPT = System.lineSeparator() + "Welcome back! Would you "
             + "like to check your BMI and recommended caloric intake?" + System.lineSeparator()
             + "Key in y or press enter keystroke to skip!";
 
-    public static final String MEAL_PRINT_FORMAT = System.lineSeparator() + "Meal Summary:"
+    public static final String MEAL_PRINT_FORMAT = System.lineSeparator() + "[Meal Summary:]"
             + System.lineSeparator() + "======================";
 
-    public static final String FLUID_PRINT_FORMAT = System.lineSeparator() + "Fluid Summary:"
+    public static final String FLUID_PRINT_FORMAT = System.lineSeparator() + "[Fluid Summary:]"
             + System.lineSeparator() + "======================";
 
-    public static final String WORKOUT_PRINT_FORMAT = System.lineSeparator() + "Workout Summary:"
+    public static final String WORKOUT_PRINT_FORMAT = System.lineSeparator() + "[Workout Summary:]"
             + System.lineSeparator() + "======================";
 
-    public static final String WEIGHT_PRINT_FORMAT = System.lineSeparator() + "Weight Summary:"
+    public static final String WEIGHT_PRINT_FORMAT = System.lineSeparator() + "[Weight Summary:]"
             + System.lineSeparator() + "======================";
 
     public static final String ENDLINE_PRINT_FORMAT = "======================";
@@ -111,33 +102,33 @@ public class ClickfitMessages {
     public static final String SCHEDULE_DATA_NOT_FOUND = "Unable to locate ScheduleTracker data file.";
 
     public static final String INCORRECT_LOADING_SCHEDULE_DATA =
-            "There were some errors during loading of ScheduleTracker data, some data may have been lost";
+            "There were some errors during loading of ScheduleTracker data, some data may have been lost.";
 
     public static final String IO_EXCEPTION_MESSAGE = "Error when loading data from files";
 
     public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
-            + "its associated calories is stored"
-            + "within your library";
+            + "its associated calories is stored "
+            + "within your library.";
 
     public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
             + "workouts and has deleted/rescheduled them!";
 
     public static final String WEIGHT_ADD_FORMAT_ERROR = "CLI.ckFit encountered a problem adding your weight."
-            + System.lineSeparator() + "Please follow the format: addweight <weight> /d <DD/MM/YYYY>";
+            + System.lineSeparator() + "Please follow the format: add weight WEIGHT_IN_KG </d DD/MM/YYYY>";
 
     public static final String WEIGHT_DELETE_FORMAT_ERROR = "CLI.ckFit encountered a problem deleting your weight."
-            + System.lineSeparator() + "Please follow the format: deleteweight <index>";
+            + System.lineSeparator() + "Please follow the format: delete weight INDEX";
 
     public static final String WEIGHT_DELETE_INDEX_ERROR = "CLI.ckFit encountered a problem deleting your weight."
             + System.lineSeparator() + "Please ensure the index is within the list.";
 
-    public static final String WEIGHT_EMPTY_ERROR = "CLI.ckFit has no recorded weights.";
+    public static final String WEIGHT_EMPTY_ERROR = "Your weight list is empty!";
 
-    public static final String EMPTY_SCHEDULE_LIST_MESSAGE = "Your workout schedule is empty";
+    public static final String EMPTY_SCHEDULE_LIST_MESSAGE = "Your workout schedule is empty!";
 
-    public static final String EMPTY_WORKOUT_LIST_MESSAGE = "Your workout list is empty";
+    public static final String EMPTY_WORKOUT_LIST_MESSAGE = "Your workout list is empty!";
 
     public static final String WEIGHT_PARAMETERS_ERROR = "CLI.ckFit could not generate your parameters.";
 
-    public static final String DONT_UNDERSTAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String DONT_UNDERSTAND = "OOPS!!! I'm sorry, but I don't know what that means";
 }
