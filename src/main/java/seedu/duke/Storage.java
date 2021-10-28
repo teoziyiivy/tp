@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
 import java.io.File;
@@ -441,13 +442,18 @@ public class Storage {
     }
 
     //@@author {I }
-    public void weightSummary() {
-        int i = 0;
+    public void weightSummary() throws DukeException {
+        int i = 1;
+        double weight;
+        String date;
         try {
-            for (String ignored : loadWeights()) {
+            for (String w : loadWeights()) {
+                weight = Parser.getWeight(w);
+                date = Parser.getDate(w);
+                System.out.println(i + ". " + weight + " kg " + date);
                 i++;
             }
-            System.out.println(System.lineSeparator() + "Total number of weights = " + i);
+            System.out.println(System.lineSeparator() + "Total number of weights = " + (i - 1));
         } catch (IOException e) {
             System.out.println("Error during printing arrayList");
         }
@@ -486,7 +492,7 @@ public class Storage {
     }
 
     //@@author {E }
-    public void printLoadedLists() {
+    public void printLoadedLists() throws DukeException {
         System.out.println(MEAL_PRINT_FORMAT);
         mealSummary();
         System.out.println(ENDLINE_PRINT_FORMAT);
