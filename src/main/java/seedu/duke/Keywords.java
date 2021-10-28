@@ -17,7 +17,7 @@ public class Keywords {
     public static final String MEALS = "meals";
     public static final String FLUIDS = "fluids";
     public static final String CALORIES = "calories";
-    public static final String VOLUME = "volume";
+    public static final String VOLUME = "volumes";
     public static final String WEIGHTS = "weights";
     public static final String WORKOUTS = "workouts";
     public static final String WORKOUT = "workout";

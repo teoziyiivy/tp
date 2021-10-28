@@ -32,33 +32,42 @@ public class ClickfitMessages {
             + "has detected a wrong input, kindly type in either a \"Y\" or a \"N\".";
 
     public static final String HELP_COMMANDS =
-        "[**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`"
-            + "[**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`"
-            + "[**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`"
-            + "[**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`"
-            + "[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`"
-            + "[**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`"
-            + "[**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`"
-            + "[**Remove meal**](#delete-a-meal)| `delete meal INDEX`"
-            + "[**Remove fluid**](#delete-a-fluid)| `delete fluid INDEX`"
-            + "[**Remove weight**](#delete-a-weight)| `delete weight INDEX`"
-            + "[**Remove workout**](#delete-a-workout)| `delete workout INDEX`"
-            + "[**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`"
-            +  "[**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`"
-            +  "[**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`"
-            + "[**List meals**](#list-meals)| `list meals <DATE>`"
-            + "[**List fluids**](#list-fluids)| `list fluids <DATE>`"
-            + "[**List weights**](#list-weights)| `list weights <DATE>`"
-            + "[**List workouts**](#list-workouts)| `list workouts <DATE>`"
-            + "[**List calories**](#list-calories)| `list calories <DATE>`"
-            + "[**List volume**](#list-volume)| `list calories <DATE>`"
-            + "[**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`"
-            + "[**List meals from library**](#list-meals-stored-in-library)| `library listmeals`"
-            + "[**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`"
-            + "[**Access user help**](#help-commands)| `help commands`"
-            + "[**Access user guide**](#help-ug)| `help UG`";
-
-    public static final String HELP_UG = "Here is the link to our User Guide! "
+            "parameters encapsulated by angle brackets \"< >\" are optional" + System.lineSeparator()
+                    + "NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your meal library already."
+                    + System.lineSeparator()
+            + System.lineSeparator() + "[Add meal] | `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`"
+            + System.lineSeparator() + "[Add fluid] | `add fluid FLUID_NAME </c FLUID_CALORIES "
+                    + "/v VOLUME /d DATE /t TIME>`"
+            + System.lineSeparator() + "[Add weight] | `add weight WEIGHT /d <DATE>`"
+            + System.lineSeparator() + "[Add workout] | `add workout WORKOUT_NAME /c "
+                    + "CALORIES_BURNED </d DATE /t TIME>`"
+            + System.lineSeparator() + "[Add scheduled workout] | `add schedule WORKOUT_NAME /d "
+                    + "DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>`"
+            + System.lineSeparator() + "[Add meal to library] | `library addmeal MEAL_NAME /c MEAL_CALORIES`"
+            + System.lineSeparator() + "[Add fluid to library] | `library addfluid "
+                    + "FLUID_NAME /c FLUID_CALORIES`"
+                    + System.lineSeparator()
+            + System.lineSeparator() + "[Remove meal] | `delete meal INDEX`"
+            + System.lineSeparator() + "[Remove fluid] | `delete fluid INDEX`"
+            + System.lineSeparator() + "[Remove weight] | `delete weight INDEX`"
+            + System.lineSeparator() + "[Remove workout] | `delete workout INDEX`"
+            + System.lineSeparator() + "[Remove scheduled workout] | `delete schedule INDEX`"
+            + System.lineSeparator() + "[Remove meal from library] | `library deletemeal INDEX`"
+            + System.lineSeparator() + "[Remove fluid from library] | `library deletefluid INDEX`"
+                    + System.lineSeparator()
+            + System.lineSeparator() + "[List meals] | `list meals <DATE>`"
+            + System.lineSeparator() + "[List fluids] | `list fluids <DATE>`"
+            + System.lineSeparator() + "[List weights] | `list weights <DATE>`"
+            + System.lineSeparator() + "[List workouts] | `list workouts <DATE>`"
+            + System.lineSeparator() + "[List calories] | `list calories <DATE>`"
+            + System.lineSeparator() + "[List volume] | `list calories <DATE>`"
+            + System.lineSeparator() + "[List scheduled workouts] | `list schedule <DATE>`"
+            + System.lineSeparator() + "[List meals from library] | `library listmeals`"
+            + System.lineSeparator() + "[List fluids from library] | `library listfluids`"
+                    + System.lineSeparator()
+            + System.lineSeparator() + "[Access user help] | `help commands`"
+            + System.lineSeparator() + "[Access user guide] | `help UG`"  + System.lineSeparator()
+                    + System.lineSeparator() + "Here is the link to our User Guide! "
             + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";
 
     public static final String DATE_ERROR = "Please enter your date in the right format. "

@@ -101,23 +101,14 @@ public class Ui {
         while (!answerIsCorrect) {
             System.out.println("what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!");
             uiInput = uiScanner.nextLine();
-            if (uiInput.equals("1")) {
+            if (uiInput.matches("^\\d+(\\.\\d+)?") ){
                 activityLevel = Integer.parseInt(uiInput);
-                answerIsCorrect = true;
-            } else if (uiInput.equals("2")) {
-                activityLevel = Integer.parseInt(uiInput);
-                answerIsCorrect = true;
-            } else if (uiInput.equals("3")) {
-                activityLevel = Integer.parseInt(uiInput);
-                answerIsCorrect = true;
-            } else if (uiInput.equals("4")) {
-                activityLevel = Integer.parseInt(uiInput);
-                answerIsCorrect = true;
-            } else if (uiInput.equals("5")) {
-                activityLevel = Integer.parseInt(uiInput);
-                answerIsCorrect = true;
+                if((activityLevel >= 1) && (activityLevel <= 5)){
+                    answerIsCorrect = true;
+                }
             }
         }
+
         Calculator calculator = new Calculator(sex, weight, height, age, activityLevel);
         calculator.getBmi();
         calculator.getIdealCalories();

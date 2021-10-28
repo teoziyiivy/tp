@@ -7,6 +7,7 @@ import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.NoFluidToDelete;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +72,7 @@ public class Fluid extends Tracker {
         if (inputArguments == null) {
             throw new NoDeleteFluidIndexException();
         }
-        if (fluidArray.size() == 0 ) {
+        if (fluidArray.size() == 0) {
             throw new DeleteEmptyFluidListException();
         }
         assert fluidArray.size() != 0 : "Fluid array should not be empty";

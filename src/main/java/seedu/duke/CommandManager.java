@@ -1,10 +1,10 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.FoodBankException;
-import seedu.duke.exceptions.meal.MealException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.fluid.InvalidFluidDescription;
+import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
@@ -112,9 +112,9 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.ADD_FLUID:
-        if (splitResults.length == 1) {
-            throw new InvalidFluidDescription();
-        }
+            if (splitResults.length == 1) {
+                throw new InvalidFluidDescription();
+            }
             FoodBank.addCustomFluid(inputArguments);
             break;
         case Keywords.DELETE_DRINKS:
