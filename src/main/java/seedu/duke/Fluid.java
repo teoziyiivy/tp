@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.FoodBankException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.fluid.InvalidFluidDescription;
@@ -97,7 +97,7 @@ public class Fluid extends Tracker {
 
     public void listFluids(String date) throws FoodBankException, FluidExceptions {
         if (fluidArray.size() == 0) {
-            System.out.println("Your fluid list is empty.");
+            System.out.println("Your fluid list is empty!");
         }
         logr.entering(getClass().getName(), "listFluids");
         if (date.equals("all")) {
