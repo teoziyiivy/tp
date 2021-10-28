@@ -107,17 +107,17 @@ public class ClickfitMessages {
     public static final String IO_EXCEPTION_MESSAGE = "Error when loading data from files";
 
     public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
-            + "its associated calories is stored"
+            + "its associated calories is stored "
             + "within your library.";
 
     public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
             + "workouts and has deleted/rescheduled them!";
 
     public static final String WEIGHT_ADD_FORMAT_ERROR = "CLI.ckFit encountered a problem adding your weight."
-            + System.lineSeparator() + "Please follow the format: addweight <weight> /d <DD/MM/YYYY>";
+            + System.lineSeparator() + "Please follow the format: add weight WEIGHT_IN_KG </d DD/MM/YYYY>";
 
     public static final String WEIGHT_DELETE_FORMAT_ERROR = "CLI.ckFit encountered a problem deleting your weight."
-            + System.lineSeparator() + "Please follow the format: deleteweight <index>";
+            + System.lineSeparator() + "Please follow the format: delete weight INDEX";
 
     public static final String WEIGHT_DELETE_INDEX_ERROR = "CLI.ckFit encountered a problem deleting your weight."
             + System.lineSeparator() + "Please ensure the index is within the list.";
