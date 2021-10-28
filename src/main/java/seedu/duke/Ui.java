@@ -101,9 +101,9 @@ public class Ui {
         while (!answerIsCorrect) {
             System.out.println("what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!");
             uiInput = uiScanner.nextLine();
-            if (uiInput.matches("^\\d+(\\.\\d+)?") ){
+            if (uiInput.matches("^\\d+(\\.\\d+)?")) {
                 activityLevel = Integer.parseInt(uiInput);
-                if((activityLevel >= 1) && (activityLevel <= 5)){
+                if ((activityLevel >= 1) && (activityLevel <= 5)) {
                     answerIsCorrect = true;
                 }
             }
