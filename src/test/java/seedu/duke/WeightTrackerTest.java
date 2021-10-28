@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
-import seedu.duke.exceptions.weight.NoWeightsException;
+import seedu.duke.exceptions.weight.DeleteWeightIndexException;
 
 public class WeightTrackerTest {
 
@@ -18,7 +18,7 @@ public class WeightTrackerTest {
     @Test
     void deleteWeight() {
         WeightTracker weights = new WeightTracker();
-        String input = "deleteweight";
+        String input = "delete weight";
         Assertions.assertThrows(DeleteWeightException.class, () -> weights.deleteWeight(input));
     }
 
@@ -26,14 +26,6 @@ public class WeightTrackerTest {
     void deleteWeightIndex() {
         WeightTracker weights = new WeightTracker();
         String input = "1";
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> weights.deleteWeight(input));
+        Assertions.assertThrows(DeleteWeightIndexException.class, () -> weights.deleteWeight(input));
     }
-
-    @Test
-    void checkWeightIndex() {
-        WeightTracker weights = new WeightTracker();
-        String input = "01/01/1999";
-        Assertions.assertThrows(NoWeightsException.class, () -> weights.listWeights(input));
-    }
-
 }

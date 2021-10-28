@@ -1,9 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightIndexException;
-import seedu.duke.exceptions.weight.NoWeightsException;
 import seedu.duke.exceptions.DukeException;
 
 import java.time.format.DateTimeParseException;
@@ -38,7 +38,7 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of generating weight parameters");
     }
 
-    public void addWeight(String input) throws AddWeightException, DateTimeParseException {
+    public void addWeight(String input) throws WeightException, DateTimeParseException {
         logger.entering(getClass().getName(), "addWeight");
         logger.log(Level.INFO, "going to add a weight and date to the list");
 
@@ -63,15 +63,15 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of processing addweight command");
     }
 
-    public void deleteWeight(String input) throws DeleteWeightException, DeleteWeightIndexException {
+    public void deleteWeight(String input) throws WeightException {
         logger.entering(getClass().getName(), "deleteWeight");
         logger.log(Level.INFO, "going to remove a weight and date from the list");
         numberOfWeights = weightsArray.size();
-        if (input.isEmpty() || input.matches("deleteweight")) {
+        if (input.isEmpty() || input.matches("delete weight")) {
             throw new DeleteWeightException();
         }
         int weightIndex = Parser.parseStringToInteger(input) - 1;
-        if (weightIndex > numberOfWeights) {
+        if ((weightIndex < 0) || (weightIndex > numberOfWeights - 1)) {
             throw new DeleteWeightIndexException();
         } else {
             generateWeightParameters(weightsArray.get(weightIndex));
@@ -84,10 +84,10 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "end of processing deleteweight command");
     }
 
-    public void listWeights(String date) throws NoWeightsException {
+    public void listWeights(String date) {
         numberOfWeights = weightsArray.size();
         if (numberOfWeights == 0) {
-            throw new NoWeightsException();
+            System.out.println(ClickfitMessages.WEIGHT_EMPTY_ERROR);
         } else if (date.equals("all")) {
             listAllWeights();
         } else {
