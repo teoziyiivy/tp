@@ -155,10 +155,6 @@ public class ScheduleTracker {
     }
 
     public void listScheduledWorkouts(String inputArguments) throws ScheduleException {
-        if (isScheduledWorkoutListEmpty()) {
-            System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
-            return;
-        }
         cleanUpScheduleList();
         if (inputArguments.equals(INPUT_ALL)) {
             listAllScheduledWorkouts();
@@ -169,6 +165,10 @@ public class ScheduleTracker {
 
     public void listAllScheduledWorkouts() {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list scheduled workouts.");
+        if (isScheduledWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
+            return;
+        }
         System.out.println("Full Workout Schedule:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
@@ -185,7 +185,11 @@ public class ScheduleTracker {
         ArrayList<ScheduledWorkout> filteredScheduleList = (ArrayList<ScheduledWorkout>) scheduledWorkouts.stream()
                 .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
         if (filteredScheduleList.isEmpty()) {
-            System.out.println("Workout schedule is empty on the date: " + inputArguments);
+            if (inputArguments.equals(Parser.getSystemDate())) {
+                System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_ON_DATE_MESSAGE);
+            } else {
+                System.out.println("Workout schedule is empty on the date: " + inputArguments);
+            }
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
                 System.out.println("Today's workout schedule:" + System.lineSeparator()

@@ -85,10 +85,6 @@ public class WorkoutTracker {
     }
 
     public void listWorkouts(String inputArguments) throws WorkoutException {
-        if (isWorkoutListEmpty()) {
-            System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
-            return;
-        }
         if (inputArguments.equals(INPUT_ALL)) {
             listAllWorkouts();
         } else {
@@ -98,6 +94,10 @@ public class WorkoutTracker {
 
     public void listAllWorkouts() throws WorkoutException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting to try and list workouts.");
+        if (isWorkoutListEmpty()) {
+            System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_MESSAGE);
+            return;
+        }
         assert workouts.size() > 0 : "List should be non empty at this point";
         System.out.println("All recorded workouts:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
         int currentIndex = 1;
@@ -116,8 +116,11 @@ public class WorkoutTracker {
         ArrayList<String> filteredWorkoutList = (ArrayList<String>) workouts.stream()
                 .filter((t) -> Parser.getDate(t).equals(inputArguments)).collect(Collectors.toList());
         if (filteredWorkoutList.isEmpty()) {
-            System.out.println("No workouts recorded on the date: " + inputArguments + System.lineSeparator()
-                    + ClickfitMessages.DATE_ERROR);
+            if (inputArguments.equals(Parser.getSystemDate())) {
+                System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_ON_DATE_MESSAGE);
+            } else {
+                System.out.println("No workouts recorded on the date: " + inputArguments);
+            }
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
                 System.out.println("Workouts recorded today:"
