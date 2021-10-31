@@ -3,6 +3,7 @@ package seedu.duke.schedule;
 import seedu.duke.ClickfitMessages;
 import seedu.duke.Storage;
 import seedu.duke.Parser;
+import seedu.duke.exceptions.schedule.DuplicateScheduledWorkoutException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.DeleteScheduleException;
 import seedu.duke.exceptions.schedule.MissingScheduleDescriptionException;
@@ -105,10 +106,10 @@ public class ScheduleTracker {
             throw new InvalidActivityFormatException();
         }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
-        scheduledWorkouts.add(
-                new ScheduledWorkout(workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout)
-        );
-        ScheduledWorkout workout = scheduledWorkouts.get(scheduledWorkouts.size() - 1);
+        ScheduledWorkout workout = new ScheduledWorkout(
+                workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout);
+        duplicateScheduledWorkoutCheck(workout);
+        scheduledWorkouts.add(workout);
         if (!isSquelchAddMessage) {
             System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
                     + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
@@ -279,7 +280,7 @@ public class ScheduleTracker {
     public void missingDescriptionCheck(String inputArguments) throws ScheduleException {
         int indexOfFirstDateSeparator = inputArguments.indexOf(Parser.DATE_SEPARATOR.trim());
         String subStringBeforeDateSeparator = "";
-        if (indexOfFirstDateSeparator != -1) { // date separator not found
+        if (indexOfFirstDateSeparator != -1) {
             subStringBeforeDateSeparator = inputArguments.substring(0, indexOfFirstDateSeparator).trim();
         } else {
             scheduledWorkoutSeparatorCheck(inputArguments);
@@ -289,5 +290,14 @@ public class ScheduleTracker {
             throw new MissingScheduleDescriptionException();
         }
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Description is present in user input arguments.");
+    }
+
+    public void duplicateScheduledWorkoutCheck(ScheduledWorkout scheduledWorkoutToAdd) throws ScheduleException {
+        String scheduledWorkoutAsString = scheduledWorkoutToAdd.getScheduledWorkoutAsString();
+        for (ScheduledWorkout s : scheduledWorkouts) {
+            if (scheduledWorkoutAsString.equals(s.getScheduledWorkoutAsString())) {
+                throw new DuplicateScheduledWorkoutException();
+            }
+        }
     }
 }

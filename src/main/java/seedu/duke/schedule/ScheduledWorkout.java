@@ -34,7 +34,7 @@ public class ScheduledWorkout {
             for (var entry : activityMap.entrySet()) {
                 activities.add(
                         new WorkoutActivity(
-                                entry.getKey(), entry.getValue(),
+                                entry.getKey().trim(), entry.getValue(),
                                 WorkoutActivity.isDistanceActivity(entry.getKey())
                         )
                 );
@@ -108,7 +108,7 @@ public class ScheduledWorkout {
         return output;
     }
 
-    private String getActivitiesAsString() {
+    public String getActivitiesAsString() {
         StringBuilder activityString = new StringBuilder();
         if (!activities.isEmpty()) {
             activityString.append(Parser.ACTIVITY_SEPARATOR);
