@@ -33,7 +33,7 @@ indicator of the user's progress
 5. Navigate to the folder where the CLIckFit.jar file is stored.
 6. Execute java -jar CLIckFit.jar in the terminal, and the application will start running.
 
-## Common terminologies in CLI.ckFit
+## Common Terminologies and Definitions
 * Calories are in kcal
 * Weight is in kg
 * Height is in cm
@@ -65,6 +65,11 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
 * To ensure correct processing of user inputs you should only enter the **necessary** number of arguments. 
   For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
   E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
+  
+* Scheduled workouts with the same activity breakdowns in a different order **are not** considered duplicated
+  in the current version of CLI.ckFit.
+  
+  
 
 ## Table of Contents
 
@@ -109,7 +114,7 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
     - [**List fluids from library**](#list-fluids-stored-in-library)
 
 ### List Manager
-- #### [**List everything**](#List-everything)
+- [**List everything**](#List-everything)
 ### Miscellaneous
 - [**FAQ**](#faq)
 - [**Command Summary**](#command-summary)
