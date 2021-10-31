@@ -203,7 +203,7 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME`
 
 Example of usage:
 
-`schedule chest day /d 22/12/2021 /t 15:00`
+`add schedule chest day /d 22/12/2021 /t 15:00`
 
 ### With activity breakdown:
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
@@ -219,9 +219,9 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 
 Example of usage:
 
-`schedule weekly chest day /d 07/12/2021 /t 13:50 /r`, <br/>
-`schedule weekly chest day /d 07/08/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r`, <br/>
-`schedule triathlon training /d 07/08/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000`
+`add schedule weekly chest day /d 07/12/2021 /t 13:50 /r`, <br/>
+`add schedule weekly chest day /d 07/08/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r`, <br/>
+`add schedule triathlon training /d 07/08/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000`
 
 ## Adding meal to library
 

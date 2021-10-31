@@ -218,6 +218,9 @@ public class ScheduleTracker {
         boolean isAnyWorkoutOverdue = true;
         ScheduledWorkout firstWorkoutEntry;
         while (isAnyWorkoutOverdue) {
+            if (scheduledWorkouts.isEmpty()) {
+                break;
+            }
             firstWorkoutEntry = scheduledWorkouts.get(FIRST_INDEX_IN_LIST);
             if (firstWorkoutEntry.getWorkoutDateAsLocalDate().isBefore(currentDate)) {
                 updateOrDeleteScheduledWorkout(firstWorkoutEntry, currentDate);
