@@ -54,6 +54,18 @@ number of repetitions. For example, you do 12 squats and rest. Then
 you do another 12 squats, rest, and then another 12. You have now
 completed three sets of 12 reps.
 
+## Known limitations
+* CLI.ckFit may not handle illogical inputs correctly due to limitations of data types. For instance, if you enter an
+overly large and nonsensical integer value for calorie such as `2147483647` there may be overflow during computation. 
+  E.g., when calculating total calories, summation may result in an overflow, producing negative calories. 
+  
+* Separators such as the date separator `/d` and time separator `/t` must be entered in the **exact same order** as shown in 
+  the respective command formats. CLI.ckFit **does not** support the shuffling of separators when taking user input.
+  
+* To ensure correct processing of user inputs you should only enter the **necessary** number of arguments. 
+  For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
+  E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
+
 ## Table of Contents
 
 ### Calorie Manager
@@ -96,6 +108,8 @@ completed three sets of 12 reps.
     - [**List meals from library**](#list-meals-stored-in-library)
     - [**List fluids from library**](#list-fluids-stored-in-library)
 
+### List Manager
+- #### [**List everything**](#List-everything)
 ### Miscellaneous
 - [**FAQ**](#faq)
 - [**Command Summary**](#command-summary)
@@ -183,7 +197,10 @@ Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 
 Example of usage:
 
-`add workout jog /c 250 /d 07/08/2021 /t 15:00`
+* `add workout jog /c 250 /d 07/08/2021 /t 15:00` records a *workout* with the
+  description `jog` and `250` calories burned on `07/08/2021` at `15:00`.
+* `add workout jog /c 250` records a *workout* with the
+    description `jog` and `250` calories burned on **today's date and current time**.
 
 ## Adding scheduled workout
 
@@ -194,34 +211,41 @@ Description: Adds a new scheduled workout to the list of scheduled workout items
 activity breakdowns, with date and time of workout.
 
 ### With no activity breakdown:
-Format: `add schedule WORKOUT_NAME /d DATE /t TIME`
+Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 
 * The `WORKOUT_NAME` can contain spaces.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * The `DATE` or `TIME` is compulsory for schedules.
+* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
 
 Example of usage:
 
-`add schedule chest day /d 22/12/2021 /t 15:00`
+* `add schedule chest day /d 22/12/2021 /t 15:00` adds a *non-recurring workout* to your schedule with the 
+  description `chest day` on `22/12/2021` at `15:00`.
+* `add schedule weekly chest day /d 07/12/2021 /t 13:50 /r` adds a *recurring* workout to your schedule with the
+  description `weekly chest day` on `07/12/2021` at `13:50`.
 
-### With activity breakdown:
+### With activity breakdown
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 
 * The `/a` separator is optional.
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
-* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in an integer `[DISTANCE]`
-  in metres for the activity.
-* For other `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two integers in the form `[SETS]x[REPS]`.
+* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in **one integer** `[DISTANCE]`
+  **in metres** for the activity.
+* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in **two integers** in the form `[SETS]x[REPS]`.
 * Multiple activities can be entered as long as they are separated by a comma `,`.
-* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly recurring workout.
+* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
 
 
 Example of usage:
 
-`add schedule weekly chest day /d 07/12/2021 /t 13:50 /r`, <br/>
-`add schedule weekly chest day /d 07/08/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r`, <br/>
-`add schedule triathlon training /d 07/08/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000`
+* `add schedule weekly chest day /d 07/12/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r` adds a *recurring* workout
+  to your schedule with the description `weekly chest day` on `07/12/2021` at `13:50`. Furthermore, an activity breakdown of
+  `bench press` with `5` sets and `12` reps as well as `pushups` with `5` sets of `20` reps will also be added.
+* `add schedule triathlon training /d 07/12/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000` adds a *non-recurring* workout
+  to your schedule with the description `traithlon training` on `07/12/2021` at `13:50`. Furthermore, an activity breakdown of
+  `running` for `3000` metres, `swimming` for `1000` metres as well as `cycling` for `4000` metres will also be added.
 
 ## Adding meal to library
 
@@ -299,29 +323,30 @@ Example of usage:
 
 Command Word: `delete workout`
 
-Description: Remove a workout from the list of workout items.
+Description: Deletes a workout from the list of workout items.
 
 Format: `delete workout INDEX`
 
+* Use `list workouts all` to determine the index of the workout you wish to delete.
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
 
-`delete workout 3`
+* `delete workout 3` will delete the workout with index `3` as seen in the list from `list schedule all` if the index is valid.
 
 ## Delete a scheduled workout
 
 Command Word: `delete schedule`
 
-Description: Remove a workout from the list of workout items.
+Description: Deletes a workout from the list of workout items.
 
 Format: `delete schedule INDEX`
-
+* Use `list schedule all` to determine the index of the scheduled workout you wish to delete.
 * The `INDEX` can only contain integers from the list.
 
 Example of usage:
 
-`delete schedule 3`
+* `delete schedule 3` will delete the schedule workout with index `3` as seen in the list from `list schedule all` if the index is valid.
 
 ## Delete a meal from library
 
@@ -412,7 +437,9 @@ Format: `list workouts <DATE>`
 
 Example of usage:
 
-`list workouts`, `list workouts 22/10/2021`, `list workouts all`
+* `list workouts` will list the recorded workouts for today's date.
+* `list workouts 22/10/2021` will list the recorded workouts on `22/10/2021`.
+* `list workouts all` will list all your recorded workouts.
 
 ## List scheduled workouts
 
@@ -428,7 +455,9 @@ Format: `list schedule <DATE>`
 
 Example of usage:
 
-`list schedule`, `list schedule 22/10/2021`, `list schedule all`
+* `list schedule` will list all the schedule for today's date.
+* `list schedule 22/10/2022` will list the schedule for `22/10/2022`.
+* `list schedule all` will list your full schedule.
 
 ## List Volumes
 
@@ -462,6 +491,22 @@ Command Word: `library listfluids`
 Description: Lists all fluids stored in the library.
 
 Format: `library listfluids`
+
+## List everything
+
+Command Word: `list`
+
+Description: Lists all meals, fluids, weight, workouts and scheduled workouts on a particular date
+
+Format `list <DATE`
+* The `DATE` is in dd/mm/yyyy.
+* If `DATE` is left empty **today's** date will be taken.
+* If the word `all` is written in place of `DATE`, **ALL** stored scheduled workouts will be listed.
+
+Example of usage:
+* `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.
+* `list 22/10/2021` will list all data on `22/10/2021`.
+* `list all` will list all stored data.
 
 ## Help Command
 
@@ -523,5 +568,6 @@ Command | Format of input
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
+[**List everything**](#list-everything)| `list <DATE>`
 [**Access user help**](#help-command)| `help`
 
