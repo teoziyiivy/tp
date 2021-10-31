@@ -3,11 +3,14 @@
 ## Acknowledgements
 The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/)
 
-Adapted from https://se-education.org/addressbook-level2/DeveloperGuide.html
+Written with reference to:
+* https://se-education.org/addressbook-level2/DeveloperGuide.html
+* https://se-education.org/addressbook-level3/DeveloperGuide.html
 
-## Ui(User Interface): Class diagram
+## Design & implementation
 
-### Design & implementation
+### Ui(User Interface): Class diagram
+
 The proposed Ui class has the class level attributes of sex, weight, height, age and activityLevel. It consists of 3 
 methods that in turn reference from different classes.
 
@@ -61,9 +64,10 @@ variables. Then the `weight` and `date` variables are added to weight array list
 is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
 when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
 
-### ScheduleTracker: Class diagram
+### ScheduleTracker
 ![diagram-2070120484733536202](https://user-images.githubusercontent.com/69461398/138324203-ea286780-6611-43f4-af77-3ea7cb59a42c.png)
 
+#### Class diagram
 Above are the UML class level diagrams of `ScheduleTracker` and `ScheduledWorkout`. As seen in the diagram, one 
 `ScheduleTracker` object keeps track/is linked to **any** number of `ScheduledWorkout` objects, thus have a 
 multiplicity of `0..*`. This association forms through a private attribute `scheduledWorkouts` which is of type 
@@ -74,7 +78,7 @@ of type `ArrayList<WorkoutActivity>` where `activities` keeps track of **any** n
 Do note that **not all** class attributes and methods are present in the diagram for 
 the sake of better comprehensibility.
 
-#### ScheduleTracker: Adding scheduled workout
+#### Sequence diagram for adding scheduled workout
 
 ![diagram-18374474381804594155](https://user-images.githubusercontent.com/69461398/138323717-0975d9b3-392a-4c41-99c4-73a8915933be.png)
 
@@ -87,8 +91,8 @@ repeatedly until the `loop` condition is satisfied. Essentially, depending on wh
 recurring, the workout is either deleted or rescheduled appropriately. Once the `loop` block exits, `sortScheduleList()` is called and the 
 `scheduledWorkouts` is sorted in *ascending* order of `DateTime`
 
-This "updating" is done in any method call that outputs something to the user to ensure a correctly sorted and cleaned up
-list is always output to the user. This also ensures the `scheduledWorkouts` ArrayList remains free of overdue workouts.
+This "updating" is done to ensure a correctly sorted and cleaned up list is always output to the user. 
+This also ensures the `scheduledWorkouts` ArrayList remains free of overdue workouts.
 
 #### Meal: Class Diagram
 

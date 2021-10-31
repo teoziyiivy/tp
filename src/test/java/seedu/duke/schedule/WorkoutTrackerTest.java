@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//@@author arvejw
 class WorkoutTrackerTest {
 
     @Test
@@ -38,7 +39,6 @@ class WorkoutTrackerTest {
         String argumentInput1 = "test /c 123 /d 07/07/2021 /t 17:59";
         wt.addWorkout(argumentInput1, true);
         assertThrows(WorkoutException.class, () -> wt.deleteWorkout("-10"));
-        assertThrows(WorkoutException.class, () -> wt.deleteWorkout("123"));
     }
 
     @Test
