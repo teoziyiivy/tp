@@ -10,8 +10,8 @@ import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//@@author arvejw
 class ScheduleTrackerTest {
 
     @Test
@@ -39,7 +39,6 @@ class ScheduleTrackerTest {
         String argumentInput1 = "test /d 07/07/2022 /t 17:59";
         st.addScheduledWorkout(argumentInput1, false, true); //must be non empty list
         assertThrows(ScheduleException.class, () -> st.deleteScheduledWorkout("-10"));
-        assertThrows(ScheduleException.class, () -> st.deleteScheduledWorkout("123"));
     }
 
 

@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.schedule.NoScheduleIndexException;
 import seedu.duke.exceptions.workout.DeleteWorkoutException;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.workout.DuplicateWorkoutException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.MissingWorkoutDescriptionException;
 import seedu.duke.exceptions.workout.NoWorkoutIndexException;
@@ -45,13 +46,14 @@ public class WorkoutTracker {
         assert inputArguments != null : "Exception should already been thrown if argument is null";
         missingDescriptionCheck(inputArguments);
         generateWorkoutParameters(inputArguments);
+        String updatedArguments = workoutDescription + Parser.CALORIE_SEPARATOR + caloriesBurned
+                + Parser.DATE_SEPARATOR + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
+        duplicateWorkoutCheck(updatedArguments);
         if (!isSquelchAddMessage) {
             System.out.println("Noted! CLI.ckFit has recorded your workout of description \"" + workoutDescription
                     + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
                     + caloriesBurned + " calories!");
         }
-        String updatedArguments = workoutDescription + Parser.CALORIE_SEPARATOR + caloriesBurned
-                + Parser.DATE_SEPARATOR + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
         workouts.add(updatedArguments);
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Successfully added workout.");
     }
@@ -81,7 +83,6 @@ public class WorkoutTracker {
             throw new DeleteWorkoutException();
         }
     }
-
 
     public void listWorkouts(String inputArguments) throws WorkoutException {
         if (isWorkoutListEmpty()) {
@@ -186,5 +187,16 @@ public class WorkoutTracker {
             throw new MissingWorkoutDescriptionException();
         }
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Description is present in user input arguments.");
+    }
+
+    public void duplicateWorkoutCheck(String inputArguments) throws WorkoutException {
+        if (workouts.isEmpty()) {
+            return;
+        }
+        for (String w: workouts) {
+            if (inputArguments.trim().equals(w)) {
+                throw new DuplicateWorkoutException();
+            }
+        }
     }
 }
