@@ -71,7 +71,9 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
   E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
   
 * Scheduled workouts with the same activity breakdowns in a different order **are not** considered duplicated
-  in the current version of CLI.ckFit.
+  in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity 
+  breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
+  on the choice usage of HashMaps for implementation.
   
   
 
