@@ -62,6 +62,9 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
 * Separators such as the date separator `/d` and time separator `/t` must be entered in the **exact same order** as shown in 
   the respective command formats. CLI.ckFit **does not** support the shuffling of separators when taking user input.
   
+* The separators as shown in the command format should be input **once**. Typing multiple identical separators 
+  unnecessarily *may* cause incorrect parsing of user input.
+  
 * To ensure correct processing of user inputs you should only enter the **necessary** number of arguments. 
   For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
   E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
