@@ -131,4 +131,8 @@ public class ClickfitMessages {
     public static final String WEIGHT_PARAMETERS_ERROR = "CLI.ckFit could not generate your parameters.";
 
     public static final String DONT_UNDERSTAND = "OOPS!!! I'm sorry, but I don't know what that means";
+
+    public static final String EMPTY_WORKOUT_LIST_ON_DATE_MESSAGE = "No workouts recorded for today!";
+
+    public static final String EMPTY_SCHEDULE_LIST_ON_DATE_MESSAGE = "No workouts scheduled for today!";
 }
