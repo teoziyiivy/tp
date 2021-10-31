@@ -63,6 +63,6 @@ public class Calculator {
         } else {
             idealCalories = (int) ((655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age)) * multiplier);
         }
-        System.out.println(idealCalories);
+        System.out.println(idealCalories + " kcal");
     }
 }

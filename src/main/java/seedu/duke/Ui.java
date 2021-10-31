@@ -18,8 +18,8 @@ public class Ui {
             + "____________________________________________________________"; //placeholder
     public static final String USER_PROMPT = "Enter command: "; //placeholder
     protected String sex;
-    protected int weight;
-    protected int height;
+    protected double weight;
+    protected double height;
     protected int age;
     protected int activityLevel;
     protected int correctInput = 0;
@@ -72,7 +72,7 @@ public class Ui {
             System.out.println("what is your weight in kg? Enter an integer!");
             uiInput = uiScanner.nextLine();
             if (uiInput.matches("^\\d+(\\.\\d+)?")) {
-                weight = Integer.parseInt(uiInput);
+                weight = Double.parseDouble(uiInput);
                 answerIsCorrect = true;
             }
         }
@@ -82,7 +82,7 @@ public class Ui {
             System.out.println("what is your height in cm? Enter an integer!");
             uiInput = uiScanner.nextLine();
             if (uiInput.matches("^\\d+(\\.\\d+)?")) {
-                height = Integer.parseInt(uiInput);
+                height = Double.parseDouble(uiInput);
                 answerIsCorrect = true;
             }
         }

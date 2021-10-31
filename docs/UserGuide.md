@@ -1,7 +1,7 @@
 # CLI.ckFit User Guide
 
 ## Introduction
-CLI.ckFit is a desktop-based fitness app which be accessed easily via CLI. CLI.ckFit allows you to input your calories, 
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input your calories, 
 weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever you wish to. 
 It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness 
 level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students 
@@ -94,6 +94,8 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
   - [**List volumes**](#list-volumes)
 - #### Help
   - [**Access user help**](#help-command)
+- #### Close CLI.ckFit
+  - [**bye**](#bye)
 
 ### Workout Manager
 - #### Add
@@ -528,6 +530,17 @@ Example of usage:
 
 `help`
 
+## Bye
+
+Command Word: `bye`
+
+Description: Terminates CLI.ckFit program.
+
+Example of usage:
+
+`bye`
+
+
 ## FAQ
 
 Q: Are the commands case-sensitive?
@@ -573,7 +586,7 @@ Command | Format of input
 [**List weights**](#list-weights)| `list weights <DATE>`
 [**List workouts**](#list-workouts)| `list workouts <DATE>`
 [**List calories**](#list-calories)| `list calories <DATE>`
-[**List volume**](#list-volumes)| `list calories <DATE>`
+[**List volume**](#list-volumes)| `list volumes <DATE>`
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
