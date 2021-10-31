@@ -486,6 +486,11 @@ A: Transfer the data text files located in the same directory as your CLIckFit.j
 to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your
 data will then be loaded from the text files when you run CLIckFit.jar on your new computer.
 
+Q: Can I check and alter my CLIckFit data myself?
+
+A: Yes. You can open up the files, "Weight.txt", "Schedule.txt", "Workout.txt", "Food.txt" and
+"FoodBank.txt". These files contain the associated data which you can view and also update manually in the correct format if you wish to.
+
 ## Command Summary
 *Psssstttttt click on the commands to skip sections!*
 
