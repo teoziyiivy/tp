@@ -39,7 +39,7 @@ public class WorkoutTracker {
      * Generates the workout parameters based off the user's input.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @throws WorkoutException
+     * @throws WorkoutException Issue during generation of workout parameters.
      */
     public void generateWorkoutParameters(String inputArguments) throws WorkoutException {
         WORKOUT_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for workout.");
