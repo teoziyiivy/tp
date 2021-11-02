@@ -113,7 +113,7 @@ public class WeightTracker extends Tracker {
     /**
      * Lists weights from the list of weights depending on user input.
      * Namely, if user inputs <code>all</code>, <code>listAllWeights()</code> will be called and all
-     * weights in the <code>Weight.txt</code> will be printed. If the user inputs a date (DD/MM/YYYY),
+     * weights in the <code>weightsArray</code> will be printed. If the user inputs a date (DD/MM/YYYY),
      * then <code>listSpecificWeights()</code> will be called instead and only the weights recorded
      * on that specific date will be printed.
      *
