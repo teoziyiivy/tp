@@ -7,6 +7,7 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
@@ -227,6 +228,12 @@ public class Parser {
     }
 
     //@@author teoziyiivy
+    /**
+     * Extracts the weight from the user input.
+     *
+     * @param inputArguments User input.
+     * @throws DukeException If input does not have a weight or (weight < 0) or (weight > 1000).
+     */
     public static double getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         if (!userInput[0].matches("^\\d+(\\.\\d+)?")) {
