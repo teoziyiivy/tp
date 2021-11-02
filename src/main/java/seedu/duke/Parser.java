@@ -7,6 +7,7 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
@@ -111,17 +112,22 @@ public class Parser {
     //@@author { J}
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
+        boolean isCaloriesParsed = false;
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
         for (int i = 0; i < length; i++) {
             if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
                 try {
                     calories = parseStringToInteger(userInput[i + 1]);
+                    isCaloriesParsed = true;
                     break;
                 } catch (IndexOutOfBoundsException e) {
                     throw new NumberFormatException();
                 }
             }
+        }
+        if (!isCaloriesParsed) {
+            throw new MissingWorkoutCalorieSeparatorException();
         }
         if (calories < 0) {
             throw new NegativeWorkoutCalorieException();

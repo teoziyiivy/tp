@@ -71,7 +71,9 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
   E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
   
 * Scheduled workouts with the same activity breakdowns in a different order **are not** considered duplicated
-  in the current version of CLI.ckFit.
+  in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity 
+  breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
+  on the choice usage of HashMaps for implementation.
   
   
 
@@ -512,7 +514,6 @@ Description: Lists all meals, fluids, weight, workouts and scheduled workouts on
 Format `list <DATE`
 * The `DATE` is in dd/mm/yyyy.
 * If `DATE` is left empty **today's** date will be taken.
-* If the word `all` is written in place of `DATE`, **ALL** stored scheduled workouts will be listed.
 
 Example of usage:
 * `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.

@@ -104,7 +104,7 @@ public class CommandManager {
     }
 
     public void foodBankParser(String inputArguments) throws
-            NullPointerException, FoodBankException, InvalidFluidDescription {
+            NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
@@ -134,10 +134,9 @@ public class CommandManager {
     }
 
     public void listParser(String inputArguments) throws
-            NullPointerException, FoodBankException,
-            ScheduleException, WorkoutException, NoWeightsException, FluidExceptions,
-            DukeException, ScheduleException, WeightException,
-            WorkoutException, NoWeightsException, MealException {
+            NullPointerException, FoodBankException, FluidExceptions,
+            ScheduleException, WeightException,
+            WorkoutException, MealException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         String date;
@@ -189,8 +188,7 @@ public class CommandManager {
     }
 
     private void listCalories(String date) throws
-            FoodBankException, WorkoutException, FluidExceptions,
-            DukeException, FoodBankException,
+            FluidExceptions, FoodBankException,
             WorkoutException, MealException {
         int calCount = fluid.getCalories(date) + meal.getCalories(date);
         int caloriesBurned = workoutTracker.getCaloriesBurned(date);
