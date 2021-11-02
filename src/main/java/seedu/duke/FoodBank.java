@@ -18,7 +18,7 @@ public class FoodBank {
     protected static int totalMeals;
     protected static int totalFluids;
 
-    //@@author {V }
+    //@@author VishalJeyaram
     public FoodBank() {
         meals = new ArrayList<>();
         fluids = new ArrayList<>();
@@ -26,7 +26,7 @@ public class FoodBank {
         totalFluids = 0;
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public static void generateParameters(String inputArguments) throws FoodBankException {
         try {
             calories = Parser.getCalories(inputArguments);
@@ -36,7 +36,7 @@ public class FoodBank {
         }
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public static void addCustomFluid(String inputArguments) throws FoodBankException {
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
@@ -53,7 +53,7 @@ public class FoodBank {
                 + " You now have " + totalFluids + " fluids!\n");
     }
 
-    //@@author { P}
+    //@@author pragyan01
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
         if (inputArguments == null) {
             throw new NoFoodIndexException();
@@ -69,7 +69,7 @@ public class FoodBank {
                 + " You now have " + totalFluids + " fluids left!\n");
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public static void listCustomFluids() throws FoodBankException {
         if (fluids.size() == 0) {
             System.out.println("Your fluids library is empty!");
@@ -84,7 +84,7 @@ public class FoodBank {
         System.out.println("Total number of fluids in library: " + totalFluids);
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public static void listCustomMeal() throws FoodBankException {
         if (meals.size() == 0) {
             System.out.println("Your meals library is empty!");
@@ -99,7 +99,7 @@ public class FoodBank {
         System.out.println("Total number of meals in library: " + totalMeals);
     }
 
-    //@@author {V }
+    //@@author VishalJeyaram
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
@@ -112,7 +112,7 @@ public class FoodBank {
                 + " calories, will be added to your library of meals. You now have " + totalMeals + " meals!\n");
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
         if (inputArguments == null) {
             throw new NoFoodIndexException();
@@ -128,7 +128,7 @@ public class FoodBank {
                 + totalMeals + " meals left!\n");
     }
 
-    //@@author { P}
+    //@@author pragyan01
     public static int findCalories(String name) throws FoodBankException {
         for (String meal : meals) {
             generateParameters(meal);

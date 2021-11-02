@@ -22,7 +22,7 @@ public class Calculator {
         this.multiplier = 0;
     }
 
-    //@@author {E}
+    //@@author EdwardZYWang
     public void getBmi() {
         System.out.println(System.lineSeparator() + "Your BMI outcome is " + System.lineSeparator());
         String getBmiOutcome;
@@ -40,7 +40,7 @@ public class Calculator {
         System.out.println(getBmiOutcome);
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public void getIdealCalories() {
         System.out.println(System.lineSeparator() + "Your ideal number of calories to maintain your weight is "
                 + System.lineSeparator());

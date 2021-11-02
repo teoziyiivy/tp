@@ -10,7 +10,7 @@ import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
 import static seedu.duke.ClickfitMessages.MESSAGE_A;
 
-//@@author { E/V}
+//@@author EdwardZYWang
 public class Ui {
 
     private Scanner uiScanner;
