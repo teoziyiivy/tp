@@ -226,7 +226,6 @@ public class Parser {
         return properTime;
     }
 
-    // implement double
     //@@author teoziyiivy
     public static double getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
@@ -236,6 +235,10 @@ public class Parser {
         double weight = parseStringToDouble(userInput[0]);
         if (weight < 0) {
             throw new DukeException("Negative weight");
+        }
+
+        if (weight > 1000) {
+            throw new DukeException("Exceeded maximum weight");
         }
         return weight;
     }
