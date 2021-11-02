@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import static seedu.duke.ClickfitMessages.HELP_COMMANDS;
 
-//@@author { E}
+//@@author EdwardZYWang
 public class UserHelp {
     private static Logger UserHelp_LOGGER = Logger.getLogger("UiLogger");
 

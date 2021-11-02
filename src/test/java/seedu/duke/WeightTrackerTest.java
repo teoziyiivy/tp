@@ -6,6 +6,7 @@ import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightIndexException;
 
+//@@author teoziyiivy
 public class WeightTrackerTest {
 
     @Test

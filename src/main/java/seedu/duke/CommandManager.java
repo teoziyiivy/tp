@@ -35,6 +35,7 @@ public class CommandManager {
     protected String inputArguments;
     protected Storage storage;
 
+    //@@author EdwardZYWang
     public CommandManager(Storage storage, Fluid fluid, Meal meal,
                           ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                           WeightTracker weightTracker, UserHelp userHelp) {
@@ -49,6 +50,7 @@ public class CommandManager {
         this.storage = storage;
     }
 
+    //@@author EdwardZYWang
     public void commandChecker() throws
             DukeException, NullPointerException,
             MealException, FluidExceptions,
@@ -95,6 +97,7 @@ public class CommandManager {
         saveEverything();
     }
 
+    //@@author VishalJeyaram
     public void saveEverything() throws IOException {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
@@ -103,6 +106,7 @@ public class CommandManager {
         storage.saveWorkout(workoutTracker);
     }
 
+    //@@author VishalJeyaram
     public void foodBankParser(String inputArguments) throws
             NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
@@ -133,6 +137,7 @@ public class CommandManager {
         }
     }
 
+    //@@author pragyan01
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException, FluidExceptions,
             ScheduleException, WeightException,
@@ -187,6 +192,7 @@ public class CommandManager {
         }
     }
 
+    //@@author pragyan01
     private void listCalories(String date) throws
             FluidExceptions, FoodBankException,
             WorkoutException, MealException {
@@ -199,6 +205,7 @@ public class CommandManager {
         System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
     }
 
+    //@@author EdwardZYWang
     public void addParser(String input) throws
             NullPointerException, FoodBankException,
             DukeException, MealException,
@@ -236,6 +243,7 @@ public class CommandManager {
         }
     }
 
+    //@@author teoziyiivy
     public void deleteParser(String input) throws NullPointerException,
             FoodBankException, DukeException,
             ScheduleException, WorkoutException,
@@ -274,9 +282,10 @@ public class CommandManager {
         DateTracker.deleteDateFromList(inputArguments, fluid, meal, workoutTracker, weightTracker);
     }
 
+    //@@author teoziyiivy
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
-            ScheduleException, WorkoutException,
+            WorkoutException,
             MealException, FluidExceptions, WeightException {
         meal.listMeals(date);
         System.out.println();

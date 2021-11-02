@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UserHelpTest {
 
+    //@@author EdwardZYWang
     @Test
     void generateUserHelpParameters() {
         String input = "commands";

@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 
+//@@author EdwardZYWang
 class CommandManagerTest {
     /*
     @Test

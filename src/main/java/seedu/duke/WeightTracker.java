@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author { I}
+//@@author teoziyiivy
 public class WeightTracker extends Tracker {
     protected ArrayList<String> weightsArray;
     protected int numberOfWeights;
