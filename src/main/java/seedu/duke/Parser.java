@@ -3,9 +3,11 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.schedule.GetActivityException;
+import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
@@ -110,16 +112,22 @@ public class Parser {
     //@@author { J}
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
+        boolean isCaloriesParsed = false;
         String[] userInput = inputArguments.split(SPACE_SEPARATOR);
         int length = userInput.length;
         for (int i = 0; i < length; i++) {
             if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
                 try {
                     calories = parseStringToInteger(userInput[i + 1]);
+                    isCaloriesParsed = true;
+                    break;
                 } catch (IndexOutOfBoundsException e) {
                     throw new NumberFormatException();
                 }
             }
+        }
+        if (!isCaloriesParsed) {
+            throw new MissingWorkoutCalorieSeparatorException();
         }
         if (calories < 0) {
             throw new NegativeWorkoutCalorieException();
@@ -194,7 +202,9 @@ public class Parser {
                 break;
             }
         }
-        return date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return formatter.format(localDate);
     }
 
     //@@author { I}
@@ -263,7 +273,7 @@ public class Parser {
     }
 
     //@@author arvejw
-    private static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
+    public static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
             throws ScheduleException {
         Map<String, ArrayList<Integer>> outputMap = new HashMap<>();
         for (String activity : nonParsedActivities) {
@@ -277,10 +287,18 @@ public class Parser {
             }
             ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
-                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                try {
+                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                } catch (NumberFormatException e) {
+                    throw new InvalidActivityFormatException();
+                }
             } else if (quantifierSplitResults.length == 2) {
-                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
-                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
+                try {
+                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
+                } catch (NumberFormatException e) {
+                    throw new InvalidActivityFormatException();
+                }
             } else {
                 throw new GetActivityException();
             }

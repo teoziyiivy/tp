@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Map;
 
 //@@author arvejw
+
+/**
+ * Represents a scheduled workout. Namely, a <code>ScheduledWorkout</code> stores information about
+ * the scheduled workout such as its description, date and time, as well as whether the workout is recurring.
+ */
 public class ScheduledWorkout {
 
     private String workoutDescription;
@@ -17,9 +22,17 @@ public class ScheduledWorkout {
     private String workoutDate;
     private String workoutTime;
     private LocalDateTime workoutDateTime;
-
     private boolean isRecurring;
 
+    /**
+     * Constructs a <code>ScheduledWorkout</code> object.
+     *
+     * @param workoutDescription the description of the workout
+     * @param workoutDate        the date of the workout
+     * @param workoutTime        the time of the workout
+     * @param activityMap        the activities of the workout
+     * @param isRecurring        the type of workout
+     */
     public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime,
                             Map<String, ArrayList<Integer>> activityMap, boolean isRecurring) {
         this.workoutDescription = workoutDescription;
@@ -34,7 +47,7 @@ public class ScheduledWorkout {
             for (var entry : activityMap.entrySet()) {
                 activities.add(
                         new WorkoutActivity(
-                                entry.getKey(), entry.getValue(),
+                                entry.getKey().trim(), entry.getValue(),
                                 WorkoutActivity.isDistanceActivity(entry.getKey())
                         )
                 );
@@ -79,6 +92,11 @@ public class ScheduledWorkout {
         return isRecurring ? "recurring " : "";
     }
 
+    /**
+     * Returns the activities in a more readable String format to be printed.
+     *
+     * @return Activity breakdown in a single String.
+     */
     public String getActivitiesAsStringToPrint() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
@@ -98,6 +116,11 @@ public class ScheduledWorkout {
         return output + System.lineSeparator() + "____________________________";
     }
 
+    /**
+     * Returns the information of the ScheduledWorkout in a data file compatible format.
+     *
+     * @return ScheduledWorkout information as a single String.
+     */
     public String getScheduledWorkoutAsString() {
         String output = workoutDescription + Parser.DATE_SEPARATOR
                 + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
@@ -108,7 +131,12 @@ public class ScheduledWorkout {
         return output;
     }
 
-    private String getActivitiesAsString() {
+    /**
+     * Returns the activity breakdown of the ScheduledWorkout in a data file compatible format.
+     *
+     * @return Activity breakdown information as a single String.
+     */
+    public String getActivitiesAsString() {
         StringBuilder activityString = new StringBuilder();
         if (!activities.isEmpty()) {
             activityString.append(Parser.ACTIVITY_SEPARATOR);
