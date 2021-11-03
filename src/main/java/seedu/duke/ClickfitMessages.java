@@ -8,7 +8,7 @@ public class ClickfitMessages {
     public static final String INITIAL_PROMPT = "What would you like to start with?";
 
     public static final String MESSAGE_A = System.lineSeparator() + "Lets get your fitness journey "
-            + "started! input any commands to get started! Type \"help\" to get started! "
+            + "started! input any commands to get started! Type \"help\" to get started!"
             + System.lineSeparator()
             + "Lets work hard together in your fitness journey!";
 
