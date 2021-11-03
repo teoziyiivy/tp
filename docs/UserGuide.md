@@ -1,7 +1,7 @@
 # CLI.ckFit User Guide
 
 ## Introduction
-CLI.ckFit is a desktop-based fitness app which be accessed easily via CLI. CLI.ckFit allows you to input your calories, 
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input your calories, 
 weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever you wish to. 
 It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness 
 level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students 
@@ -96,6 +96,8 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
   - [**List volumes**](#list-volumes)
 - #### Help
   - [**Access user help**](#help-command)
+- #### Close CLI.ckFit
+  - [**bye**](#bye)
 
 ### Workout Manager
 - #### Add
@@ -120,7 +122,8 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
     - [**List fluids from library**](#list-fluids-stored-in-library)
 
 ### List Manager
-- [**List everything**](#List-everything)
+- [**List everything**](#list-everything)
+
 ### Miscellaneous
 - [**FAQ**](#faq)
 - [**Command Summary**](#command-summary)
@@ -181,12 +184,14 @@ Command Word: `add weight`
 
 Description: Adds a new weight to the list of weight items, with its associated date.
 
-
 Format: `add weight WEIGHT </d DATE>`
 
-* The `WEIGHT` cannot contain spaces.
+* The `WEIGHT` cannot contain spaces and must be a non-negative number to maximum of 1 decimal place.
+* The `WEIGHT` has to be realistic (<1000.0 kg) due to limitation of integer overflow.
 * The `DATE` is in dd/mm/yyyy.
-* If `DATE` is not specified, the system current date will be taken.
+* If `DATE` is not specified, the current system date will be taken.
+* Only 1 `WEIGHT` should be included in your input.
+* If multiple `/d DATE` or `DATE` is written only the first input will be taken.
 
 Example of usage:
 
@@ -325,6 +330,8 @@ Description: Deletes a meal from the list of meals.
 Format: `delete weight INDEX`
 
 * Use `list weights all` to determine the index of the meal you wish to delete.
+* The `INDEX` can only contain integers from the list.
+* Only 1 `INDEX` should be included in your input.
 
 Example of usage:
 
@@ -425,9 +432,11 @@ Command Word:`list weights`
 Description: Lists weight depending on date of entry.
 
 Format: `list weights <DATE>`
+
 * The `DATE` is in dd/mm/yyyy.
 * If `DATE` is left empty, the weights recorded **today** will be returned.
 * If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
+* Only 1 `DATE` should be included in your input.
 
 Example of usage:
 
@@ -529,6 +538,17 @@ Example of usage:
 
 `help`
 
+## Bye
+
+Command Word: `bye`
+
+Description: Terminates CLI.ckFit program.
+
+Example of usage:
+
+`bye`
+
+
 ## FAQ
 
 Q: Are the commands case-sensitive?
@@ -574,7 +594,7 @@ Command | Format of input
 [**List weights**](#list-weights)| `list weights <DATE>`
 [**List workouts**](#list-workouts)| `list workouts <DATE>`
 [**List calories**](#list-calories)| `list calories <DATE>`
-[**List volume**](#list-volumes)| `list calories <DATE>`
+[**List volume**](#list-volumes)| `list volumes <DATE>`
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`

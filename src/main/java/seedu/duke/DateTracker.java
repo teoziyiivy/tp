@@ -14,7 +14,7 @@ import java.util.Comparator;
 public class DateTracker {
     protected static ArrayList<String> dates = new ArrayList<>();
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public static void checkIfDateExists(String newDate) {
         for (String date : dates) {
             if (date.equals(newDate)) {
@@ -29,7 +29,7 @@ public class DateTracker {
         Collections.sort(dates);
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public static void sortDate(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
             public int compare(String o1, String o2) {
@@ -42,7 +42,7 @@ public class DateTracker {
         });
     }
 
-    //@@author {P V }
+    //@@author VishalJeyaram
     public static void deleteDateFromList(String inputArguments, Fluid fluid, Meal meal,
                                           WorkoutTracker workoutTracker,
                                           WeightTracker weightTracker) throws DukeException {
@@ -70,7 +70,7 @@ public class DateTracker {
         dates.remove(date);
     }
 
-    //@@author { J}
+    ////@@author arvejw
     public static void sortDateAndTime(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
             public int compare(String o1, String o2) {

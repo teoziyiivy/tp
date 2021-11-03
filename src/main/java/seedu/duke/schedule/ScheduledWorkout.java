@@ -1,6 +1,7 @@
 package seedu.duke.schedule;
 
 import seedu.duke.Parser;
+import seedu.duke.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,11 +28,11 @@ public class ScheduledWorkout {
     /**
      * Constructs a <code>ScheduledWorkout</code> object.
      *
-     * @param workoutDescription the description of the workout
-     * @param workoutDate        the date of the workout
-     * @param workoutTime        the time of the workout
-     * @param activityMap        the activities of the workout
-     * @param isRecurring        the type of workout
+     * @param workoutDescription The description of the workout.
+     * @param workoutDate        The date of the workout.
+     * @param workoutTime        The time of the workout.
+     * @param activityMap        The activities of the workout.
+     * @param isRecurring        The type of workout, namely whether its recurring or not.
      */
     public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime,
                             Map<String, ArrayList<Integer>> activityMap, boolean isRecurring) {
@@ -95,12 +96,12 @@ public class ScheduledWorkout {
     /**
      * Returns the activities in a more readable String format to be printed.
      *
-     * @return Activity breakdown in a single String.
+     * @return String Activity breakdown as a single String to be printed.
      */
     public String getActivitiesAsStringToPrint() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
-            return output + "nil" + System.lineSeparator() + "____________________________";
+            return output + "nil" + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
         }
         int currentIndex = 1;
         for (WorkoutActivity a : activities) {
@@ -113,13 +114,13 @@ public class ScheduledWorkout {
             }
             currentIndex++;
         }
-        return output + System.lineSeparator() + "____________________________";
+        return output + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
     }
 
     /**
      * Returns the information of the ScheduledWorkout in a data file compatible format.
      *
-     * @return ScheduledWorkout information as a single String.
+     * @return String Scheduled workout information as a single String.
      */
     public String getScheduledWorkoutAsString() {
         String output = workoutDescription + Parser.DATE_SEPARATOR
@@ -134,7 +135,7 @@ public class ScheduledWorkout {
     /**
      * Returns the activity breakdown of the ScheduledWorkout in a data file compatible format.
      *
-     * @return Activity breakdown information as a single String.
+     * @return String Activity breakdown information as a single String to be stored.
      */
     public String getActivitiesAsString() {
         StringBuilder activityString = new StringBuilder();
