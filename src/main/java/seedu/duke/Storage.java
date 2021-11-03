@@ -38,7 +38,7 @@ public class Storage {
         initializeWorkoutFile();
     }
 
-    //@@author {V }
+    //@@author VishalJeyaram
     public void saveFood(Fluid fluid, Meal meal) throws IOException {
         String currentDate;
         String currentMeal;
@@ -87,7 +87,7 @@ public class Storage {
         }
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public void saveLibrary() throws IOException {
         String customMeal;
         String customFluid;
@@ -113,7 +113,7 @@ public class Storage {
         }
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public void saveWeight(WeightTracker weight) throws IOException {
         String currentWeight;
         String header;
@@ -169,7 +169,7 @@ public class Storage {
         fileWriter.close();
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -191,7 +191,7 @@ public class Storage {
         return meals;
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -213,7 +213,7 @@ public class Storage {
         return fluids;
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public ArrayList<String> loadWeights() throws IOException {
         ArrayList<String> weights = new ArrayList<>();
         String newFilePath = new File(weightFile).getAbsolutePath();
@@ -232,7 +232,7 @@ public class Storage {
         return weights;
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public ArrayList<String> loadMealLibrary() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
@@ -254,7 +254,7 @@ public class Storage {
         return meals;
     }
 
-    //@@author {P }
+    //@@author pragyan01
     public ArrayList<String> loadFluidLibrary() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
@@ -319,7 +319,7 @@ public class Storage {
         }
     }
 
-    //@@author {V }
+    //@@author VishalJeyaram
     public static void initializeFoodFile() {
         File dataFile = new File(foodFile);
         if (!dataFile.exists()) {
@@ -331,7 +331,7 @@ public class Storage {
         }
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static void initializeFoodBankFile() {
         File dataFile = new File(libraryFile);
         if (!dataFile.exists()) {
@@ -343,7 +343,7 @@ public class Storage {
         }
     }
 
-    //@@author {I }
+    //@@author teoziyiivy
     public static void initializeWeightFile() {
         File dataFile = new File(weightFile);
         if (!dataFile.exists()) {
@@ -367,7 +367,7 @@ public class Storage {
         }
     }
 
-    //@@author { E}
+    //@@author EdwardZYWang
     public void mealSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -399,7 +399,7 @@ public class Storage {
         }
     }
 
-    //@@author {E }
+    //@@author EdwardZYWang
     public void fluidSummary() {
         int totalCalories = 0;
         int totalVolume = 0;
@@ -441,7 +441,7 @@ public class Storage {
         }
     }
 
-    //@@author {I }
+    //@@author teoziyiivy
     public void weightSummary() throws DukeException {
         int i = 1;
         double weight;
@@ -459,7 +459,7 @@ public class Storage {
         }
     }
 
-    //@@author { E}
+    //@@author EdwardZYWang
     public void workoutSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -491,7 +491,7 @@ public class Storage {
         }
     }
 
-    //@@author {E }
+    //@@author EdwardZYWang
     public void printLoadedLists() throws DukeException {
         System.out.println(MEAL_PRINT_FORMAT);
         mealSummary();
