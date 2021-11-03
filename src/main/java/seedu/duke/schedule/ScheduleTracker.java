@@ -49,7 +49,7 @@ public class ScheduleTracker {
     /**
      * Returns the private attribute scheduledWorkouts.
      *
-     * @return ArrayList of ScheduledWorkout objects.
+     * @return ArrayList<ScheduledWorkout> Array List of scheduled workouts.
      */
     public ArrayList<ScheduledWorkout> getScheduledWorkouts() {
         return scheduledWorkouts;
@@ -95,7 +95,7 @@ public class ScheduleTracker {
      * String[1] contains the workout date, String[2] contains the workout time.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @return The generated parameters in a String array of size 3.
+     * @return String[] The generated parameters in a String array of size 3.
      * @throws ScheduleException Issue generating schedule description.
      */
     public String[] generateScheduledWorkoutParameters(String inputArguments) throws ScheduleException {
@@ -139,14 +139,12 @@ public class ScheduleTracker {
             throw new InvalidActivityFormatException();
         }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
-        ScheduledWorkout workout = new ScheduledWorkout(
+        ScheduledWorkout workoutToAdd = new ScheduledWorkout(
                 workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout);
-        duplicateScheduledWorkoutCheck(workout);
-        scheduledWorkouts.add(workout);
+        duplicateScheduledWorkoutCheck(workoutToAdd);
+        scheduledWorkouts.add(workoutToAdd);
         if (!isSquelchAddMessage) {
-            System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
-                    + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
-                    + workoutTime + ".");
+            System.out.println(ClickfitMessages.getAddScheduleSuccessMessage(workoutToAdd));
         }
         if (isCleanUp) {
             cleanUpScheduleList();
@@ -159,7 +157,7 @@ public class ScheduleTracker {
      * This check is done under the assumption that ones-indexing is used.
      *
      * @param workoutNumber Index of the scheduled workout.
-     * @return <code>true</code> if within range, <code>false</code> otherwise.
+     * @return boolean <code>true</code> if within range, <code>false</code> otherwise.
      */
     public boolean isScheduledWorkoutNumberWithinRange(int workoutNumber) {
         int upperBound = scheduledWorkouts.size();
@@ -188,10 +186,7 @@ public class ScheduleTracker {
         int workoutIndex = workoutNumber - 1; // 0-indexing
         if (isScheduledWorkoutNumberWithinRange(workoutNumber)) {
             ScheduledWorkout workoutToDelete = scheduledWorkouts.get(workoutIndex);
-            System.out.println("Noted! CLI.ckFit has successfully deleted your "
-                    + workoutToDelete.isRecurringStatusAsText() + "scheduled workout of description \""
-                    + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
-                    + " at " + workoutToDelete.getWorkoutTime() + "!");
+            System.out.println(ClickfitMessages.getDeleteScheduleSuccessMessage(workoutToDelete));
             scheduledWorkouts.remove(workoutIndex);
             SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted scheduled workout.");
         } else {
@@ -225,7 +220,7 @@ public class ScheduleTracker {
             System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
             return;
         }
-        System.out.println("Full Workout Schedule:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
+        System.out.println(ClickfitMessages.FULL_SCHEDULE_LIST_MESSAGE);
         int currentIndex = 1;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
@@ -247,17 +242,15 @@ public class ScheduleTracker {
                 .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
         if (filteredScheduleList.isEmpty()) {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_ON_DATE_MESSAGE);
+                System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_TODAY_MESSAGE);
             } else {
-                System.out.println("Workout schedule is empty on the date: " + inputArguments);
+                System.out.println(ClickfitMessages.getEmptyScheduleOnDateMessage(inputArguments));
             }
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("Today's workout schedule:" + System.lineSeparator()
-                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
+                System.out.println(ClickfitMessages.WORKOUT_SCHEDULE_TODAY_MESSAGE);
             } else {
-                System.out.println("Workout schedule on " + inputArguments + ":" + System.lineSeparator()
-                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
+                System.out.println(ClickfitMessages.getWorkoutScheduleOnDateMessage(inputArguments));
             }
             int currentIndex = 1;
             int workoutCount = 0;
@@ -270,13 +263,13 @@ public class ScheduleTracker {
                 currentIndex++;
                 workoutCount++;
             }
-            System.out.println("You have " + workoutCount + " scheduled workouts on that day!");
+            System.out.println(ClickfitMessages.getWorkoutCountMessage(workoutCount));
         }
     }
 
     /**
      * Cleans up the schedule list from any overdue workouts.
-     * If workout is non recurring and the date is passed it is deleted. Otherwise if it is recurring, the workout
+     * If workout is non-recurring and the date is passed it is deleted. Otherwise if it is recurring, the workout
      * is rescheduled by the required days in multiples of 7.
      */
     public void cleanUpScheduleList() {

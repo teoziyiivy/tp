@@ -71,7 +71,7 @@ public class Duke {
     public void run() {
         while (!commandManager.isExit) {
             try {
-                System.out.println(Ui.HORIZONTAL_BAR);
+                System.out.println(Ui.HORIZONTAL_BAR_LONG);
                 System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
             } catch (DateTimeParseException e) {

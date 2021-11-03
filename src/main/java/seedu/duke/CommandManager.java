@@ -3,14 +3,12 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
-import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
-import seedu.duke.exceptions.weight.NoWeightsException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 
@@ -58,7 +56,7 @@ public class CommandManager {
             ScheduleException, WeightException,
             WorkoutException {
         String input = scanner.nextLine();
-        System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
+        System.out.println(Ui.HORIZONTAL_BAR_LONG + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;

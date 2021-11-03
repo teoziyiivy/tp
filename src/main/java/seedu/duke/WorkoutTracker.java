@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.DeleteWorkoutException;
 import seedu.duke.exceptions.workout.DuplicateWorkoutException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
@@ -161,7 +160,7 @@ public class WorkoutTracker {
                 .filter((t) -> Parser.getDate(t).equals(inputArguments)).collect(Collectors.toList());
         if (filteredWorkoutList.isEmpty()) {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_ON_DATE_MESSAGE);
+                System.out.println(ClickfitMessages.EMPTY_WORKOUT_LIST_TODAY_MESSAGE);
             } else {
                 System.out.println("No workouts recorded on the date: " + inputArguments);
             }
@@ -193,7 +192,7 @@ public class WorkoutTracker {
      * Returns the calories burned on a particular date based on the workouts recorded in the workout list.
      *
      * @param date Date to use as a filter in the format dd/mm/yyyy when getting total calories.
-     * @return The total calories burned on the date. If no workouts recorded on the date, total calories burned is 0.
+     * @return int The total calories burned on the date. If no workouts recorded on the date, total calories burned is 0.
      * @throws WorkoutException Issue getting calories burned from workouts.
      */
     public int getCaloriesBurned(String date) throws WorkoutException {
@@ -225,7 +224,7 @@ public class WorkoutTracker {
     /**
      * Checks whether the list of recorded workouts is empty.
      *
-     * @return <code>true</code> if workout list is empty, <code>false</code> otherwise.
+     * @return boolean <code>true</code> if workout list is empty, <code>false</code> otherwise.
      */
     public boolean isWorkoutListEmpty() {
         return workouts.isEmpty();
@@ -236,7 +235,7 @@ public class WorkoutTracker {
      * This check is done under the assumption that ones-indexing is used.
      *
      * @param workoutNumber Index of the workout.
-     * @return <code>true</code> if within range, <code>false</code> otherwise.
+     * @return boolean <code>true</code> if within range, <code>false</code> otherwise.
      */
     public boolean isWorkoutNumberWithinRange(int workoutNumber) {
         int upperBound = workouts.size();

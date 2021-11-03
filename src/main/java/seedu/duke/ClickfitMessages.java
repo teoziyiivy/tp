@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.schedule.ScheduledWorkout;
+
 //@@author { ALL}
 public class ClickfitMessages {
 
@@ -132,7 +134,39 @@ public class ClickfitMessages {
 
     public static final String DONT_UNDERSTAND = "OOPS!!! I'm sorry, but I don't know what that means";
 
-    public static final String EMPTY_WORKOUT_LIST_ON_DATE_MESSAGE = "No workouts recorded for today!";
+    public static final String EMPTY_WORKOUT_LIST_TODAY_MESSAGE = "No workouts recorded for today!";
 
-    public static final String EMPTY_SCHEDULE_LIST_ON_DATE_MESSAGE = "No workouts scheduled for today!";
+    public static final String EMPTY_SCHEDULE_LIST_TODAY_MESSAGE = "No workouts scheduled for today!";
+
+    public static final String WORKOUT_SCHEDULE_TODAY_MESSAGE = "Today's workout schedule:" + System.lineSeparator()
+            + Ui.HORIZONTAL_BAR_SHORT;
+
+    public static final String FULL_SCHEDULE_LIST_MESSAGE = "Full Workout Schedule:" + System.lineSeparator()
+            + Ui.HORIZONTAL_BAR_LONG;
+
+    public static String getWorkoutCountMessage(int workoutCount) {
+        return "You have " + workoutCount + " scheduled workouts on that day!";
+    }
+
+    public static String getWorkoutScheduleOnDateMessage(String date) {
+        return "Workout schedule on " + date + ":" + System.lineSeparator()
+                + Ui.HORIZONTAL_BAR_SHORT;
+    }
+
+    public static String getEmptyScheduleOnDateMessage(String date) {
+        return "Workout schedule is empty on the date: " + date;
+    }
+
+    public static String getAddScheduleSuccessMessage(ScheduledWorkout workoutToAdd) {
+        return "Noted! CLI.ckFit has scheduled your " + workoutToAdd.isRecurringStatusAsText()
+                + "workout of description \"" + workoutToAdd.getWorkoutDescription() + "\" on "
+                + workoutToAdd.getWorkoutDate() + " at " + workoutToAdd.getWorkoutTime() + ".";
+    }
+
+    public static String getDeleteScheduleSuccessMessage(ScheduledWorkout workoutToDelete) {
+        return "Noted! CLI.ckFit has successfully deleted your "
+                + workoutToDelete.isRecurringStatusAsText() + "scheduled workout of description \""
+                + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
+                + " at " + workoutToDelete.getWorkoutTime() + "!";
+    }
 }
