@@ -183,12 +183,14 @@ Command Word: `add weight`
 
 Description: Adds a new weight to the list of weight items, with its associated date.
 
-
 Format: `add weight WEIGHT </d DATE>`
 
-* The `WEIGHT` cannot contain spaces.
+* The `WEIGHT` cannot contain spaces and must be a non-negative number to maximum of 1 decimal place.
+* The `WEIGHT` has to be realistic (<1000.0 kg) due to limitation of integer overflow.
 * The `DATE` is in dd/mm/yyyy.
-* If `DATE` is not specified, the system current date will be taken.
+* If `DATE` is not specified, the current system date will be taken.
+* Only 1 `WEIGHT` should be included in your input.
+* If multiple `/d DATE` or `DATE` is written only the first input will be taken.
 
 Example of usage:
 
@@ -327,6 +329,8 @@ Description: Deletes a meal from the list of meals.
 Format: `delete weight INDEX`
 
 * Use `list weights all` to determine the index of the meal you wish to delete.
+* The `INDEX` can only contain integers from the list.
+* Only 1 `INDEX` should be included in your input.
 
 Example of usage:
 
@@ -427,9 +431,11 @@ Command Word:`list weights`
 Description: Lists weight depending on date of entry.
 
 Format: `list weights <DATE>`
+
 * The `DATE` is in dd/mm/yyyy.
 * If `DATE` is left empty, the weights recorded **today** will be returned.
 * If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
+* Only 1 `DATE` should be included in your input.
 
 Example of usage:
 
