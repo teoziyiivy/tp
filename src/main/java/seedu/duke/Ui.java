@@ -16,7 +16,7 @@ public class Ui {
     private Scanner uiScanner;
     public static final String HORIZONTAL_BAR_LONG = "____________________________________________________________"
             + "____________________________________________________________";
-    public static final String HORIZONTAL_BAR_SHORT = "__________________________________________";
+    public static final String HORIZONTAL_BAR_SHORT = "_________________________________________________________";
     public static final String USER_PROMPT = "Enter command: ";
     protected String sex;
     protected double weight;

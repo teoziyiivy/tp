@@ -122,7 +122,8 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
     - [**List fluids from library**](#list-fluids-stored-in-library)
 
 ### List Manager
-- [**List everything**](#List-everything)
+- [**List everything**](#list-everything)
+
 ### Miscellaneous
 - [**FAQ**](#faq)
 - [**Command Summary**](#command-summary)

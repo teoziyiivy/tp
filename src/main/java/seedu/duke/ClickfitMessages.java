@@ -144,7 +144,13 @@ public class ClickfitMessages {
     public static final String FULL_SCHEDULE_LIST_MESSAGE = "Full Workout Schedule:" + System.lineSeparator()
             + Ui.HORIZONTAL_BAR_LONG;
 
-    public static String getWorkoutCountMessage(int workoutCount) {
+    public static final String FULL_WORKOUT_LIST_MESSAGE = "All recorded workouts:" + System.lineSeparator()
+            + Ui.HORIZONTAL_BAR_SHORT;
+
+    public static final String WORKOUTS_RECORDED_TODAY_MESSAGE = "Workouts recorded today:"
+            + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
+
+    public static String getScheduledWorkoutCountMessage(int workoutCount) {
         return "You have " + workoutCount + " scheduled workouts on that day!";
     }
 
@@ -168,5 +174,40 @@ public class ClickfitMessages {
                 + workoutToDelete.isRecurringStatusAsText() + "scheduled workout of description \""
                 + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
                 + " at " + workoutToDelete.getWorkoutTime() + "!";
+    }
+
+    public static String getAddWorkoutSuccessMessage(String workoutDescription, String workoutDate,
+                                                     String workoutTime, int caloriesBurned) {
+        return "Noted! CLI.ckFit has recorded your workout of description \"" + workoutDescription
+                + "\" on " + workoutDate + " at " + workoutTime + " where you burned "
+                + caloriesBurned + " calories!";
+    }
+
+    public static String getDeleteWorkoutSuccessMessage(String workoutDescription, String workoutDate,
+                                                        String workoutTime, int caloriesBurned) {
+        return "Noted! CLI.ckFit has successfully deleted your recorded workout of description \""
+                + workoutDescription + "\" on " + workoutDate + " at " + workoutTime + System.lineSeparator()
+                + " where you burned " + caloriesBurned + " calories!";
+    }
+
+    public static String getEmptyWorkoutListOnDateMessage(String date) {
+        return "No workouts recorded on the date: " + date;
+    }
+
+    public static String getWorkoutsOnDateMessage(String date) {
+        return "Workouts recorded on " + date + ":"
+                + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
+    }
+
+    public static String getTotalScheduledWorkoutMessage(int scheduleCount) {
+        return "You have a total of " + scheduleCount + " workouts in your schedule.";
+    }
+
+    public static String getTotalCaloriesBurnedMessage(int caloriesBurned) {
+        return "Total calories burned: " + caloriesBurned;
+    }
+
+    public static String getTotalWorkoutsDoneMessage(int totalWorkouts) {
+        return "You have completed a total of " + totalWorkouts + " workouts. Amazing job!";
     }
 }
