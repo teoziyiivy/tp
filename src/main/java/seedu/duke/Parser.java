@@ -35,6 +35,7 @@ public class Parser {
     public static final String ACTIVITY_SPLITTER = ":";
     public static final String QUANTIFIER_SPLITTER = "x";
     public static final String SPACE_SEPARATOR = " ";
+    public static final String EMPTY_STRING = "";
 
     //@@author teoziyiivy
     public static boolean containsDateSeparator(String inputArguments) {
@@ -114,7 +115,7 @@ public class Parser {
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         boolean isCaloriesParsed = false;
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         for (int i = 0; i < length; i++) {
             if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
@@ -139,7 +140,7 @@ public class Parser {
 
     //@@author pragyan01
     public static int getVolume(String inputArguments) throws DukeException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         int volume = 0;
         for (int i = 1; i < length; i++) {
@@ -172,7 +173,7 @@ public class Parser {
 
     //@@author teoziyiivy
     public static String getDate(String inputArguments) throws DateTimeParseException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         String date = "";
         for (int i = 1; i < length; i++) {
@@ -194,9 +195,9 @@ public class Parser {
 
     //@@author teoziyiivy
     public static String getDateNoDateTracker(String inputArguments) throws DateTimeParseException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
-        String date = "";
+        String date = EMPTY_STRING;
         for (int i = 1; i < length; i++) {
             if (userInput[i].equals(DATE_SEPARATOR.trim())) {
                 date = userInput[i + 1];
@@ -210,7 +211,7 @@ public class Parser {
 
     //@@author teoziyiivy
     public static String getTime(String inputArguments) throws DateTimeParseException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         String time = "";
         for (int i = 1; i < length; i++) {
@@ -251,6 +252,13 @@ public class Parser {
     }
 
     //@@author arvejw
+    /**
+     * Returns the description of the scheduled workout.
+     *
+     * @param inputArguments Arguments input by the user that come after the command word.
+     * @return String Description of the workout.
+     * @throws ScheduleException If unable to extract description.
+     */
     public static String getScheduleDescription(String inputArguments) throws ScheduleException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         String description = userInput[0];
@@ -261,9 +269,16 @@ public class Parser {
     }
 
     //@@author arvejw
+    /**
+     * Returns the description and arguments for the workout activity.
+     *
+     * @param inputArguments Arguments input by the user that come after the command word.
+     * @return Map of activity description and activity quantifier pairs.
+     * @throws ScheduleException If there is missing activity splitter, quantifier or invalid format.
+     */
     public static Map<String, ArrayList<Integer>> getActivities(String inputArguments) throws ScheduleException {
         int indexOfActivitySeparator = inputArguments.indexOf(Parser.ACTIVITY_SEPARATOR);
-        String subSubstringAfterActivitySeparator = "";
+        String subSubstringAfterActivitySeparator = EMPTY_STRING;
         if (indexOfActivitySeparator != -1) {
             subSubstringAfterActivitySeparator = inputArguments.substring(
                     indexOfActivitySeparator).trim();
@@ -283,6 +298,13 @@ public class Parser {
     }
 
     //@@author arvejw
+    /**
+     * Returns the description and arguments for the workout activity.
+     *
+     * @param nonParsedActivities The activities which have not been parsed.
+     * @return Map of activity description and activity quantifier pairs.
+     * @throws ScheduleException If there is missing activity splitter, quantifier or invalid format.
+     */
     public static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
             throws ScheduleException {
         Map<String, ArrayList<Integer>> outputMap = new HashMap<>();

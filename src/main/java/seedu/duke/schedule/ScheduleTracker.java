@@ -49,7 +49,7 @@ public class ScheduleTracker {
     /**
      * Returns the private attribute scheduledWorkouts.
      *
-     * @return ArrayList of ScheduledWorkout objects.
+     * @return Array List of scheduled workouts.
      */
     public ArrayList<ScheduledWorkout> getScheduledWorkouts() {
         return scheduledWorkouts;
@@ -95,8 +95,8 @@ public class ScheduleTracker {
      * String[1] contains the workout date, String[2] contains the workout time.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @return The generated parameters in a String array of size 3.
-     * @throws ScheduleException Issue generating schedule description.
+     * @return String[] The generated parameters in a String array of size 3.
+     * @throws ScheduleException If there are issues generating schedule description.
      */
     public String[] generateScheduledWorkoutParameters(String inputArguments) throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting generation of parameters for scheduled workout.");
@@ -117,7 +117,7 @@ public class ScheduleTracker {
      *                            <code>false</code> to continue printing the message.
      * @param isCleanUp           Flag that determines whether to clean up the schedule list after successfully
      *                            adding a scheduled workout.
-     * @throws ScheduleException Issue adding a scheduled workout.
+     * @throws ScheduleException If there are issues adding a scheduled workout.
      */
     public void addScheduledWorkout(String inputArguments, boolean isSquelchAddMessage, boolean isCleanUp)
             throws ScheduleException {
@@ -139,14 +139,12 @@ public class ScheduleTracker {
             throw new InvalidActivityFormatException();
         }
         boolean isRecurringWorkout = Parser.isRecurringWorkout(inputArguments);
-        ScheduledWorkout workout = new ScheduledWorkout(
+        ScheduledWorkout workoutToAdd = new ScheduledWorkout(
                 workoutDescription, workoutDate, workoutTime, activityMap, isRecurringWorkout);
-        duplicateScheduledWorkoutCheck(workout);
-        scheduledWorkouts.add(workout);
+        duplicateScheduledWorkoutCheck(workoutToAdd);
+        scheduledWorkouts.add(workoutToAdd);
         if (!isSquelchAddMessage) {
-            System.out.println("Noted! CLI.ckFit has scheduled your " + workout.isRecurringStatusAsText()
-                    + "workout of description \"" + workoutDescription + "\" on " + workoutDate + " at "
-                    + workoutTime + ".");
+            System.out.println(ClickfitMessages.getAddScheduleSuccessMessage(workoutToAdd));
         }
         if (isCleanUp) {
             cleanUpScheduleList();
@@ -159,7 +157,7 @@ public class ScheduleTracker {
      * This check is done under the assumption that ones-indexing is used.
      *
      * @param workoutNumber Index of the scheduled workout.
-     * @return <code>true</code> if within range, <code>false</code> otherwise.
+     * @return boolean <code>true</code> if within range, <code>false</code> otherwise.
      */
     public boolean isScheduledWorkoutNumberWithinRange(int workoutNumber) {
         int upperBound = scheduledWorkouts.size();
@@ -171,7 +169,7 @@ public class ScheduleTracker {
      * Deletes a scheduled workout from the list of scheduled workouts.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @throws ScheduleException Issue deleting a scheduled workout
+     * @throws ScheduleException If there are issues deleting a scheduled workout
      */
     public void deleteScheduledWorkout(String inputArguments) throws ScheduleException {
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Starting to try and delete scheduled workout.");
@@ -188,10 +186,7 @@ public class ScheduleTracker {
         int workoutIndex = workoutNumber - 1; // 0-indexing
         if (isScheduledWorkoutNumberWithinRange(workoutNumber)) {
             ScheduledWorkout workoutToDelete = scheduledWorkouts.get(workoutIndex);
-            System.out.println("Noted! CLI.ckFit has successfully deleted your "
-                    + workoutToDelete.isRecurringStatusAsText() + "scheduled workout of description \""
-                    + workoutToDelete.getWorkoutDescription() + "\" on " + workoutToDelete.getWorkoutDate()
-                    + " at " + workoutToDelete.getWorkoutTime() + "!");
+            System.out.println(ClickfitMessages.getDeleteScheduleSuccessMessage(workoutToDelete));
             scheduledWorkouts.remove(workoutIndex);
             SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully deleted scheduled workout.");
         } else {
@@ -225,15 +220,18 @@ public class ScheduleTracker {
             System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_MESSAGE);
             return;
         }
-        System.out.println("Full Workout Schedule:" + System.lineSeparator() + ClickfitMessages.ENDLINE_PRINT_FORMAT);
+        System.out.println(ClickfitMessages.FULL_SCHEDULE_LIST_MESSAGE);
         int currentIndex = 1;
+        int scheduleCount = 0;
         for (ScheduledWorkout workout : scheduledWorkouts) {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
             System.out.println("Date: " + workout.getWorkoutDate());
             System.out.println("Time: " + workout.getWorkoutTime());
             System.out.println(workout.getActivitiesAsStringToPrint());
             currentIndex++;
+            scheduleCount++;
         }
+        System.out.println(ClickfitMessages.getTotalScheduledWorkoutMessage(scheduleCount));
         SCHEDULE_TRACKER_LOGGER.log(Level.INFO, "Successfully listed workouts.");
     }
 
@@ -247,17 +245,15 @@ public class ScheduleTracker {
                 .filter((t) -> t.getWorkoutDate().equals(inputArguments)).collect(Collectors.toList());
         if (filteredScheduleList.isEmpty()) {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_ON_DATE_MESSAGE);
+                System.out.println(ClickfitMessages.EMPTY_SCHEDULE_LIST_TODAY_MESSAGE);
             } else {
-                System.out.println("Workout schedule is empty on the date: " + inputArguments);
+                System.out.println(ClickfitMessages.getEmptyScheduleOnDateMessage(inputArguments));
             }
         } else {
             if (inputArguments.equals(Parser.getSystemDate())) {
-                System.out.println("Today's workout schedule:" + System.lineSeparator()
-                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
+                System.out.println(ClickfitMessages.WORKOUT_SCHEDULE_TODAY_MESSAGE);
             } else {
-                System.out.println("Workout schedule on " + inputArguments + ":" + System.lineSeparator()
-                        + ClickfitMessages.ENDLINE_PRINT_FORMAT);
+                System.out.println(ClickfitMessages.getWorkoutScheduleOnDateMessage(inputArguments));
             }
             int currentIndex = 1;
             int workoutCount = 0;
@@ -270,13 +266,13 @@ public class ScheduleTracker {
                 currentIndex++;
                 workoutCount++;
             }
-            System.out.println("You have " + workoutCount + " scheduled workouts on that day!");
+            System.out.println(ClickfitMessages.getScheduledWorkoutCountMessage(workoutCount));
         }
     }
 
     /**
      * Cleans up the schedule list from any overdue workouts.
-     * If workout is non recurring and the date is passed it is deleted. Otherwise if it is recurring, the workout
+     * If workout is non-recurring and the date is passed it is deleted. Otherwise if it is recurring, the workout
      * is rescheduled by the required days in multiples of 7.
      */
     public void cleanUpScheduleList() {
@@ -345,7 +341,7 @@ public class ScheduleTracker {
      * Checks whether input argument is null.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @throws ScheduleException Argument is null.
+     * @throws ScheduleException If input argument is null.
      */
     public void nullArgumentCheck(String inputArguments) throws ScheduleException {
         if (inputArguments == null) {
@@ -360,7 +356,7 @@ public class ScheduleTracker {
      * Namely the the date separator <code>/d</code> and time separator <code>/t</code>.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @throws ScheduleException Missing separator detected.
+     * @throws ScheduleException If missing separator detected.
      */
     public void scheduledWorkoutSeparatorCheck(String inputArguments) throws ScheduleException {
         boolean areSeparatorsCorrect = Parser.containsDateSeparator(inputArguments)
@@ -385,7 +381,7 @@ public class ScheduleTracker {
      * Checks whether the description of the scheduled workout is missing in the user input.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @throws ScheduleException Unable to find description or find separators.
+     * @throws ScheduleException If unable to find description or find separators.
      */
     public void missingDescriptionCheck(String inputArguments) throws ScheduleException {
         int indexOfFirstDateSeparator = inputArguments.indexOf(Parser.DATE_SEPARATOR.trim());
@@ -406,7 +402,7 @@ public class ScheduleTracker {
      * Checks whether a duplicate scheduled workout already exists in the list.
      *
      * @param scheduledWorkoutToAdd The <code>ScheduledWorkout</code> object to be potentially added.
-     * @throws ScheduleException Duplicate workout detected.
+     * @throws ScheduleException If duplicate workout detected.
      */
     public void duplicateScheduledWorkoutCheck(ScheduledWorkout scheduledWorkoutToAdd) throws ScheduleException {
         String scheduledWorkoutAsString = scheduledWorkoutToAdd.getScheduledWorkoutAsString();

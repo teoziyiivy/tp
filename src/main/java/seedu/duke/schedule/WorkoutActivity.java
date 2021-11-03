@@ -42,7 +42,7 @@ public class WorkoutActivity {
      * Helps check if the activity is one of the 3 pre-defined distance based activity swimming/running/cycling.
      *
      * @param activityDescription Description of the activity.
-     * @return <code>true</code> if the activity is distance based, <code>false</code> otherwise.
+     * @return boolean <code>true</code> if the activity is distance based, <code>false</code> otherwise.
      */
     public static boolean isDistanceActivity(String activityDescription) {
         if (activityDescription.trim().equals(ACTIVITY_SWIMMING)

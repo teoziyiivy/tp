@@ -3,14 +3,12 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
-import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
-import seedu.duke.exceptions.weight.NoWeightsException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 
@@ -20,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
-//@@author { E}
+//@@author EdwardZYWang
 public class CommandManager {
 
     protected ScheduleTracker scheduleTracker;
@@ -35,7 +33,6 @@ public class CommandManager {
     protected String inputArguments;
     protected Storage storage;
 
-    //@@author EdwardZYWang
     public CommandManager(Storage storage, Fluid fluid, Meal meal,
                           ScheduleTracker scheduleTracker, WorkoutTracker workoutTracker,
                           WeightTracker weightTracker, UserHelp userHelp) {
@@ -50,7 +47,6 @@ public class CommandManager {
         this.storage = storage;
     }
 
-    //@@author EdwardZYWang
     public void commandChecker() throws
             DukeException, NullPointerException,
             MealException, FluidExceptions,
@@ -58,7 +54,7 @@ public class CommandManager {
             ScheduleException, WeightException,
             WorkoutException {
         String input = scanner.nextLine();
-        System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
+        System.out.println(Ui.HORIZONTAL_BAR_LONG + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
@@ -97,7 +93,6 @@ public class CommandManager {
         saveEverything();
     }
 
-    //@@author VishalJeyaram
     public void saveEverything() throws IOException {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
@@ -106,7 +101,6 @@ public class CommandManager {
         storage.saveWorkout(workoutTracker);
     }
 
-    //@@author VishalJeyaram
     public void foodBankParser(String inputArguments) throws
             NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
@@ -137,7 +131,6 @@ public class CommandManager {
         }
     }
 
-    //@@author pragyan01
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException, FluidExceptions,
             ScheduleException, WeightException,
@@ -192,7 +185,6 @@ public class CommandManager {
         }
     }
 
-    //@@author pragyan01
     private void listCalories(String date) throws
             FluidExceptions, FoodBankException,
             WorkoutException, MealException {
@@ -205,7 +197,6 @@ public class CommandManager {
         System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
     }
 
-    //@@author EdwardZYWang
     public void addParser(String input) throws
             NullPointerException, FoodBankException,
             DukeException, MealException,
@@ -243,7 +234,6 @@ public class CommandManager {
         }
     }
 
-    //@@author teoziyiivy
     public void deleteParser(String input) throws NullPointerException,
             FoodBankException, DukeException,
             ScheduleException, WorkoutException,
@@ -282,7 +272,6 @@ public class CommandManager {
         DateTracker.deleteDateFromList(inputArguments, fluid, meal, workoutTracker, weightTracker);
     }
 
-    //@@author teoziyiivy
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             WorkoutException,
