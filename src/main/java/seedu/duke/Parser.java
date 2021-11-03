@@ -52,7 +52,7 @@ public class Parser {
         return inputArguments.contains(CALORIE_SEPARATOR);
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public static boolean isRecurringWorkout(String inputArguments) {
         String[] splitResults = inputArguments.split(RECURRING_FLAG, 2);
         if (splitResults.length == 1) {
@@ -111,7 +111,7 @@ public class Parser {
         }
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         boolean isCaloriesParsed = false;
