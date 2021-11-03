@@ -273,7 +273,7 @@ public class Parser {
      * Returns the description and arguments for the workout activity.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
-     * @return Map<String, ArrayList<Integer>> Map of activity description and activity quantifier pairs.
+     * @return Map of activity description and activity quantifier pairs.
      * @throws ScheduleException If there is missing activity splitter, quantifier or invalid format.
      */
     public static Map<String, ArrayList<Integer>> getActivities(String inputArguments) throws ScheduleException {
@@ -302,7 +302,7 @@ public class Parser {
      * Returns the description and arguments for the workout activity.
      *
      * @param nonParsedActivities The activities which have not been parsed.
-     * @return Map<String, ArrayList<Integer>> Map of activity description and activity quantifier pairs.
+     * @return Map of activity description and activity quantifier pairs.
      * @throws ScheduleException If there is missing activity splitter, quantifier or invalid format.
      */
     public static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)

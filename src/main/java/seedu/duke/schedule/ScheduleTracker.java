@@ -49,7 +49,7 @@ public class ScheduleTracker {
     /**
      * Returns the private attribute scheduledWorkouts.
      *
-     * @return ArrayList<ScheduledWorkout> Array List of scheduled workouts.
+     * @return Array List of scheduled workouts.
      */
     public ArrayList<ScheduledWorkout> getScheduledWorkouts() {
         return scheduledWorkouts;

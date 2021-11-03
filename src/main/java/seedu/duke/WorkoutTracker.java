@@ -190,7 +190,7 @@ public class WorkoutTracker {
      * Returns the calories burned on a particular date based on the workouts recorded in the workout list.
      *
      * @param date Date to use as a filter in the format dd/mm/yyyy when getting total calories.
-     * @return int The total calories burned on the date. If no workouts recorded on the date, total calories burned is 0.
+     * @return int The total calories burned on the date. If no workouts recorded on total calories burned is 0.
      * @throws WorkoutException If there are issues getting calories burned from workouts.
      */
     public int getCaloriesBurned(String date) throws WorkoutException {
