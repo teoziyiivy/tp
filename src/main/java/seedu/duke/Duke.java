@@ -91,7 +91,7 @@ public class Duke {
             } catch (FluidExceptions e) {
                 System.out.println(e.getMessage());
             } catch (FoodBankException e) {
-                System.out.println(ClickfitMessages.FOOD_BANK_EXCEPTION_MESSAGE);
+                System.out.println(e.getMessage());
             } catch (IOException e) {
                 System.out.println(ClickfitMessages.IO_EXCEPTION_MESSAGE);
             } catch (WeightException weighte) {
