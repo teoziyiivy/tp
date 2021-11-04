@@ -9,9 +9,11 @@ import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.LoadException;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.logging.LogManager;
+
 import static seedu.duke.ClickfitMessages.IO_EXCEPTION_MESSAGE;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 
@@ -74,14 +76,6 @@ public class Duke {
                 System.out.println(Ui.HORIZONTAL_BAR_LONG);
                 System.out.print(Ui.USER_PROMPT);
                 commandManager.commandChecker();
-            } catch (DateTimeParseException e) {
-                System.out.println(ClickfitMessages.DATE_TIME_ERROR);
-            } catch (NumberFormatException e) {
-                System.out.println(ClickfitMessages.NUMBER_ERROR);
-            } catch (NullPointerException e) {
-                System.out.println(ClickfitMessages.INCORRECT_INPUT);
-            } catch (DukeException ignored) {
-                System.out.println("I'm sorry!");
             } catch (ScheduleException se) {
                 System.out.println(se.getMessage());
             } catch (WorkoutException we) {
@@ -96,6 +90,14 @@ public class Duke {
                 System.out.println(ClickfitMessages.IO_EXCEPTION_MESSAGE);
             } catch (WeightException weighte) {
                 System.out.println(weighte.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println(ClickfitMessages.DATE_TIME_ERROR);
+            } catch (NumberFormatException e) {
+                System.out.println(ClickfitMessages.NUMBER_ERROR);
+            } catch (NullPointerException e) {
+                System.out.println(ClickfitMessages.INCORRECT_INPUT);
+            } catch (DukeException e) {
+                System.out.println("I'm sorry");
             }
         }
         LogManager.getLogManager().reset();

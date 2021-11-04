@@ -63,12 +63,12 @@ completed three sets of 12 reps.
 overly large and nonsensical integer value for calorie such as `2147483647` there may be overflow during computation. 
   E.g., when calculating total calories, summation may result in an overflow, producing negative calories. 
   
-* Separators such as the date separator `/d` and time separator `/t` should be entered in the **same order** as shown in 
-  their respective command formats. CLI.ckFit **does not** support the shuffling of separators when taking user input.
+* Separators such as the date separator `/d`, time separator `/t`, calorie separator `/c`, volume separator `/v` and 
+  activity separator `/a` should be entered in the **same order** as shown in their respective command formats. 
+  CLI.ckFit **does not** support the shuffling of separators when taking user input. 
   
 * The separators as shown in the command format should be input **once**. Typing multiple identical separators 
-  unnecessarily *may* cause incorrect parsing of user input. In such cases, the argument after the first instance of 
-  the separator will be taken.
+  unnecessarily *may* cause incorrect parsing of user input. 
   
 * To ensure correct processing of user inputs you should only enter the **necessary** number of arguments. 
   For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
@@ -261,11 +261,13 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 
 * The `/a` separator is optional.
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
-* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in one **positive non-zero integer** `[DISTANCE]`
-  **in metres** for the activity.
-* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** in the form `[SETS]x[REPS]`.
+* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in one 
+  **positive non-zero integer** `[DISTANCE]` in **metres** for the activity.
+* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** 
+  in the form `[SETS]x[REPS]`.
 * Multiple activities can be entered as long as they are separated by a comma `,`.
 * The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
+* The ***optional*** `/r` flag, **if** included, **must** be at the end of the command.
 
 
 Example of usage:

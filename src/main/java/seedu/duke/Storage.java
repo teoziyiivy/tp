@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

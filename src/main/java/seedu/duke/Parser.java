@@ -7,7 +7,6 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
-import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
@@ -34,7 +33,6 @@ public class Parser {
     public static final String MULTIPLE_ACTIVITY_MARKER = ",";
     public static final String ACTIVITY_SPLITTER = ":";
     public static final String QUANTIFIER_SPLITTER = "x";
-    public static final String SPACE_SEPARATOR = " ";
     public static final String EMPTY_STRING = "";
 
     //@@author teoziyiivy
@@ -96,7 +94,7 @@ public class Parser {
             calories = FoodBank.findCalories(description);
             return calories;
         } else {
-            String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+            String[] userInput = inputArguments.split("\\s+");
             int length = userInput.length;
             for (int i = 1; i < length; i++) {
                 if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
@@ -167,7 +165,7 @@ public class Parser {
         } else {
             return inputArguments;
         }
-        String description = userInput[0];
+        String description = userInput[0].trim();
         return description;
     }
 
@@ -261,10 +259,10 @@ public class Parser {
      */
     public static String getScheduleDescription(String inputArguments) throws ScheduleException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
-        String description = userInput[0];
         if (userInput.length == 1) {
             throw new InvalidScheduleDescriptionException();
         }
+        String description = userInput[0].trim();
         return description;
     }
 
