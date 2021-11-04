@@ -34,6 +34,7 @@ public class FoodBank {
 
     //@@author pragyan01
     public static void addCustomFluid(String inputArguments) throws FoodBankException {
+        totalFluids = fluids.size();
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
         }
@@ -51,6 +52,7 @@ public class FoodBank {
 
     //@@author pragyan01
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
+        totalFluids = fluids.size();
         if (inputArguments == null) {
             throw new NoFoodIndexException();
         }
@@ -100,6 +102,7 @@ public class FoodBank {
 
     //@@author VishalJeyaram
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
+        totalMeals = meals.size();
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
         }
@@ -113,6 +116,7 @@ public class FoodBank {
 
     //@@author VishalJeyaram
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
+        totalMeals = meals.size();
         if (inputArguments == null) {
             throw new NoFoodIndexException();
         }

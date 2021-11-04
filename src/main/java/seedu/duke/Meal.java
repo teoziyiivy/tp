@@ -45,6 +45,7 @@ public class Meal extends Tracker {
             throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
         logger.entering(getClass().getName(), "addMeal");
         logger.log(Level.INFO, "generating meal parameters");
+        mealNumber = meals.size();
         generateMealParameters(inputArguments);
         if (Parser.containsSeparators(description)) {
             throw new MealException();
