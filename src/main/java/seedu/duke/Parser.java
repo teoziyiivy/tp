@@ -7,6 +7,7 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.schedule.UnnecessaryQuantifierException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
@@ -314,6 +315,9 @@ public class Parser {
             String[] quantifierSplitResults = splitResults[1].split(QUANTIFIER_SPLITTER, 2);
             if (quantifierSplitResults.length == 1 && !WorkoutActivity.isDistanceActivity(splitResults[0])) {
                 throw new MissingActivityQuantifierException();
+            }
+            if (quantifierSplitResults.length == 2 && WorkoutActivity.isDistanceActivity(splitResults[0])) {
+                throw new UnnecessaryQuantifierException();
             }
             ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
