@@ -22,7 +22,7 @@ public class Calculator {
         this.multiplier = 0;
     }
 
-    //@@author {E}
+    //@@author EdwardZYWang
     public void getBmi() {
         System.out.println(System.lineSeparator() + "Your BMI outcome is " + System.lineSeparator());
         String getBmiOutcome;
@@ -40,7 +40,7 @@ public class Calculator {
         System.out.println(getBmiOutcome);
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public void getIdealCalories() {
         System.out.println(System.lineSeparator() + "Your ideal number of calories to maintain your weight is "
                 + System.lineSeparator());
@@ -63,6 +63,6 @@ public class Calculator {
         } else {
             idealCalories = (int) ((655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age)) * multiplier);
         }
-        System.out.println(idealCalories);
+        System.out.println(idealCalories + " kcal");
     }
 }

@@ -1,6 +1,7 @@
 package seedu.duke.schedule;
 
 import seedu.duke.Parser;
+import seedu.duke.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Map;
 
 //@@author arvejw
+
+/**
+ * Represents a scheduled workout. Namely, a <code>ScheduledWorkout</code> stores information about
+ * the scheduled workout such as its description, date and time, as well as whether the workout is recurring.
+ */
 public class ScheduledWorkout {
 
     private String workoutDescription;
@@ -17,9 +23,17 @@ public class ScheduledWorkout {
     private String workoutDate;
     private String workoutTime;
     private LocalDateTime workoutDateTime;
-
     private boolean isRecurring;
 
+    /**
+     * Constructs a <code>ScheduledWorkout</code> object.
+     *
+     * @param workoutDescription The description of the workout.
+     * @param workoutDate        The date of the workout.
+     * @param workoutTime        The time of the workout.
+     * @param activityMap        The activities of the workout.
+     * @param isRecurring        The type of workout, namely whether its recurring or not.
+     */
     public ScheduledWorkout(String workoutDescription, String workoutDate, String workoutTime,
                             Map<String, ArrayList<Integer>> activityMap, boolean isRecurring) {
         this.workoutDescription = workoutDescription;
@@ -34,7 +48,7 @@ public class ScheduledWorkout {
             for (var entry : activityMap.entrySet()) {
                 activities.add(
                         new WorkoutActivity(
-                                entry.getKey(), entry.getValue(),
+                                entry.getKey().trim(), entry.getValue(),
                                 WorkoutActivity.isDistanceActivity(entry.getKey())
                         )
                 );
@@ -79,10 +93,15 @@ public class ScheduledWorkout {
         return isRecurring ? "recurring " : "";
     }
 
+    /**
+     * Returns the activities in a more readable String format to be printed.
+     *
+     * @return String Activity breakdown as a single String to be printed.
+     */
     public String getActivitiesAsStringToPrint() {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
-            return output + "nil" + System.lineSeparator() + "____________________________";
+            return output + "nil" + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
         }
         int currentIndex = 1;
         for (WorkoutActivity a : activities) {
@@ -95,9 +114,14 @@ public class ScheduledWorkout {
             }
             currentIndex++;
         }
-        return output + System.lineSeparator() + "____________________________";
+        return output + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
     }
 
+    /**
+     * Returns the information of the ScheduledWorkout in a data file compatible format.
+     *
+     * @return String Scheduled workout information as a single String.
+     */
     public String getScheduledWorkoutAsString() {
         String output = workoutDescription + Parser.DATE_SEPARATOR
                 + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
@@ -108,7 +132,12 @@ public class ScheduledWorkout {
         return output;
     }
 
-    private String getActivitiesAsString() {
+    /**
+     * Returns the activity breakdown of the ScheduledWorkout in a data file compatible format.
+     *
+     * @return String Activity breakdown information as a single String to be stored.
+     */
+    public String getActivitiesAsString() {
         StringBuilder activityString = new StringBuilder();
         if (!activities.isEmpty()) {
             activityString.append(Parser.ACTIVITY_SEPARATOR);

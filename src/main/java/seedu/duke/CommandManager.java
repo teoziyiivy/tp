@@ -3,14 +3,12 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
-import seedu.duke.exceptions.fluid.InvalidFluidDescription;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
-import seedu.duke.exceptions.weight.NoWeightsException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 
@@ -20,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
-//@@author { E}
+//@@author EdwardZYWang
 public class CommandManager {
 
     protected ScheduleTracker scheduleTracker;
@@ -56,7 +54,7 @@ public class CommandManager {
             ScheduleException, WeightException,
             WorkoutException {
         String input = scanner.nextLine();
-        System.out.println(Ui.HORIZONTAL_BAR + System.lineSeparator());
+        System.out.println(Ui.HORIZONTAL_BAR_LONG + System.lineSeparator());
         String[] splitResults = input.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
@@ -104,7 +102,7 @@ public class CommandManager {
     }
 
     public void foodBankParser(String inputArguments) throws
-            NullPointerException, FoodBankException, InvalidFluidDescription {
+            NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
@@ -134,10 +132,9 @@ public class CommandManager {
     }
 
     public void listParser(String inputArguments) throws
-            NullPointerException, FoodBankException,
-            ScheduleException, WorkoutException, NoWeightsException, FluidExceptions,
-            DukeException, ScheduleException, WeightException,
-            WorkoutException, NoWeightsException, MealException {
+            NullPointerException, FoodBankException, FluidExceptions,
+            ScheduleException, WeightException,
+            WorkoutException, MealException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];
         String date;
@@ -189,8 +186,7 @@ public class CommandManager {
     }
 
     private void listCalories(String date) throws
-            FoodBankException, WorkoutException, FluidExceptions,
-            DukeException, FoodBankException,
+            FluidExceptions, FoodBankException,
             WorkoutException, MealException {
         int calCount = fluid.getCalories(date) + meal.getCalories(date);
         int caloriesBurned = workoutTracker.getCaloriesBurned(date);
@@ -278,7 +274,7 @@ public class CommandManager {
 
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
-            ScheduleException, WorkoutException,
+            WorkoutException,
             MealException, FluidExceptions, WeightException {
         meal.listMeals(date);
         System.out.println();

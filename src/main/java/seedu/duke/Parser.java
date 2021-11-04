@@ -3,9 +3,12 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.schedule.GetActivityException;
+import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.weight.WeightException;
+import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
@@ -32,23 +35,24 @@ public class Parser {
     public static final String ACTIVITY_SPLITTER = ":";
     public static final String QUANTIFIER_SPLITTER = "x";
     public static final String SPACE_SEPARATOR = " ";
+    public static final String EMPTY_STRING = "";
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static boolean containsTimeSeparator(String inputArguments) {
         return inputArguments.contains(TIME_SEPARATOR);
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static boolean containsCalorieSeparator(String inputArguments) {
         return inputArguments.contains(CALORIE_SEPARATOR);
     }
 
-    //@@author { J}
+    //@@author EdwardZYWang
     public static boolean isRecurringWorkout(String inputArguments) {
         String[] splitResults = inputArguments.split(RECURRING_FLAG, 2);
         if (splitResults.length == 1) {
@@ -57,17 +61,17 @@ public class Parser {
         return splitResults[1].isEmpty(); // true if /r flag is at the end of the string
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static int parseStringToInteger(String input) throws NumberFormatException {
         return Integer.parseInt(input);
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static double parseStringToDouble(String input) throws NumberFormatException {
         return Double.parseDouble(input);
     }
 
-    //@@author {V }
+    //@@author VishalJeyaram
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
             return true;
@@ -80,7 +84,7 @@ public class Parser {
         }
     }
 
-    //@@author { V}
+    //@@author VishalJeyaram
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
@@ -107,19 +111,25 @@ public class Parser {
         }
     }
 
-    //@@author { J}
+    //@@author EdwardZYWang
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        boolean isCaloriesParsed = false;
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         for (int i = 0; i < length; i++) {
             if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
                 try {
                     calories = parseStringToInteger(userInput[i + 1]);
+                    isCaloriesParsed = true;
+                    break;
                 } catch (IndexOutOfBoundsException e) {
                     throw new NumberFormatException();
                 }
             }
+        }
+        if (!isCaloriesParsed) {
+            throw new MissingWorkoutCalorieSeparatorException();
         }
         if (calories < 0) {
             throw new NegativeWorkoutCalorieException();
@@ -128,9 +138,9 @@ public class Parser {
         }
     }
 
-    //@@author {P}
+    //@@author pragyan01
     public static int getVolume(String inputArguments) throws DukeException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         int volume = 0;
         for (int i = 1; i < length; i++) {
@@ -145,7 +155,7 @@ public class Parser {
         return volume;
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static String getDescription(String inputArguments) {
         String[] userInput;
         if (containsCalorieSeparator(inputArguments)) {
@@ -161,9 +171,9 @@ public class Parser {
         return description;
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static String getDate(String inputArguments) throws DateTimeParseException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         String date = "";
         for (int i = 1; i < length; i++) {
@@ -183,23 +193,25 @@ public class Parser {
         return formatter.format(localDate);
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static String getDateNoDateTracker(String inputArguments) throws DateTimeParseException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
-        String date = "";
+        String date = EMPTY_STRING;
         for (int i = 1; i < length; i++) {
             if (userInput[i].equals(DATE_SEPARATOR.trim())) {
                 date = userInput[i + 1];
                 break;
             }
         }
-        return date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return formatter.format(localDate);
     }
 
-    //@@author { I}
+    //@@author teoziyiivy
     public static String getTime(String inputArguments) throws DateTimeParseException {
-        String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+        String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         String time = "";
         for (int i = 1; i < length; i++) {
@@ -216,8 +228,13 @@ public class Parser {
         return properTime;
     }
 
-    // implement double
-    //@@author { I}
+    //@@author teoziyiivy
+    /**
+     * Extracts the weight from the user input.
+     *
+     * @param inputArguments User input.
+     * @throws DukeException If input does not have a weight or (weight < 0) or (weight > 1000).
+     */
     public static double getWeight(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         if (!userInput[0].matches("^\\d+(\\.\\d+)?")) {
@@ -227,10 +244,21 @@ public class Parser {
         if (weight < 0) {
             throw new DukeException("Negative weight");
         }
+
+        if (weight > 1000) {
+            throw new DukeException("Exceeded maximum weight");
+        }
         return weight;
     }
 
     //@@author arvejw
+    /**
+     * Returns the description of the scheduled workout.
+     *
+     * @param inputArguments Arguments input by the user that come after the command word.
+     * @return String Description of the workout.
+     * @throws ScheduleException If unable to extract description.
+     */
     public static String getScheduleDescription(String inputArguments) throws ScheduleException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
         String description = userInput[0];
@@ -241,9 +269,16 @@ public class Parser {
     }
 
     //@@author arvejw
+    /**
+     * Returns the description and arguments for the workout activity.
+     *
+     * @param inputArguments Arguments input by the user that come after the command word.
+     * @return Map of activity description and activity quantifier pairs.
+     * @throws ScheduleException If there is missing activity splitter, quantifier or invalid format.
+     */
     public static Map<String, ArrayList<Integer>> getActivities(String inputArguments) throws ScheduleException {
         int indexOfActivitySeparator = inputArguments.indexOf(Parser.ACTIVITY_SEPARATOR);
-        String subSubstringAfterActivitySeparator = "";
+        String subSubstringAfterActivitySeparator = EMPTY_STRING;
         if (indexOfActivitySeparator != -1) {
             subSubstringAfterActivitySeparator = inputArguments.substring(
                     indexOfActivitySeparator).trim();
@@ -263,7 +298,14 @@ public class Parser {
     }
 
     //@@author arvejw
-    private static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
+    /**
+     * Returns the description and arguments for the workout activity.
+     *
+     * @param nonParsedActivities The activities which have not been parsed.
+     * @return Map of activity description and activity quantifier pairs.
+     * @throws ScheduleException If there is missing activity splitter, quantifier or invalid format.
+     */
+    public static Map<String, ArrayList<Integer>> getActivityArguments(String[] nonParsedActivities)
             throws ScheduleException {
         Map<String, ArrayList<Integer>> outputMap = new HashMap<>();
         for (String activity : nonParsedActivities) {
@@ -277,10 +319,18 @@ public class Parser {
             }
             ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
-                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                try {
+                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                } catch (NumberFormatException e) {
+                    throw new InvalidActivityFormatException();
+                }
             } else if (quantifierSplitResults.length == 2) {
-                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
-                activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
+                try {
+                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
+                } catch (NumberFormatException e) {
+                    throw new InvalidActivityFormatException();
+                }
             } else {
                 throw new GetActivityException();
             }
@@ -289,7 +339,7 @@ public class Parser {
         return outputMap;
     }
 
-    //@@author { P}
+    //@@author pragyan01
     public static String getSystemDate() {
         String systemDate = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault());
@@ -299,7 +349,7 @@ public class Parser {
         return systemDate;
     }
 
-    //@@author { P}
+    //@@author pragyan01
     public static String getSystemTime() {
         String systemTime = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());

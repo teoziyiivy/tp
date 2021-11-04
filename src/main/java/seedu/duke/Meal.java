@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author {V }
+//@@author VishalJeyaram
 public class Meal extends Tracker {
     protected ArrayList<String> meals;
     protected int mealNumber;
