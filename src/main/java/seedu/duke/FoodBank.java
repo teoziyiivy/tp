@@ -2,12 +2,15 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.DuplicateFood;
-import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
-import seedu.duke.exceptions.foodbank.EmptyMealBankException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
+import seedu.duke.exceptions.foodbank.EmptyMealBankException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
+import seedu.duke.exceptions.foodbank.InvalidMealIndexException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import seedu.duke.exceptions.foodbank.NoFoodIndexException;
+
 import java.util.ArrayList;
 
 public class FoodBank {
@@ -39,6 +42,7 @@ public class FoodBank {
 
     //@@author pragyan01
     public static void addCustomFluid(String inputArguments) throws FoodBankException {
+        totalFluids = fluids.size();
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
         }
@@ -61,15 +65,19 @@ public class FoodBank {
 
     //@@author pragyan01
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
+        totalFluids = fluids.size();
         if (inputArguments == null) {
             throw new NoFoodIndexException();
         }
         if (fluids.size() == 0) {
             throw new EmptyFluidBankException();
         }
-        int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
-        generateParameters(fluids.get(taskNumber));
-        fluids.remove(taskNumber);
+        int fluidIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        if ((fluidIndex < 0) || (fluidIndex > (fluids.size() - 1))) {
+            throw new InvalidFluidIndexException();
+        }
+        generateParameters(fluids.get(fluidIndex));
+        fluids.remove(fluidIndex);
         totalFluids -= 1;
         System.out.println(description + " will be removed from your list of fluids consumed."
                 + " You now have " + totalFluids + " fluids left!\n");
@@ -107,6 +115,7 @@ public class FoodBank {
 
     //@@author VishalJeyaram
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
+        totalMeals = meals.size();
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
         }
@@ -125,6 +134,7 @@ public class FoodBank {
 
     //@@author VishalJeyaram
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
+        totalMeals = meals.size();
         if (inputArguments == null) {
             throw new NoFoodIndexException();
         }
@@ -132,6 +142,9 @@ public class FoodBank {
             throw new EmptyMealBankException();
         }
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        if ((mealIndex < 0) || (mealIndex > (meals.size() - 1))) {
+            throw new InvalidMealIndexException();
+        }
         generateParameters(meals.get(mealIndex));
         meals.remove(mealIndex);
         totalMeals -= 1;
