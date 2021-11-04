@@ -248,7 +248,6 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 * The `TIME` is in hh:mm.
 * The `DATE` or `TIME` is compulsory for schedules.
 * The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
-* Workouts can be scheduled to a past date if desired
 
 Example of usage:
 
@@ -540,7 +539,6 @@ Format `list <DATE`
 Example of usage:
 * `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.
 * `list 22/10/2021` will list all data on `22/10/2021`.
-* `list all` will list all stored data.
 
 ## List everything on all dates
 

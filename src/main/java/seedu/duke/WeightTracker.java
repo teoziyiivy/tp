@@ -3,9 +3,11 @@ package seedu.duke;
 import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.AddWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
+import seedu.duke.exceptions.weight.FutureWeightException;
 import seedu.duke.exceptions.weight.DeleteWeightIndexException;
 import seedu.duke.exceptions.DukeException;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -67,6 +69,13 @@ public class WeightTracker extends Tracker {
         logger.log(Level.INFO, "going to add a weight and date to the list");
         numberOfWeights = weightsArray.size();
         generateWeightParameters(input);
+        String inputDate = date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(inputDate, formatter);
+        LocalDate now = LocalDate.now();
+        if (localDate.isAfter(now)) {
+            throw new FutureWeightException();
+        }
         logger.log(Level.INFO, "weight parameters generated");
         if (input == null) {
             throw new AddWeightException();
