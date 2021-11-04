@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.fluid.noVolumeEntered;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
@@ -55,6 +56,9 @@ public class Fluid extends Tracker {
         logr.info("end of generating fluid parameters");
         if (description.equals("") || Parser.containsSeparators(description)) {
             throw new InvalidFluidDescription();
+        }
+        if ((calories > 0) && (volume == 0)) {
+            throw new noVolumeEntered();
         }
         inputArguments = description + " /c " + calories + " /v " + volume + " /d " + date + " /t " + time;
         fluidArray.add(inputArguments);
