@@ -85,11 +85,11 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(), "deleteMeal");
     }
 
-    public void listMeals(String date) throws FoodBankException, MealException {
+    public void listMeals(String userDate) throws FoodBankException, MealException {
         if (meals.size() == 0) {
             System.out.println("Your meal list is empty!");
         }
-        if (date.equals("all")) {
+        if (userDate.equals("all")) {
             int i = 1;
             totalCalories = 0;
             mealNumber = 0;
@@ -113,7 +113,7 @@ public class Meal extends Tracker {
             totalCalories = 0;
             mealNumber = 0;
             for (String meal : meals) {
-                if (meal.contains(date)) {
+                if (meal.contains(userDate)) {
                     logger.log(Level.INFO, "generating meal parameters");
                     generateMealParameters(meal);
                     logger.log(Level.INFO, "meal parameters generated");
