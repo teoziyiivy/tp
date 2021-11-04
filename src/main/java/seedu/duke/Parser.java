@@ -319,24 +319,59 @@ public class Parser {
             }
             ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
-                try {
-                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
-                } catch (NumberFormatException e) {
-                    throw new InvalidActivityFormatException();
-                }
+                parseDistanceActivityQuantifiers(quantifierSplitResults, activityQuantifiers);
             } else if (quantifierSplitResults.length == 2) {
-                try {
-                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
-                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
-                } catch (NumberFormatException e) {
-                    throw new InvalidActivityFormatException();
-                }
+                parseNonDistanceActivityQuantifiers(quantifierSplitResults, activityQuantifiers);
             } else {
                 throw new GetActivityException();
             }
             outputMap.put(splitResults[0].trim(), activityQuantifiers);
         }
         return outputMap;
+    }
+
+    //@@author arvejw
+    /**
+     * Adds distance activity quantifiers to array list of activity quantifiers.
+     *
+     * @param quantifierSplitResults Array of quantifier split results.
+     * @param activityQuantifiers ArrayList of activity quantifiers.
+     * @throws InvalidActivityFormatException If non-integer or integer less than equal to 0 detected.
+     */
+    private static void parseDistanceActivityQuantifiers(
+            String[] quantifierSplitResults, ArrayList<Integer> activityQuantifiers)
+            throws InvalidActivityFormatException {
+        try {
+            if (parseStringToInteger(quantifierSplitResults[0].trim()) <= 0) {
+                throw new NumberFormatException();
+            }
+            activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+        } catch (NumberFormatException e) {
+            throw new InvalidActivityFormatException();
+        }
+    }
+
+    //@@author arvejw
+    /**
+     * Adds non-distance activity quantifiers to array list of activity quantifiers.
+     *
+     * @param quantifierSplitResults Array of quantifier split results.
+     * @param activityQuantifiers ArrayList of activity quantifiers.
+     * @throws InvalidActivityFormatException If non-integer or integer less than equal to 0 detected.
+     */
+    private static void parseNonDistanceActivityQuantifiers(
+            String[] quantifierSplitResults, ArrayList<Integer> activityQuantifiers)
+            throws InvalidActivityFormatException {
+        try {
+            if (parseStringToInteger(quantifierSplitResults[0].trim()) <= 0
+                    || parseStringToInteger(quantifierSplitResults[1].trim()) <= 0) {
+                throw new NumberFormatException();
+            }
+            activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+            activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
+        } catch (NumberFormatException e) {
+            throw new InvalidActivityFormatException();
+        }
     }
 
     //@@author pragyan01
