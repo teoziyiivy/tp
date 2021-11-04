@@ -160,8 +160,14 @@ public class Storage {
         fileCleaner.write("");
         fileCleaner.close();
         for (String s : schedule) {
-            if (LocalDate.parse(Parser.getDateNoDateTracker(s),
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy")).isBefore(LocalDate.now())) {
+            if (Parser.isRecurringWorkout(s)) {
+                fileWriter.write(s + System.lineSeparator());
+                continue;
+            }
+            if (LocalDate.parse(
+                    Parser.getDateNoDateTracker(s),
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    .isBefore(LocalDate.now())) {
                 continue;
             }
             fileWriter.write(s + System.lineSeparator());
