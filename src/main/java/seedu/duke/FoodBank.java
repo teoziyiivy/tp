@@ -1,12 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.foodbank.FoodBankException;
-import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
-import seedu.duke.exceptions.foodbank.EmptyMealBankException;
-import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
-import seedu.duke.exceptions.foodbank.NoFoodFoundException;
-import seedu.duke.exceptions.foodbank.NoFoodIndexException;
+import seedu.duke.exceptions.foodbank.*;
+
 import java.util.ArrayList;
 
 public class FoodBank {
@@ -61,9 +57,12 @@ public class FoodBank {
         if (fluids.size() == 0) {
             throw new EmptyFluidBankException();
         }
-        int taskNumber = Parser.parseStringToInteger(inputArguments) - 1;
-        generateParameters(fluids.get(taskNumber));
-        fluids.remove(taskNumber);
+        int fluidIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        if ((fluidIndex < 0) || (fluidIndex > (fluids.size() - 1))) {
+            throw new InvalidFluidIndexException();
+        }
+        generateParameters(fluids.get(fluidIndex));
+        fluids.remove(fluidIndex);
         totalFluids -= 1;
         System.out.println(description + " will be removed from your list of fluids consumed."
                 + " You now have " + totalFluids + " fluids left!\n");
@@ -121,6 +120,9 @@ public class FoodBank {
             throw new EmptyMealBankException();
         }
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
+        if ((mealIndex < 0) || (mealIndex > (meals.size() - 1))) {
+            throw new InvalidMealIndexException();
+        }
         generateParameters(meals.get(mealIndex));
         meals.remove(mealIndex);
         totalMeals -= 1;
