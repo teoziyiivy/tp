@@ -129,7 +129,7 @@ public class Storage {
         }
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);
         Set<String> workoutSet = new LinkedHashSet<>(workoutTracker.workouts);
@@ -145,7 +145,7 @@ public class Storage {
         fileWriter.close();
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public void saveSchedule(ScheduleTracker scheduleTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(SCHEDULE_FILE_PATH, true);
         ArrayList<String> currentScheduleStringList = new ArrayList<>();
@@ -282,7 +282,7 @@ public class Storage {
         return fluids;
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public ArrayList<String> loadWorkouts() throws IOException {
         ArrayList<String> workout = new ArrayList<>();
         File dataFile = new File(WORKOUT_FILE_PATH);
@@ -298,7 +298,7 @@ public class Storage {
         return workout;
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public ArrayList<String> loadSchedule() throws IOException {
         ArrayList<String> schedule = new ArrayList<>();
         File dataFile = new File(SCHEDULE_FILE_PATH);
@@ -313,7 +313,7 @@ public class Storage {
         return schedule;
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public static void initializeScheduleFile() {
         File dataFile = new File(SCHEDULE_FILE_PATH);
         if (!dataFile.exists()) {
@@ -361,7 +361,7 @@ public class Storage {
         }
     }
 
-    //@@author arvejw
+    //@@author EdwardZYWang
     public static void initializeWorkoutFile() {
         File dataFile = new File(WORKOUT_FILE_PATH);
         if (!dataFile.exists()) {

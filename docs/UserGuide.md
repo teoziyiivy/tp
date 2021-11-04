@@ -18,6 +18,10 @@ exacerbate this issue.
 ## Quick Start
 1. The BMI calculator and recommended caloric intake calculator gives the user an idea of where his current fitness 
 level stands. Users can also choose to skip using the calculators by entering the appropriate keystrokes.
+* *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator 
+questions. Any deviating inputs will 
+result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the 
+calculator to calculate BMI and recommended daily caloric intake.
 2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
 to track the calories burned.
 3. Workout schedule manager also allows the user to schedule future workouts
@@ -74,6 +78,14 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
   in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity 
   breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
   on the choice usage of HashMaps for implementation.
+
+## Important FAQs
+* In order to save the data of your previous session, the user *MUST* type in "y" when prompted with the following 
+question: 
+
+`"Would you like to load up the records of your fitness journey? Key in y or press enter keystroke to skip!"`
+
+Failure to do so would result in the previous session's data being deleted!
   
   
 
