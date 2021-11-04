@@ -151,7 +151,7 @@ Description: Adds a new meal to the list of meals, with its associated calories,
 Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 
 * The `MEAL_NAME` can contain spaces.
-* Prefixes cannot be swapped and must follow the order shown above.  
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed. 
 * The `MEAL_CALORIES` can only contain positive integers inclusive of 0.
 * You can only omit putting `MEAL_CALORIES` if you have saved the meal in your [meal library](#adding-meal-to-library) already.
 * The `DATE` is in dd/mm/yyyy.
@@ -174,7 +174,7 @@ Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 
 
 * The `FLUID_NAME` can contain spaces.
-* Prefixes cannot be swapped and must follow the order shown above.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
 * You can only omit putting `FLUID_CALORIES` if you have saved the drink in your [fluid library](#adding-fluid-to-library) already.
 * The `VOLUME` can only contain positive integers inclusive of 0.
@@ -220,7 +220,7 @@ Description: Adds a new workout to the list of workout items, with its associate
 Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 
 * The `WORKOUT_NAME` can contain spaces.
-* Prefixes cannot be swapped and must follow the order shown above.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * The `CALORIES_BURNT` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
@@ -245,7 +245,7 @@ activity breakdowns, with date and time of workout.
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 
 * The `WORKOUT_NAME` can contain spaces.
-* Prefixes cannot be swapped and must follow the order shown above.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * The `DATE` or `TIME` is compulsory for schedules.
@@ -263,7 +263,7 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 
 * The `/a` separator is optional.
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
-* Prefixes cannot be swapped and must follow the order shown above.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in **one integer** `[DISTANCE]`
   **in metres** for the activity.
 * For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in **two integers** in the form `[SETS]x[REPS]`.
@@ -289,7 +289,7 @@ Description: Add a new meal record to the library, with its associated calories.
 Format: `library addmeal MEAL_NAME /c MEAL_CALORIES`
 
 * The MEAL_NAME can contain spaces.
-* Prefixes cannot be swapped and must follow the order shown above.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * The MEAL_CALORIES can only contain positive integers inclusive of 0.
 
 Example of usage:
@@ -305,7 +305,7 @@ Description: Adds a new fluid record to the library, with its associated calorie
 Format: `library addfluid FLUID_NAME /c FLUID_CALORIES`
 
 * The FLUID_NAME can contain spaces.
-* Prefixes cannot be swapped and must follow the order shown above.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * The FLUID_CALORIES can only contain positive integers inclusive of 0.
 
 Example of usage:
