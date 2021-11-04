@@ -95,12 +95,12 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "deleteFluid");
     }
 
-    public void listFluids(String date) throws FoodBankException, FluidExceptions {
+    public void listFluids(String userDate) throws FoodBankException, FluidExceptions {
         if (fluidArray.size() == 0) {
             System.out.println("Your fluid list is empty!");
         }
         logr.entering(getClass().getName(), "listFluids");
-        if (date.equals("all")) {
+        if (userDate.equals("all")) {
             int i = 1;
             totalCalories = 0;
             fluidNumber = 0;
@@ -125,7 +125,7 @@ public class Fluid extends Tracker {
             totalCalories = 0;
             fluidNumber = 0;
             for (String fluid : fluidArray) {
-                if (fluid.contains(date)) {
+                if (fluid.contains(userDate)) {
                     logr.log(Level.INFO, "generating fluid parameters");
                     generateFluidParameters(fluid);
                     logr.log(Level.INFO, "fluid parameters generated");

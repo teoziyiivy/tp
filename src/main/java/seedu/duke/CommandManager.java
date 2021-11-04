@@ -139,7 +139,10 @@ public class CommandManager {
         command = splitResults[0];
         String date;
         if (splitResults.length == 1) {
-            if (command.contains("/")) {
+            if (command.equals("all")) {
+                listEverything("all");
+                return;
+            } else if (command.contains("/")) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate localDate = LocalDate.parse(command, formatter);
                 date = formatter.format(localDate);

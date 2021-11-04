@@ -18,6 +18,10 @@ exacerbate this issue.
 ## Quick Start
 1. The BMI calculator and recommended caloric intake calculator gives the user an idea of where his current fitness 
 level stands. Users can also choose to skip using the calculators by entering the appropriate keystrokes.
+* *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator 
+questions. Any deviating inputs will 
+result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the 
+calculator to calculate BMI and recommended daily caloric intake.
 2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
 to track the calories burned.
 3. Workout schedule manager also allows the user to schedule future workouts
@@ -74,6 +78,14 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
   in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity 
   breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
   on the choice usage of HashMaps for implementation.
+
+## Important FAQs
+* In order to save the data of your previous session, the user *MUST* type in "y" when prompted with the following 
+question: 
+
+`"Would you like to load up the records of your fitness journey? Key in y or press enter keystroke to skip!"`
+
+Failure to do so would result in the previous session's data being deleted!
   
   
 
@@ -144,8 +156,8 @@ Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
-
-Example of usage:
+* Meals can be added to a future date if desired
+  Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
@@ -166,6 +178,7 @@ Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 * The `VOLUME` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
+* Fluids can be added to a future date if desired
 
 Example of usage:
 
@@ -210,6 +223,7 @@ Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
+* Workouts can be added to a future date if desired
 
 Example of usage:
 
@@ -512,7 +526,7 @@ Description: Lists all fluids stored in the library.
 
 Format: `library listfluids`
 
-## List everything
+## List everything on current date
 
 Command Word: `list`
 
@@ -525,8 +539,44 @@ Format `list <DATE`
 Example of usage:
 * `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.
 * `list 22/10/2021` will list all data on `22/10/2021`.
-* `list all` will list all stored data.
 
+## List everything on all dates
+
+Command Word: `list`
+
+Description: Lists all meals, fluids, weight, workouts and scheduled workouts on all dates
+
+Format `list all`
+
+Example of usage:
+`list all`
+
+Expected output
+```
+1. cookie
+Calories: 22
+Date: 15/02/2022
+Time: 19:38
+
+Total number of meals: 1
+Total calories: 22
+
+1. cola
+Calories: 123
+Volume: 0
+Date: 12/12/2024
+Time: 19:38
+
+Total number of fluids: 1
+Total calories: 123
+
+Your weight list is empty!
+
+Your workout list is empty!
+
+Your workout schedule is empty!
+
+```
 ## Help Command
 
 Command Word: `help`
