@@ -156,8 +156,8 @@ Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
-
-Example of usage:
+* Meals can be added to a future date if desired
+  Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
@@ -178,6 +178,7 @@ Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 * The `VOLUME` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
+* Fluids can be added to a future date if desired
 
 Example of usage:
 
@@ -222,6 +223,7 @@ Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
+* Workouts can be added to a future date if desired
 
 Example of usage:
 
@@ -524,7 +526,7 @@ Description: Lists all fluids stored in the library.
 
 Format: `library listfluids`
 
-## List everything
+## List everything on current date
 
 Command Word: `list`
 
@@ -537,8 +539,44 @@ Format `list <DATE`
 Example of usage:
 * `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.
 * `list 22/10/2021` will list all data on `22/10/2021`.
-* `list all` will list all stored data.
 
+## List everything on all dates
+
+Command Word: `list`
+
+Description: Lists all meals, fluids, weight, workouts and scheduled workouts on all dates
+
+Format `list all`
+
+Example of usage:
+`list all`
+
+Expected output
+```
+1. cookie
+Calories: 22
+Date: 15/02/2022
+Time: 19:38
+
+Total number of meals: 1
+Total calories: 22
+
+1. cola
+Calories: 123
+Volume: 0
+Date: 12/12/2024
+Time: 19:38
+
+Total number of fluids: 1
+Total calories: 123
+
+Your weight list is empty!
+
+Your workout list is empty!
+
+Your workout schedule is empty!
+
+```
 ## Help Command
 
 Command Word: `help`
