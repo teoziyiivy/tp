@@ -10,13 +10,14 @@ import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_PROMPT;
 import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_Y_INPUT;
 import static seedu.duke.ClickfitMessages.MESSAGE_A;
 
-//@@author EdwardZYWang
+
 public class Ui {
 
     private Scanner uiScanner;
-    public static final String HORIZONTAL_BAR = "____________________________________________________________"
-            + "____________________________________________________________"; //placeholder
-    public static final String USER_PROMPT = "Enter command: "; //placeholder
+    public static final String HORIZONTAL_BAR_LONG = "____________________________________________________________"
+            + "____________________________________________________________";
+    public static final String HORIZONTAL_BAR_SHORT = "_________________________________________________________";
+    public static final String USER_PROMPT = "Enter command: ";
     protected String sex;
     protected double weight;
     protected double height;
@@ -28,6 +29,7 @@ public class Ui {
         uiScanner = new Scanner(System.in);
     }
 
+    //@@author EdwardZYWang
     public static void welcomeMessage() {
         String logo = "   ______  _____     _____            __       ________  _   _\n"
                 + " .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_\n"
@@ -40,6 +42,7 @@ public class Ui {
         System.out.println(MESSAGE_A);
     }
 
+    //@@author pragyan01
     public void getInfo() {
         System.out.println(CALCULATOR_PROMPT);
         String uiInput;
@@ -114,7 +117,7 @@ public class Ui {
         calculator.getIdealCalories();
     }
 
-
+    //@@author EdwardZYWang
     public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput;
