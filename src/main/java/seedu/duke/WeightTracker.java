@@ -68,7 +68,6 @@ public class WeightTracker extends Tracker {
         numberOfWeights = weightsArray.size();
         generateWeightParameters(input);
         logger.log(Level.INFO, "weight parameters generated");
-
         if (input == null) {
             throw new AddWeightException();
         } else {
