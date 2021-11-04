@@ -19,7 +19,9 @@ public class ClickfitMessages {
 
     public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Would you "
             + "like to load up the records of your fitness journey?" + System.lineSeparator()
-            + "Key in y or press enter keystroke to skip!";
+            + "Key in y or press enter keystroke to skip!" + System.lineSeparator()
+            + "Note: Pressing enter to skip this prompt will result in the previous session's data"
+            + "being deleted!";
 
     public static final String INCORRECT_INPUT = System.lineSeparator() + "CLI.ckFit has detected a "
             + "wrong input, kindly check your inputs or type \"help commands\" for input examples.";
