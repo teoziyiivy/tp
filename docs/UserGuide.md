@@ -152,7 +152,7 @@ Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 
 * The `MEAL_NAME` can contain spaces.
 * The `MEAL_CALORIES` can only contain positive integers inclusive of 0.
-* You can only omit putting `MEAL_CALORIES` if you have saved the meal in your meal library already.
+* You can only omit putting `MEAL_CALORIES` if you have saved the meal in your [meal library](#adding-meal-to-library) already.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
@@ -174,7 +174,7 @@ Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 
 * The `FLUID_NAME` can contain spaces.
 * The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
-* You can only omit putting `FLUID_CALORIES` if you have saved the drink in your fluid library already.
+* You can only omit putting `FLUID_CALORIES` if you have saved the drink in your [fluid library](#adding-fluid-to-library) already.
 * The `VOLUME` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
