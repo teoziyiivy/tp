@@ -1,6 +1,6 @@
 package seedu.duke.exceptions.fluid;
 
-public class noVolumeEntered extends FluidExceptions {
+public class NoVolumeEntered extends FluidExceptions {
     @Override
     public String getMessage() {
         return "Please enter volume.";
