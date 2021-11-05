@@ -144,7 +144,7 @@ public class ClickfitMessages {
             + Ui.HORIZONTAL_BAR_SHORT;
 
     public static final String FULL_SCHEDULE_LIST_MESSAGE = "Full Workout Schedule:" + System.lineSeparator()
-            + Ui.HORIZONTAL_BAR_LONG;
+            + Ui.HORIZONTAL_BAR_SHORT;
 
     public static final String FULL_WORKOUT_LIST_MESSAGE = "All recorded workouts:" + System.lineSeparator()
             + Ui.HORIZONTAL_BAR_SHORT;

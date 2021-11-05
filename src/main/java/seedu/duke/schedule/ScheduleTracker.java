@@ -3,6 +3,7 @@ package seedu.duke.schedule;
 import seedu.duke.ClickfitMessages;
 import seedu.duke.Storage;
 import seedu.duke.Parser;
+import seedu.duke.exceptions.schedule.DuplicateRescheduledWorkoutException;
 import seedu.duke.exceptions.schedule.DuplicateScheduledWorkoutException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.DeleteScheduleException;
@@ -310,7 +311,12 @@ public class ScheduleTracker {
      */
     public void updateOrDeleteScheduledWorkout(ScheduledWorkout scheduledWorkout, LocalDate currentDate) {
         if (scheduledWorkout.isRecurring()) {
-            rescheduleRecurringWorkout(scheduledWorkout, currentDate);
+            try {
+                rescheduleRecurringWorkout(scheduledWorkout, currentDate);
+            } catch (ScheduleException e) {
+                scheduledWorkouts.remove(scheduledWorkout);
+                System.out.println(e.getMessage());
+            }
         } else {
             scheduledWorkouts.remove(scheduledWorkout);
         }
@@ -322,11 +328,19 @@ public class ScheduleTracker {
      *
      * @param scheduledWorkout Scheduled workout to be rescheduled.
      * @param currentDate      Current date.
+     * @throws ScheduleException If workout to be rescheduled already exists in the list.
      */
-    public void rescheduleRecurringWorkout(ScheduledWorkout scheduledWorkout, LocalDate currentDate) {
-        long daysUntilCurrentDate = ChronoUnit.DAYS.between(
-                scheduledWorkout.getWorkoutDateAsLocalDate(), currentDate);
+    public void rescheduleRecurringWorkout(ScheduledWorkout scheduledWorkout, LocalDate currentDate)
+            throws ScheduleException {
+        long daysUntilCurrentDate = ChronoUnit.DAYS.between(scheduledWorkout.getWorkoutDateAsLocalDate(), currentDate);
         long daysToAdd = (long) (Math.ceil((double) daysUntilCurrentDate / DAYS_IN_A_WEEK) * DAYS_IN_A_WEEK);
+        ScheduledWorkout copyOfScheduledWorkout = new ScheduledWorkout(scheduledWorkout);
+        copyOfScheduledWorkout.incrementWorkoutDate(daysToAdd);
+        try {
+            duplicateScheduledWorkoutCheck(copyOfScheduledWorkout);
+        } catch (ScheduleException e) {
+            throw new DuplicateRescheduledWorkoutException();
+        }
         scheduledWorkout.incrementWorkoutDate(daysToAdd);
     }
 
