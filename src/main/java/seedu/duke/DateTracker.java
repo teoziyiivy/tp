@@ -36,7 +36,7 @@ public class DateTracker {
     /**
      * This method sorts an array list by date.
      *
-     * @param list any array list provided
+     * @param list any array list provided.
      *
      * @author pragyan01
      */
