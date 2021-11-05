@@ -41,7 +41,11 @@ public class Ui {
         System.out.println(MESSAGE_A);
     }
 
-    //@@author pragyan01
+    /**
+     * This method obtains user's answers to BMI related questions and then calculates user's BMI.
+     *
+     * @author pragyan01
+     */
     public void getInfo() {
         System.out.println(CALCULATOR_PROMPT);
         String uiInput;
