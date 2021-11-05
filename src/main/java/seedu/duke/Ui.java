@@ -24,6 +24,11 @@ public class Ui {
     protected int age;
     protected int activityLevel;
 
+    //@@author pragyan01
+    /**
+     * Constructor of UI class.
+     *
+     */
     public Ui() {
         uiScanner = new Scanner(System.in);
     }
@@ -42,6 +47,11 @@ public class Ui {
     }
 
     //@@author pragyan01
+    /**
+     * This method obtains user's answers to BMI related questions and then calculates user's BMI.
+     *
+     * @author pragyan01
+     */
     public void getInfo() {
         System.out.println(CALCULATOR_PROMPT);
         String uiInput;

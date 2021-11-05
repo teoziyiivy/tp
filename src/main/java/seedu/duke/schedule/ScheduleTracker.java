@@ -70,7 +70,7 @@ public class ScheduleTracker {
             System.out.println(ClickfitMessages.SCHEDULE_DATA_NOT_FOUND);
             return;
         }
-        String currentLine = "";
+        String currentLine = Parser.EMPTY_STRING;
         boolean isDataLoadCorrectly = true;
         while (fileScanner.hasNext()) {
             currentLine = fileScanner.nextLine();
@@ -79,7 +79,7 @@ public class ScheduleTracker {
             }
             try {
                 addScheduledWorkout(currentLine, true, false);
-            } catch (DateTimeParseException | ScheduleException e) {
+            } catch (Exception e) {
                 isDataLoadCorrectly = false;
             }
         }
@@ -285,7 +285,7 @@ public class ScheduleTracker {
         boolean isAnyWorkoutOverdue = true;
         ScheduledWorkout firstWorkoutEntry;
         while (isAnyWorkoutOverdue) {
-            if (scheduledWorkouts.isEmpty()) {
+            if (isScheduledWorkoutListEmpty()) {
                 break;
             }
             firstWorkoutEntry = scheduledWorkouts.get(FIRST_INDEX_IN_LIST);
