@@ -3,6 +3,7 @@ package seedu.duke.exceptions.fluid;
 //@@author pragyan01
 /**
  * Custom exception for when unknown error related to fluid tracker occurs.
+ * Parent exception class for fluid exceptions.
  *
  * @author pragyan01
  */

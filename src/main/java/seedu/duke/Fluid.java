@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.fluid.EmptyFluidList;
+import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
@@ -91,9 +92,13 @@ public class Fluid extends Tracker {
             logr.info("error adding fluid: invalidDescription");
             throw new InvalidFluidDescription();
         }
-        if ((calories > 0) && (volume == 0)) {
+        if ((volume == 0) || !inputArguments.contains("/v")) {
             logr.info("error adding fluid: no volume provided");
             throw new NoVolumeEntered();
+        }
+        if ((calories == 0) || !inputArguments.contains("/c")) {           //DOES NOT WORK
+            logr.info("error adding fluid: no calories provided");
+            throw new NoCaloriesEntered();
         }
         logr.info("no fluid parameter errors found!");
         inputArguments = description + " /c " + calories + " /v " + volume + " /d " + date + " /t " + time;

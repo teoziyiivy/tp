@@ -103,12 +103,16 @@ public class Parser {
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
+        String description = getDescription(inputArguments);
         if (!containsCalorieSeparator(inputArguments)) {
-            String description = getDescription(inputArguments);
             if (Parser.containsSeparators(description)) {
                 throw new DukeException("");
             }
-            calories = FoodBank.findCalories(description);
+            if (FoodBank.isFoodFound(description)) {
+                calories = FoodBank.findCalories(description);
+                return calories;
+            }
+            calories = 0;
             return calories;
         } else {
             String[] userInput = inputArguments.split("\\s+");
