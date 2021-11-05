@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -160,8 +161,14 @@ public class Storage {
         fileCleaner.write("");
         fileCleaner.close();
         for (String s : schedule) {
-            if (LocalDate.parse(Parser.getDateNoDateTracker(s),
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy")).isBefore(LocalDate.now())) {
+            if (Parser.isRecurringWorkout(s)) {
+                fileWriter.write(s + System.lineSeparator());
+                continue;
+            }
+            if (LocalDate.parse(
+                    Parser.getDateNoDateTracker(s),
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    .isBefore(LocalDate.now())) {
                 continue;
             }
             fileWriter.write(s + System.lineSeparator());
