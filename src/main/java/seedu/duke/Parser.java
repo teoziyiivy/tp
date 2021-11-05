@@ -14,6 +14,7 @@ import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.WorkoutActivity;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -126,6 +127,13 @@ public class Parser {
     }
 
     //@@author EdwardZYWang
+    /**
+     * gets calories burned through workout from the user's inputs.
+     *
+     * @param inputArguments arguments of the user's inputs.
+     * @return calories burned for workout parameter
+     * @throws WorkoutException if there is an unknown error encountered.
+     */
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         boolean isCaloriesParsed = false;
