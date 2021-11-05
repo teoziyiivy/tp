@@ -91,8 +91,6 @@ question:
 `"Would you like to load up the records of your fitness journey? Key in y or press enter keystroke to skip!"`
 
 Failure to do so would result in the previous session's data being deleted!
-  
-  
 
 ## Table of Contents
 
