@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
 
@@ -144,6 +145,12 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * saves the user's workouts to the text file so that it can be accessed again in future sessions.
+     *
+     * @param workoutTracker workout of the user.
+     * @throws IOException if there is an incorrect input.
+     */
     public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);
         FileWriter fileCleaner = new FileWriter(WORKOUT_FILE_PATH, false);
@@ -157,6 +164,12 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * saves the user's future workout schedule to the text file so that it can be accessed again in future sessions.
+     *
+     * @param scheduleTracker workout of the user.
+     * @throws IOException if there is an incorrect input.
+     */
     public void saveSchedule(ScheduleTracker scheduleTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(SCHEDULE_FILE_PATH, true);
         FileWriter fileCleaner = new FileWriter(SCHEDULE_FILE_PATH, false);
@@ -321,6 +334,12 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Loads all the workouts in the text file and stores them as an array list of strings for workout summary.
+     *
+     * @return workout array list.
+     * @throws IOException if there is an incorrect input.
+     */
     public ArrayList<String> loadWorkouts() throws IOException {
         ArrayList<String> workout = new ArrayList<>();
         File dataFile = new File(WORKOUT_FILE_PATH);
@@ -337,6 +356,10 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Creates workout schedule file if it hasn't been created already.
+     *
+     */
     public static void initializeScheduleFile() {
         File dataFile = new File(SCHEDULE_FILE_PATH);
         if (!dataFile.exists()) {
@@ -388,6 +411,10 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Creates workout file if it hasn't been created already.
+     *
+     */
     public static void initializeWorkoutFile() {
         File dataFile = new File(WORKOUT_FILE_PATH);
         if (!dataFile.exists()) {
@@ -400,6 +427,12 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * A method that take in the array list, meals, and formats it into the appropriate output
+     * form to be a useful summary to the user. if loop accounts for the "[" in the first element
+     * during parsing, else loop accounts for the case when there is no "[" in the parsed string m.
+     *
+     */
     public void mealSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -432,6 +465,12 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * A method that take in the array list, fluids, and formats it into the appropriate output
+     * form to be a useful summary to the user. if loop accounts for the "[" in the first element
+     * during parsing, else loop accounts for the case when there is no "[" in the parsed string m.
+     *
+     */
     public void fluidSummary() {
         int totalCalories = 0;
         int totalVolume = 0;
@@ -492,6 +531,12 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * A method that take in the array list,workout, and formats it into the appropriate output
+     * form to be a useful summary to the user. if loop accounts for the "[" in the first element
+     * during parsing, else loop accounts for the case when there is no "[" in the parsed string m.
+     *
+     */
     public void workoutSummary() {
         int totalCalories = 0;
         int i = 1;
@@ -524,6 +569,13 @@ public class Storage {
     }
 
     //@@author EdwardZYWang
+    /**
+     * A method that take calls the class summaries above and prints them out in the correct format.
+     * it also prints out the date and time of the summary so that the user knows that he or she is receiving the
+     * most updated information.
+     *
+     * @throws DukeException when there is an error
+     */
     public void printLoadedLists() throws DukeException {
         System.out.println(MEAL_PRINT_FORMAT);
         mealSummary();
