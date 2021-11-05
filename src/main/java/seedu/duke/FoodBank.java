@@ -10,7 +10,9 @@ import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
 import seedu.duke.exceptions.foodbank.InvalidMealIndexException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import seedu.duke.exceptions.foodbank.NoFoodIndexException;
+import seedu.duke.exceptions.meal.MealException;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class FoodBank {
@@ -23,6 +25,12 @@ public class FoodBank {
     protected static int totalFluids;
 
     //@@author VishalJeyaram
+    /**
+     * Constructor for FoodBank class used to initialize the instance variables
+     * such as the arraylist to store the library meals, the arraylist to store
+     * the library fluids, two integer variables to store the number of library
+     * meals and the number of library fluids respectively.
+     */
     public FoodBank() {
         meals = new ArrayList<>();
         fluids = new ArrayList<>();
@@ -99,6 +107,11 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Lists out all the library meals.
+     *
+     * @throws FoodBankException if user's food is already within the meal library.
+     */
     public static void listCustomMeal() throws FoodBankException {
         if (meals.size() == 0) {
             System.out.println("Your meals library is empty!");
@@ -114,6 +127,12 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Adds a custom meal with its associated calories to the meal library
+     *
+     * @throws FoodBankException If the meal description is empty, or if the meal already exists
+     * within the library.
+     */
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
         totalMeals = meals.size();
         if (inputArguments == null) {
@@ -133,6 +152,13 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Deletes a custom meal with its associated calories from the meal library
+     *
+     * @throws NumberFormatException If the meal index is not an integer value.
+     * @throws FoodBankException If meal index is not keyed in, or if the meal library is empty,
+     * or if the meal index is out of range
+     */
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
         totalMeals = meals.size();
         if (inputArguments == null) {
