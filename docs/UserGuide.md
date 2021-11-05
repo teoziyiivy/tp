@@ -8,6 +8,8 @@ level. You can also schedule a variety of workouts such as running, cycling, gym
 staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or 
 even student athletes. Prior knowledge in fitness and gym-related terminologies is beneficial, but not necessary.
 
+[**>>Skip to Table of Contents<<**](#table-of-contents)
+
 ## Motivations
 University students staying on-campus have always found it difficult to juggle their hall activities, academic workload, 
 and social activities. This makes it difficult for them to track their health & fitness. Furthermore, most students 
@@ -31,11 +33,11 @@ indicator of the user's progress
 ## Technical Start Up
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CLI.ckFit` from [here](http://link.to/duke).
-3. Go to the folder you saved the CLIckFit.jar file and note the absolute file path.
+3. Go to the folder you saved the `CLIckFit.jar` file and note the absolute file path.
 4. If you are using Windows, open up a Command prompt terminal cmd.exe or powershell.exe and for
    Mac and Linux users, do the same with the terminal of your respective systems.
-5. Navigate to the folder where the CLIckFit.jar file is stored.
-6. Execute java -jar CLIckFit.jar in the terminal, and the application will start running.
+5. Navigate to the folder where the `CLIckFit.jar` file is stored.
+6. Execute `java -jar CLIckFit.jar` in the terminal, and the application will start running.
 
 ## Common Terminologies and Definitions
 * Calories are in kcal
@@ -60,12 +62,12 @@ completed three sets of 12 reps.
 
 ## Known limitations
 * CLI.ckFit may not handle illogical inputs correctly due to limitations of data types. For instance, if you enter an
-overly large and nonsensical integer value for calorie such as `2147483647` there may be overflow during computation. 
+overly large and nonsensical integer value for calories such as `2147483647` there may be overflow during computation. 
   E.g., when calculating total calories, summation may result in an overflow, producing negative calories. 
   
 * Separators such as the date separator `/d`, time separator `/t`, calorie separator `/c`, volume separator `/v` and 
   activity separator `/a` should be entered in the **same order** as shown in their respective command formats. 
-  CLI.ckFit **does not** support the shuffling of separators when taking user input. 
+  CLI.ckFit **does not** actively support the shuffling of separators when taking user input. 
   
 * The separators as shown in the command format should be input **once**. Typing multiple identical separators 
   unnecessarily *may* cause incorrect parsing of user input. 
@@ -77,7 +79,10 @@ overly large and nonsensical integer value for calorie such as `2147483647` ther
 * Scheduled workouts with the same activity breakdowns in a different order **are not** considered duplicated
   in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity 
   breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
-  on the choice usage of HashMaps for implementation.
+  on the choice usage of HashMaps in implementation.
+  
+* The current version CLI.ckFit only supports 3 types of distance based activities, 
+  namely swimming, running and cycling. **ALL** other activities are assumed to be sets/repetitions based. 
 
 ## Important FAQs
 * In order to save the data of your previous session, the user *MUST* type in "y" when prompted with the following 
@@ -258,6 +263,7 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 * The `TIME` is in hh:mm.
 * The `DATE` or `TIME` is compulsory for schedules.
 * The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
+* The ***optional*** `/r` flag, **if** included, **must** be at the end of the command.
 
 Example of usage:
 
@@ -272,16 +278,15 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
 * Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 * Each prefix only accepts one input after it.
-* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in **one integer** `[DISTANCE]`
-  **in metres** for the activity.
-* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in **two integers** in the form `[SETS]x[REPS]`.
-* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in one 
-  **positive non-zero integer** `[DISTANCE]` in **metres** for the activity.
+* CLI.ckFit supports 3 special **case-sensitive** keywords for `ACTIVITY_NAME`, namely `running/swimming/cycling`.
+  If any of these 3 keywords are used, then `ACTIVITY_QUANTIFIER` takes in one **positive non-zero integer** `[DISTANCE]`
+  in **metres** for the activity.
 * For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** 
-  in the form `[SETS]x[REPS]`.
+  in the form `[SETS]x[REPS]`. In other words it is **assumed** that the activities are sets/repetitions
+  activities. (Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions))
 * Multiple activities can be entered as long as they are separated by a comma `,`.
-* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
-* The ***optional*** `/r` flag, **if** included, **must** be at the end of the command.
+* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly recurring workout.
+* The ***optional*** `/r` flag, if included, **must** be at the end of the command.
 
 
 Example of usage:
