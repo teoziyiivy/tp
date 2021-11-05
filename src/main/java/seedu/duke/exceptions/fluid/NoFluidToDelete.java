@@ -1,5 +1,10 @@
 package seedu.duke.exceptions.fluid;
 
+/**
+ * Custom exception for when user tries to delete a fluid entry which does not exist.
+ *
+ * @author pragyan01
+ */
 public class NoFluidToDelete extends FluidExceptions {
     @Override
     public String getMessage() {

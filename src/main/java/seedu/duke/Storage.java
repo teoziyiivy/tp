@@ -176,7 +176,14 @@ public class Storage {
         fileWriter.close();
     }
 
-    //@@author pragyan01
+    /**
+     * This method loads all meals saved in .txt file to meal array list.
+     *
+     * @throws IOException if I/O error occurs
+     * @return meal array list
+     *
+     * @author pragyan01
+     */
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -198,7 +205,14 @@ public class Storage {
         return meals;
     }
 
-    //@@author pragyan01
+    /**
+     * This method loads all fluids saved in .txt file to fluid array list.
+     *
+     * @throws IOException if I/O error occurs
+     * @return fluid array list
+     *
+     * @author pragyan01
+     */
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -261,7 +275,14 @@ public class Storage {
         return meals;
     }
 
-    //@@author pragyan01
+    /**
+     * This method loads all fluid entries for foodbank saved in .txt file to fluid array list.
+     *
+     * @throws IOException if I/O error occurs
+     * @return fluid array lists
+     *
+     * @author pragyan01
+     */
     public ArrayList<String> loadFluidLibrary() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
