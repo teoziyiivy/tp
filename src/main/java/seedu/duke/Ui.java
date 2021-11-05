@@ -26,7 +26,7 @@ public class Ui {
 
     //@@author pragyan01
     /**
-     * Constructor of UI class
+     * Constructor of UI class.
      *
      */
     public Ui() {

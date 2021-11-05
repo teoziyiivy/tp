@@ -146,14 +146,11 @@ public class Storage {
     //@@author EdwardZYWang
     public void saveWorkout(WorkoutTracker workoutTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(WORKOUT_FILE_PATH, true);
-        Set<String> workoutSet = new LinkedHashSet<>(workoutTracker.workouts);
-        workoutSet.addAll(loadWorkouts());
-        ArrayList<String> workouts = new ArrayList<>(workoutSet);
-        DateTracker.sortDateAndTime(workouts);
         FileWriter fileCleaner = new FileWriter(WORKOUT_FILE_PATH, false);
-        fileCleaner.write("");
+        fileCleaner.write(Parser.EMPTY_STRING);
+        DateTracker.sortDateAndTime(workoutTracker.workouts);
         fileCleaner.close();
-        for (String w : workouts) {
+        for (String w : workoutTracker.workouts) {
             fileWriter.write(w + System.lineSeparator());
         }
         fileWriter.close();
@@ -162,18 +159,15 @@ public class Storage {
     //@@author EdwardZYWang
     public void saveSchedule(ScheduleTracker scheduleTracker) throws IOException {
         FileWriter fileWriter = new FileWriter(SCHEDULE_FILE_PATH, true);
+        FileWriter fileCleaner = new FileWriter(SCHEDULE_FILE_PATH, false);
         ArrayList<String> currentScheduleStringList = new ArrayList<>();
         for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
             currentScheduleStringList.add(w.getScheduledWorkoutAsString());
         }
-        Set<String> scheduleSet = new LinkedHashSet<>(currentScheduleStringList);
-        scheduleSet.addAll(loadSchedule());
-        ArrayList<String> schedule = new ArrayList<>(scheduleSet);
-        DateTracker.sortDateAndTime(schedule);
-        FileWriter fileCleaner = new FileWriter(SCHEDULE_FILE_PATH, false);
-        fileCleaner.write("");
+        DateTracker.sortDateAndTime(currentScheduleStringList);
+        fileCleaner.write(Parser.EMPTY_STRING);
         fileCleaner.close();
-        for (String s : schedule) {
+        for (String s : currentScheduleStringList) {
             if (Parser.isRecurringWorkout(s)) {
                 fileWriter.write(s + System.lineSeparator());
                 continue;
@@ -340,21 +334,6 @@ public class Storage {
             }
         }
         return workout;
-    }
-
-    //@@author EdwardZYWang
-    public ArrayList<String> loadSchedule() throws IOException {
-        ArrayList<String> schedule = new ArrayList<>();
-        File dataFile = new File(SCHEDULE_FILE_PATH);
-        Scanner fileScanner = new Scanner(dataFile);
-        String textFromFile;
-        while (fileScanner.hasNext()) {
-            textFromFile = fileScanner.nextLine();
-            if (Parser.containsDateSeparator(textFromFile) && Parser.containsTimeSeparator(textFromFile)) {
-                schedule.add(textFromFile);
-            }
-        }
-        return schedule;
     }
 
     //@@author EdwardZYWang
