@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.meal.MealException;
+
 public class Calculator {
 
     protected double height;
@@ -41,6 +44,9 @@ public class Calculator {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Prints out the ideal recommended caloric intake of an individual based on the Harris-Benedict Formula.
+     */
     public void getIdealCalories() {
         System.out.println(System.lineSeparator() + "Your ideal number of calories to maintain your weight is "
                 + System.lineSeparator());

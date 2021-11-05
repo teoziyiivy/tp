@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
@@ -71,6 +72,12 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Checks if the user's input contains separators.
+     *
+     * @param inputArguments User's input.
+     * @return true, if input contains separators, and false, if input does not contain separators.
+     */
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
             return true;
@@ -84,6 +91,15 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Returns calories extracted from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Calories.
+     * @throws DukeException If the user's description is empty.
+     * @throws NumberFormatException If calories is not an integer value.
+     * @throws FoodBankException If food already exists within either meal or fluid library.
+     */
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
@@ -185,7 +201,14 @@ public class Parser {
         return description;
     }
 
-    //@@author teoziyiivy
+    //@@author VishalJeyaram
+    /**
+     * Returns date extracted from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Date.
+     * @throws DateTimeParseException If the date is not entered properly.
+     */
     public static String getDate(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
