@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.fluid.NoVolumeEntered;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
@@ -13,6 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author pragyan01
+/**
+ * Class responsible for handling fluid entries.
+ *
+ * @author pragyan01
+ */
 public class Fluid extends Tracker {
 
     protected ArrayList<String> fluidArray;
@@ -26,6 +32,10 @@ public class Fluid extends Tracker {
     protected int totalVolume;
     private static final Logger logr = Logger.getLogger("FluidLogger");
 
+    /**
+     * Constructor of fluid class
+     *
+     */
     public Fluid() {
         this.fluidArray = new ArrayList<>();
         this.fluidNumber = 0;
@@ -33,6 +43,15 @@ public class Fluid extends Tracker {
         logr.setLevel(Level.SEVERE);
     }
 
+    /**
+     * This method splits user input to extract parameters such as description, calories, volume, date & time.
+     *
+     * @param inputArguments user input provided
+     * @throws FoodBankException if calories are not provided
+     * @throws FluidExceptions if description not provided
+     *
+     * @author pragyan01
+     */
     public void generateFluidParameters(String inputArguments) throws FoodBankException, FluidExceptions {
         try {
             description = Parser.getDescription(inputArguments);
@@ -45,7 +64,16 @@ public class Fluid extends Tracker {
         }
     }
 
-    public void addFluid(String inputArguments) throws DukeException, FluidExceptions, FoodBankException {
+    /**
+     * This method adds a fluid entry to the fluid array.
+     *
+     * @param inputArguments user input provided
+     * @throws FluidExceptions if description or volume is not provided
+     * @throws FoodBankException if calories are not provided
+     *
+     * @author pragyan01
+     */
+    public void addFluid(String inputArguments) throws FluidExceptions, FoodBankException {
         logr.entering(getClass().getName(), "addFluid");
         logr.info("going to generate fluid parameters from user input");
         if (inputArguments == null) {
@@ -55,6 +83,9 @@ public class Fluid extends Tracker {
         logr.info("end of generating fluid parameters");
         if (description.equals("") || Parser.containsSeparators(description)) {
             throw new InvalidFluidDescription();
+        }
+        if ((calories > 0) && (volume == 0)) {
+            throw new NoVolumeEntered();
         }
         inputArguments = description + " /c " + calories + " /v " + volume + " /d " + date + " /t " + time;
         fluidArray.add(inputArguments);
@@ -67,6 +98,15 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "addFluid");
     }
 
+    /**
+     * This method deletes a fluid entry from the fluid array.
+     *
+     * @param inputArguments user input provided
+     * @throws FluidExceptions if fluid entry index is not provided
+     * @throws FoodBankException if the fluid entry does not exist
+     *
+     * @author pragyan01
+     */
     public void deleteFluid(String inputArguments) throws FoodBankException, FluidExceptions {
         logr.entering(getClass().getName(), "deleteFluid");
         if (inputArguments == null) {
@@ -95,6 +135,15 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "deleteFluid");
     }
 
+    /**
+     * This method lists out all fluid entries stored.
+     *
+     *@param userDate date provided by user
+     *@throws FluidExceptions if description for a fluid entry is not found
+     *@throws FoodBankException if calories for a fluid entry is not found
+     *
+     * @author pragyan01
+     */
     public void listFluids(String userDate) throws FoodBankException, FluidExceptions {
         if (fluidArray.size() == 0) {
             System.out.println("Your fluid list is empty!");
@@ -146,6 +195,16 @@ public class Fluid extends Tracker {
         logr.exiting(getClass().getName(), "listFluids");
     }
 
+    /**
+     * This method sums up the calorie total for a specific date.
+     *
+     *@param date date provided by user
+     *@throws FluidExceptions if description for a fluid entry is not found
+     *@throws FoodBankException if calories for a fluid entry is not found
+     *@return total calorie for the specific date
+     *
+     *@author pragyan01
+     */
     public int getCalories(String date) throws FoodBankException, FluidExceptions {
         int calorieTotal = 0;
         for (String fluid : fluidArray) {
@@ -157,6 +216,16 @@ public class Fluid extends Tracker {
         return calorieTotal;
     }
 
+    /**
+     * This method sums up the volume total for a specific date.
+     *
+     *@param date date provided by user
+     *@throws FluidExceptions if description for a fluid entry is not found
+     *@throws FoodBankException if calories for a fluid entry is not found
+     *@return total volume for the specific date
+     *
+     *@author pragyan01
+     */
     public int getVolume(String date) throws FoodBankException, FluidExceptions {
         int volumeTotal = 0;
         for (String fluid : fluidArray) {

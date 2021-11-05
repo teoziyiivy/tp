@@ -56,6 +56,20 @@ public class ScheduledWorkout {
         }
     }
 
+    /**
+     * Copies and constructs a <code>ScheduledWorkout</code> object with the same parameters.
+     *
+     * @param scheduledWorkout <code>ScheduledWorkout</code> object to be copied.
+     */
+    public ScheduledWorkout(ScheduledWorkout scheduledWorkout) {
+        this.workoutDescription = scheduledWorkout.workoutDescription;
+        this.activities = scheduledWorkout.activities;
+        this.workoutDate = scheduledWorkout.workoutDate;
+        this.workoutTime = scheduledWorkout.workoutTime;
+        this.workoutDateTime = scheduledWorkout.workoutDateTime;
+        this.isRecurring = scheduledWorkout.isRecurring;
+    }
+
     public String getWorkoutDescription() {
         return workoutDescription;
     }

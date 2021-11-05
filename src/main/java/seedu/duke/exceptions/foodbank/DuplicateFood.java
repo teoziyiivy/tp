@@ -1,9 +1,9 @@
 package seedu.duke.exceptions.foodbank;
 
 //@@author pragyan01
-public class FoodBankException extends Exception {
+public class DuplicateFood extends FoodBankException {
     @Override
     public String getMessage() {
-        return "Unknown Error occurred";
+        return "This food entry already exists.";
     }
 }
