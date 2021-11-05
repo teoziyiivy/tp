@@ -63,12 +63,12 @@ completed three sets of 12 reps.
 overly large and nonsensical integer value for calorie such as `2147483647` there may be overflow during computation. 
   E.g., when calculating total calories, summation may result in an overflow, producing negative calories. 
   
-* Separators such as the date separator `/d` and time separator `/t` should be entered in the **same order** as shown in 
-  their respective command formats. CLI.ckFit **does not** support the shuffling of separators when taking user input.
+* Separators such as the date separator `/d`, time separator `/t`, calorie separator `/c`, volume separator `/v` and 
+  activity separator `/a` should be entered in the **same order** as shown in their respective command formats. 
+  CLI.ckFit **does not** support the shuffling of separators when taking user input. 
   
 * The separators as shown in the command format should be input **once**. Typing multiple identical separators 
-  unnecessarily *may* cause incorrect parsing of user input. In such cases, the argument after the first instance of 
-  the separator will be taken.
+  unnecessarily *may* cause incorrect parsing of user input. 
   
 * To ensure correct processing of user inputs you should only enter the **necessary** number of arguments. 
   For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
@@ -151,8 +151,10 @@ Description: Adds a new meal to the list of meals, with its associated calories,
 Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 
 * The `MEAL_NAME` can contain spaces.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * The `MEAL_CALORIES` can only contain positive integers inclusive of 0.
-* You can only omit putting `MEAL_CALORIES` if you have saved the meal in your meal library already.
+* You can only omit putting `MEAL_CALORIES` if you have saved the meal in your [meal library](#adding-meal-to-library) already.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
@@ -173,8 +175,10 @@ Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 
 
 * The `FLUID_NAME` can contain spaces.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
-* You can only omit putting `FLUID_CALORIES` if you have saved the drink in your fluid library already.
+* You can only omit putting `FLUID_CALORIES` if you have saved the drink in your [fluid library](#adding-fluid-to-library) already.
 * The `VOLUME` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
@@ -200,6 +204,8 @@ Description: Adds a new weight to the list of weight items, with its associated 
 Format: `add weight WEIGHT </d DATE>`
 
 * The `WEIGHT` cannot contain spaces and must be a non-negative number to maximum of 1 decimal place.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * The `WEIGHT` has to be realistic (<1000.0 kg) due to limitation of integer overflow.
 * The `DATE` is in dd/mm/yyyy.
 * If `DATE` is not specified, the current system date will be taken.
@@ -219,6 +225,8 @@ Description: Adds a new workout to the list of workout items, with its associate
 Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 
 * The `WORKOUT_NAME` can contain spaces.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * The `CALORIES_BURNT` can only contain positive integers inclusive of 0.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
@@ -244,6 +252,8 @@ activity breakdowns, with date and time of workout.
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 
 * The `WORKOUT_NAME` can contain spaces.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * The `DATE` is in dd/mm/yyyy.
 * The `TIME` is in hh:mm.
 * The `DATE` or `TIME` is compulsory for schedules.
@@ -258,23 +268,29 @@ Example of usage:
 
 ### With activity breakdown
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
-
 * The `/a` separator is optional.
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in **one integer** `[DISTANCE]`
   **in metres** for the activity.
 * For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in **two integers** in the form `[SETS]x[REPS]`.
+* If `ACTIVITY_NAME` is either `running/swimming/cycling` then `ACTIVITY_QUANTIFIER` takes in one 
+  **positive non-zero integer** `[DISTANCE]` in **metres** for the activity.
+* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** 
+  in the form `[SETS]x[REPS]`.
 * Multiple activities can be entered as long as they are separated by a comma `,`.
 * The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
+* The ***optional*** `/r` flag, **if** included, **must** be at the end of the command.
 
 
 Example of usage:
 
 * `add schedule weekly chest day /d 07/12/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r` adds a *recurring* workout
-  to your schedule with the description `weekly chest day` on `07/12/2021` at `13:50`. Furthermore, an activity breakdown of
+  to your schedule with the description `weekly chest day` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
   `bench press` with `5` sets and `12` reps as well as `pushups` with `5` sets of `20` reps will also be added.
 * `add schedule triathlon training /d 07/12/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000` adds a *non-recurring* workout
-  to your schedule with the description `traithlon training` on `07/12/2021` at `13:50`. Furthermore, an activity breakdown of
+  to your schedule with the description `traithlon training` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
   `running` for `3000` metres, `swimming` for `1000` metres as well as `cycling` for `4000` metres will also be added.
 
 ## Adding meal to library
@@ -286,6 +302,8 @@ Description: Add a new meal record to the library, with its associated calories.
 Format: `library addmeal MEAL_NAME /c MEAL_CALORIES`
 
 * The MEAL_NAME can contain spaces.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.
 * The MEAL_CALORIES can only contain positive integers inclusive of 0.
 
 Example of usage:
@@ -301,6 +319,8 @@ Description: Adds a new fluid record to the library, with its associated calorie
 Format: `library addfluid FLUID_NAME /c FLUID_CALORIES`
 
 * The FLUID_NAME can contain spaces.
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
+* Each prefix only accepts one input after it.  
 * The FLUID_CALORIES can only contain positive integers inclusive of 0.
 
 Example of usage:

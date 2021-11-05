@@ -152,6 +152,8 @@ public class ClickfitMessages {
     public static final String WORKOUTS_RECORDED_TODAY_MESSAGE = "Workouts recorded today:"
             + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
 
+    public static final String UNKNOWN_ERROR_MESSAGE = "Unknown error detected, please contact the devs of CLI.ckFit";
+
     public static String getScheduledWorkoutCountMessage(int workoutCount) {
         return "You have " + workoutCount + " scheduled workouts on that day!";
     }

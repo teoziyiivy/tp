@@ -133,7 +133,7 @@ public class CommandManager {
 
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException, FluidExceptions,
-            ScheduleException, WeightException,
+            WeightException,
             WorkoutException, MealException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
         command = splitResults[0];

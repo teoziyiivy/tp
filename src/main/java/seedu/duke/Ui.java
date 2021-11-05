@@ -59,7 +59,6 @@ public class Ui {
                 System.out.println("wrong input!");
             }
         }
-
         answerIsCorrect = checkGender(answerIsCorrect);
 
         answerIsCorrect = checkWeight(answerIsCorrect);
