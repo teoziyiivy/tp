@@ -18,7 +18,7 @@ public class UserHelp {
     /**
      * Takes in user input to decide whether to print out help commands.
      *
-     * @param String input.
+     * @param input user's input
      */
     public static void generateUserHelpParameters(String input) {
         assert !Objects.equals(input, "");

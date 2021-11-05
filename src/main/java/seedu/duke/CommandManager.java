@@ -111,8 +111,8 @@ public class CommandManager {
     }
 
     /**
-     * Calls other methods to save the user's inputs into the respective textfiles
-     * so that future sessions can start from where they ended
+     * Calls other methods to save the user's inputs into the respective text files
+     * so that future sessions can start from where they ended.
      *
      * @throws IOException when there is an input error
      */
