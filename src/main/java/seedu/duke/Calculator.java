@@ -1,8 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.foodbank.FoodBankException;
-import seedu.duke.exceptions.meal.MealException;
-
 public class Calculator {
 
     protected double height;
