@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
@@ -136,7 +137,15 @@ public class Parser {
         }
     }
 
-    //@@author pragyan01
+    /**
+     * This method extracts volume parameter from user input.
+     *
+     *@param inputArguments user input provided
+     *@throws DukeException if volume entered is negative
+     *@return volume parameter
+     *
+     *@author pragyan01
+     */
     public static int getVolume(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -153,7 +162,14 @@ public class Parser {
         return volume;
     }
 
-    //@@author teoziyiivy
+    /**
+     * This method extracts description parameter from user input.
+     *
+     *@param inputArguments user input provided
+     *@return description parameter
+     *
+     *@author pragyan01
+     */
     public static String getDescription(String inputArguments) {
         String[] userInput;
         if (containsCalorieSeparator(inputArguments)) {
@@ -372,7 +388,13 @@ public class Parser {
         }
     }
 
-    //@@author pragyan01
+    /**
+     * This method obtains current system date of the user.
+     *
+     *@return current system date
+     *
+     *@author pragyan01
+     */
     public static String getSystemDate() {
         String systemDate = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault());
@@ -382,7 +404,13 @@ public class Parser {
         return systemDate;
     }
 
-    //@@author pragyan01
+    /**
+     * This method obtains current system time of the user.
+     *
+     *@return current system time
+     *
+     *@author pragyan01
+     */
     public static String getSystemTime() {
         String systemTime = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());

@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.schedule.ScheduleTracker;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,9 +28,20 @@ public class DateTracker {
         Collections.sort(dates);
     }
 
-    //@@author pragyan01
+    /**
+     * This method sorts an array list by date.
+     *
+     * @param list any array list provided
+     *
+     * @author pragyan01
+     */
     public static void sortDate(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
+            /**
+             * @return sorted array list by date
+             *
+             * @author pragyan01
+             */
             public int compare(String o1, String o2) {
                 LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(o1),
                         DateTimeFormatter.ofPattern("dd/MM/yyyy"));
