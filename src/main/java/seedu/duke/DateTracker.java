@@ -1,12 +1,14 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.schedule.ScheduleTracker;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,6 +17,12 @@ public class DateTracker {
     protected static ArrayList<String> dates = new ArrayList<>();
 
     //@@author VishalJeyaram
+    /**
+     * Checks if a date for any parameter has already been accounted for.
+     * If is has not been accounted for, the date will be added to the list of dates.
+     *
+     * @param newDate Date to be checked
+     */
     public static void checkIfDateExists(String newDate) {
         for (String date : dates) {
             if (date.equals(newDate)) {
@@ -29,9 +37,20 @@ public class DateTracker {
         Collections.sort(dates);
     }
 
-    //@@author pragyan01
+    /**
+     * This method sorts an array list by date.
+     *
+     * @param list any array list provided
+     *
+     * @author pragyan01
+     */
     public static void sortDate(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
+            /**
+             * @return sorted array list by date
+             *
+             * @author pragyan01
+             */
             public int compare(String o1, String o2) {
                 LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(o1),
                         DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -43,9 +62,18 @@ public class DateTracker {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Deletes a date from the list of dates if no meal, workout, weight or fluid occurs on that date
+     *
+     * @param inputArguments User's input
+     * @param fluid Fluid object
+     * @param meal Meal object
+     * @param workoutTracker WorkoutTracker object
+     * @param weightTracker WeightTracker object
+     */
     public static void deleteDateFromList(String inputArguments, Fluid fluid, Meal meal,
                                           WorkoutTracker workoutTracker,
-                                          WeightTracker weightTracker) throws DukeException {
+                                          WeightTracker weightTracker) {
         String date = Parser.getDate(inputArguments);
         for (String m : meal.meals) {
             if (m.contains(date)) {

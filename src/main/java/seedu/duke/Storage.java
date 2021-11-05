@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
 
@@ -40,55 +41,67 @@ public class Storage {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Saves meal and fluid headers and date headers to text file.
+     *
+     * @param fluid Fluid object.
+     * @param meal Meal object.
+     * @throws IOException If there is a problem with the text file.
+     */
     public void saveFood(Fluid fluid, Meal meal) throws IOException {
-        String currentDate;
-        String currentMeal;
-        String currentFluid;
         String header;
         String filePath = new File(foodFile).getAbsolutePath();
         FileWriter fw = new FileWriter(filePath, false);
-        int headerFlag;
         header = "Meals" + "\n";
         Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
         fw.close();
         for (String date : DateTracker.dates) {
-            headerFlag = 0;
-            for (String m : meal.meals) {
-                if (m.contains(date) && (headerFlag == 0)) {
-                    currentDate = "Date: " + date + "\n";
-                    Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
-                    fw.close();
-                    headerFlag = 1;
-                }
-                if (m.contains(date)) {
-                    currentMeal = m + "\n";
-                    Files.write(Paths.get(filePath), currentMeal.getBytes(), StandardOpenOption.APPEND);
-                    fw.close();
-                }
-            }
+            saveFoodLists(filePath, fw, date, meal.meals);
         }
         header = "Fluids" + "\n";
         Files.write(Paths.get(filePath), header.getBytes(), StandardOpenOption.APPEND);
         fw.close();
         for (String date : DateTracker.dates) {
-            headerFlag = 0;
-            for (String f : fluid.fluidArray) {
-                if (f.contains(date) && (headerFlag == 0)) {
-                    currentDate = "Date: " + date + "\n";
-                    Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
-                    fw.close();
-                    headerFlag = 1;
-                }
-                if (f.contains(date)) {
-                    currentFluid = f + "\n";
-                    Files.write(Paths.get(filePath), currentFluid.getBytes(), StandardOpenOption.APPEND);
-                    fw.close();
-                }
+            saveFoodLists(filePath, fw, date, fluid.fluidArray);
+        }
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * Saves meal and fluid lists to text file.
+     *
+     * @param filePath Name of textfile.
+     * @param fw FileWriter variable.
+     * @param date Date of food consumption.
+     * @param foods List of foods.
+     * @throws IOException If there is a problem with the text file.
+     */
+    private void saveFoodLists(String filePath, FileWriter fw, String date, ArrayList<String> foods) throws IOException {
+        int headerFlag;
+        String currentDate;
+        String currentMeal;
+        headerFlag = 0;
+        for (String food : foods) {
+            if (food.contains(date) && (headerFlag == 0)) {
+                currentDate = "Date: " + date + "\n";
+                Files.write(Paths.get(filePath), currentDate.getBytes(), StandardOpenOption.APPEND);
+                fw.close();
+                headerFlag = 1;
+            }
+            if (food.contains(date)) {
+                currentMeal = food + "\n";
+                Files.write(Paths.get(filePath), currentMeal.getBytes(), StandardOpenOption.APPEND);
+                fw.close();
             }
         }
     }
 
     //@@author VishalJeyaram
+    /**
+     * Saves library meals and fluids to text file.
+     *
+     * @throws IOException If there is a problem with the text file.
+     */
     public void saveLibrary() throws IOException {
         String customMeal;
         String customFluid;
@@ -176,7 +189,14 @@ public class Storage {
         fileWriter.close();
     }
 
-    //@@author pragyan01
+    /**
+     * This method loads all meals saved in .txt file to meal array list.
+     *
+     * @throws IOException if I/O error occurs
+     * @return meal array list
+     *
+     * @author pragyan01
+     */
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -198,7 +218,14 @@ public class Storage {
         return meals;
     }
 
-    //@@author pragyan01
+    /**
+     * This method loads all fluids saved in .txt file to fluid array list.
+     *
+     * @throws IOException if I/O error occurs
+     * @return fluid array list
+     *
+     * @author pragyan01
+     */
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(foodFile).getAbsolutePath();
@@ -240,6 +267,12 @@ public class Storage {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Loads meal library from text file to arraylist.
+     *
+     * @return Meal library arraylist.
+     * @throws IOException If there is a problem with the text file.
+     */
     public ArrayList<String> loadMealLibrary() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
@@ -261,7 +294,14 @@ public class Storage {
         return meals;
     }
 
-    //@@author pragyan01
+    /**
+     * This method loads all fluid entries for foodbank saved in .txt file to fluid array list.
+     *
+     * @throws IOException if I/O error occurs
+     * @return fluid array lists
+     *
+     * @author pragyan01
+     */
     public ArrayList<String> loadFluidLibrary() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
         String newFilePath = new File(libraryFile).getAbsolutePath();
@@ -327,6 +367,9 @@ public class Storage {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Creates food file, "Food.txt" if it hasn't been created already.
+     */
     public static void initializeFoodFile() {
         File dataFile = new File(foodFile);
         if (!dataFile.exists()) {

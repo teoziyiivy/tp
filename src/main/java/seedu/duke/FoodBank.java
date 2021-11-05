@@ -10,7 +10,9 @@ import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
 import seedu.duke.exceptions.foodbank.InvalidMealIndexException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import seedu.duke.exceptions.foodbank.NoFoodIndexException;
+import seedu.duke.exceptions.meal.MealException;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class FoodBank {
@@ -23,6 +25,12 @@ public class FoodBank {
     protected static int totalFluids;
 
     //@@author VishalJeyaram
+    /**
+     * Constructor for FoodBank class used to initialize the instance variables
+     * such as the arraylist to store the library meals, the arraylist to store
+     * the library fluids, two integer variables to store the number of library
+     * meals and the number of library fluids respectively.
+     */
     public FoodBank() {
         meals = new ArrayList<>();
         fluids = new ArrayList<>();
@@ -30,7 +38,14 @@ public class FoodBank {
         totalFluids = 0;
     }
 
-    //@@author pragyan01
+    /**
+     * This method splits user input to extract parameters such as description and calories.
+     *
+     * @param inputArguments user input provided
+     * @throws FoodBankException if calories are not provided
+     *
+     * @author pragyan01
+     */
     public static void generateParameters(String inputArguments) throws FoodBankException {
         try {
             calories = Parser.getCalories(inputArguments);
@@ -40,7 +55,14 @@ public class FoodBank {
         }
     }
 
-    //@@author pragyan01
+    /**
+     * This method adds a fluid entry to the fluid library.
+     *
+     * @param inputArguments user input provided
+     * @throws FoodBankException if user input is null
+     *
+     * @author pragyan01
+     */
     public static void addCustomFluid(String inputArguments) throws FoodBankException {
         totalFluids = fluids.size();
         if (inputArguments == null) {
@@ -63,7 +85,14 @@ public class FoodBank {
                 + " You now have " + totalFluids + " fluids!\n");
     }
 
-    //@@author pragyan01
+    /**
+     * This method deletes a fluid entry from the fluid library.
+     *
+     * @param inputArguments user input provided
+     * @throws FoodBankException if the fluid entry index is invalid or not provided
+     *
+     * @author pragyan01
+     */
     public static void deleteCustomFluids(String inputArguments) throws FoodBankException {
         totalFluids = fluids.size();
         if (inputArguments == null) {
@@ -83,7 +112,13 @@ public class FoodBank {
                 + " You now have " + totalFluids + " fluids left!\n");
     }
 
-    //@@author pragyan01
+    /**
+     * This method lists out all fluid entries stored in the food library.
+     *
+     *@throws FoodBankException if calories for a fluid entry is not found
+     *
+     * @author pragyan01
+     */
     public static void listCustomFluids() throws FoodBankException {
         if (fluids.size() == 0) {
             System.out.println("Your fluids library is empty!");
@@ -99,6 +134,11 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Lists out all the library meals.
+     *
+     * @throws FoodBankException if user's food is already within the meal library.
+     */
     public static void listCustomMeal() throws FoodBankException {
         if (meals.size() == 0) {
             System.out.println("Your meals library is empty!");
@@ -114,6 +154,12 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Adds a custom meal with its associated calories to the meal library
+     *
+     * @throws FoodBankException If the meal description is empty, or if the meal already exists
+     * within the library.
+     */
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
         totalMeals = meals.size();
         if (inputArguments == null) {
@@ -133,6 +179,13 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Deletes a custom meal with its associated calories from the meal library
+     *
+     * @throws NumberFormatException If the meal index is not an integer value.
+     * @throws FoodBankException If meal index is not keyed in, or if the meal library is empty,
+     * or if the meal index is out of range
+     */
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
         totalMeals = meals.size();
         if (inputArguments == null) {
@@ -152,7 +205,14 @@ public class FoodBank {
                 + totalMeals + " meals left!\n");
     }
 
-    //@@author pragyan01
+    /**
+     * This method finds calories associated with a specific food entry.
+     *
+     * @throws FoodBankException if specified food entry
+     * @return calories associated with the specific food entry
+     *
+     * @author pragyan01
+     */
     public static int findCalories(String name) throws FoodBankException {
         for (String meal : meals) {
             generateParameters(meal);

@@ -1,7 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
@@ -70,6 +72,12 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Checks if the user's input contains separators.
+     *
+     * @param inputArguments User's input.
+     * @return true, if input contains separators, and false, if input does not contain separators.
+     */
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
             return true;
@@ -83,6 +91,15 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Returns calories extracted from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Calories.
+     * @throws DukeException If the user's description is empty.
+     * @throws NumberFormatException If calories is not an integer value.
+     * @throws FoodBankException If food already exists within either meal or fluid library.
+     */
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
@@ -136,7 +153,15 @@ public class Parser {
         }
     }
 
-    //@@author pragyan01
+    /**
+     * This method extracts volume parameter from user input.
+     *
+     *@param inputArguments user input provided
+     *@throws DukeException if volume entered is negative
+     *@return volume parameter
+     *
+     *@author pragyan01
+     */
     public static int getVolume(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -153,7 +178,14 @@ public class Parser {
         return volume;
     }
 
-    //@@author teoziyiivy
+    /**
+     * This method extracts description parameter from user input.
+     *
+     *@param inputArguments user input provided
+     *@return description parameter
+     *
+     *@author pragyan01
+     */
     public static String getDescription(String inputArguments) {
         String[] userInput;
         if (containsCalorieSeparator(inputArguments)) {
@@ -169,7 +201,14 @@ public class Parser {
         return description;
     }
 
-    //@@author teoziyiivy
+    //@@author VishalJeyaram
+    /**
+     * Returns date extracted from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Date.
+     * @throws DateTimeParseException If the date is not entered properly.
+     */
     public static String getDate(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -372,7 +411,13 @@ public class Parser {
         }
     }
 
-    //@@author pragyan01
+    /**
+     * This method obtains current system date of the user.
+     *
+     *@return current system date
+     *
+     *@author pragyan01
+     */
     public static String getSystemDate() {
         String systemDate = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault());
@@ -382,7 +427,13 @@ public class Parser {
         return systemDate;
     }
 
-    //@@author pragyan01
+    /**
+     * This method obtains current system time of the user.
+     *
+     *@return current system time
+     *
+     *@author pragyan01
+     */
     public static String getSystemTime() {
         String systemTime = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
