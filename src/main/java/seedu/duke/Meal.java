@@ -13,6 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author VishalJeyaram
+/**
+ * Class used to perform actions related to meals such as adding,
+ * deleting and listing meals
+ */
 public class Meal extends Tracker {
     protected ArrayList<String> meals;
     protected int mealNumber;
@@ -23,6 +27,11 @@ public class Meal extends Tracker {
     protected int totalCalories;
     private static Logger logger = Logger.getLogger("MealTrackerLogger");
 
+    /**
+     * Constructor for Meal class used to initialize the instance variables
+     * such as the arraylist to store the meals, and two integer variables
+     * to store the number of meals, and the number of calories respectively.
+     */
     public Meal() {
         this.meals = new ArrayList<>();
         this.mealNumber = 0;
@@ -30,6 +39,14 @@ public class Meal extends Tracker {
         logger.setLevel(Level.SEVERE);
     }
 
+    /**
+     * Extracts the calories, description, date, and time for a particular
+     * user input.
+     *
+     * @param inputArguments User input.
+     * @throws FoodBankException if user's meal is already within the meal library.
+     * @throws MealException if no meal description is in input.
+     */
     public void generateMealParameters(String inputArguments) throws FoodBankException, MealException {
         try {
             calories = Parser.getCalories(inputArguments);
@@ -41,6 +58,15 @@ public class Meal extends Tracker {
         }
     }
 
+    /**
+     * Adds a meal to list of meals.
+     *
+     * @param inputArguments User input.
+     * @throws DateTimeParseException If date and/or time is not keyed in properly.
+     * @throws NumberFormatException If the calories is not an integer value.
+     * @throws MealException If no meal description is in the input.
+     * @throws FoodBankException If user's meal is already within the meal library.
+     */
     public void addMeal(String inputArguments)
             throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
         logger.entering(getClass().getName(), "addMeal");
@@ -62,8 +88,16 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(), "addMeal");
     }
 
+    /**
+     * Deletes a meal from the list of meals.
+     *
+     * @param inputArguments User input.
+     * @throws NumberFormatException If the meal index is not an integer value.
+     * @throws MealException If meal list is empty or if meal index keyed in by user does not exist.
+     * @throws FoodBankException If user's meal is already within the meal library
+     */
     public void deleteMeal(String inputArguments)
-            throws DateTimeParseException, NumberFormatException, FoodBankException, MealException {
+            throws NumberFormatException, FoodBankException, MealException {
         mealNumber = meals.size();
         if (meals.size() == 0) {
             throw new EmptyMealListException();
@@ -86,15 +120,44 @@ public class Meal extends Tracker {
         logger.exiting(getClass().getName(), "deleteMeal");
     }
 
+    /**
+     * Lists meals from the list of meals depending on the date.
+     *
+     * @param userDate Date on which to list meals.
+     * @throws MealException If meal list is empty or if meal index keyed in by user does not exist.
+     * @throws FoodBankException If user's food is already within the meal library
+     */
     public void listMeals(String userDate) throws FoodBankException, MealException {
         if (meals.size() == 0) {
             System.out.println("Your meal list is empty!");
         }
+        totalCalories = 0;
+        mealNumber = 0;
         if (userDate.equals("all")) {
-            int i = 1;
-            totalCalories = 0;
-            mealNumber = 0;
-            for (String meal : meals) {
+            listAllMeals();
+        } else {
+            listMealsByDate(userDate);
+        }
+        System.out.println("Total number of meals: " + mealNumber);
+        System.out.println("Total calories: " + totalCalories);
+        logger.log(Level.INFO, "meal list printed");
+        logger.exiting(getClass().getName(), "listMeal");
+    }
+
+    /**
+     * Lists all meals from the list of meals on a specific date.
+     *
+     * @param userDate Date on which to list meals.
+     * @throws MealException If meal list is empty or if meal index keyed in by user does not exist.
+     * @throws FoodBankException If user's food is already within the meal library
+     */
+    private void listMealsByDate(String userDate) throws FoodBankException, MealException {
+        assert mealNumber != 0;
+        logger.entering(getClass().getName(), "listMeals");
+        int i = 1;
+        logger.log(Level.INFO, "entering for loop");
+        for (String meal : meals) {
+            if (meal.contains(userDate)) {
                 logger.log(Level.INFO, "generating meal parameters");
                 generateMealParameters(meal);
                 logger.log(Level.INFO, "meal parameters generated");
@@ -106,34 +169,39 @@ public class Meal extends Tracker {
                 totalCalories += calories;
                 mealNumber += 1;
             }
-        } else {
-            assert mealNumber != 0;
-            logger.entering(getClass().getName(), "listMeals");
-            int i = 1;
-            logger.log(Level.INFO, "entering for loop");
-            totalCalories = 0;
-            mealNumber = 0;
-            for (String meal : meals) {
-                if (meal.contains(userDate)) {
-                    logger.log(Level.INFO, "generating meal parameters");
-                    generateMealParameters(meal);
-                    logger.log(Level.INFO, "meal parameters generated");
-                    System.out.println(i + ". " + description);
-                    System.out.println("Calories: " + calories);
-                    System.out.println("Date: " + date);
-                    System.out.println("Time: " + time + "\n");
-                    i += 1;
-                    totalCalories += calories;
-                    mealNumber += 1;
-                }
-            }
         }
-        System.out.println("Total number of meals: " + mealNumber);
-        System.out.println("Total calories: " + totalCalories);
-        logger.log(Level.INFO, "meal list printed");
-        logger.exiting(getClass().getName(), "listMeal");
     }
 
+    /**
+     * Lists all meals from the list of meals on all days.
+     *
+     * @throws MealException If meal list is empty or if meal index keyed in by user does not exist.
+     * @throws FoodBankException If user's food is already within the meal library
+     */
+    private void listAllMeals() throws FoodBankException, MealException {
+        int i = 1;
+        for (String meal : meals) {
+            logger.log(Level.INFO, "generating meal parameters");
+            generateMealParameters(meal);
+            logger.log(Level.INFO, "meal parameters generated");
+            System.out.println(i + ". " + description);
+            System.out.println("Calories: " + calories);
+            System.out.println("Date: " + date);
+            System.out.println("Time: " + time + "\n");
+            i += 1;
+            totalCalories += calories;
+            mealNumber += 1;
+        }
+    }
+
+    /**
+     * Returns total calories from meals consumed from the list of meals depending on the date.
+     *
+     * @param date Date on which to list meals.
+     * @return Lateral location.
+     * @throws MealException If meal list is empty or if meal index keyed in by user does not exist.
+     * @throws FoodBankException If user's food is already within the meal library
+     */
     public int getCalories(String date) throws FoodBankException, MealException {
         int calorieTotal = 0;
         for (String meal : meals) {

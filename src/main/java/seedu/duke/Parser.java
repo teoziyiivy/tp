@@ -7,7 +7,6 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
-import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
@@ -34,7 +33,6 @@ public class Parser {
     public static final String MULTIPLE_ACTIVITY_MARKER = ",";
     public static final String ACTIVITY_SPLITTER = ":";
     public static final String QUANTIFIER_SPLITTER = "x";
-    public static final String SPACE_SEPARATOR = " ";
     public static final String EMPTY_STRING = "";
 
     //@@author teoziyiivy
@@ -72,6 +70,12 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Checks if the user's input contains separators.
+     *
+     * @param inputArguments User's input.
+     * @return true, if input contains separators, and false, if input does not contain separators.
+     */
     public static boolean containsSeparators(String inputArguments) {
         if (inputArguments.contains(CALORIE_SEPARATOR.trim())) {
             return true;
@@ -85,6 +89,15 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
+    /**
+     * Returns calories extracted from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Calories.
+     * @throws DukeException If the user's description is empty.
+     * @throws NumberFormatException If calories is not an integer value.
+     * @throws FoodBankException If food already exists within either meal or fluid library.
+     */
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
@@ -96,7 +109,7 @@ public class Parser {
             calories = FoodBank.findCalories(description);
             return calories;
         } else {
-            String[] userInput = inputArguments.split(SPACE_SEPARATOR);
+            String[] userInput = inputArguments.split("\\s+");
             int length = userInput.length;
             for (int i = 1; i < length; i++) {
                 if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
@@ -139,6 +152,15 @@ public class Parser {
     }
 
     //@@author pragyan01
+    /**
+     * This method extracts volume parameter from user input.
+     *
+     *@param inputArguments user input provided
+     *@throws DukeException if volume entered is negative
+     *@return volume parameter
+     *
+     *@author pragyan01
+     */
     public static int getVolume(String inputArguments) throws DukeException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -155,7 +177,15 @@ public class Parser {
         return volume;
     }
 
-    //@@author teoziyiivy
+    //@@author pragyan01
+    /**
+     * This method extracts description parameter from user input.
+     *
+     *@param inputArguments user input provided
+     *@return description parameter
+     *
+     *@author pragyan01
+     */
     public static String getDescription(String inputArguments) {
         String[] userInput;
         if (containsCalorieSeparator(inputArguments)) {
@@ -167,11 +197,18 @@ public class Parser {
         } else {
             return inputArguments;
         }
-        String description = userInput[0];
+        String description = userInput[0].trim();
         return description;
     }
 
-    //@@author teoziyiivy
+    //@@author VishalJeyaram
+    /**
+     * Returns date extracted from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Date.
+     * @throws DateTimeParseException If the date is not entered properly.
+     */
     public static String getDate(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -261,10 +298,10 @@ public class Parser {
      */
     public static String getScheduleDescription(String inputArguments) throws ScheduleException {
         String[] userInput = inputArguments.split(DATE_SEPARATOR);
-        String description = userInput[0];
         if (userInput.length == 1) {
             throw new InvalidScheduleDescriptionException();
         }
+        String description = userInput[0].trim();
         return description;
     }
 
@@ -319,18 +356,9 @@ public class Parser {
             }
             ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
-                try {
-                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
-                } catch (NumberFormatException e) {
-                    throw new InvalidActivityFormatException();
-                }
+                parseDistanceActivityQuantifiers(quantifierSplitResults, activityQuantifiers);
             } else if (quantifierSplitResults.length == 2) {
-                try {
-                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
-                    activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
-                } catch (NumberFormatException e) {
-                    throw new InvalidActivityFormatException();
-                }
+                parseNonDistanceActivityQuantifiers(quantifierSplitResults, activityQuantifiers);
             } else {
                 throw new GetActivityException();
             }
@@ -339,7 +367,58 @@ public class Parser {
         return outputMap;
     }
 
+    //@@author arvejw
+    /**
+     * Adds distance activity quantifiers to array list of activity quantifiers.
+     *
+     * @param quantifierSplitResults Array of quantifier split results.
+     * @param activityQuantifiers ArrayList of activity quantifiers.
+     * @throws InvalidActivityFormatException If non-integer or integer less than equal to 0 detected.
+     */
+    private static void parseDistanceActivityQuantifiers(
+            String[] quantifierSplitResults, ArrayList<Integer> activityQuantifiers)
+            throws InvalidActivityFormatException {
+        try {
+            if (parseStringToInteger(quantifierSplitResults[0].trim()) <= 0) {
+                throw new NumberFormatException();
+            }
+            activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+        } catch (NumberFormatException e) {
+            throw new InvalidActivityFormatException();
+        }
+    }
+
+    //@@author arvejw
+    /**
+     * Adds non-distance activity quantifiers to array list of activity quantifiers.
+     *
+     * @param quantifierSplitResults Array of quantifier split results.
+     * @param activityQuantifiers ArrayList of activity quantifiers.
+     * @throws InvalidActivityFormatException If non-integer or integer less than equal to 0 detected.
+     */
+    private static void parseNonDistanceActivityQuantifiers(
+            String[] quantifierSplitResults, ArrayList<Integer> activityQuantifiers)
+            throws InvalidActivityFormatException {
+        try {
+            if (parseStringToInteger(quantifierSplitResults[0].trim()) <= 0
+                    || parseStringToInteger(quantifierSplitResults[1].trim()) <= 0) {
+                throw new NumberFormatException();
+            }
+            activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[0].trim()));
+            activityQuantifiers.add(parseStringToInteger(quantifierSplitResults[1].trim()));
+        } catch (NumberFormatException e) {
+            throw new InvalidActivityFormatException();
+        }
+    }
+
     //@@author pragyan01
+    /**
+     * This method obtains current system date of the user.
+     *
+     *@return current system date
+     *
+     *@author pragyan01
+     */
     public static String getSystemDate() {
         String systemDate = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault());
@@ -350,6 +429,13 @@ public class Parser {
     }
 
     //@@author pragyan01
+    /**
+     * This method obtains current system time of the user.
+     *
+     *@return current system time
+     *
+     *@author pragyan01
+     */
     public static String getSystemTime() {
         String systemTime = "";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault());
