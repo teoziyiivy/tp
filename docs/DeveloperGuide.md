@@ -55,23 +55,24 @@ classes are first converted
 to arrayLists, which are converted to arrayLists, which are then referenced by PrintLoadedLists() to be formatted and
 printed as a summary of all stored information iu the text files.
 
-
 ### MealTracker
 
+#### Meal: Listing Meals
+![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
+The UML sequence diagram above shows what happens when the user attempts to list their meals. If the user inputs
+"list meals all", the if block's condition will be satisfied, and the method "listAllMeals()" will be called. If 
+the user inputs "list meals DATE" where date is an arbitrary date, the method "listMealsByDate(userDate)" will be 
+called, where userDate is the date specified by the user. Then, the method "printMealListTotals(mealNumber, totalCalories)"
+will be called, printing out a message to tell the user the total meal calories and number of meals.
+
 #### Class Diagram
-
 ![](https://user-images.githubusercontent.com/69350459/138307467-cef8cdd8-06ce-4284-92b5-9fe5e1ef50ef.png)
-
 Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
 the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
-#### Listing Meals
-![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
-The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
-The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date`
-variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
-is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
-when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
+### FoodBank
+
+#### FoodBank: Adding custom meal
 
 ### FluidTracker
 #### Class diagram
@@ -92,12 +93,15 @@ The UML sequence diagram above shows what happens when the input command is reco
 The UML sequence diagram above shows what happens when the input command is recognised as `delete fluid`.
 `generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. `taskNumber`, which refers to the respective fluid's entry index is parsed from user input. An `if` block checks for possible errors in user input, which are caught by their respective exceptions. Otherwise, `fluidArray.remove(taskNumber)` is called, which deletes the relevant entry from the `fluidArray` list.
 
+#### Get total calories for specific date fluid sequence diagram
+![](https://user-images.githubusercontent.com/69446495/140621687-7f221499-f29b-4003-a0f5-90d26ecf7f16.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `list calories`. For all fluid entries stored in `fluidArray`, if the entries contain the date as provided, `generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. The `calorie` parameter for each fluid entry in the `fluidArray` is added up, which returns `calorieTotal` at the end of the method's lifeline.
 
 ### WeightTracker
 
 #### Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138873653-d5db5c99-1f22-4c68-86af-188f1ea2c593.png)
-
 Above are the UML class level diagrams of `WeightTracker`, `WeightTrackerMessages`, `Tracker` and relevant exception classes. 
 As seen in the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` class and inherits from the 
 `Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.
