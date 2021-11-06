@@ -191,7 +191,7 @@ public class ClickfitMessages {
                                                         String workoutTime, int caloriesBurned) {
         return "Noted! CLI.ckFit has successfully deleted your recorded workout of description \""
                 + workoutDescription + "\" on " + workoutDate + " at " + workoutTime + System.lineSeparator()
-                + " where you burned " + caloriesBurned + " calories!";
+                + "where you burned " + caloriesBurned + " calories!";
     }
 
     public static String getEmptyWorkoutListOnDateMessage(String date) {
