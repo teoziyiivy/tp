@@ -107,9 +107,9 @@ overly large and nonsensical integer value for calories such as `2147483647` the
 question: 
 
 ```
-Would you like to load up the records of your fitness journey?
-Key in 'y' to skip or press enter to load data from your previous session
-Note: Keying in 'y' to skip this prompt will result in the previous session's data being deleted!`
+Would you like to clear all records of your fitness journey?
+Key in "y" to clear your records, or press enter keystroke to load in data from your previous session(s)
+Note: Keying in "y" will result in the previous session's data being deleted!
 ```
 
 ## Table of Contents
@@ -233,6 +233,12 @@ Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
+
+Expected output:
+
+```
+Noted! CLI.ckFit has recorded your meal of risotto on 14/10/2021 and at 08:30. 250 calories has been added to the calorie count!
+```
 
 ## Adding fluids
 
@@ -427,6 +433,12 @@ Example of usage:
 
 `library addmeal chocolate cake /c 110`
 
+Expected output:
+
+```
+chocolate cake, which has 110 calories, will be added to your library of meals. You now have 2 meals!
+```
+
 ## Adding fluid to library
 
 Command Word: `library addfluid`
@@ -464,6 +476,12 @@ Format: `delete meal INDEX`
 Example of usage:
 
 `delete meal 1`
+
+Expected output:
+
+```
+rissoto will be removed from your list of meals consumed!
+```
 
 ## Delete a fluid
 
@@ -547,7 +565,13 @@ Format: `library deletemeal INDEX`
 
 Example of usage:
 
-`library deletemeal 2`
+`library deletemeal 1`
+
+Expected output:
+
+```
+chocolate cake will be removed from your list of meals consumed. You now have 0 meals left!
+```
 
 ## Delete a fluid from library
 
@@ -584,6 +608,28 @@ Format: `list meals <DATE>`
 Example of usage:
 
 `list meals`, `list meals 22/10/2021`, `list meals all`
+
+Expected output: 
+
+```
+1. chicken soup
+Calories: 150
+Date: 15/09/2021
+Time: 01:16
+
+2. risoto
+Calories: 12
+Date: 07/11/2021
+Time: 01:16
+
+3. rice
+Calories: 120
+Date: 14/12/2022
+Time: 15:07
+
+Total number of meals: 3
+Total calories: 282
+```
 
 ## List fluids
 
@@ -729,6 +775,21 @@ Description: Lists all meals stored in the library.
 
 Format: `library listmeals`
 
+Expected output:
+
+```
+1. pasta
+Calories: 120
+
+2. chocolate bar
+Calories: 90
+
+3. canned soup
+Calories: 122
+
+Total number of meals in library: 3
+```
+
 ## List fluids stored in library
 
 Command Word: `library listfluids`
@@ -806,31 +867,61 @@ Example of usage:
 Expected outcome:
 
 ```
-1. apple
-   Calories: 60
-   Date: 07/11/2021
-   Time: 01:15
+1. risoto
+Calories: 12
+Date: 07/11/2021
+Time: 01:16
 
-Total number of meals: 1
-Total calories: 60
+2. rice
+Calories: 120
+Date: 14/12/2022
+Time: 15:07
 
-1. water
-   Calories: 0
-   Volume: 100
-   Date: 07/11/2021
-   Time: 01:15
+3. chicken soup
+Calories: 150
+Date: 15/09/2021
+Time: 01:16
+
+Total number of meals: 3
+Total calories: 282
+
+1. cola
+Calories: 123
+Volume: 50
+Date: 07/11/2021
+Time: 01:22
 
 Total number of fluids: 1
-Total calories: 0
+Total calories: 123
 
 Here are your recorded weights:
-1.  Weight: 75.0  Date: 07/11/2021
+1.  Weight: 70.0  Date: 07/11/2021
 
 Total number of weights: 1
 
-Your workout list is empty!
+All recorded workouts:
+_________________________________________________________
+1. Hammer curls
+Calories burned: 22
+Date: 07/11/2021
+Time: 01:22
+_________________________________________________________
+You have completed a total of 1 workouts. Amazing job!
 
-Your workout schedule is empty!
+Full Workout Schedule:
+_________________________________________________________
+1. test123 [R]
+Date: 11/11/2021
+Time: 18:59
+
+Activities Breakdown: 
+1. running: 800metres
+2. swimming: 800metres
+3. squats: 3sets x 10reps
+4. cycling: 800metres
+
+_________________________________________________________
+You have a total of 1 workouts in your schedule.
 ```
 
 ## Help Command
