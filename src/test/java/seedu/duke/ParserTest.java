@@ -93,4 +93,10 @@ class ParserTest {
         }
     }
 
+    //@@author arvejw
+    @Test
+    void getActivities_unnecessaryQuantifier_exceptionThrow() {
+        String input = "add schedule test123 /d 28/12/2021 /t 18:59 /a squats: 3x10, swimming:1000x123, running:1000";
+        assertThrows(ScheduleException.class, () -> Parser.getActivities(input));
+    }
 }
