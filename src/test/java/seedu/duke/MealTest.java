@@ -173,7 +173,7 @@ class MealTest {
     @Test
     void deleteMeal6() throws MealException, FoodBankException {
         Meal meal = new Meal();
-        String input = "pasta /c 30 /d 14/09/2021";
+        String input = "pasta /c 31 /d 14/09/2021";
         meal.addMeal(input);
         String deleteInput = "&";
         assertThrows(NumberFormatException.class, () -> {

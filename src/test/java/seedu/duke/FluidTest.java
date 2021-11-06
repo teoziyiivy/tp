@@ -8,6 +8,7 @@ import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
+import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 
 import java.time.format.DateTimeParseException;
@@ -72,7 +73,7 @@ class FluidTest {
     void addFluid8() {
         Fluid fluid = new Fluid();
         String input = "/c 40 /v 100 /d 12/12/2021 /t 10:30";
-        assertThrows(InvalidFluidDescription.class, () -> fluid.addFluid(input));
+        assertThrows(EmptyFoodDescription.class, () -> fluid.addFluid(input));
     }
 
     @Test

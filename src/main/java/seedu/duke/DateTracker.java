@@ -43,9 +43,9 @@ public class DateTracker {
     public static void sortDate(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
             /**
-             * @return sorted array list by date
+             * This method compares two date strings.
              *
-             * @author pragyan01
+             * @return sorted array list by date.
              */
             public int compare(String o1, String o2) {
                 LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(o1),
@@ -59,7 +59,7 @@ public class DateTracker {
 
     //@@author VishalJeyaram
     /**
-     * Deletes a date from the list of dates if no meal, workout, weight or fluid occurs on that date
+     * Deletes a date from the list of dates if no meal, workout, weight or fluid occurs on that date.
      *
      * @param inputArguments User's input
      * @param fluid Fluid object
