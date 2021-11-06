@@ -1,12 +1,14 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.meal.EmptyMealListException;
 import seedu.duke.exceptions.meal.MealException;
+import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDescriptionException;
+import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.meal.NoSuchMealIndexException;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -48,14 +50,10 @@ public class Meal extends Tracker {
      * @throws MealException if no meal description is in input.
      */
     public void generateMealParameters(String inputArguments) throws FoodBankException, MealException {
-        try {
-            calories = Parser.getCalories(inputArguments);
-            description = Parser.getDescription(inputArguments);
-            date = Parser.getDate(inputArguments);
-            time = Parser.getTime(inputArguments);
-        } catch (DukeException e) {
-            throw new NoMealDescriptionException();
-        }
+        calories = Parser.getCalories(inputArguments);
+        description = Parser.getDescription(inputArguments);
+        date = Parser.getDate(inputArguments);
+        time = Parser.getTime(inputArguments);
     }
 
     /**
@@ -71,21 +69,30 @@ public class Meal extends Tracker {
             throws DateTimeParseException, NumberFormatException, MealException, FoodBankException {
         logger.entering(getClass().getName(), "addMeal");
         logger.log(Level.INFO, "generating meal parameters");
+        if (inputArguments == null) {
+            throw new NoMealDetailsException();
+        }
         mealNumber = meals.size();
         generateMealParameters(inputArguments);
         if (Parser.containsSeparators(description)) {
-            throw new MealException();
+            throw new EmptyFoodDescription();
         }
+        totalCalories = getCalories(date);
         logger.log(Level.INFO, "meal parameters generated");
-        System.out.println("Noted! CLI.ckFit has recorded your meal of "
-                + description + " on " + date + " and at " + time
-                + ". " + calories + " calories has been added to the calorie count!\n");
-        totalCalories += calories;
-        inputArguments = description + " /c " + calories + " /d " + date + " /t " + time;
+        inputArguments = combineMealParameters();
         meals.add(inputArguments);
+        totalCalories += calories;
         mealNumber += 1;
+        ClickfitMessages.printAddedMealMessage(description,date,time,calories, totalCalories);
         logger.log(Level.INFO, "meal has been added to meal list");
         logger.exiting(getClass().getName(), "addMeal");
+    }
+
+    private String combineMealParameters() {
+        String inputArguments;
+        inputArguments = description + Parser.CALORIE_SEPARATOR + calories
+                + Parser.DATE_SEPARATOR + date + Parser.TIME_SEPARATOR + time;
+        return inputArguments;
     }
 
     /**
@@ -98,11 +105,13 @@ public class Meal extends Tracker {
      */
     public void deleteMeal(String inputArguments)
             throws NumberFormatException, FoodBankException, MealException {
+        if (inputArguments == null) {
+            throw new NoDeleteMealIndexException();
+        }
         mealNumber = meals.size();
         if (meals.size() == 0) {
             throw new EmptyMealListException();
         }
-        //assert mealNumber != 0;
         logger.entering(getClass().getName(), "deleteMeal");
         int mealIndex = Parser.parseStringToInteger(inputArguments) - 1;
         if ((mealIndex < 0) || (mealIndex > (mealNumber - 1))) {
@@ -110,13 +119,13 @@ public class Meal extends Tracker {
         }
         logger.log(Level.INFO, "generating meal parameters");
         generateMealParameters(meals.get(mealIndex));
+        totalCalories = getCalories(date);
         logger.log(Level.INFO, "meal parameters generated");
         meals.remove(mealIndex);
         mealNumber -= 1;
         totalCalories -= calories;
         logger.log(Level.INFO, "meal has been deleted from meal list");
-        System.out.println(description + " will be removed from your list of meals consumed. You now "
-                + "have " + totalCalories + " left!\n");
+        ClickfitMessages.printDeletedMealMessage(description, totalCalories, date);
         logger.exiting(getClass().getName(), "deleteMeal");
     }
 
@@ -129,17 +138,16 @@ public class Meal extends Tracker {
      */
     public void listMeals(String userDate) throws FoodBankException, MealException {
         if (meals.size() == 0) {
-            System.out.println("Your meal list is empty!");
+            ClickfitMessages.printEmptyMealList();
         }
-        totalCalories = 0;
         mealNumber = 0;
-        if (userDate.equals("all")) {
+        totalCalories = 0;
+        if (userDate.equals(Keywords.ALL)) {
             listAllMeals();
         } else {
             listMealsByDate(userDate);
         }
-        System.out.println("Total number of meals: " + mealNumber);
-        System.out.println("Total calories: " + totalCalories);
+        ClickfitMessages.printMealListTotals(mealNumber, totalCalories);
         logger.log(Level.INFO, "meal list printed");
         logger.exiting(getClass().getName(), "listMeal");
     }
@@ -152,7 +160,6 @@ public class Meal extends Tracker {
      * @throws FoodBankException If user's food is already within the meal library
      */
     private void listMealsByDate(String userDate) throws FoodBankException, MealException {
-        assert mealNumber != 0;
         logger.entering(getClass().getName(), "listMeals");
         int i = 1;
         logger.log(Level.INFO, "entering for loop");
@@ -161,10 +168,7 @@ public class Meal extends Tracker {
                 logger.log(Level.INFO, "generating meal parameters");
                 generateMealParameters(meal);
                 logger.log(Level.INFO, "meal parameters generated");
-                System.out.println(i + ". " + description);
-                System.out.println("Calories: " + calories);
-                System.out.println("Date: " + date);
-                System.out.println("Time: " + time + "\n");
+                ClickfitMessages.printSingleMealDetails(i,description,calories,date,time);
                 i += 1;
                 totalCalories += calories;
                 mealNumber += 1;
@@ -184,10 +188,7 @@ public class Meal extends Tracker {
             logger.log(Level.INFO, "generating meal parameters");
             generateMealParameters(meal);
             logger.log(Level.INFO, "meal parameters generated");
-            System.out.println(i + ". " + description);
-            System.out.println("Calories: " + calories);
-            System.out.println("Date: " + date);
-            System.out.println("Time: " + time + "\n");
+            ClickfitMessages.printSingleMealDetails(i,description,calories,date,time);
             i += 1;
             totalCalories += calories;
             mealNumber += 1;

@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.io.IOException;
-
 public class Calculator {
 
     protected double height;
@@ -13,6 +11,7 @@ public class Calculator {
     protected int activityLevel;
     protected double multiplier;
 
+    //@@author teoziyiivy
     public Calculator(String sex, double weight, double height, int age, int activityLevel) {
         this.height = height;
         this.weight = weight;

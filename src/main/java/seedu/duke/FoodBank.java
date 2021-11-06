@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.DuplicateFood;
 import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
@@ -46,12 +45,9 @@ public class FoodBank {
      * @author pragyan01
      */
     public static void generateParameters(String inputArguments) throws FoodBankException {
-        try {
-            calories = Parser.getCalories(inputArguments);
-            description = Parser.getDescription(inputArguments);
-        } catch (DukeException e) {
-            System.out.println("run away");
-        }
+        calories = Parser.getCalories(inputArguments);
+        description = Parser.getDescription(inputArguments);
+
     }
 
     //@@author pragyan01

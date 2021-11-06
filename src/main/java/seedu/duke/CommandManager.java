@@ -4,8 +4,6 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.meal.MealException;
-import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
-import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.WeightException;
@@ -290,9 +288,6 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
-            if (splitResults.length == 1) {
-                throw new NoMealDetailsException();
-            }
             meal.addMeal(inputArguments);
             DateTracker.sortDateAndTime(meal.meals);
             break;
@@ -344,9 +339,6 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
-            if (splitResults.length == 1) {
-                throw new NoDeleteMealIndexException();
-            }
             meal.deleteMeal(inputArguments);
             break;
         case Keywords.FLUID:
