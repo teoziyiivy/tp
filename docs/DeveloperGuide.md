@@ -114,7 +114,7 @@ The UML sequence diagram above shows what happens when the input command is reco
 `generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. An `if` block checks for possible errors in user input, which are caught by their respective exceptions. Otherwise, variables are then concatenated together as a string called `inputArguments` and added to the `fluidArray` list to be saved.
 
 #### Fluid: Deleting fluid sequence diagram
-![](https://user-images.githubusercontent.com/69446495/140607063-d033a4d1-d8ca-458c-b750-cc2765377eaa.png)
+![](https://user-images.githubusercontent.com/69446495/140607494-11daab2e-4c64-482c-80e9-4bf435ef554d.png)
 
 The UML sequence diagram above shows what happens when the input command is recognised as `delete fluid`.
 `generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. `taskNumber`, which refers to the respective fluid's entry index is parsed from user input. An `if` block checks for possible errors in user input, which are caught by their respective exceptions. Otherwise, `fluidArray.remove(taskNumber)` is called, which deletes the relevant entry from the `fluidArray` list.
