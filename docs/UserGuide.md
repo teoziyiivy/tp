@@ -30,8 +30,7 @@ calculator to calculate BMI and recommended daily caloric intake.
 2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
 to track the calories burned.
 3. Workout schedule manager also allows the user to schedule future workouts
-4. For the long term outlook, weight tracker lets the user monitor his weight over the length of usage of CLI.ckFit as an 
-
+4. For the long term outlook, weight tracker lets the user monitor his weight over the length of usage of CLI.ckFit as an
 indicator of the user's progress
 
 ## Technical Start Up
@@ -104,8 +103,7 @@ overly large and nonsensical integer value for calories such as `2147483647` the
 
 ## Important FAQs
 
-* In order to load the data of your previous session, the user *MUST* press "enter" when prompted with the following 
-
+* In order to load the data of your previous session, the user *MUST* press "enter" when prompted with the following
 question: 
 
 ```
@@ -230,9 +228,9 @@ Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
 
-* Meals can be added to a future date if desired
-
-  Example of usage:
+* Meals can be added to a future date if desired 
+  
+Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
