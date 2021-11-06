@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
 import seedu.duke.exceptions.foodbank.FoodBankException;
