@@ -87,6 +87,7 @@ class FluidTest {
     @Test
     void addFluid10() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = "coke /v 100 /d 12/12/2021 /t 10:30";
         assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
@@ -94,6 +95,7 @@ class FluidTest {
     @Test
     void addFluid11() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = "";
         assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
@@ -101,6 +103,7 @@ class FluidTest {
     @Test
     void addFluid12() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = " ";
         assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
@@ -108,6 +111,7 @@ class FluidTest {
     @Test
     void addFluid13() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = "coke";
         assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
