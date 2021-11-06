@@ -194,7 +194,7 @@ Note: Keying in 'y' to skip this prompt will result in the previous session's da
 
 ### List Manager
 
-- [**List everything**](#list-everything)
+- [**List everything**](#List-everything-on-current-date)
 
 ### Miscellaneous
 
@@ -234,7 +234,6 @@ Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
-
 ## Adding fluids
 
 Command Word: `add fluid`
@@ -266,7 +265,6 @@ Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 Example of usage:
 
 `add fluid milk /c 180 /v 100 /d 08/09/2021 /t 07:40`
-
 
 Expected outcome:
 
@@ -441,13 +439,17 @@ Format: `library addfluid FLUID_NAME /c FLUID_CALORIES`
 
 * Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-* Each prefix only accepts one input after it.  
+* Each prefix only accepts one input after it.
 
 * The FLUID_CALORIES can only contain positive integers inclusive of 0.
 
 Example of usage:
 
 `library addfluid chocolate milk /c 200`
+
+Expected outcome:
+
+`chocolate milk, which has 200 calories, will be added to your library of fluids. You now have 1 fluids!`
 
 ## Delete a meal
 
@@ -476,6 +478,12 @@ Format: `delete fluid INDEX`
 Example of usage:
 
 `delete fluid 2`
+
+Expected outcome:
+
+```
+Noted! CLI.ckFit has deleted your drink of milk of 180 calories and 100 ml on 08/09/2021 07:40.
+```
 
 ## Delete a weight
 
@@ -555,6 +563,10 @@ Example of usage:
 
 `library deletefluid 2`
 
+Expected outcome:
+
+`coke will be removed from your list of fluids consumed. You now have 0 fluids left!`
+
 ## List meals
 
 Command Word: `list meals`
@@ -573,7 +585,6 @@ Example of usage:
 
 `list meals`, `list meals 22/10/2021`, `list meals all`
 
-
 ## List fluids
 
 Command Word: `list fluids`
@@ -591,6 +602,25 @@ Format: `list fluids <DATE>`
 Example of usage:
 
 `list fluids`, `list fluids 22/10/2021`, `list fluids all`
+
+Expected outcome:
+
+```
+1. cola
+Calories: 60
+Volume: 100
+Date: 06/11/2021
+Time: 06:24
+
+2. coke
+   Calories: 60
+   Volume: 60
+   Date: 07/11/2021
+   Time: 00:37
+
+Total number of fluids: 2
+Total calories: 120
+```
 
 ## List weights
 
@@ -667,6 +697,12 @@ Description: List volumes of all fluids consumed for a specific date
 
 Format: `list volumes <DATE>`
 
+Expected outcome:
+
+```
+Your total volume consumption for 07/11/2021 is: 60 ml.
+```
+
 ## List Calories
 
 Command Word: `list calories`
@@ -676,6 +712,14 @@ Description:  List total number of calories consumed, total number of calories b
 for a chosen date
 
 Format: `list calories <DATE> `
+
+Expected outcome:
+
+```
+Your total calorie consumption for 07/11/2021 is: 60 calories.
+Your total calories burned for 07/11/2021 is: 0 calories.
+Your NET calories for 07/11/2021 is: 60 calories.
+```
 
 ## List meals stored in library
 
@@ -692,6 +736,18 @@ Command Word: `library listfluids`
 Description: Lists all fluids stored in the library.
 
 Format: `library listfluids`
+
+Expected outcome:
+
+```
+1. water
+   Calories: 0
+
+2. cola
+   Calories: 60
+
+Total number of fluids in library: 2
+```
 
 ## List everything on current date
 
@@ -711,6 +767,30 @@ Example of usage:
 
 * `list 22/10/2021` will list all data on `22/10/2021`.
 
+Expected outcome:
+
+```
+Your meal list is empty!
+Total number of meals: 0
+Total calories: 0
+
+1. milk
+   Calories: 100
+   Volume: 200
+   Date: 07/11/2021
+   Time: 01:17
+
+Total number of fluids: 1
+Total calories: 100
+
+1. Weight: 60.0
+   Total number of weights: 1
+
+No workouts recorded for today!
+
+No workouts scheduled for today!
+```
+
 ## List everything on all dates
 
 Command Word: `list`
@@ -723,24 +803,33 @@ Example of usage:
 
 `list all`
 
-Expected output
+Expected outcome:
 
 ```
-1. cookie
-Calories: 22
-Date: 15/02/2022
-Time: 19:38
+1. apple
+   Calories: 60
+   Date: 07/11/2021
+   Time: 01:15
+
 Total number of meals: 1
-Total calories: 22
-1. cola
-Calories: 123
-Volume: 0
-Date: 12/12/2024
-Time: 19:38
+Total calories: 60
+
+1. water
+   Calories: 0
+   Volume: 100
+   Date: 07/11/2021
+   Time: 01:15
+
 Total number of fluids: 1
-Total calories: 123
-Your weight list is empty!
+Total calories: 0
+
+Here are your recorded weights:
+1.  Weight: 75.0  Date: 07/11/2021
+
+Total number of weights: 1
+
 Your workout list is empty!
+
 Your workout schedule is empty!
 ```
 
@@ -755,6 +844,44 @@ Example of usage:
 
 `help`
 
+Expected outcome:
+
+```
+parameters encapsulated by angle brackets "< >" are optional
+NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your meal library.
+
+[Add meal] | add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>
+[Add fluid] | add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>
+[Add weight] | add weight WEIGHT /d <DATE>
+[Add workout] | add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>
+[Add scheduled workout] | add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>
+[Add meal to library] | library addmeal MEAL_NAME /c MEAL_CALORIES
+[Add fluid to library] | library addfluid FLUID_NAME /c FLUID_CALORIES
+
+[Remove meal] | delete meal INDEX
+[Remove fluid] | delete fluid INDEX
+[Remove weight] | delete weight INDEX
+[Remove workout] | delete workout INDEX
+[Remove scheduled workout] | delete schedule INDEX
+[Remove meal from library] | library deletemeal INDEX
+[Remove fluid from library] | library deletefluid INDEX
+
+[List meals] | list meals <DATE>
+[List fluids] | list fluids <DATE>
+[List weights] | list weights <DATE>
+[List workouts] | list workouts <DATE>
+[List calories] | list calories <DATE>
+[List volume] | list volumes <DATE>
+[List scheduled workouts] | list schedule <DATE>
+[List meals from library] | library listmeals
+[List fluids from library] | library listfluids
+
+[Access user help] | help commands
+[Access user guide] | help UG
+
+Here is the link to our User Guide! https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html
+```
+
 ## Bye
 
 Command Word: `bye`
@@ -765,6 +892,13 @@ Example of usage:
 
 `bye`
 
+Expected outcome:
+
+```
+Thank you for the hardwork today. CLI.ckFit wishes you a good day
+Team CLI.ckFit is proudly brought to you by Jiewen, Vishal, Pragyan, Ivy and Edward.
+See you soon!
+```
 
 ## FAQ
 
@@ -816,5 +950,5 @@ Command | Format of input
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
-[**List everything**](#list-everything)| `list <DATE>`
+[**List everything**](#List-everything-on-current-date)| `list <DATE>`
 [**Access user help**](#help-command)| `help`
