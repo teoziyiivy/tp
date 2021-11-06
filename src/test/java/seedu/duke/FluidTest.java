@@ -5,7 +5,6 @@ import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
 import seedu.duke.exceptions.fluid.EmptyFluidList;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.fluid.InvalidFluidDescription;
-import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
@@ -84,7 +83,7 @@ class FluidTest {
     }
 
     @Test
-    void addFluid10() {   //DOES NOT WORK
+    void addFluid10() {
         Fluid fluid = new Fluid();
         String input = "coke /v 100 /d 12/12/2021 /t 10:30";
         assertThrows(NullPointerException.class, () -> fluid.addFluid(input));

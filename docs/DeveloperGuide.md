@@ -107,11 +107,17 @@ the diagram, the `Meal` class inherits from the `Tracker` class. This class diag
 
 Above are the UML class level diagrams of `Fluid`, `FluidExceptions` and `Tracker`. As seen in the diagram, the `Fluid` class is dependent on the `FluidExceptions` and the `Fluid`class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
-#### Fluid: Adding weight sequence diagram
-![](https://user-images.githubusercontent.com/69446495/138881867-cff1b0a7-e836-43dd-b654-5b7db96ea1a3.png)
+#### Fluid: Adding fluid sequence diagram
+![](https://user-images.githubusercontent.com/69446495/140606905-45c62251-ae7e-43f5-a5aa-b37d7a12ec1a.png)
 
 The UML sequence diagram above shows what happens when the input command is recognised as `add fluid`.
-`generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. These variables are then concatenated together as a string called `inputArguments` and added to the `fluidArray` list.
+`generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. An `if` block checks for possible errors in user input, which are caught by their respective exceptions. Otherwise, variables are then concatenated together as a string called `inputArguments` and added to the `fluidArray` list to be saved.
+
+#### Fluid: Deleting fluid sequence diagram
+![](https://user-images.githubusercontent.com/69446495/140607063-d033a4d1-d8ca-458c-b750-cc2765377eaa.png)
+
+The UML sequence diagram above shows what happens when the input command is recognised as `delete fluid`.
+`generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. `taskNumber`, which refers to the respective fluid's entry index is parsed from user input. An `if` block checks for possible errors in user input, which are caught by their respective exceptions. Otherwise, `fluidArray.remove(taskNumber)` is called, which deletes the relevant entry from the `fluidArray` list.
 
 ## Product scope
 ### Target user profile
