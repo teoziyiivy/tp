@@ -10,7 +10,7 @@ activate "fluid:Fluid" #FFBBBB
 activate "fluid:Fluid" #DarkSalmon
 return
 |||
-alt no fluid description \n or description has \n separators
+alt invalid fluid description / missing parameters \n/ description has separators
 else else
 "fluid:Fluid"->"fluid:Fluid" : fluidArray.add(inputArguments: String)
 activate "fluid:Fluid" #IndianRed

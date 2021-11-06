@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.DuplicateFood;
 import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
@@ -46,12 +45,9 @@ public class FoodBank {
      * @author pragyan01
      */
     public static void generateParameters(String inputArguments) throws FoodBankException {
-        try {
-            calories = Parser.getCalories(inputArguments);
-            description = Parser.getDescription(inputArguments);
-        } catch (DukeException e) {
-            System.out.println("run away");
-        }
+        calories = Parser.getCalories(inputArguments);
+        description = Parser.getDescription(inputArguments);
+
     }
 
     //@@author pragyan01
@@ -230,5 +226,31 @@ public class FoodBank {
             }
         }
         throw new NoFoodFoundException();
+    }
+
+//@@author pragyan01
+    /**
+     * This method checks if specified food exists in food bank.
+     *
+     * @param name food name specified by user
+     * @throws FoodBankException if parameters cannot be generated for food entries stored in food bank.
+     * @return true if food specified is found in food bank, false otherwise.
+     *
+     * @author pragyan01
+     */
+    public static boolean isFoodFound(String name) throws FoodBankException {
+        for (String meal : meals) {
+            generateParameters(meal);
+            if (description.equals(name)) {
+                return true;
+            }
+        }
+        for (String fluid : fluids) {
+            generateParameters(fluid);
+            if (description.equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
