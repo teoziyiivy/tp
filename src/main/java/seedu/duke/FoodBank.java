@@ -48,7 +48,6 @@ public class FoodBank {
     public static void generateParameters(String inputArguments) throws FoodBankException {
         calories = Parser.getCalories(inputArguments);
         description = Parser.getDescription(inputArguments);
-
     }
 
     //@@author pragyan01
