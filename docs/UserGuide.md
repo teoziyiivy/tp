@@ -512,177 +512,177 @@ Example of usage:
 
 `delete meal 1`
 
-[comment]: <> (## Delete a fluid)
+## Delete a fluid
 
-[comment]: <> (Command Word: `delete fluid`)
+Command Word: `delete fluid`
 
-[comment]: <> (Description: Removes a fluid from the list of fluid items.)
+Description: Removes a fluid from the list of fluid items.
 
-[comment]: <> (Format: `delete fluid INDEX`)
+Format: `delete fluid INDEX`
 
-[comment]: <> (* The `INDEX` can only contain integers from the list.)
+* The `INDEX` can only contain integers from the list.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`delete fluid 2`)
+`delete fluid 2`
 
-[comment]: <> (## Delete a weight)
+## Delete a weight
 
-[comment]: <> (Command Word: `delete weight`)
+Command Word: `delete weight`
 
-[comment]: <> (Description: Deletes a meal from the list of meals.)
+Description: Deletes a meal from the list of meals.
 
-[comment]: <> (Format: `delete weight INDEX`)
+Format: `delete weight INDEX`
 
-[comment]: <> (* Use `list weights all` to determine the index of the meal you wish to delete.)
+* Use `list weights all` to determine the index of the meal you wish to delete.
 
-[comment]: <> (* The `INDEX` can only contain integers from the list.)
+* The `INDEX` can only contain integers from the list.
 
-[comment]: <> (* Only 1 `INDEX` should be included in your input.)
+* Only 1 `INDEX` should be included in your input.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`delete weight 2`)
+`delete weight 2`
 
-[comment]: <> (## Delete a workout)
+## Delete a workout
 
-[comment]: <> (Command Word: `delete workout`)
+Command Word: `delete workout`
 
-[comment]: <> (Description: Deletes a workout from the list of workout items.)
+Description: Deletes a workout from the list of workout items.
 
-[comment]: <> (Format: `delete workout INDEX`)
+Format: `delete workout INDEX`
 
-[comment]: <> (* Use `list workouts all` to determine the index of the workout you wish to delete.)
+* Use `list workouts all` to determine the index of the workout you wish to delete.
 
-[comment]: <> (* The `INDEX` can only contain integers from the list.)
+* The `INDEX` can only contain integers from the list.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `delete workout 3` will delete the workout with index `3` as seen in the list from `list schedule all` if the index is valid.)
+* `delete workout 3` will delete the workout with index `3` as seen in the list from `list schedule all` if the index is valid.
 
-[comment]: <> (## Delete a scheduled workout)
+## Delete a scheduled workout
 
-[comment]: <> (Command Word: `delete schedule`)
+Command Word: `delete schedule`
 
-[comment]: <> (Description: Deletes a workout from the list of workout items.)
+Description: Deletes a workout from the list of workout items.
 
-[comment]: <> (Format: `delete schedule INDEX`)
+Format: `delete schedule INDEX`
 
-[comment]: <> (* Use `list schedule all` to determine the index of the scheduled workout you wish to delete.)
+* Use `list schedule all` to determine the index of the scheduled workout you wish to delete.
 
-[comment]: <> (* The `INDEX` can only contain integers from the list.)
+* The `INDEX` can only contain integers from the list.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `delete schedule 3` will delete the schedule workout with index `3` as seen in the list from `list schedule all` if the index is valid.)
+* `delete schedule 3` will delete the schedule workout with index `3` as seen in the list from `list schedule all` if the index is valid.
 
-[comment]: <> (## Delete a meal from library)
+## Delete a meal from library
 
-[comment]: <> (Command Word: `library deletemeal`)
+Command Word: `library deletemeal`
 
-[comment]: <> (Description: Deletes a meal record from the library.)
+Description: Deletes a meal record from the library.
 
-[comment]: <> (Format: `library deletemeal INDEX`)
+Format: `library deletemeal INDEX`
 
-[comment]: <> (* Use `library listmeals` to determine the index of the meal you wish to delete.)
+* Use `library listmeals` to determine the index of the meal you wish to delete.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`library deletemeal 2`)
+`library deletemeal 2`
 
-[comment]: <> (## Delete a fluid from library)
+## Delete a fluid from library
 
-[comment]: <> (Command Word: `library deletefluid`)
+Command Word: `library deletefluid`
 
-[comment]: <> (Description: Deletes a fluid record from the library.)
+Description: Deletes a fluid record from the library.
 
-[comment]: <> (Format: `library deletefluid INDEX`)
+Format: `library deletefluid INDEX`
 
-[comment]: <> (* Use `library listfluids` to determine the index of the meal you wish to delete.)
+* Use `library listfluids` to determine the index of the meal you wish to delete.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`library deletefluid 2`)
+`library deletefluid 2`
 
-[comment]: <> (## List meals)
+## List meals
 
-[comment]: <> (Command Word: `list meals`)
+Command Word: `list meals`
 
-[comment]: <> (Description: Lists all meals, with its associated calories, date and time of consumption.)
+Description: Lists all meals, with its associated calories, date and time of consumption.
 
-[comment]: <> (Format: `list meals <DATE>`)
+Format: `list meals <DATE>`
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is left empty, the meals recorded **today** will be returned.)
+* If `DATE` is left empty, the meals recorded **today** will be returned.
 
-[comment]: <> (* If the word `all` is written in place of `DATE`, **ALL** stored meals will be listed.)
+* If the word `all` is written in place of `DATE`, **ALL** stored meals will be listed.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`list meals`, `list meals 22/10/2021`, `list meals all`)
+`list meals`, `list meals 22/10/2021`, `list meals all`
 
 
-[comment]: <> (## List fluids)
+## List fluids
 
-[comment]: <> (Command Word: `list fluids`)
+Command Word: `list fluids`
 
-[comment]: <> (Description: Lists all fluids, with its associated calories, date and time of consumption.)
+Description: Lists all fluids, with its associated calories, date and time of consumption.
 
-[comment]: <> (Format: `list fluids <DATE>`)
+Format: `list fluids <DATE>`
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is left empty, the fluids recorded today will be returned.)
+* If `DATE` is left empty, the fluids recorded today will be returned.
 
-[comment]: <> (* If the word `all` is written in place of DATE, ALL stored fluids will be listed.)
+* If the word `all` is written in place of DATE, ALL stored fluids will be listed.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`list fluids`, `list fluids 22/10/2021`, `list fluids all`)
+`list fluids`, `list fluids 22/10/2021`, `list fluids all`
 
-[comment]: <> (## List weights)
+## List weights
 
-[comment]: <> (Command Word:`list weights`)
+Command Word:`list weights`
 
-[comment]: <> (Description: Lists weight depending on date of entry.)
+Description: Lists weight depending on date of entry.
 
-[comment]: <> (Format: `list weights <DATE>`)
+Format: `list weights <DATE>`
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is left empty, the weights recorded **today** will be returned.)
+* If `DATE` is left empty, the weights recorded **today** will be returned.
 
-[comment]: <> (* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.)
+* If the word `all` is written in place of `DATE`, **ALL** stored weights will be listed.
 
-[comment]: <> (* Only 1 `DATE` should be included in your input.)
+* Only 1 `DATE` should be included in your input.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`list weights`, `list weights 22/10/2021`, `list weights all`)
+`list weights`, `list weights 22/10/2021`, `list weights all`
 
-[comment]: <> (## List workouts)
+## List workouts
 
-[comment]: <> (Command Word:`list workouts`)
+Command Word:`list workouts`
 
-[comment]: <> (Description: Lists out all stored workout descriptions, )
+Description: Lists out all stored workout descriptions, 
 
-[comment]: <> (calories burned, date and time depending on date of entry.)
+calories burned, date and time depending on date of entry.
 
-[comment]: <> (Format: `list workouts <DATE>`)
+Format: `list workouts <DATE>`
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is left empty, the workouts recorded **today** will be returned.)
+* If `DATE` is left empty, the workouts recorded **today** will be returned.
 
-[comment]: <> (* If the word `all` is written in place of `DATE`, **ALL** stored workouts will be listed.)
+* If the word `all` is written in place of `DATE`, **ALL** stored workouts will be listed.
 
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `list workouts` will list the recorded workouts for today's date.)
+* `list workouts` will list the recorded workouts for today's date.
 
-[comment]: <> (* `list workouts 22/10/2021` will list the recorded workouts on `22/10/2021`.)
+* `list workouts 22/10/2021` will list the recorded workouts on `22/10/2021`.
 
 [comment]: <> (* `list workouts all` will list all your recorded workouts.)
 
