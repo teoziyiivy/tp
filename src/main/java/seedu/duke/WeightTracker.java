@@ -80,7 +80,7 @@ public class WeightTracker extends Tracker {
         if (input == null) {
             throw new AddWeightException();
         } else {
-            WeightTrackerMessages.printAddWeightResponse(weight, date);
+            ClickfitMessages.printAddWeightResponse(weight, date);
             input = weight + " /d " + date;
             weightsArray.add(input);
             numberOfWeights += 1;
@@ -109,7 +109,7 @@ public class WeightTracker extends Tracker {
             throw new DeleteWeightIndexException();
         } else {
             generateWeightParameters(weightsArray.get(weightIndex));
-            WeightTrackerMessages.printDeleteWeightResponse(weight, date);
+            ClickfitMessages.printDeleteWeightResponse(weight, date);
             weightsArray.remove(weightIndex);
             numberOfWeights--;
             assert numberOfWeights >= 0 : "number of logged weights should be more than or equal to zero";

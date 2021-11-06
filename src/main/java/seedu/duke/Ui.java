@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.LoadException;
-import java.io.IOException;
 import java.util.Scanner;
 
 import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
@@ -189,8 +188,8 @@ public class Ui {
     //@@author EdwardZYWang
     /**
      * Checks with the user whether he wishes to load the data of the previous session.
-     * if "y" is input, the data from the previous session is saved . if enter keystroke is registered
-     * the previous session's data is wiped.
+     * if "y" is input, the data from the previous session is deleted . if enter keystroke is registered
+     * the previous session's data is loaded.
      *
      * @throws LoadException If there are missing text files.
      */
@@ -204,11 +203,11 @@ public class Ui {
             if (uiInput.isEmpty()) {
                 System.out.println(MEMORY_STARTUP_N_INPUT);
                 System.out.println(System.lineSeparator() + "What would you like to do?");
-                result = false;
+                result = true;
                 flag = true;
             } else if (uiInput.trim().equals("y")) {
                 System.out.println(MEMORY_STARTUP_Y_INPUT);
-                result = true;
+                result = false;
                 flag = true;
             } else {
                 System.out.println("wrong input!");

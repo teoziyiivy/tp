@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.DuplicateFood;
 import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
