@@ -49,11 +49,11 @@ public class Meal extends Tracker {
      * @throws FoodBankException if user's meal is already within the meal library.
      * @throws MealException if no meal description is in input.
      */
-    public void generateMealParameters(String inputArguments) throws FoodBankException, MealException {
-        calories = Parser.getCalories(inputArguments);
-        description = Parser.getDescription(inputArguments);
-        date = Parser.getDate(inputArguments);
-        time = Parser.getTime(inputArguments);
+    public void generateMealParameters(String inputArguments) throws FoodBankException {
+        this.calories = Parser.getCalories(inputArguments);
+        this.description = Parser.getDescription(inputArguments);
+        this.date = Parser.getDate(inputArguments);
+        this.time = Parser.getTime(inputArguments);
     }
 
     /**
@@ -79,20 +79,14 @@ public class Meal extends Tracker {
         }
         totalCalories = getCalories(date);
         logger.log(Level.INFO, "meal parameters generated");
-        inputArguments = combineMealParameters();
+        inputArguments = description + Parser.CALORIE_SEPARATOR + calories
+                + Parser.DATE_SEPARATOR + date + Parser.TIME_SEPARATOR + time;
         meals.add(inputArguments);
         totalCalories += calories;
         mealNumber += 1;
         ClickfitMessages.printAddedMealMessage(description,date,time,calories, totalCalories);
         logger.log(Level.INFO, "meal has been added to meal list");
         logger.exiting(getClass().getName(), "addMeal");
-    }
-
-    private String combineMealParameters() {
-        String inputArguments;
-        inputArguments = description + Parser.CALORIE_SEPARATOR + calories
-                + Parser.DATE_SEPARATOR + date + Parser.TIME_SEPARATOR + time;
-        return inputArguments;
     }
 
     /**
