@@ -74,7 +74,6 @@ class FluidTest {
         String input = null;
         assertThrows(InvalidFluidDescription.class, () -> fluid.addFluid(input));
     }
-    */
 
     @Test
     void generateFluidParameters9() {
@@ -82,6 +81,7 @@ class FluidTest {
         String input = "-5";
         assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
     }
+    */
 
     @Test
     void addFluid() {
