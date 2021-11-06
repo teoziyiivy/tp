@@ -3,16 +3,16 @@
 |||
 participant "fluid:Fluid"
 
-->"fluid:Fluid" : addFluid(inputArguments: String)
+->"fluid:Fluid" : deleteFluid(inputArguments: String)
 activate "fluid:Fluid" #FFBBBB
 
-"fluid:Fluid"->"fluid:Fluid" : generateFluidParameters(inputArguments: String)
+"fluid:Fluid"->"fluid:Fluid" : generateFluidParameters(fluidArray.get(taskNumber: int): String)
 activate "fluid:Fluid" #DarkSalmon
 return
 |||
-alt invalid fluid description / missing parameters \n/ description has separators
+alt invalid fluid index / empty fluid list
 else else
-"fluid:Fluid"->"fluid:Fluid" : fluidArray.add(inputArguments: String)
+"fluid:Fluid"->"fluid:Fluid" : fluidArray.remove(taskNumber: int)
 activate "fluid:Fluid" #IndianRed
 return
 |||

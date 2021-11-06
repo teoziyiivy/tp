@@ -96,7 +96,7 @@ public class Fluid extends Tracker {
             logr.info("error adding fluid: no volume provided");
             throw new NoVolumeEntered();
         }
-        if ((calories == 0) || !inputArguments.contains("/c")) {           //DOES NOT WORK
+        if ((calories == 0) || !inputArguments.contains("/c")) {
             logr.info("error adding fluid: no calories provided");
             throw new NoCaloriesEntered();
         }
