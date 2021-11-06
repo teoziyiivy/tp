@@ -95,7 +95,7 @@ class FluidTest {
     void addFluid11() {
         Fluid fluid = new Fluid();
         String input = "";
-            assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
