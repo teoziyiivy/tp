@@ -5,6 +5,7 @@ import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.EmptyMealBankException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.foodbank.IncorrectLibraryAddFormatException;
 import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
 import seedu.duke.exceptions.foodbank.InvalidMealIndexException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
@@ -47,7 +48,6 @@ public class FoodBank {
     public static void generateParameters(String inputArguments) throws FoodBankException {
         calories = Parser.getCalories(inputArguments);
         description = Parser.getDescription(inputArguments);
-
     }
 
     //@@author pragyan01
@@ -164,12 +164,15 @@ public class FoodBank {
         if (inputArguments == null) {
             throw new EmptyFoodDescription();
         }
+        generateParameters(inputArguments);
+        if (Parser.containsSeparators(description)) {
+            throw new FoodBankException();
+        }
         for (String m : meals) {
-            if (m.contains(inputArguments)) {
+            if (m.contains(description)) {
                 throw new DuplicateFood();
             }
         }
-        generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
         meals.add(inputArguments);
         totalMeals += 1;

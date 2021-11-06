@@ -75,6 +75,7 @@ the diagram, the `Meal` class inherits from the `Tracker` class. This class diag
 #### FoodBank: Adding custom meal
 
 ### FluidTracker
+
 #### Class diagram
 
 ![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
