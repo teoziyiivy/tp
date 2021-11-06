@@ -107,9 +107,9 @@ overly large and nonsensical integer value for calories such as `2147483647` the
 question: 
 
 ```
-Would you like to load up the records of your fitness journey?
-Key in 'y' to skip or press enter to load data from your previous session
-Note: Keying in 'y' to skip this prompt will result in the previous session's data being deleted!`
+Would you like to clear all records of your fitness journey?
+Key in "y" to clear your records, or press enter keystroke to load in data from your previous session(s)
+Note: Keying in "y" will result in the previous session's data being deleted!
 ```
 
 ## Table of Contents
