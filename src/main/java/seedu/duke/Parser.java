@@ -1,7 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.fluid.FluidExceptions;
+import seedu.duke.exceptions.fluid.NegativeVolumeException;
+import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.foodbank.NegativeCaloriesException;
+import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
@@ -91,7 +96,7 @@ public class Parser {
 
     //@@author VishalJeyaram
     /**
-     * Returns calories extracted from user's input.
+     * Returns calories extracted from user's input or from meal or fluid library.
      *
      * @param inputArguments User's input.
      * @return Calories.
@@ -100,32 +105,69 @@ public class Parser {
      * @throws FoodBankException If food already exists within either meal or fluid library.
      */
     public static int getCalories(String inputArguments)
-            throws DukeException, NumberFormatException, FoodBankException {
-        int calories = 0;
+            throws NumberFormatException, FoodBankException {
+        String description = getDescription(inputArguments);
         if (!containsCalorieSeparator(inputArguments)) {
-            String description = getDescription(inputArguments);
-            if (Parser.containsSeparators(description)) {
-                throw new DukeException("");
+            return findCaloriesInLibrary(description);
+        } else {
+            return extractCalories(inputArguments);
+        }
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * Returns calories from user's input.
+     *
+     * @param inputArguments User's input.
+     * @return Calories.
+     * @throws NumberFormatException If calories is not an integer value.
+     * @throws FoodBankException If the user has keyed in negative calories.
+     */
+    private static int extractCalories(String inputArguments) throws FoodBankException {
+        int calories = 0;
+        String[] userInput = inputArguments.split("\\s+");
+        int length = userInput.length;
+        for (int i = 1; i < length; i++) {
+            if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
+                calories = parseStringToInteger(userInput[i + 1]);
             }
+        }
+        if (calories < 0) {
+            throw new NegativeCaloriesException();
+        } else {
+            return calories;
+        }
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * Returns calories from meal or fluid library.
+     *
+     * @param description Name of Food
+     * @return Calories.
+     * @throws FoodBankException If the user hasn't keyed in a description for their food, or if their
+     * meal or fluid is not stored in the meal or fluid library.
+     */
+    private static int findCaloriesInLibrary(String description) throws FoodBankException {
+        int calories;
+        if (Parser.containsSeparators(description)) {
+            throw new EmptyFoodDescription();
+        } else if (FoodBank.isFoodFound(description)) {
             calories = FoodBank.findCalories(description);
             return calories;
         } else {
-            String[] userInput = inputArguments.split("\\s+");
-            int length = userInput.length;
-            for (int i = 1; i < length; i++) {
-                if (userInput[i].equals(CALORIE_SEPARATOR.trim())) {
-                    calories = parseStringToInteger(userInput[i + 1]);
-                }
-            }
-            if (calories < 0) {
-                throw new DukeException("Negative calories");
-            } else {
-                return calories;
-            }
+            throw new NoFoodFoundException();
         }
     }
 
     //@@author EdwardZYWang
+    /**
+     * gets calories burned through workout from the user's inputs.
+     *
+     * @param inputArguments arguments of the user's inputs.
+     * @return calories burned for workout parameter
+     * @throws WorkoutException if there is an unknown error encountered.
+     */
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         boolean isCaloriesParsed = false;
@@ -162,7 +204,7 @@ public class Parser {
      *
      *@author pragyan01
      */
-    public static int getVolume(String inputArguments) throws DukeException {
+    public static int getVolume(String inputArguments) throws FluidExceptions {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
         int volume = 0;
@@ -173,7 +215,7 @@ public class Parser {
             }
         }
         if (volume < 0) {
-            throw new DukeException("Negative volume");
+            throw new NegativeVolumeException();
         }
         return volume;
     }

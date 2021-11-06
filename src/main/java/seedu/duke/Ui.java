@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.LoadException;
-
 import java.util.Scanner;
 
 import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
@@ -34,6 +33,10 @@ public class Ui {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Print method with clickFit's logo.
+     *
+     */
     public static void welcomeMessage() {
         String logo = "   ______  _____     _____            __       ________  _   _\n"
                 + " .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_\n"
@@ -84,6 +87,12 @@ public class Ui {
         calculator.getIdealCalories();
     }
 
+    //@@author pragyan01
+    /**
+     * This method obtains user's answers to BMI related questions and then calculates user's BMI.
+     *
+     * @author pragyan01
+     */
     private void checkActivityLevel(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -102,6 +111,12 @@ public class Ui {
         }
     }
 
+    //@@author pragyan01
+    /**
+     * This method obtains user's age.
+     *
+     * @author pragyan01
+     */
     private boolean checkAge(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -120,6 +135,12 @@ public class Ui {
         return answerIsCorrect;
     }
 
+    //@@author pragyan01
+    /**
+     * This method obtains user's height.
+     *
+     * @author pragyan01
+     */
     private boolean checkHeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -134,6 +155,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
+    //@@author VishalJeyaram
     private boolean checkWeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -148,6 +170,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
+    //@@author VishalJeyaram
     private boolean checkGender(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -163,6 +186,13 @@ public class Ui {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Checks with the user whether he wishes to load the data of the previous session.
+     * if "y" is input, the data from the previous session is deleted . if enter keystroke is registered
+     * the previous session's data is loaded.
+     *
+     * @throws LoadException If there are missing text files.
+     */
     public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput;
@@ -173,11 +203,11 @@ public class Ui {
             if (uiInput.isEmpty()) {
                 System.out.println(MEMORY_STARTUP_N_INPUT);
                 System.out.println(System.lineSeparator() + "What would you like to do?");
-                result = false;
+                result = true;
                 flag = true;
             } else if (uiInput.trim().equals("y")) {
                 System.out.println(MEMORY_STARTUP_Y_INPUT);
-                result = true;
+                result = false;
                 flag = true;
             } else {
                 System.out.println("wrong input!");

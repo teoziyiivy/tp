@@ -11,6 +11,7 @@ public class Calculator {
     protected int activityLevel;
     protected double multiplier;
 
+    //@@author teoziyiivy
     public Calculator(String sex, double weight, double height, int age, int activityLevel) {
         this.height = height;
         this.weight = weight;
@@ -23,6 +24,12 @@ public class Calculator {
     }
 
     //@@author EdwardZYWang
+    /**
+     * method that receives weight, height and calculates the bmi of the user.
+     * the bmi value is then compared to the bounds and the user's bmi condition
+     * is returned
+     *
+     */
     public void getBmi() {
         System.out.println(System.lineSeparator() + "Your BMI outcome is " + System.lineSeparator());
         String getBmiOutcome;
