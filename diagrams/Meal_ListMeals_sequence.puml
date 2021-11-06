@@ -1,9 +1,9 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 participant "meal:Meal"
-    ->"meal:Meal" : "listMeals(date: String)"
+    ->"meal:Meal" : "listMeals(userDate: String)"
     activate "meal:Meal" #FFBBBB
-    alt date.equals("all")
+    alt userDate.equals(Keywords.ALL)
     |||
     loop Until no more meals
     "meal:Meal"->"meal:Meal" : generateMealParameters(inputArguments: String)
