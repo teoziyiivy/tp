@@ -46,42 +46,41 @@ class FluidTest {
         assertDoesNotThrow(() -> fluid.generateFluidParameters(input));
     }
 
-    /*
+
     @Test
     void generateFluidParameters5() {
         Fluid fluid = new Fluid();
         String input = "coke";
-        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
     }
 
     @Test
     void generateFluidParameters6() {
         Fluid fluid = new Fluid();
         String input = "";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
     }
 
     @Test
     void generateFluidParameters7() {
         Fluid fluid = new Fluid();
         String input = " ";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
     }
 
     @Test
     void generateFluidParameters8() {
         Fluid fluid = new Fluid();
         String input = null;
-        assertThrows(InvalidFluidDescription.class, () -> fluid.addFluid(input));
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
     }
 
     @Test
     void generateFluidParameters9() {
         Fluid fluid = new Fluid();
         String input = "-5";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
     }
-    */
 
     @Test
     void addFluid() {
