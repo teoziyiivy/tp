@@ -231,4 +231,30 @@ public class FoodBank {
         }
         throw new NoFoodFoundException();
     }
+
+//@@author pragyan01
+    /**
+     * This method checks if specified food exists in food bank.
+     *
+     * @param name food name specified by user
+     * @throws FoodBankException if parameters cannot be generated for food entries stored in food bank.
+     * @return true if food specified is found in food bank, false otherwise.
+     *
+     * @author pragyan01
+     */
+    public static boolean isFoodFound(String name) throws FoodBankException {
+        for (String meal : meals) {
+            generateParameters(meal);
+            if (description.equals(name)) {
+                return true;
+            }
+        }
+        for (String fluid : fluids) {
+            generateParameters(fluid);
+            if (description.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

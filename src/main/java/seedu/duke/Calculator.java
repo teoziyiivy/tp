@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 public class Calculator {
 
     protected double height;
@@ -23,6 +25,12 @@ public class Calculator {
     }
 
     //@@author EdwardZYWang
+    /**
+     * method that receives weight, height and calculates the bmi of the user.
+     * the bmi value is then compared to the bounds and the user's bmi condition
+     * is returned
+     *
+     */
     public void getBmi() {
         System.out.println(System.lineSeparator() + "Your BMI outcome is " + System.lineSeparator());
         String getBmiOutcome;

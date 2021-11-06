@@ -1,14 +1,14 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
+import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
-import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
+import seedu.duke.exceptions.weight.WeightException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 
@@ -47,6 +47,23 @@ public class CommandManager {
         this.storage = storage;
     }
 
+    /**
+     * A method that makes sense of the user's inputs. The input is taken in, then split using splitResults.
+     * splitResults[0] is used to identify the command word of the user's input. splitResult[1] is the
+     * rest of the command. splitResult[1] saved as inputArguments after checking if it is not an empty
+     * command. inputArgument is then passed on to the other methods through switch cases.
+     *
+     *
+     * @throws DukeException if there is an Duke error
+     * @throws NullPointerException when an application attempts to use null in a case where an object is required
+     * @throws MealException when there is an unknown error has occurred in MealTracker
+     * @throws FluidExceptions when there is an unknown error has occurred in FluidTracker
+     * @throws FoodBankException when there is an unknown error has occurred
+     * @throws IOException when there is an input error
+     * @throws ScheduleException when an unknown error has occurred in ScheduleTracker
+     * @throws WeightException when an unknown error has occurred in Weight Tracker
+     * @throws WorkoutException when an unknown error has occurred in WorkoutTracker
+     */
     public void commandChecker() throws
             DukeException, NullPointerException,
             MealException, FluidExceptions,
@@ -93,6 +110,12 @@ public class CommandManager {
         saveEverything();
     }
 
+    /**
+     * Calls other methods to save the user's inputs into the respective text files
+     * so that future sessions can start from where they ended.
+     *
+     * @throws IOException when there is an input error
+     */
     public void saveEverything() throws IOException {
         storage.saveFood(fluid, meal);
         storage.saveLibrary();
@@ -101,6 +124,18 @@ public class CommandManager {
         storage.saveWorkout(workoutTracker);
     }
 
+    /**
+     * A method that makes sense of the user's inputs for food bank class. The input is taken in, then split
+     * using splitResults. splitResults[0] is used to identify the command word of the user's input.
+     * splitResult[1] is the rest of the command. splitResult[1] saved as inputArguments after
+     * checking if it is not an empty command. inputArguments is then passed on to the other methods
+     * through switch cases.
+     *
+     *
+     * @param inputArguments user's input commands' parameters
+     * @throws NullPointerException when an application attempts to use null in a case where an object is required
+     * @throws FoodBankException when there is an unknown error has occurred
+     */
     public void foodBankParser(String inputArguments) throws
             NullPointerException, FoodBankException {
         String[] splitResults = inputArguments.trim().split(" ", 2);
@@ -131,6 +166,21 @@ public class CommandManager {
         }
     }
 
+    /**
+     * A method that makes sense of the user's inputs for "list" commands. inputArguments is take in and checked
+     * if it is empty or not. if it is not empty, it then checks to see if the users has entered any date
+     * as part of the list commands' parameters. if there is a date, it will list out the respective class'
+     * contents for that date, else, it will list out the respective class' contents for the system date.
+     *
+     *
+     * @param inputArguments user's input commands' parameters
+     * @throws NullPointerException when an application attempts to use null in a case where an object is required
+     * @throws MealException when there is an unknown error has occurred in MealTracker
+     * @throws FluidExceptions when there is an unknown error has occurred in FluidTracker
+     * @throws FoodBankException when there is an unknown error has occurred
+     * @throws WeightException when an unknown error has occurred in Weight Tracker
+     * @throws WorkoutException when an unknown error has occurred in WorkoutTracker
+     */
     public void listParser(String inputArguments) throws
             NullPointerException, FoodBankException, FluidExceptions,
             WeightException,
@@ -188,6 +238,20 @@ public class CommandManager {
         }
     }
 
+    /**
+     * A method that makes sense of the user's inputs for "list calories" commands. it checks to see if the users
+     * has entered any date as part of the list commands' parameters. if there is a date, it will list out
+     * the calories gained from consuming food, the calories burnt through workouts and the net calories
+     * for that date, else, it will list out the calories gained from consuming food, the calories burnt
+     * through workouts and the net calories for the system date.
+     *
+     *
+     * @param date user's date input
+     * @throws MealException when there is an unknown error has occurred in MealTracker
+     * @throws FluidExceptions when there is an unknown error has occurred in FluidTracker
+     * @throws FoodBankException when there is an unknown error has occurred
+     * @throws WorkoutException when an unknown error has occurred in WorkoutTracker
+     */
     private void listCalories(String date) throws
             FluidExceptions, FoodBankException,
             WorkoutException, MealException {
@@ -200,6 +264,22 @@ public class CommandManager {
         System.out.println("Your NET calories for " + date + " is: " + netCalories + " calories.");
     }
 
+    /**
+     * A method that makes sense of the user's inputs. The input is taken in, then split using splitResults.
+     * splitResults[0] is used to identify the command word of the user's input. splitResult[1] is the
+     * rest of the command. splitResult[1] saved as inputArguments after checking if it is not an empty
+     * command. inputArgument is then passed on to the other "add" methods through switch cases.
+     *
+     *
+     * @param input user's input
+     * @throws NullPointerException when an application attempts to use null in a case where an object is required
+     * @throws MealException when there is an unknown error has occurred in MealTracker
+     * @throws FluidExceptions when there is an unknown error has occurred in FluidTracker
+     * @throws FoodBankException when there is an unknown error has occurred
+     * @throws WeightException when an unknown error has occurred in Weight Tracker
+     * @throws WorkoutException when an unknown error has occurred in WorkoutTracker
+     * @throws ScheduleException when an unknown error has occurred in ScheduleTracker
+     */
     public void addParser(String input) throws
             NullPointerException, FoodBankException,
             DukeException, MealException,
@@ -237,6 +317,22 @@ public class CommandManager {
         }
     }
 
+    /**
+     * A method that makes sense of the user's inputs. The input is taken in, then split using splitResults.
+     * splitResults[0] is used to identify the command word of the user's input. splitResult[1] is the
+     * rest of the command. splitResult[1] saved as inputArguments after checking if it is not an empty
+     * command. inputArgument is then passed on to the other "delete" methods through switch cases.
+     *
+     *
+     * @param input user's input
+     * @throws NullPointerException when an application attempts to use null in a case where an object is required
+     * @throws MealException when there is an unknown error has occurred in MealTracker
+     * @throws FluidExceptions when there is an unknown error has occurred in FluidTracker
+     * @throws FoodBankException when there is an unknown error has occurred
+     * @throws WeightException when an unknown error has occurred in Weight Tracker
+     * @throws WorkoutException when an unknown error has occurred in WorkoutTracker
+     * @throws ScheduleException when an unknown error has occurred in ScheduleTracker
+     */
     public void deleteParser(String input) throws NullPointerException,
             FoodBankException, DukeException,
             ScheduleException, WorkoutException,
@@ -275,6 +371,21 @@ public class CommandManager {
         DateTracker.deleteDateFromList(inputArguments, fluid, meal, workoutTracker, weightTracker);
     }
 
+    /**
+     * A method that makes sense of the user's inputs for list everything command. it checks to see if the users
+     * has entered any date as part of the list commands' parameters. if there is a date, it will list everything
+     * in the text files for all classes for that date, else, it will just it will list everything
+     * in the text files for all classes for the system date.
+     *
+     *
+     * @param date user's date input
+     * @throws NullPointerException when an application attempts to use null in a case where an object is required
+     * @throws MealException when there is an unknown error has occurred in MealTracker
+     * @throws FluidExceptions when there is an unknown error has occurred in FluidTracker
+     * @throws FoodBankException when there is an unknown error has occurred
+     * @throws WeightException when an unknown error has occurred in Weight Tracker
+     * @throws WorkoutException when an unknown error has occurred in WorkoutTracker
+     */
     public void listEverything(String date) throws
             NullPointerException, FoodBankException,
             WorkoutException,

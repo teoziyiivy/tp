@@ -36,7 +36,7 @@ public class DateTracker {
     /**
      * This method sorts an array list by date.
      *
-     * @param list any array list provided
+     * @param list any array list provided.
      *
      * @author pragyan01
      */
@@ -94,7 +94,12 @@ public class DateTracker {
         dates.remove(date);
     }
 
-    ////@@author arvejw
+    //@@author arvejw
+    /**
+     * Sorts ArrayList of String by ascending order of date time.
+     *
+     * @param list ArrayList to be sorted.
+     */
     public static void sortDateAndTime(ArrayList<String> list) {
         Collections.sort(list, new Comparator<String>() {
             public int compare(String o1, String o2) {
