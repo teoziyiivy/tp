@@ -45,13 +45,9 @@ public class WorkoutActivity {
      * @return boolean <code>true</code> if the activity is distance based, <code>false</code> otherwise.
      */
     public static boolean isDistanceActivity(String activityDescription) {
-        if (activityDescription.trim().equals(ACTIVITY_SWIMMING)
+        return activityDescription.trim().equals(ACTIVITY_SWIMMING)
                 || activityDescription.trim().equals(ACTIVITY_RUNNING)
-                || activityDescription.trim().equals(ACTIVITY_CYCLING)) {
-            return true;
-        } else {
-            return false;
-        }
+                || activityDescription.trim().equals(ACTIVITY_CYCLING);
     }
 
     public boolean isDistanceActivity() {
