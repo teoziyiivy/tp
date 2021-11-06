@@ -140,7 +140,6 @@ public class Parser {
     }
 
     //@@author VishalJeyaram
-
     /**
      * Returns calories from meal or fluid library.
      *

@@ -74,16 +74,10 @@ public class ClickfitMessages {
                     + System.lineSeparator() + "Here is the link to our User Guide! "
                     + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";
 
-    public static final String DATE_ERROR = "Please enter your date in the right format. "
-            + "It should be \"DD/MM/YYYY\"";
-
     public static final String DATE_TIME_ERROR = "Please enter your date and time in the right format. "
             + "It should be \"DD/MM/YYYY\" and \"HH:MM\" respectively.";
 
     public static final String NUMBER_ERROR = "Please enter a positive integer.";
-
-    public static final String FLUID_ADD_FORMAT_ERROR = "Please enter in the format: drank [fluid_name]"
-            + " /c [calorie_intake] " + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]";
 
     public static final String CALCULATOR_PROMPT = System.lineSeparator() + "Would you "
             + "like to check your BMI and recommended caloric intake?" + System.lineSeparator()
@@ -112,7 +106,7 @@ public class ClickfitMessages {
 
     public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
             + "its associated calories is stored "
-            + "within your library.";
+            + "within your library. Please enter calories.";
 
     public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
             + "workouts and has deleted/rescheduled them!";
