@@ -2,54 +2,35 @@
 
 ## Introduction
 
-CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input your calories, 
-
-weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever you wish to. 
-
-It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness 
-
-level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students 
-
-staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or 
-
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input your calories,
+weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever you wish to.
+It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
+level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students
+staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or
 even student athletes. Prior knowledge in fitness and gym-related terminologies is beneficial, but not necessary.
 
 [**>>Skip to Table of Contents<<**](#table-of-contents)
 
 ## Motivations
 
-University students staying on-campus have always found it difficult to juggle their hall activities, academic workload, 
-
-and social activities. This makes it difficult for them to track their health & fitness. Furthermore, most students 
-
-don’t want to budget for a fitness app which may be inconvenient to access. Lastly, one's foray into serious fitness may 
-
-be a daunting and a confusing process. The abundance of apps in the market that each provide different services can 
-
+University students staying on-campus have always found it difficult to juggle their hall activities, academic workload,
+and social activities. This makes it difficult for them to track their health & fitness. Furthermore, most students
+don’t want to budget for a fitness app which may be inconvenient to access. Lastly, one's foray into serious fitness may
+be a daunting and a confusing process. The abundance of apps in the market that each provide different services can
 exacerbate this issue.
 
 ## Quick Start
 
-1. The BMI calculator and recommended caloric intake calculator gives the user an idea of where his current fitness 
-
+1. The BMI calculator and recommended caloric intake calculator gives the user an idea of where his current fitness
 level stands. Users can also choose to skip using the calculators by entering the appropriate keystrokes.
-
-* *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator 
-
-questions. Any deviating inputs will 
-
-result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the 
-
+* *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator
+questions. Any deviating inputs will result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the
 calculator to calculate BMI and recommended daily caloric intake.
-
+  
 2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
-
 to track the calories burned.
-
 3. Workout schedule manager also allows the user to schedule future workouts
-
-4. For the long term outlook, weight tracker lets the user monitor his weight over the length of usage of CLI.ckFit as an 
-
+4. For the long term outlook, weight tracker lets the user monitor his weight over the length of usage of CLI.ckFit as an
 indicator of the user's progress
 
 ## Technical Start Up
@@ -85,68 +66,51 @@ indicator of the user's progress
 ### What is a rep?
 
 A rep is short for repetitions. Repetitions define the number of times
-
 to perform an exercise. For example if you do 12 squats, then stop, the
-
 12 squats you perform are considered 12 repetitions.
 
 ### What is a set?
 
 Sets refer to how many times you will repeat that exercise for the set
-
 number of repetitions. For example, you do 12 squats and rest. Then
-
 you do another 12 squats, rest, and then another 12. You have now
-
 completed three sets of 12 reps.
 
 ## Known limitations
 
 * CLI.ckFit may not handle illogical inputs correctly due to limitations of data types. For instance, if you enter an
-
-overly large and nonsensical integer value for calories such as `2147483647` there may be overflow during computation. 
-
+overly large and nonsensical integer value for calories such as `2147483647` there may be overflow during computation.
   E.g., when calculating total calories, summation may result in an overflow, producing negative calories. 
   
-* Separators such as the date separator `/d`, time separator `/t`, calorie separator `/c`, volume separator `/v` and 
-
-  activity separator `/a` should be entered in the **same order** as shown in their respective command formats. 
-
-  CLI.ckFit **does not** actively support the shuffling of separators when taking user input. 
+* Separators such as the date separator `/d`, time separator `/t`, calorie separator `/c`, volume separator `/v` and
+  activity separator `/a` should be entered in the **same order** as shown in their respective command formats.
+  CLI.ckFit **does not** actively support the shuffling of separators when taking user input.
   
-* The separators as shown in the command format should be input **once**. Typing multiple identical separators 
-
-  unnecessarily *may* cause incorrect parsing of user input. 
+* The separators as shown in the command format should be input **once**. Typing multiple identical separators
+  unnecessarily *may* cause incorrect parsing of user input.
   
-* To ensure correct processing of user inputs you should only enter the **necessary** number of arguments. 
-
+* To ensure correct processing of user inputs you should only enter the **necessary** number of arguments.
   For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
-
   E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
   
 * Scheduled workouts with the same activity breakdowns in a different order **are not** considered duplicated
-
-  in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity 
-
+  in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity
   breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
-
   on the choice usage of HashMaps in implementation.
   
-* The current version CLI.ckFit only supports 3 types of distance based activities, 
-
+* The current version CLI.ckFit only supports 3 types of distance based activities,
   namely swimming, running and cycling. **ALL** other activities are assumed to be sets/repetitions based. 
 
 ## Important FAQs
 
-* In order to load the data of your previous session, the user *MUST* press "enter" when prompted with the following 
-
+* In order to load the data of your previous session, the user *MUST* press "enter" when prompted with the following
 question: 
 
-`Would you like to load up the records of your fitness journey?
-
+```
+Would you like to load up the records of your fitness journey?
 Key in 'y' to skip or press enter to load data from your previous session
-
-Note: Keying in 'y' to skip this prompt will result in the previous session's databeing deleted!`
+Note: Keying in 'y' to skip this prompt will result in the previous session's data being deleted!`
+```
 
 ## Table of Contents
 
@@ -264,9 +228,9 @@ Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 
 * If `DATE` or `TIME` is not specified, the system current date and time will be taken.
 
-* Meals can be added to a future date if desired
-
-  Example of usage:
+* Meals can be added to a future date if desired 
+  
+Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
@@ -307,9 +271,7 @@ Example of usage:
 Expected outcome:
 
 ```
-
 Noted! CLI.ckFit has recorded your drink of milk of 180 calories and 100 ml on 08/09/2021 07:40.
-
 ```
 
 ## Adding weight
@@ -405,12 +367,10 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 
 Example of usage:
 
-* `add schedule chest day /d 22/12/2021 /t 15:00` adds a *non-recurring workout* to your schedule with the 
-
+* `add schedule chest day /d 22/12/2021 /t 15:00` adds a *non-recurring workout* to your schedule with the
   description `chest day` on `22/12/2021` at `15:00`.
 
 * `add schedule weekly chest day /d 07/12/2021 /t 13:50 /r` adds a *recurring* workout to your schedule with the
-
   description `weekly chest day` on `07/12/2021` at `13:50`.
 
 ### With activity breakdown
@@ -426,17 +386,13 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 * Each prefix only accepts one input after it.
 
 * CLI.ckFit supports 3 special **case-sensitive** keywords for `ACTIVITY_NAME`, namely `running/swimming/cycling`.
-
   If any of these 3 keywords are used, then `ACTIVITY_QUANTIFIER` takes in one **positive non-zero integer** `[DISTANCE]`
-
   in **metres** for the activity.
 
-* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** 
-
+* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers**
   in the form `[SETS]x[REPS]`. In other words it is **assumed** that the activities are sets/repetitions
-
   activities. (Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions))
-
+  
 * Multiple activities can be entered as long as they are separated by a comma `,`.
 
 * The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly recurring workout.
@@ -447,15 +403,10 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 Example of usage:
 
 * `add schedule weekly chest day /d 07/12/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r` adds a *recurring* workout
-
   to your schedule with the description `weekly chest day` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
-
   `bench press` with `5` sets and `12` reps as well as `pushups` with `5` sets of `20` reps will also be added.
-
 * `add schedule triathlon training /d 07/12/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000` adds a *non-recurring* workout
-
   to your schedule with the description `traithlon training` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
-
   `running` for `3000` metres, `swimming` for `1000` metres as well as `cycling` for `4000` metres will also be added.
 
 ## Adding meal to library
@@ -666,7 +617,6 @@ Example of usage:
 Command Word:`list workouts`
 
 Description: Lists out all stored workout descriptions, 
-
 calories burned, date and time depending on date of entry.
 
 Format: `list workouts <DATE>`
@@ -690,9 +640,8 @@ Example of usage:
 
 Command Word: `list schedule`
 
-Description: Lists out stored scheduled 
-
-workout descriptions, date and time as well as their activity breakdowns depending on date 
+Description: Lists out stored scheduled workout descriptions, date and time as well as their activity 
+breakdowns depending on date 
 
 Format: `list schedule <DATE>`
 
@@ -777,47 +726,29 @@ Example of usage:
 Expected output
 
 ```
-
 1. cookie
-
 Calories: 22
-
 Date: 15/02/2022
-
 Time: 19:38
-
 Total number of meals: 1
-
 Total calories: 22
-
 1. cola
-
 Calories: 123
-
 Volume: 0
-
 Date: 12/12/2024
-
 Time: 19:38
-
 Total number of fluids: 1
-
 Total calories: 123
-
 Your weight list is empty!
-
 Your workout list is empty!
-
 Your workout schedule is empty!
-
 ```
 
 ## Help Command
 
 Command Word: `help`
 
-Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and 
-
+Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and
 provides the hyperlink to the user guide for more tech-savvy users to read.
 
 Example of usage:
@@ -844,15 +775,12 @@ A: Yes, please follow the specified casing. All commands are to be in lower-case
 Q: How do I transfer my CLIckFit data to another computer?
 
 A: Transfer the data text files located in the same directory as your CLIckFit.jar file over
-
 to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your
-
 data will then be loaded from the text files when you run CLIckFit.jar on your new computer.
 
 Q: Can I check and alter my CLIckFit data myself?
 
 A: Yes. You can open up the files, "Weight.txt", "Schedule.txt", "Workout.txt", "Food.txt" and
-
 "FoodBank.txt". These files contain the associated data which you can view and also update manually in the correct format if you wish to.
 
 ## Command Summary
@@ -864,55 +792,29 @@ A: Yes. You can open up the files, "Weight.txt", "Schedule.txt", "Workout.txt", 
 * You can only omit putting calories if you have already saved the meal/fluid in their respective libraries.
 
 Command | Format of input
-
 ------------ | -------------
-
 [**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`
-
 [**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
-
 [**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
-
 [**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
-
 [**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
-
 [**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
-
 [**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
-
 [**Remove meal**](#delete-a-meal)| `delete meal INDEX`
-
 [**Remove fluid**](#delete-a-fluid)| `delete fluid INDEX`
-
 [**Remove weight**](#delete-a-weight)| `delete weight INDEX`
-
 [**Remove workout**](#delete-a-workout)| `delete workout INDEX`
-
 [**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`
-
 [**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`
-
 [**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`
-
 [**List meals**](#list-meals)| `list meals <DATE>`
-
 [**List fluids**](#list-fluids)| `list fluids <DATE>`
-
 [**List weights**](#list-weights)| `list weights <DATE>`
-
 [**List workouts**](#list-workouts)| `list workouts <DATE>`
-
 [**List calories**](#list-calories)| `list calories <DATE>`
-
 [**List volume**](#list-volumes)| `list volumes <DATE>`
-
 [**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
-
 [**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
-
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
-
 [**List everything**](#list-everything)| `list <DATE>`
-
 [**Access user help**](#help-command)| `help`
