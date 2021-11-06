@@ -684,235 +684,235 @@ Example of usage:
 
 * `list workouts 22/10/2021` will list the recorded workouts on `22/10/2021`.
 
-[comment]: <> (* `list workouts all` will list all your recorded workouts.)
+* `list workouts all` will list all your recorded workouts.
 
-[comment]: <> (## List scheduled workouts)
+## List scheduled workouts
 
-[comment]: <> (Command Word: `list schedule`)
+Command Word: `list schedule`
 
-[comment]: <> (Description: Lists out stored scheduled )
+Description: Lists out stored scheduled 
 
-[comment]: <> (workout descriptions, date and time as well as their activity breakdowns depending on date )
+workout descriptions, date and time as well as their activity breakdowns depending on date 
 
-[comment]: <> (Format: `list schedule <DATE>`)
+Format: `list schedule <DATE>`
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is left empty, the schedule for the **today** will be returned.)
+* If `DATE` is left empty, the schedule for the **today** will be returned.
 
-[comment]: <> (* If the word `all` is written in place of `DATE`, **ALL** stored scheduled workouts will be listed.)
+* If the word `all` is written in place of `DATE`, **ALL** stored scheduled workouts will be listed.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `list schedule` will list all the schedule for today's date.)
+* `list schedule` will list all the schedule for today's date.
 
-[comment]: <> (* `list schedule 22/10/2022` will list the schedule for `22/10/2022`.)
+* `list schedule 22/10/2022` will list the schedule for `22/10/2022`.
 
-[comment]: <> (* `list schedule all` will list your full schedule.)
+* `list schedule all` will list your full schedule.
 
-[comment]: <> (## List Volumes)
+## List Volumes
 
-[comment]: <> (Command Word: `list volumes`)
+Command Word: `list volumes`
 
-[comment]: <> (Description: List volumes of all fluids consumed for a specific date)
+Description: List volumes of all fluids consumed for a specific date
 
-[comment]: <> (Format: `list volumes <DATE>`)
+Format: `list volumes <DATE>`
 
-[comment]: <> (## List Calories)
+## List Calories
 
-[comment]: <> (Command Word: `list calories`)
+Command Word: `list calories`
 
-[comment]: <> (Description:  List total number of calories consumed, total number of calories burned and net calories)
+Description:  List total number of calories consumed, total number of calories burned and net calories
 
-[comment]: <> (for a chosen date)
+for a chosen date
 
-[comment]: <> (Format: `list calories <DATE> `)
+Format: `list calories <DATE> `
 
-[comment]: <> (## List meals stored in library)
+## List meals stored in library
 
-[comment]: <> (Command Word: `library listmeals`)
+Command Word: `library listmeals`
 
-[comment]: <> (Description: Lists all meals stored in the library.)
+Description: Lists all meals stored in the library.
 
-[comment]: <> (Format: `library listmeals`)
+Format: `library listmeals`
 
-[comment]: <> (## List fluids stored in library)
+## List fluids stored in library
 
-[comment]: <> (Command Word: `library listfluids`)
+Command Word: `library listfluids`
 
-[comment]: <> (Description: Lists all fluids stored in the library.)
+Description: Lists all fluids stored in the library.
 
-[comment]: <> (Format: `library listfluids`)
+Format: `library listfluids`
 
-[comment]: <> (## List everything on current date)
+## List everything on current date
 
-[comment]: <> (Command Word: `list`)
+Command Word: `list`
 
-[comment]: <> (Description: Lists all meals, fluids, weight, workouts and scheduled workouts on a particular date)
+Description: Lists all meals, fluids, weight, workouts and scheduled workouts on a particular date
 
-[comment]: <> (Format `list <DATE`)
+Format `list <DATE`
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is left empty **today's** date will be taken.)
+* If `DATE` is left empty **today's** date will be taken.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.)
+* `list` will list all data from meals, fluids, weight, workouts and schedule workouts for today's date.
 
-[comment]: <> (* `list 22/10/2021` will list all data on `22/10/2021`.)
+* `list 22/10/2021` will list all data on `22/10/2021`.
 
-[comment]: <> (## List everything on all dates)
+## List everything on all dates
 
-[comment]: <> (Command Word: `list`)
+Command Word: `list`
 
-[comment]: <> (Description: Lists all meals, fluids, weight, workouts and scheduled workouts on all dates)
+Description: Lists all meals, fluids, weight, workouts and scheduled workouts on all dates
 
-[comment]: <> (Format `list all`)
+Format `list all`
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`list all`)
+`list all`
 
-[comment]: <> (Expected output)
+Expected output
 
-[comment]: <> (```)
+```
 
-[comment]: <> (1. cookie)
+1. cookie
 
-[comment]: <> (Calories: 22)
+Calories: 22
 
-[comment]: <> (Date: 15/02/2022)
+Date: 15/02/2022
 
-[comment]: <> (Time: 19:38)
+Time: 19:38
 
-[comment]: <> (Total number of meals: 1)
+Total number of meals: 1
 
-[comment]: <> (Total calories: 22)
+Total calories: 22
 
-[comment]: <> (1. cola)
+1. cola
 
-[comment]: <> (Calories: 123)
+Calories: 123
 
-[comment]: <> (Volume: 0)
+Volume: 0
 
-[comment]: <> (Date: 12/12/2024)
+Date: 12/12/2024
 
-[comment]: <> (Time: 19:38)
+Time: 19:38
 
-[comment]: <> (Total number of fluids: 1)
+Total number of fluids: 1
 
-[comment]: <> (Total calories: 123)
+Total calories: 123
 
-[comment]: <> (Your weight list is empty!)
+Your weight list is empty!
 
-[comment]: <> (Your workout list is empty!)
+Your workout list is empty!
 
-[comment]: <> (Your workout schedule is empty!)
+Your workout schedule is empty!
 
-[comment]: <> (```)
+```
 
-[comment]: <> (## Help Command)
+## Help Command
 
-[comment]: <> (Command Word: `help`)
+Command Word: `help`
 
-[comment]: <> (Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and )
+Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and 
 
-[comment]: <> (provides the hyperlink to the user guide for more tech-savvy users to read.)
+provides the hyperlink to the user guide for more tech-savvy users to read.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`help`)
+`help`
 
-[comment]: <> (## Bye)
+## Bye
 
-[comment]: <> (Command Word: `bye`)
+Command Word: `bye`
 
-[comment]: <> (Description: Terminates CLI.ckFit program.)
+Description: Terminates CLI.ckFit program.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`bye`)
+`bye`
 
 
-[comment]: <> (## FAQ)
+## FAQ
 
-[comment]: <> (Q: Are the commands case-sensitive?)
+Q: Are the commands case-sensitive?
 
-[comment]: <> (A: Yes, please follow the specified casing. All commands are to be in lower-case. )
+A: Yes, please follow the specified casing. All commands are to be in lower-case. 
 
-[comment]: <> (Q: How do I transfer my CLIckFit data to another computer?)
+Q: How do I transfer my CLIckFit data to another computer?
 
-[comment]: <> (A: Transfer the data text files located in the same directory as your CLIckFit.jar file over)
+A: Transfer the data text files located in the same directory as your CLIckFit.jar file over
 
-[comment]: <> (to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your)
+to your other computer. Place it in the same directory as the CLIckFit.jar file on your other computer. Your
 
-[comment]: <> (data will then be loaded from the text files when you run CLIckFit.jar on your new computer.)
+data will then be loaded from the text files when you run CLIckFit.jar on your new computer.
 
-[comment]: <> (Q: Can I check and alter my CLIckFit data myself?)
+Q: Can I check and alter my CLIckFit data myself?
 
-[comment]: <> (A: Yes. You can open up the files, "Weight.txt", "Schedule.txt", "Workout.txt", "Food.txt" and)
+A: Yes. You can open up the files, "Weight.txt", "Schedule.txt", "Workout.txt", "Food.txt" and
 
-[comment]: <> ("FoodBank.txt". These files contain the associated data which you can view and also update manually in the correct format if you wish to.)
+"FoodBank.txt". These files contain the associated data which you can view and also update manually in the correct format if you wish to.
 
-[comment]: <> (## Command Summary)
+## Command Summary
 
-[comment]: <> (*Psssstttttt click on the commands to skip sections!*)
+*Psssstttttt click on the commands to skip sections!*
 
-[comment]: <> (* Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.)
+* Parameters not enclosed in any brackets are compulsory while those enclosed in `<>` are ***optional***.
 
-[comment]: <> (* You can only omit putting calories if you have already saved the meal/fluid in their respective libraries.)
+* You can only omit putting calories if you have already saved the meal/fluid in their respective libraries.
 
-[comment]: <> (Command | Format of input)
+Command | Format of input
 
-[comment]: <> (------------ | -------------)
+------------ | -------------
 
-[comment]: <> ([**Add meal**]&#40;#adding-a-meal&#41;| `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`)
+[**Add meal**](#adding-a-meal)| `add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>`
 
-[comment]: <> ([**Add fluid**]&#40;#adding-fluids&#41;| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`)
+[**Add fluid**](#adding-fluids)| `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 
-[comment]: <> ([**Add weight**]&#40;#adding-weight&#41;| `add weight WEIGHT /d <DATE>`)
+[**Add weight**](#adding-weight)| `add weight WEIGHT /d <DATE>`
 
-[comment]: <> ([**Add workout**]&#40;#adding-workout&#41;| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`)
+[**Add workout**](#adding-workout)| `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 
-[comment]: <> ([**Add scheduled workout**]&#40;#adding-scheduled-workout&#41;| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`)
+[**Add scheduled workout**](#adding-scheduled-workout)| `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 
-[comment]: <> ([**Add meal to library**]&#40;#adding-meal-to-library&#41;| `library addmeal MEAL_NAME /c MEAL_CALORIES`)
+[**Add meal to library**](#adding-meal-to-library)| `library addmeal MEAL_NAME /c MEAL_CALORIES`
 
-[comment]: <> ([**Add fluid to library**]&#40;#adding-fluid-to-library&#41;| `library addfluid FLUID_NAME /c FLUID_CALORIES`)
+[**Add fluid to library**](#adding-fluid-to-library)| `library addfluid FLUID_NAME /c FLUID_CALORIES`
 
-[comment]: <> ([**Remove meal**]&#40;#delete-a-meal&#41;| `delete meal INDEX`)
+[**Remove meal**](#delete-a-meal)| `delete meal INDEX`
 
-[comment]: <> ([**Remove fluid**]&#40;#delete-a-fluid&#41;| `delete fluid INDEX`)
+[**Remove fluid**](#delete-a-fluid)| `delete fluid INDEX`
 
-[comment]: <> ([**Remove weight**]&#40;#delete-a-weight&#41;| `delete weight INDEX`)
+[**Remove weight**](#delete-a-weight)| `delete weight INDEX`
 
-[comment]: <> ([**Remove workout**]&#40;#delete-a-workout&#41;| `delete workout INDEX`)
+[**Remove workout**](#delete-a-workout)| `delete workout INDEX`
 
-[comment]: <> ([**Remove scheduled workout**]&#40;#delete-a-scheduled-workout&#41;| `delete schedule INDEX`)
+[**Remove scheduled workout**](#delete-a-scheduled-workout)| `delete schedule INDEX`
 
-[comment]: <> ([**Remove meal from library**]&#40;#delete-a-meal-from-library&#41;| `library deletemeal INDEX`)
+[**Remove meal from library**](#delete-a-meal-from-library)| `library deletemeal INDEX`
 
-[comment]: <> ([**Remove fluid from library**]&#40;#delete-a-fluid-from-library&#41;| `library deletefluid INDEX`)
+[**Remove fluid from library**](#delete-a-fluid-from-library)| `library deletefluid INDEX`
 
-[comment]: <> ([**List meals**]&#40;#list-meals&#41;| `list meals <DATE>`)
+[**List meals**](#list-meals)| `list meals <DATE>`
 
-[comment]: <> ([**List fluids**]&#40;#list-fluids&#41;| `list fluids <DATE>`)
+[**List fluids**](#list-fluids)| `list fluids <DATE>`
 
-[comment]: <> ([**List weights**]&#40;#list-weights&#41;| `list weights <DATE>`)
+[**List weights**](#list-weights)| `list weights <DATE>`
 
-[comment]: <> ([**List workouts**]&#40;#list-workouts&#41;| `list workouts <DATE>`)
+[**List workouts**](#list-workouts)| `list workouts <DATE>`
 
-[comment]: <> ([**List calories**]&#40;#list-calories&#41;| `list calories <DATE>`)
+[**List calories**](#list-calories)| `list calories <DATE>`
 
-[comment]: <> ([**List volume**]&#40;#list-volumes&#41;| `list volumes <DATE>`)
+[**List volume**](#list-volumes)| `list volumes <DATE>`
 
-[comment]: <> ([**List scheduled workouts**]&#40;#list-scheduled-workouts&#41;| `list schedule <DATE>`)
+[**List scheduled workouts**](#list-scheduled-workouts)| `list schedule <DATE>`
 
-[comment]: <> ([**List meals from library**]&#40;#list-meals-stored-in-library&#41;| `library listmeals`)
+[**List meals from library**](#list-meals-stored-in-library)| `library listmeals`
 
-[comment]: <> ([**List fluids from library**]&#40;#list-fluids-stored-in-library&#41;| `library listfluids`)
+[**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
 
-[comment]: <> ([**List everything**]&#40;#list-everything&#41;| `list <DATE>`)
+[**List everything**](#list-everything)| `list <DATE>`
 
-[comment]: <> ([**Access user help**]&#40;#help-command&#41;| `help`)
+[**Access user help**](#help-command)| `help`
