@@ -51,6 +51,14 @@ class WorkoutTrackerTest {
     }
 
     @Test
+    void deleteWorkout_nullInput_exceptionThrow() throws WorkoutException {
+        WorkoutTracker wt = new WorkoutTracker();
+        String argumentInput1 = "test /c 123 /d 07/07/2021 /t 17:59";
+        wt.addWorkout(argumentInput1, true);
+        assertThrows(WorkoutException.class, () -> wt.deleteWorkout(null));
+    }
+
+    @Test
     void addWorkout_invalidDateFormat_exceptionThrow() {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "test /c 123 /d 07-07-2021 /t 17:59";
