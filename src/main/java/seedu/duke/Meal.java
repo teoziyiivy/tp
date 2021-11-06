@@ -74,19 +74,24 @@ public class Meal extends Tracker {
         }
         mealNumber = meals.size();
         generateMealParameters(inputArguments);
+        System.out.println(description);
         if (Parser.containsSeparators(description)) {
             throw new EmptyFoodDescription();
         }
-        totalCalories = getCalories(date);
         logger.log(Level.INFO, "meal parameters generated");
-        inputArguments = description + Parser.CALORIE_SEPARATOR + calories
-                + Parser.DATE_SEPARATOR + date + Parser.TIME_SEPARATOR + time;
-        meals.add(inputArguments);
-        totalCalories += calories;
+        String input = combineMealParameters();
+        meals.add(input);
         mealNumber += 1;
-        ClickfitMessages.printAddedMealMessage(description,date,time,calories, totalCalories);
+        ClickfitMessages.printAddedMealMessage(description,date,time,calories);
         logger.log(Level.INFO, "meal has been added to meal list");
         logger.exiting(getClass().getName(), "addMeal");
+    }
+
+    public String combineMealParameters() {
+        String inputArguments;
+        inputArguments = description + Parser.CALORIE_SEPARATOR + calories
+                + Parser.DATE_SEPARATOR + date + Parser.TIME_SEPARATOR + time;
+        return inputArguments;
     }
 
     /**
@@ -113,13 +118,11 @@ public class Meal extends Tracker {
         }
         logger.log(Level.INFO, "generating meal parameters");
         generateMealParameters(meals.get(mealIndex));
-        totalCalories = getCalories(date);
         logger.log(Level.INFO, "meal parameters generated");
         meals.remove(mealIndex);
         mealNumber -= 1;
-        totalCalories -= calories;
         logger.log(Level.INFO, "meal has been deleted from meal list");
-        ClickfitMessages.printDeletedMealMessage(description, totalCalories, date);
+        ClickfitMessages.printDeletedMealMessage(description, date);
         logger.exiting(getClass().getName(), "deleteMeal");
     }
 
