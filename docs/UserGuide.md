@@ -168,177 +168,177 @@ Note: Keying in 'y' to skip this prompt will result in the previous session's da
 
   - [**Remove weight**](#delete-a-weight)
 
-[comment]: <> (- #### List)
+- #### List
 
-[comment]: <> (  - [**List meals**]&#40;#list-meals&#41;)
+  - [**List meals**](#list-meals)
 
-[comment]: <> (  - [**List fluids**]&#40;#list-fluids&#41;)
+  - [**List fluids**](#list-fluids)
 
-[comment]: <> (  - [**List weights**]&#40;#list-weights&#41;)
+  - [**List weights**](#list-weights)
 
-[comment]: <> (  - [**List calories**]&#40;#list-calories&#41;)
+  - [**List calories**](#list-calories)
 
-[comment]: <> (  - [**List volumes**]&#40;#list-volumes&#41;)
+  - [**List volumes**](#list-volumes)
 
-[comment]: <> (- #### Help)
+- #### Help
 
-[comment]: <> (  - [**Access user help**]&#40;#help-command&#41;)
+  - [**Access user help**](#help-command)
 
-[comment]: <> (- #### Close CLI.ckFit)
+- #### Close CLI.ckFit
 
-[comment]: <> (  - [**Bye**]&#40;#bye&#41;)
+  - [**Bye**](#bye)
 
-[comment]: <> (### Workout Manager)
+### Workout Manager
 
-[comment]: <> (- #### Add)
+- #### Add
 
-[comment]: <> (  - [**Add workout**]&#40;#adding-workout&#41;)
+  - [**Add workout**](#adding-workout)
 
-[comment]: <> (  - [**Add scheduled workout**]&#40;#adding-scheduled-workout&#41;)
+  - [**Add scheduled workout**](#adding-scheduled-workout)
 
-[comment]: <> (- #### Delete)
+- #### Delete
 
-[comment]: <> (  - [**Remove workout**]&#40;#delete-a-workout&#41;)
+  - [**Remove workout**](#delete-a-workout)
 
-[comment]: <> (  - [**Remove scheduled workout**]&#40;#delete-a-scheduled-workout&#41;)
+  - [**Remove scheduled workout**](#delete-a-scheduled-workout)
 
-[comment]: <> (- #### List)
+- #### List
 
-[comment]: <> (  - [**List workouts**]&#40;#list-workouts&#41;)
+  - [**List workouts**](#list-workouts)
 
-[comment]: <> (  - [**List scheduled workouts**]&#40;#list-scheduled-workouts&#41;)
+  - [**List scheduled workouts**](#list-scheduled-workouts)
 
-[comment]: <> (### Library Manager)
+### Library Manager
 
-[comment]: <> (- #### Add)
+- #### Add
 
-[comment]: <> (  - [**Add meal to library**]&#40;#adding-meal-to-library&#41;)
+  - [**Add meal to library**](#adding-meal-to-library)
 
-[comment]: <> (  - [**Add fluid to library**]&#40;#adding-fluid-to-library&#41;)
+  - [**Add fluid to library**](#adding-fluid-to-library)
 
-[comment]: <> (- #### Delete)
+- #### Delete
 
-[comment]: <> (    - [**Remove meal from library**]&#40;#delete-a-meal-from-library&#41;)
+    - [**Remove meal from library**](#delete-a-meal-from-library)
 
-[comment]: <> (    - [**Remove fluid from library**]&#40;#delete-a-fluid-from-library&#41;)
+    - [**Remove fluid from library**](#delete-a-fluid-from-library)
 
-[comment]: <> (- #### List)
+- #### List
 
-[comment]: <> (    - [**List meals from library**]&#40;#list-meals-stored-in-library&#41;)
+    - [**List meals from library**](#list-meals-stored-in-library)
 
-[comment]: <> (    - [**List fluids from library**]&#40;#list-fluids-stored-in-library&#41;)
+    - [**List fluids from library**](#list-fluids-stored-in-library)
 
-[comment]: <> (### List Manager)
+### List Manager
 
-[comment]: <> (- [**List everything**]&#40;#list-everything&#41;)
+- [**List everything**](#list-everything)
 
-[comment]: <> (### Miscellaneous)
+### Miscellaneous
 
-[comment]: <> (- [**FAQ**]&#40;#faq&#41;)
+- [**FAQ**](#faq)
 
-[comment]: <> (- [**Command Summary**]&#40;#command-summary&#41;)
+- [**Command Summary**](#command-summary)
 
-[comment]: <> (# *Features:*)
+# *Features:*
 
-[comment]: <> (## Adding a meal)
+## Adding a meal
 
-[comment]: <> (Command Word: `add meal`)
+Command Word: `add meal`
 
-[comment]: <> (Description: Adds a new meal to the list of meals, with its associated calories, date and time of consumption.)
+Description: Adds a new meal to the list of meals, with its associated calories, date and time of consumption.
 
-[comment]: <> (Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`)
+Format: `add meal MEAL NAME </c MEAL CALORIES /d DATE /t TIME>`
 
-[comment]: <> (* The `MEAL_NAME` can contain spaces.)
+* The `MEAL_NAME` can contain spaces.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* The `MEAL_CALORIES` can only contain positive integers inclusive of 0.)
+* The `MEAL_CALORIES` can only contain positive integers inclusive of 0.
 
-[comment]: <> (* You can only omit putting `MEAL_CALORIES` if you have saved the meal in your [meal library]&#40;#adding-meal-to-library&#41; already.)
+* You can only omit putting `MEAL_CALORIES` if you have saved the meal in your [meal library](#adding-meal-to-library) already.
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* The `TIME` is in hh:mm.)
+* The `TIME` is in hh:mm.
 
-[comment]: <> (* If `DATE` or `TIME` is not specified, the system current date and time will be taken.)
+* If `DATE` or `TIME` is not specified, the system current date and time will be taken.
 
-[comment]: <> (* Meals can be added to a future date if desired)
+* Meals can be added to a future date if desired
 
-[comment]: <> (  Example of usage:)
+  Example of usage:
 
-[comment]: <> (`add meal risotto /c 250 /d 14/10/2021 /t 08:30`)
+`add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
 
-[comment]: <> (## Adding fluids)
+## Adding fluids
 
-[comment]: <> (Command Word: `add fluid`)
+Command Word: `add fluid`
 
-[comment]: <> (Description: Adds a new fluid to the list of fluid items, with its associated calories, date and time of consumption.)
+Description: Adds a new fluid to the list of fluid items, with its associated calories, date and time of consumption.
 
 
-[comment]: <> (Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`)
+Format: `add fluid FLUID_NAME </c FLUID_CALORIES /v VOLUME /d DATE /t TIME>`
 
 
-[comment]: <> (* The `FLUID_NAME` can contain spaces.)
+* The `FLUID_NAME` can contain spaces.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* The `FLUID_CALORIES` can only contain positive integers inclusive of 0.)
+* The `FLUID_CALORIES` can only contain positive integers inclusive of 0.
 
-[comment]: <> (* You can only omit putting `FLUID_CALORIES` if you have saved the drink in your [fluid library]&#40;#adding-fluid-to-library&#41; already.)
+* You can only omit putting `FLUID_CALORIES` if you have saved the drink in your [fluid library](#adding-fluid-to-library) already.
 
-[comment]: <> (* The `VOLUME` can only contain positive integers inclusive of 0.)
+* The `VOLUME` can only contain positive integers inclusive of 0.
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* The `TIME` is in hh:mm.)
+* The `TIME` is in hh:mm.
 
-[comment]: <> (* Fluids can be added to a future date if desired)
+* Fluids can be added to a future date if desired
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`add fluid milk /c 180 /v 100 /d 08/09/2021 /t 07:40`)
+`add fluid milk /c 180 /v 100 /d 08/09/2021 /t 07:40`
 
 
-[comment]: <> (Expected outcome:)
+Expected outcome:
 
-[comment]: <> (```)
+```
 
-[comment]: <> (Noted! CLI.ckFit has recorded your drink of milk of 180 calories and 100 ml on 08/09/2021 07:40.)
+Noted! CLI.ckFit has recorded your drink of milk of 180 calories and 100 ml on 08/09/2021 07:40.
 
-[comment]: <> (```)
+```
 
-[comment]: <> (## Adding weight)
+## Adding weight
 
-[comment]: <> (Command Word: `add weight`)
+Command Word: `add weight`
 
-[comment]: <> (Description: Adds a new weight to the list of weight items, with its associated date.)
+Description: Adds a new weight to the list of weight items, with its associated date.
 
-[comment]: <> (Format: `add weight WEIGHT </d DATE>`)
+Format: `add weight WEIGHT </d DATE>`
 
-[comment]: <> (* The `WEIGHT` cannot contain spaces and must be a non-negative number to maximum of 1 decimal place.)
+* The `WEIGHT` cannot contain spaces and must be a non-negative number to maximum of 1 decimal place.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* The `WEIGHT` has to be realistic &#40;<1000.0 kg&#41; due to limitation of integer overflow.)
+* The `WEIGHT` has to be realistic (<1000.0 kg) due to limitation of integer overflow.
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* If `DATE` is not specified, the current system date will be taken.)
+* If `DATE` is not specified, the current system date will be taken.
 
-[comment]: <> (* Only 1 `WEIGHT` should be included in your input.)
+* Only 1 `WEIGHT` should be included in your input.
 
-[comment]: <> (* If multiple `/d DATE` or `DATE` is written only the first input will be taken.)
+* If multiple `/d DATE` or `DATE` is written only the first input will be taken.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`add weight 50 /d 03/04/2021`)
+`add weight 50 /d 03/04/2021`
 
 [comment]: <> (## Adding workout)
 
