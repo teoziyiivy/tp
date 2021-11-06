@@ -33,7 +33,7 @@ public class Fluid extends Tracker {
     private static final Logger logr = Logger.getLogger("FluidLogger");
 
     /**
-     * Constructor of fluid class
+     * Constructor of fluid class.
      *
      */
     public Fluid() {
@@ -216,11 +216,9 @@ public class Fluid extends Tracker {
      * This method sums up the calorie total for a specific date.
      *
      *@param date date provided by user
+     *@return total calorie for the specific date
      *@throws FluidExceptions if description for a fluid entry is not found
      *@throws FoodBankException if calories for a fluid entry is not found
-     *@return total calorie for the specific date
-     *
-     *@author pragyan01
      */
     public int getCalories(String date) throws FoodBankException, FluidExceptions {
         logr.entering(getClass().getName(), "getCalories");
@@ -243,11 +241,9 @@ public class Fluid extends Tracker {
      * This method sums up the volume total for a specific date.
      *
      *@param date date provided by user
+     *@return total volume for the specific date
      *@throws FluidExceptions if description for a fluid entry is not found
      *@throws FoodBankException if calories for a fluid entry is not found
-     *@return total volume for the specific date
-     *
-     *@author pragyan01
      */
     public int getVolume(String date) throws FoodBankException, FluidExceptions {
         logr.entering(getClass().getName(), "getVolume");

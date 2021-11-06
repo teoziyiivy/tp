@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 //@@author VishalJeyaram
 /**
  * Class used to perform actions related to meals such as adding,
- * deleting and listing meals
+ * deleting and listing meals.
  */
 public class Meal extends Tracker {
     protected ArrayList<String> meals;
