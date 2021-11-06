@@ -219,7 +219,8 @@ public class ClickfitMessages {
     /**
      * To notify the user that a meal has been added to their list of meals.
      */
-    public static void printAddedMealMessage(String description, String date, String time, int calories, int totalCalories) {
+    public static void printAddedMealMessage(String description, String date, String time,
+                                             int calories, int totalCalories) {
         System.out.println("Noted! CLI.ckFit has recorded your meal of "
                 + description + " on " + date + " and at " + time
                 + ". " + calories + " calories has been added to the calorie count. Your total calories"
