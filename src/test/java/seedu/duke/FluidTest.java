@@ -10,6 +10,7 @@ import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
+import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 
 import java.time.format.DateTimeParseException;
 
@@ -87,28 +88,28 @@ class FluidTest {
     void addFluid10() {
         Fluid fluid = new Fluid();
         String input = "coke /v 100 /d 12/12/2021 /t 10:30";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
     void addFluid11() {
         Fluid fluid = new Fluid();
         String input = "";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+            assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
     void addFluid12() {
         Fluid fluid = new Fluid();
         String input = " ";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
     void addFluid13() {
         Fluid fluid = new Fluid();
         String input = "coke";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
