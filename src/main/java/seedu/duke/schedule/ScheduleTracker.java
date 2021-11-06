@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -146,6 +145,9 @@ public class ScheduleTracker {
         scheduledWorkouts.add(workoutToAdd);
         if (!isSquelchAddMessage) {
             System.out.println(ClickfitMessages.getAddScheduleSuccessMessage(workoutToAdd));
+            if (workoutToAdd.hasActivities()) {
+                System.out.println(workoutToAdd.getActivitiesAsStringToPrint(false));
+            }
         }
         if (isCleanUp) {
             cleanUpScheduleList();
@@ -228,7 +230,7 @@ public class ScheduleTracker {
             System.out.println(currentIndex + ". " + workout.getWorkoutDescription() + workout.isRecurringStatus());
             System.out.println("Date: " + workout.getWorkoutDate());
             System.out.println("Time: " + workout.getWorkoutTime());
-            System.out.println(workout.getActivitiesAsStringToPrint());
+            System.out.println(workout.getActivitiesAsStringToPrint(true));
             currentIndex++;
             scheduleCount++;
         }
@@ -263,7 +265,7 @@ public class ScheduleTracker {
                         + workout.getWorkoutDescription() + workout.isRecurringStatus());
                 System.out.println("Date: " + workout.getWorkoutDate());
                 System.out.println("Time: " + workout.getWorkoutTime());
-                System.out.println(workout.getActivitiesAsStringToPrint());
+                System.out.println(workout.getActivitiesAsStringToPrint(true));
                 currentIndex++;
                 workoutCount++;
             }
