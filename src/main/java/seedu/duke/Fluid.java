@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.fluid.EmptyFluidList;
 import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
 import seedu.duke.exceptions.foodbank.FoodBankException;
@@ -168,7 +167,7 @@ public class Fluid extends Tracker {
         logr.entering(getClass().getName(), "listFluid");
         if (fluidArray.size() == 0) {
             logr.info("error listing fluids: fluid list is empty");
-            throw new EmptyFluidList();
+            System.out.println("Your fluid list is empty.");
         }
         logr.info("checking if specific date is provided by user or all entries are to be printed");
         if (userDate.equals("all")) {
@@ -177,7 +176,6 @@ public class Fluid extends Tracker {
             totalCalories = 0;
             fluidNumber = 0;
             logr.info("totalCalories & fluidNumber have been reset");
-            assert fluidArray.size() != 0 : "Fluid array should not be empty";
             for (String fluid : fluidArray) {
                 generateFluidParameters(fluid);
                 System.out.println(i + ". " + description);
@@ -196,7 +194,6 @@ public class Fluid extends Tracker {
             totalCalories = 0;
             fluidNumber = 0;
             logr.info("totalCalories & fluidNumber have been reset");
-            assert fluidArray.size() != 0 : "Fluid array should not be empty";
             for (String fluid : fluidArray) {
                 if (fluid.contains(userDate)) {
                     logr.log(Level.INFO, "generating fluid parameters");
@@ -235,7 +232,6 @@ public class Fluid extends Tracker {
         logr.entering(getClass().getName(), "getCalories");
         int calorieTotal = 0;
         logr.log(Level.INFO, "calorieTotal has been reset");
-        assert fluidArray.size() != 0 : "Fluid array should not be empty";
         for (String fluid : fluidArray) {
             if (fluid.contains(date)) {
                 generateFluidParameters(fluid);
@@ -263,7 +259,6 @@ public class Fluid extends Tracker {
         logr.entering(getClass().getName(), "getVolume");
         int volumeTotal = 0;
         logr.log(Level.INFO, "volumeTotal has been reset");
-        assert fluidArray.size() != 0 : "Fluid array should not be empty";
         for (String fluid : fluidArray) {
             if (fluid.contains(date)) {
                 generateFluidParameters(fluid);
