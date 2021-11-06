@@ -89,6 +89,11 @@ public class Ui {
     }
 
     //@@author pragyan01
+    /**
+     * This method obtains user's answers to BMI related questions and then calculates user's BMI.
+     *
+     * @author pragyan01
+     */
     private void checkActivityLevel(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -108,6 +113,11 @@ public class Ui {
     }
 
     //@@author pragyan01
+    /**
+     * This method obtains user's age.
+     *
+     * @author pragyan01
+     */
     private boolean checkAge(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -127,6 +137,11 @@ public class Ui {
     }
 
     //@@author pragyan01
+    /**
+     * This method obtains user's height.
+     *
+     * @author pragyan01
+     */
     private boolean checkHeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
