@@ -2,9 +2,9 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
-import seedu.duke.exceptions.fluid.EmptyFluidList;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.fluid.InvalidFluidDescription;
+import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
@@ -90,6 +90,27 @@ class FluidTest {
     }
 
     @Test
+    void addFluid11() {
+        Fluid fluid = new Fluid();
+        String input = "";
+        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+    }
+
+    @Test
+    void addFluid12() {
+        Fluid fluid = new Fluid();
+        String input = " ";
+        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+    }
+
+    @Test
+    void addFluid13() {
+        Fluid fluid = new Fluid();
+        String input = "coke";
+        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+    }
+
+    @Test
     void deleteFluid() throws FoodBankException, FluidExceptions {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
@@ -145,6 +166,14 @@ class FluidTest {
     }
 
     @Test
+    void deleteFluid8() throws FluidExceptions, FoodBankException {
+        Fluid fluid = new Fluid();
+        fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
+        String input = " ";
+        assertThrows(NumberFormatException.class, () -> fluid.deleteFluid(input));
+    }
+
+    @Test
     void listFluid() throws FoodBankException, FluidExceptions {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
@@ -162,13 +191,13 @@ class FluidTest {
     @Test
     void listFluid3() {
         Fluid fluid = new Fluid();
-        assertThrows(EmptyFluidList.class, () -> fluid.listFluids("all"));
+        assertDoesNotThrow(() -> fluid.listFluids("all"));
     }
 
     @Test
     void listFluid4() {
         Fluid fluid = new Fluid();
-        assertThrows(EmptyFluidList.class, () -> fluid.listFluids("12/12/2021"));
+        assertDoesNotThrow(() -> fluid.listFluids("12/12/2021"));
     }
 
     @Test
@@ -207,6 +236,12 @@ class FluidTest {
     }
 
     @Test
+    void getCalories4() {
+        Fluid fluid = new Fluid();
+        assertDoesNotThrow(() -> fluid.getCalories("23/12/2021"));
+    }
+
+    @Test
     void getVolume() throws FoodBankException, FluidExceptions {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100");
@@ -224,6 +259,12 @@ class FluidTest {
     void getVolume3() throws FoodBankException, FluidExceptions {
         Fluid fluid = new Fluid();
         fluid.addFluid("coke /c 40 /v 100 /d 12/12/2021 /t 10:30");
+        assertDoesNotThrow(() -> fluid.getVolume("23/12/2021"));
+    }
+
+    @Test
+    void getVolume4() {
+        Fluid fluid = new Fluid();
         assertDoesNotThrow(() -> fluid.getVolume("23/12/2021"));
     }
 }
