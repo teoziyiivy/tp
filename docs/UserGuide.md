@@ -340,177 +340,177 @@ Example of usage:
 
 `add weight 50 /d 03/04/2021`
 
-[comment]: <> (## Adding workout)
+## Adding workout
 
-[comment]: <> (Command Word: `add workout`)
+Command Word: `add workout`
 
-[comment]: <> (Description: Adds a new workout to the list of workout items, with its associated calories, date and time of workout.)
+Description: Adds a new workout to the list of workout items, with its associated calories, date and time of workout.
 
-[comment]: <> (Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`)
+Format: `add workout WORKOUT_NAME /c CALORIES_BURNED </d DATE /t TIME>`
 
-[comment]: <> (* The `WORKOUT_NAME` can contain spaces.)
+* The `WORKOUT_NAME` can contain spaces.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* The `CALORIES_BURNT` can only contain positive integers inclusive of 0.)
+* The `CALORIES_BURNT` can only contain positive integers inclusive of 0.
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* The `TIME` is in hh:mm.)
+* The `TIME` is in hh:mm.
 
-[comment]: <> (* If `DATE` or `TIME` is not specified, the system current date and time will be taken.)
+* If `DATE` or `TIME` is not specified, the system current date and time will be taken.
 
-[comment]: <> (* Workouts can be added to a future date if desired)
+* Workouts can be added to a future date if desired
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `add workout jog /c 250 /d 07/08/2021 /t 15:00` records a *workout* with the)
+* `add workout jog /c 250 /d 07/08/2021 /t 15:00` records a *workout* with the
 
-[comment]: <> (  description `jog` and `250` calories burned on `07/08/2021` at `15:00`.)
+  description `jog` and `250` calories burned on `07/08/2021` at `15:00`.
 
-[comment]: <> (* `add workout jog /c 250` records a *workout* with the)
+* `add workout jog /c 250` records a *workout* with the
 
-[comment]: <> (    description `jog` and `250` calories burned on **today's date and current time**.)
+    description `jog` and `250` calories burned on **today's date and current time**.
 
-[comment]: <> (## Adding scheduled workout)
+## Adding scheduled workout
 
 
-[comment]: <> (Command Word: `add schedule`)
+Command Word: `add schedule`
 
-[comment]: <> (Description: Adds a new scheduled workout to the list of scheduled workout items with the option to include )
+Description: Adds a new scheduled workout to the list of scheduled workout items with the option to include 
 
-[comment]: <> (activity breakdowns, with date and time of workout.)
+activity breakdowns, with date and time of workout.
 
-[comment]: <> (### With no activity breakdown:)
+### With no activity breakdown:
 
-[comment]: <> (Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`)
+Format: `add schedule WORKOUT_NAME /d DATE /t TIME </r>`
 
-[comment]: <> (* The `WORKOUT_NAME` can contain spaces.)
+* The `WORKOUT_NAME` can contain spaces.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* The `DATE` is in dd/mm/yyyy.)
+* The `DATE` is in dd/mm/yyyy.
 
-[comment]: <> (* The `TIME` is in hh:mm.)
+* The `TIME` is in hh:mm.
 
-[comment]: <> (* The `DATE` or `TIME` is compulsory for schedules.)
+* The `DATE` or `TIME` is compulsory for schedules.
 
-[comment]: <> (* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.)
+* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly *recurring* workout.
 
-[comment]: <> (* The ***optional*** `/r` flag, **if** included, **must** be at the end of the command.)
+* The ***optional*** `/r` flag, **if** included, **must** be at the end of the command.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `add schedule chest day /d 22/12/2021 /t 15:00` adds a *non-recurring workout* to your schedule with the )
+* `add schedule chest day /d 22/12/2021 /t 15:00` adds a *non-recurring workout* to your schedule with the 
 
-[comment]: <> (  description `chest day` on `22/12/2021` at `15:00`.)
+  description `chest day` on `22/12/2021` at `15:00`.
 
-[comment]: <> (* `add schedule weekly chest day /d 07/12/2021 /t 13:50 /r` adds a *recurring* workout to your schedule with the)
+* `add schedule weekly chest day /d 07/12/2021 /t 13:50 /r` adds a *recurring* workout to your schedule with the
 
-[comment]: <> (  description `weekly chest day` on `07/12/2021` at `13:50`.)
+  description `weekly chest day` on `07/12/2021` at `13:50`.
 
-[comment]: <> (### With activity breakdown)
+### With activity breakdown
 
-[comment]: <> (Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`)
+Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 
-[comment]: <> (* The `/a` separator is optional.)
+* The `/a` separator is optional.
 
-[comment]: <> (* The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.)
+* The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* CLI.ckFit supports 3 special **case-sensitive** keywords for `ACTIVITY_NAME`, namely `running/swimming/cycling`.)
+* CLI.ckFit supports 3 special **case-sensitive** keywords for `ACTIVITY_NAME`, namely `running/swimming/cycling`.
 
-[comment]: <> (  If any of these 3 keywords are used, then `ACTIVITY_QUANTIFIER` takes in one **positive non-zero integer** `[DISTANCE]`)
+  If any of these 3 keywords are used, then `ACTIVITY_QUANTIFIER` takes in one **positive non-zero integer** `[DISTANCE]`
 
-[comment]: <> (  in **metres** for the activity.)
+  in **metres** for the activity.
 
-[comment]: <> (* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** )
+* For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers** 
 
-[comment]: <> (  in the form `[SETS]x[REPS]`. In other words it is **assumed** that the activities are sets/repetitions)
+  in the form `[SETS]x[REPS]`. In other words it is **assumed** that the activities are sets/repetitions
 
-[comment]: <> (  activities. &#40;Read more about Sets and Reps under [**Common Terminologies**]&#40;#common-terminologies-and-definitions&#41;&#41;)
+  activities. (Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions))
 
-[comment]: <> (* Multiple activities can be entered as long as they are separated by a comma `,`.)
+* Multiple activities can be entered as long as they are separated by a comma `,`.
 
-[comment]: <> (* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly recurring workout.)
+* The `/r` flag at the end is an ***optional*** flag for recurrence, which schedules a weekly recurring workout.
 
-[comment]: <> (* The ***optional*** `/r` flag, if included, **must** be at the end of the command.)
+* The ***optional*** `/r` flag, if included, **must** be at the end of the command.
 
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (* `add schedule weekly chest day /d 07/12/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r` adds a *recurring* workout)
+* `add schedule weekly chest day /d 07/12/2021 /t 15:00 /a bench press:5x12, pushups:5x20 /r` adds a *recurring* workout
 
-[comment]: <> (  to your schedule with the description `weekly chest day` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of)
+  to your schedule with the description `weekly chest day` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
 
-[comment]: <> (  `bench press` with `5` sets and `12` reps as well as `pushups` with `5` sets of `20` reps will also be added.)
+  `bench press` with `5` sets and `12` reps as well as `pushups` with `5` sets of `20` reps will also be added.
 
-[comment]: <> (* `add schedule triathlon training /d 07/12/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000` adds a *non-recurring* workout)
+* `add schedule triathlon training /d 07/12/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000` adds a *non-recurring* workout
 
-[comment]: <> (  to your schedule with the description `traithlon training` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of)
+  to your schedule with the description `traithlon training` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
 
-[comment]: <> (  `running` for `3000` metres, `swimming` for `1000` metres as well as `cycling` for `4000` metres will also be added.)
+  `running` for `3000` metres, `swimming` for `1000` metres as well as `cycling` for `4000` metres will also be added.
 
-[comment]: <> (## Adding meal to library)
+## Adding meal to library
 
-[comment]: <> (Command Word: `library addmeal`)
+Command Word: `library addmeal`
 
-[comment]: <> (Description: Add a new meal record to the library, with its associated calories.)
+Description: Add a new meal record to the library, with its associated calories.
 
-[comment]: <> (Format: `library addmeal MEAL_NAME /c MEAL_CALORIES`)
+Format: `library addmeal MEAL_NAME /c MEAL_CALORIES`
 
-[comment]: <> (* The MEAL_NAME can contain spaces.)
+* The MEAL_NAME can contain spaces.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.)
+* Each prefix only accepts one input after it.
 
-[comment]: <> (* The MEAL_CALORIES can only contain positive integers inclusive of 0.)
+* The MEAL_CALORIES can only contain positive integers inclusive of 0.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`library addmeal chocolate cake /c 110`)
+`library addmeal chocolate cake /c 110`
 
-[comment]: <> (## Adding fluid to library)
+## Adding fluid to library
 
-[comment]: <> (Command Word: `library addfluid`)
+Command Word: `library addfluid`
 
-[comment]: <> (Description: Adds a new fluid record to the library, with its associated calories.)
+Description: Adds a new fluid record to the library, with its associated calories.
 
-[comment]: <> (Format: `library addfluid FLUID_NAME /c FLUID_CALORIES`)
+Format: `library addfluid FLUID_NAME /c FLUID_CALORIES`
 
-[comment]: <> (* The FLUID_NAME can contain spaces.)
+* The FLUID_NAME can contain spaces.
 
-[comment]: <> (* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.)
+* Prefixes cannot be swapped and must follow the order shown above. No duplicates allowed.
 
-[comment]: <> (* Each prefix only accepts one input after it.  )
+* Each prefix only accepts one input after it.  
 
-[comment]: <> (* The FLUID_CALORIES can only contain positive integers inclusive of 0.)
+* The FLUID_CALORIES can only contain positive integers inclusive of 0.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`library addfluid chocolate milk /c 200`)
+`library addfluid chocolate milk /c 200`
 
-[comment]: <> (## Delete a meal)
+## Delete a meal
 
-[comment]: <> (Command Word: `delete meal`)
+Command Word: `delete meal`
 
-[comment]: <> (Description: Remove a meal from the list of meal items.)
+Description: Remove a meal from the list of meal items.
 
-[comment]: <> (Format: `delete meal INDEX`)
+Format: `delete meal INDEX`
 
-[comment]: <> (* The `INDEX` can only contain integers from the list.)
+* The `INDEX` can only contain integers from the list.
 
-[comment]: <> (Example of usage:)
+Example of usage:
 
-[comment]: <> (`delete meal 1`)
+`delete meal 1`
 
 [comment]: <> (## Delete a fluid)
 
