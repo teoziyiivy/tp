@@ -153,25 +153,26 @@ public class ScheduledWorkout {
      */
     public String getActivitiesAsString() {
         StringBuilder activityString = new StringBuilder();
-        if (!activities.isEmpty()) {
-            activityString.append(Parser.ACTIVITY_SEPARATOR);
-            int currentIndex = 0;
-            for (WorkoutActivity activity : activities) {
-                if (activity.isDistanceActivity()) {
-                    activityString.append(activity.getActivityDescription())
-                            .append(Parser.ACTIVITY_SPLITTER)
-                            .append(activity.getActivityDistance());
-                } else {
-                    activityString.append(activity.getActivityDescription())
-                            .append(Parser.ACTIVITY_SPLITTER)
-                            .append(activity.getActivitySets())
-                            .append(Parser.QUANTIFIER_SPLITTER)
-                            .append(activity.getActivityReps());
-                }
-                currentIndex++;
-                activityString.append(
-                        (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+        if (activities.isEmpty()) {
+            return activityString.toString();
+        }
+        activityString.append(Parser.ACTIVITY_SEPARATOR);
+        int currentIndex = 0;
+        for (WorkoutActivity activity : activities) {
+            if (activity.isDistanceActivity()) {
+                activityString.append(activity.getActivityDescription())
+                        .append(Parser.ACTIVITY_SPLITTER)
+                        .append(activity.getActivityDistance());
+            } else {
+                activityString.append(activity.getActivityDescription())
+                        .append(Parser.ACTIVITY_SPLITTER)
+                        .append(activity.getActivitySets())
+                        .append(Parser.QUANTIFIER_SPLITTER)
+                        .append(activity.getActivityReps());
             }
+            currentIndex++;
+            activityString.append(
+                    (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
         }
         return activityString.toString();
     }
