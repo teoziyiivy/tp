@@ -141,7 +141,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
-    //@@author pragyan01
+    //@@author VishalJeyaram
     private boolean checkWeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -156,7 +156,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
-    //@@author pragyan01
+    //@@author VishalJeyaram
     private boolean checkGender(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
