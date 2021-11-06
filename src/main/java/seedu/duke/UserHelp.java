@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,11 @@ public class UserHelp {
         this.UserHelp_LOGGER.setLevel(Level.SEVERE);
     }
 
+    /**
+     * Takes in user input to decide whether to print out help commands.
+     *
+     * @param input user's input
+     */
     public static void generateUserHelpParameters(String input) {
         assert !Objects.equals(input, "");
 

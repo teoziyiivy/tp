@@ -44,16 +44,30 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
-        if (!activityMap.isEmpty()) {
-            for (var entry : activityMap.entrySet()) {
-                activities.add(
-                        new WorkoutActivity(
-                                entry.getKey().trim(), entry.getValue(),
-                                WorkoutActivity.isDistanceActivity(entry.getKey())
-                        )
-                );
-            }
-        }
+//        if (!activityMap.isEmpty()) {
+//            for (var entry : activityMap.entrySet()) {
+//                activities.add(
+//                        new WorkoutActivity(
+//                                entry.getKey().trim(), entry.getValue(),
+//                                WorkoutActivity.isDistanceActivity(entry.getKey())
+//                        )
+//                );
+//            }
+//        }
+    }
+
+    /**
+     * Copies and constructs a <code>ScheduledWorkout</code> object with the same parameters.
+     *
+     * @param scheduledWorkout <code>ScheduledWorkout</code> object to be copied.
+     */
+    public ScheduledWorkout(ScheduledWorkout scheduledWorkout) {
+        this.workoutDescription = scheduledWorkout.workoutDescription;
+        this.activities = scheduledWorkout.activities;
+        this.workoutDate = scheduledWorkout.workoutDate;
+        this.workoutTime = scheduledWorkout.workoutTime;
+        this.workoutDateTime = scheduledWorkout.workoutDateTime;
+        this.isRecurring = scheduledWorkout.isRecurring;
     }
 
     public String getWorkoutDescription() {

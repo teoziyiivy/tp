@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.LoadException;
-
+import java.io.IOException;
 import java.util.Scanner;
 
 import static seedu.duke.ClickfitMessages.CALCULATOR_PROMPT;
@@ -26,7 +26,7 @@ public class Ui {
 
     //@@author pragyan01
     /**
-     * Constructor of UI class
+     * Constructor of UI class.
      *
      */
     public Ui() {
@@ -34,6 +34,10 @@ public class Ui {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Print method with clickFit's logo.
+     *
+     */
     public static void welcomeMessage() {
         String logo = "   ______  _____     _____            __       ________  _   _\n"
                 + " .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_\n"
@@ -84,6 +88,7 @@ public class Ui {
         calculator.getIdealCalories();
     }
 
+    //@@author pragyan01
     private void checkActivityLevel(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -102,6 +107,7 @@ public class Ui {
         }
     }
 
+    //@@author pragyan01
     private boolean checkAge(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -120,6 +126,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
+    //@@author pragyan01
     private boolean checkHeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -134,6 +141,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
+    //@@author pragyan01
     private boolean checkWeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -148,6 +156,7 @@ public class Ui {
         return answerIsCorrect;
     }
 
+    //@@author pragyan01
     private boolean checkGender(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -163,6 +172,13 @@ public class Ui {
     }
 
     //@@author EdwardZYWang
+    /**
+     * Checks with the user whether he wishes to load the data of the previous session.
+     * if "y" is input, the data from the previous session is saved . if enter keystroke is registered
+     * the previous session's data is wiped.
+     *
+     * @throws LoadException If there are missing text files.
+     */
     public boolean memoryStartup() throws LoadException {
         System.out.println(MEMORY_STARTUP_PROMPT);
         String uiInput;

@@ -7,12 +7,14 @@ import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
 import seedu.duke.exceptions.schedule.InvalidScheduleDescriptionException;
 import seedu.duke.exceptions.schedule.MissingActivityQuantifierException;
 import seedu.duke.exceptions.schedule.MissingActivitySplitterException;
+import seedu.duke.exceptions.schedule.UnnecessaryQuantifierException;
 import seedu.duke.exceptions.workout.MissingWorkoutCalorieSeparatorException;
 import seedu.duke.exceptions.workout.NegativeWorkoutCalorieException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.WorkoutActivity;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -101,12 +103,16 @@ public class Parser {
     public static int getCalories(String inputArguments)
             throws DukeException, NumberFormatException, FoodBankException {
         int calories = 0;
+        String description = getDescription(inputArguments);
         if (!containsCalorieSeparator(inputArguments)) {
-            String description = getDescription(inputArguments);
             if (Parser.containsSeparators(description)) {
                 throw new DukeException("");
             }
-            calories = FoodBank.findCalories(description);
+            if (FoodBank.isFoodFound(description)) {
+                calories = FoodBank.findCalories(description);
+                return calories;
+            }
+            calories = 0;
             return calories;
         } else {
             String[] userInput = inputArguments.split("\\s+");
@@ -125,6 +131,13 @@ public class Parser {
     }
 
     //@@author EdwardZYWang
+    /**
+     * gets calories burned through workout from the user's inputs.
+     *
+     * @param inputArguments arguments of the user's inputs.
+     * @return calories burned for workout parameter
+     * @throws WorkoutException if there is an unknown error encountered.
+     */
     public static int getCaloriesBurnedForWorkout(String inputArguments) throws WorkoutException {
         int calories = 0;
         boolean isCaloriesParsed = false;
@@ -307,7 +320,7 @@ public class Parser {
 
     //@@author arvejw
     /**
-     * Returns the description and arguments for the workout activity.
+     * Returns the parsed breakdown of the workout activities.
      *
      * @param inputArguments Arguments input by the user that come after the command word.
      * @return Map of activity description and activity quantifier pairs.
@@ -353,6 +366,9 @@ public class Parser {
             String[] quantifierSplitResults = splitResults[1].split(QUANTIFIER_SPLITTER, 2);
             if (quantifierSplitResults.length == 1 && !WorkoutActivity.isDistanceActivity(splitResults[0])) {
                 throw new MissingActivityQuantifierException();
+            }
+            if (quantifierSplitResults.length == 2 && WorkoutActivity.isDistanceActivity(splitResults[0])) {
+                throw new UnnecessaryQuantifierException();
             }
             ArrayList<Integer> activityQuantifiers = new ArrayList<Integer>();
             if (WorkoutActivity.isDistanceActivity(splitResults[0])) {
