@@ -5,27 +5,22 @@ participant "meal:Meal"
     activate "meal:Meal" #FFBBBB
     alt userDate.equals(Keywords.ALL)
     |||
-    loop Until no more meals
-    "meal:Meal"->"meal:Meal" : generateMealParameters(inputArguments: String)
+    "meal:Meal"->"meal:Meal" : listAllMeals()
     activate "meal:Meal" #FFBBBB
     return
-    |||
-    end
     |||
     else
     |||
-    loop Until no more meals
     |||
-    opt meal.contains(date)
-    "meal:Meal"->"meal:Meal" : generateMealParameters(inputArguments: String)
+    "meal:Meal"->"meal:Meal" : listMealsByDate(userDate: String)
     activate "meal:Meal" #FFBBBB
     return
     |||
     end
     |||
-    end
-    |||
-    end
+    "meal:Meal"->":ClickfitMessages" : printMealListTotals(mealNumber: int, totalCalories: int)
+    activate ":ClickfitMessages" #FFBBBB
+    return
     deactivate "meal:Meal"
     |||
 @enduml
