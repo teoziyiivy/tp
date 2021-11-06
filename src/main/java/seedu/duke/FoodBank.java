@@ -152,11 +152,12 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+
     /**
-     * Adds a custom meal with its associated calories to the meal library
+     * Adds a custom meal with its associated calories to the meal library.
      *
      * @throws FoodBankException If the meal description is empty, or if the meal already exists
-     * within the library.
+     *                           within the library.
      */
     public static void addCustomMeal(String inputArguments) throws FoodBankException {
         totalMeals = meals.size();
@@ -177,12 +178,13 @@ public class FoodBank {
     }
 
     //@@author VishalJeyaram
+
     /**
-     * Deletes a custom meal with its associated calories from the meal library
+     * Deletes a custom meal with its associated calories from the meal library.
      *
      * @throws NumberFormatException If the meal index is not an integer value.
-     * @throws FoodBankException If meal index is not keyed in, or if the meal library is empty,
-     * or if the meal index is out of range
+     * @throws FoodBankException     If meal index is not keyed in, or if the meal library is empty,
+     *                               or if the meal index is out of range
      */
     public static void deleteCustomMeal(String inputArguments) throws NumberFormatException, FoodBankException {
         totalMeals = meals.size();
@@ -206,11 +208,8 @@ public class FoodBank {
     //@@author pragyan01
     /**
      * This method finds calories associated with a specific food entry.
-     *
-     * @throws FoodBankException if specified food entry
      * @return calories associated with the specific food entry
-     *
-     * @author pragyan01
+     * @throws FoodBankException if specified food entry
      */
     public static int findCalories(String name) throws FoodBankException {
         for (String meal : meals) {
@@ -228,15 +227,13 @@ public class FoodBank {
         throw new NoFoodFoundException();
     }
 
-//@@author pragyan01
+    //@@author pragyan01
     /**
      * This method checks if specified food exists in food bank.
      *
      * @param name food name specified by user
-     * @throws FoodBankException if parameters cannot be generated for food entries stored in food bank.
      * @return true if food specified is found in food bank, false otherwise.
-     *
-     * @author pragyan01
+     * @throws FoodBankException if parameters cannot be generated for food entries stored in food bank.
      */
     public static boolean isFoodFound(String name) throws FoodBankException {
         for (String meal : meals) {
