@@ -45,6 +45,11 @@ printed as a summary of all stored information iu the text files.
 
 ### Meal: Listing Meals
 ![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
+The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
+The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date`
+variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
+is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
+when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
 
 
 ### WeightTracker: Class diagram

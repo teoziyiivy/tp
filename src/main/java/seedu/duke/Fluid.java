@@ -57,16 +57,11 @@ public class Fluid extends Tracker {
     public void generateFluidParameters(String inputArguments) throws FoodBankException, FluidExceptions {
         logr.entering(getClass().getName(), "generateFluidParameters");
         logr.info("start of generating fluid parameters");
-        try {
-            description = Parser.getDescription(inputArguments);
-            calories = Parser.getCalories(inputArguments);
-            volume = Parser.getVolume(inputArguments);
-            date = Parser.getDate(inputArguments);
-            time = Parser.getTime(inputArguments);
-        } catch (DukeException e) {
-            logr.info("error generating parameters: invalidDescription");
-            throw new InvalidFluidDescription();
-        }
+        description = Parser.getDescription(inputArguments);
+        calories = Parser.getCalories(inputArguments);
+        volume = Parser.getVolume(inputArguments);
+        date = Parser.getDate(inputArguments);
+        time = Parser.getTime(inputArguments);
         logr.info("end of process-generateFluidParameters");
         logr.exiting(getClass().getName(), "generateFluidParameters");
     }

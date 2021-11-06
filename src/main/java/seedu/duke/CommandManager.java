@@ -290,9 +290,6 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
-            if (splitResults.length == 1) {
-                throw new NoMealDetailsException();
-            }
             meal.addMeal(inputArguments);
             DateTracker.sortDateAndTime(meal.meals);
             break;
@@ -344,9 +341,6 @@ public class CommandManager {
         inputArguments = (splitResults.length == 2) ? splitResults[1] : null;
         switch (command) {
         case Keywords.MEAL:
-            if (splitResults.length == 1) {
-                throw new NoDeleteMealIndexException();
-            }
             meal.deleteMeal(inputArguments);
             break;
         case Keywords.FLUID:

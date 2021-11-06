@@ -214,4 +214,52 @@ public class ClickfitMessages {
     public static String getTotalWorkoutsDoneMessage(int totalWorkouts) {
         return "You have completed a total of " + totalWorkouts + " workouts. Amazing job!";
     }
+
+    //@@author VishalJeyaram
+    /**
+     * To notify the user that a meal has been added to their list of meals.
+     */
+    public static void printAddedMealMessage(String description, String date, String time, int calories, int totalCalories) {
+        System.out.println("Noted! CLI.ckFit has recorded your meal of "
+                + description + " on " + date + " and at " + time
+                + ". " + calories + " calories has been added to the calorie count. Your total calories"
+                + " for " + date + " is " + totalCalories + "!\n");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To notify the user that a meal has been deleted from their list of meals.
+     */
+    public static void printDeletedMealMessage(String description, int totalCalories, String date) {
+        System.out.println(description + " will be removed from your list of meals consumed. You now "
+                + "have " + totalCalories + " left on " + date + " !\n");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To notify the user that their meal list is empty.
+     */
+    public static void printEmptyMealList() {
+        System.out.println("Your meal list is empty!");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To tell the user how many calories and meals they have consumed thus far.
+     */
+    public static void printMealListTotals(int mealNumber, int totalCalories) {
+        System.out.println("Total number of meals: " + mealNumber);
+        System.out.println("Total calories: " + totalCalories);
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To tell the user the details of a single meal such as its name, calories, and date and time of consumption.
+     */
+    public static void printSingleMealDetails(int i, String description, int calories, String date, String time) {
+        System.out.println(i + ". " + description);
+        System.out.println("Calories: " + calories);
+        System.out.println("Date: " + date);
+        System.out.println("Time: " + time + "\n");
+    }
 }
