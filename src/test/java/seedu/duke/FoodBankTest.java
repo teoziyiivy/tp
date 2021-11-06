@@ -476,7 +476,7 @@ public class FoodBankTest {
     void isFoodFound() throws FoodBankException {
         FoodBank foodbank = new FoodBank();
         foodbank.addCustomFluid("coke /c 40");
-        String input = "coke";
+        String input = "cola";
         assertDoesNotThrow(() -> foodbank.isFoodFound(input));
     }
 
