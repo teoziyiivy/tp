@@ -1,11 +1,29 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+|||
+participant ":FoodBank"
+    ->":FoodBank" : "addCustomMeal(inputArguments: String)"
+    activate ":FoodBank" #FFBBBB
+    opt inputArguments == null
+    end
+    note left : if block only throws an exception
+    |||
+    opt Until no more meals
 
-autonumber
+    opt m.contains(inputArguments)
+    |||
+    end
+    |||
+    end
+    |||
+    note left : if block only throws an exception
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+    ":FoodBank"->":FoodBank" : generateParameters(inputArguments: String)
+    activate ":FoodBank" #FFBBBB
+    return
+    |||
+
+    deactivate ":FoodBank"
+    |||
 @enduml

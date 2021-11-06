@@ -42,19 +42,20 @@ classes are first converted
 to arrayLists, which are converted to arrayLists, which are then referenced by PrintLoadedLists() to be formatted and
 printed as a summary of all stored information iu the text files.
 
-
 ### Meal: Listing Meals
 ![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
-The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
-The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date`
-variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
-is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
-when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
+The UML sequence diagram above shows what happens when the user attempts to list their meals. If the user inputs
+"list meals all", the if block's condition will be satisfied, and the method "listAllMeals()" will be called. If 
+the user inputs "list meals DATE" where date is an arbitrary date, the method "listMealsByDate(userDate)" will be 
+called, where userDate is the date specified by the user. Then, the method "printMealListTotals(mealNumber, totalCalories)"
+will be called, printing out a message to tell the user the total meal calories and number of meals.
+
+
+### FoodBank: Adding custom meal
 
 
 ### WeightTracker: Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138873653-d5db5c99-1f22-4c68-86af-188f1ea2c593.png)
-
 Above are the UML class level diagrams of `WeightTracker`, `WeightTrackerMessages`, `Tracker` and relevant exception classes. 
 As seen in the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` class and inherits from the 
 `Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.
