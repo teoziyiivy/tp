@@ -42,7 +42,6 @@ indicator of the user's progress
 3. Go to the folder you saved the `CLIckFit.jar` file and note the absolute file path.
 
 4. If you are using Windows, open up a Command prompt terminal cmd.exe or powershell.exe and for
-
    Mac and Linux users, do the same with the terminal of your respective systems.
 
 5. Navigate to the folder where the `CLIckFit.jar` file is stored.
@@ -84,7 +83,7 @@ overly large and nonsensical integer value for calories such as `2147483647` the
   
 * Separators such as the date separator `/d`, time separator `/t`, calorie separator `/c`, volume separator `/v` and
   activity separator `/a` should be entered in the **same order** as shown in their respective command formats.
-  CLI.ckFit **does not** actively support the shuffling of separators when taking user input.
+  CLI.ckFit does not actively support the shuffling of separators when taking user input.
   
 * The separators as shown in the command format should be input **once**. Typing multiple identical separators
   unnecessarily *may* cause incorrect parsing of user input.
@@ -93,7 +92,7 @@ overly large and nonsensical integer value for calories such as `2147483647` the
   For instance if you want to add a meal of `300` calories, only enter a **single** integer for your calories.
   E.g., enter `/c 300` instead of something like `/c 300 20 10`. The same applies to other arguments like date and time.
   
-* Scheduled workouts with the same activity breakdowns in a different order **are not** considered duplicated
+* Scheduled workouts with the same activity breakdowns in a different order are not considered duplicated
   in the current version of CLI.ckFit. If multiple activities with the same name are input in the same activity
   breakdown, only the activity quantifier of the latest activity will be taken. This is due to limitations based
   on the choice usage of HashMaps in implementation.
@@ -336,6 +335,12 @@ Example of usage:
 
     description `jog` and `250` calories burned on **today's date and current time**.
 
+Expected outcome:
+
+```
+Noted! CLI.ckFit has recorded your workout of description "jog" on 07/08/2021 at 15:00 where you burned 250 calories!
+```
+
 ## Adding scheduled workout
 
 
@@ -373,6 +378,15 @@ Example of usage:
 * `add schedule weekly chest day /d 07/12/2021 /t 13:50 /r` adds a *recurring* workout to your schedule with the
   description `weekly chest day` on `07/12/2021` at `13:50`.
 
+Expected outcomes:
+```
+Noted! CLI.ckFit has scheduled your workout of description "chest day" on 22/12/2021 at 15:00.
+```
+
+```
+Noted! CLI.ckFit has scheduled your recurring workout of description "weekly chest day" on 07/12/2021 at 13:50.
+```
+
 ### With activity breakdown
 
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
@@ -408,6 +422,26 @@ Example of usage:
 * `add schedule triathlon training /d 07/12/2021 /t 15:00 /a running:3000, swimming:1000, cycling:4000` adds a *non-recurring* workout
   to your schedule with the description `traithlon training` on `07/12/2021` at `15:00`. Furthermore, an activity breakdown of
   `running` for `3000` metres, `swimming` for `1000` metres as well as `cycling` for `4000` metres will also be added.
+
+Expected outcomes:
+```
+Noted! CLI.ckFit has scheduled your recurring workout of description "weekly chest day" on 07/12/2021 at 15:00.
+
+Activities Breakdown: 
+1. bench press: 5sets x 12reps
+2. pushups: 5sets x 20reps
+
+```
+
+```
+Noted! CLI.ckFit has scheduled your workout of description "triathlon training" on 07/12/2021 at 15:00.
+
+Activities Breakdown: 
+1. running: 3000metres
+2. swimming: 1000metres
+3. cycling: 4000metres
+
+```
 
 ## Adding meal to library
 
@@ -511,6 +545,12 @@ Example of usage:
 
 * `delete workout 3` will delete the workout with index `3` as seen in the list from `list schedule all` if the index is valid.
 
+Expected outcome:
+```
+Noted! CLI.ckFit has successfully deleted your recorded workout of description "jog" on 07/08/2021 at 15:00
+where you burned 250 calories!
+```
+
 ## Delete a scheduled workout
 
 Command Word: `delete schedule`
@@ -526,6 +566,11 @@ Format: `delete schedule INDEX`
 Example of usage:
 
 * `delete schedule 3` will delete the schedule workout with index `3` as seen in the list from `list schedule all` if the index is valid.
+
+Expected outcome:
+```
+Noted! CLI.ckFit has successfully deleted your recurring scheduled workout of description "weekly chest day" on 07/12/2021 at 15:00!
+```
 
 ## Delete a meal from library
 
@@ -632,9 +677,53 @@ Example of usage:
 
 * `list workouts` will list the recorded workouts for today's date.
 
-* `list workouts 22/10/2021` will list the recorded workouts on `22/10/2021`.
+* `list workouts 08/11/2021` will list the recorded workouts on `08/11/2021`.
 
 * `list workouts all` will list all your recorded workouts.
+
+Expected outcomes:
+```
+Workouts recorded today:
+_________________________________________________________
+1. jog
+Calories burned: 321
+Date: 07/11/2021
+Time: 01:45
+_________________________________________________________
+Total calories burned: 321
+```
+
+```
+Workouts recorded on 08/11/2021:
+_________________________________________________________
+1. swimming
+Calories burned: 300
+Date: 08/11/2021
+Time: 15:15
+_________________________________________________________
+Total calories burned: 300
+```
+
+```
+All recorded workouts:
+_________________________________________________________
+1. jog
+Calories burned: 321
+Date: 07/11/2021
+Time: 01:45
+_________________________________________________________
+2. swimming
+Calories burned: 300
+Date: 08/11/2021
+Time: 15:15
+_________________________________________________________
+3. chest day
+Calories burned: 200
+Date: 09/11/2021
+Time: 12:10
+_________________________________________________________
+You have completed a total of 3 workouts. Amazing job!
+```
 
 ## List scheduled workouts
 
@@ -655,9 +744,77 @@ Example of usage:
 
 * `list schedule` will list all the schedule for today's date.
 
-* `list schedule 22/10/2022` will list the schedule for `22/10/2022`.
+* `list schedule 07/12/2021` will list the schedule for `07/12/2021`.
 
 * `list schedule all` will list your full schedule.
+
+Expected outcomes:
+```
+Today's workout schedule:
+_________________________________________________________
+1. triathlon training
+Date: 07/11/2021
+Time: 15:00
+
+Activities Breakdown: 
+1. running: 2000metres
+2. swimming: 1000metres
+3. cycling: 3000metres
+
+_________________________________________________________
+You have 1 scheduled workouts on that day!
+```
+
+```
+Workout schedule on 07/12/2021:
+_________________________________________________________
+1. weekly chest day [R]
+Date: 07/12/2021
+Time: 15:00
+
+Activities Breakdown: 
+1. bench press: 5sets x 12reps
+2. pushups: 5sets x 20reps
+
+_________________________________________________________
+You have 1 scheduled workouts on that day!
+```
+
+```
+Full Workout Schedule:
+_________________________________________________________
+1. triathlon training
+Date: 07/11/2021
+Time: 15:00
+
+Activities Breakdown: 
+1. running: 2000metres
+2. swimming: 1000metres
+3. cycling: 3000metres
+
+_________________________________________________________
+2. weekly chest day [R]
+Date: 07/12/2021
+Time: 15:00
+
+Activities Breakdown: 
+1. bench press: 5sets x 12reps
+2. pushups: 5sets x 20reps
+
+_________________________________________________________
+3. triathlon training
+Date: 09/12/2021
+Time: 15:00
+
+Activities Breakdown: 
+1. running: 3000metres
+2. swimming: 1000metres
+3. cycling: 4000metres
+
+_________________________________________________________
+You have a total of 3 workouts in your schedule.
+```
+
 
 ## List Volumes
 
