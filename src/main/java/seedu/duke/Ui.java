@@ -201,12 +201,12 @@ public class Ui {
         while (!flag) {
             uiInput = uiScanner.nextLine();
             if (uiInput.isEmpty()) {
-                System.out.println(MEMORY_STARTUP_N_INPUT);
+                System.out.println(MEMORY_STARTUP_Y_INPUT);
                 System.out.println(System.lineSeparator() + "What would you like to do?");
                 result = true;
                 flag = true;
             } else if (uiInput.trim().equals("y")) {
-                System.out.println(MEMORY_STARTUP_Y_INPUT);
+                System.out.println(MEMORY_STARTUP_N_INPUT);
                 result = false;
                 flag = true;
             } else {
