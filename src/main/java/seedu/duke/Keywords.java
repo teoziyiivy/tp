@@ -27,4 +27,5 @@ public class Keywords {
     public static final String FLUID = "fluid";
     public static final String DELETE = "delete";
     public static final String WEIGHT = "weight";
+    public static final String ALL = "all";
 }
