@@ -234,6 +234,11 @@ Example of usage:
 
 `add meal risotto /c 250 /d 14/10/2021 /t 08:30`
 
+Expected output:
+
+```
+Noted! CLI.ckFit has recorded your meal of risotto on 14/10/2021 and at 08:30. 250 calories has been added to the calorie count!
+```
 
 ## Adding fluids
 
@@ -429,6 +434,12 @@ Example of usage:
 
 `library addmeal chocolate cake /c 110`
 
+Expected output:
+
+```
+chocolate cake, which has 110 calories, will be added to your library of meals. You now have 2 meals!
+```
+
 ## Adding fluid to library
 
 Command Word: `library addfluid`
@@ -462,6 +473,12 @@ Format: `delete meal INDEX`
 Example of usage:
 
 `delete meal 1`
+
+Expected output:
+
+```
+rissoto will be removed from your list of meals consumed!
+```
 
 ## Delete a fluid
 
@@ -539,7 +556,13 @@ Format: `library deletemeal INDEX`
 
 Example of usage:
 
-`library deletemeal 2`
+`library deletemeal 1`
+
+Expected output:
+
+```
+chocolate cake will be removed from your list of meals consumed. You now have 0 meals left!
+```
 
 ## Delete a fluid from library
 
@@ -573,6 +596,27 @@ Example of usage:
 
 `list meals`, `list meals 22/10/2021`, `list meals all`
 
+Expected output: 
+
+```
+1. chicken soup
+Calories: 150
+Date: 15/09/2021
+Time: 01:16
+
+2. risoto
+Calories: 12
+Date: 07/11/2021
+Time: 01:16
+
+3. rice
+Calories: 120
+Date: 14/12/2022
+Time: 15:07
+
+Total number of meals: 3
+Total calories: 282
+```
 
 ## List fluids
 
@@ -685,6 +729,21 @@ Description: Lists all meals stored in the library.
 
 Format: `library listmeals`
 
+Expected output:
+
+```
+1. pasta
+Calories: 120
+
+2. chocolate bar
+Calories: 90
+
+3. canned soup
+Calories: 122
+
+Total number of meals in library: 3
+```
+
 ## List fluids stored in library
 
 Command Word: `library listfluids`
@@ -726,22 +785,61 @@ Example of usage:
 Expected output
 
 ```
-1. cookie
-Calories: 22
-Date: 15/02/2022
-Time: 19:38
-Total number of meals: 1
-Total calories: 22
+1. risoto
+Calories: 12
+Date: 07/11/2021
+Time: 01:16
+
+2. rice
+Calories: 120
+Date: 14/12/2022
+Time: 15:07
+
+3. chicken soup
+Calories: 150
+Date: 15/09/2021
+Time: 01:16
+
+Total number of meals: 3
+Total calories: 282
+
 1. cola
 Calories: 123
-Volume: 0
-Date: 12/12/2024
-Time: 19:38
+Volume: 50
+Date: 07/11/2021
+Time: 01:22
+
 Total number of fluids: 1
 Total calories: 123
-Your weight list is empty!
-Your workout list is empty!
-Your workout schedule is empty!
+
+Here are your recorded weights:
+1.  Weight: 70.0  Date: 07/11/2021
+
+Total number of weights: 1
+
+All recorded workouts:
+_________________________________________________________
+1. Hammer curls
+Calories burned: 22
+Date: 07/11/2021
+Time: 01:22
+_________________________________________________________
+You have completed a total of 1 workouts. Amazing job!
+
+Full Workout Schedule:
+_________________________________________________________
+1. test123 [R]
+Date: 11/11/2021
+Time: 18:59
+
+Activities Breakdown: 
+1. running: 800metres
+2. swimming: 800metres
+3. squats: 3sets x 10reps
+4. cycling: 800metres
+
+_________________________________________________________
+You have a total of 1 workouts in your schedule.
 ```
 
 ## Help Command
