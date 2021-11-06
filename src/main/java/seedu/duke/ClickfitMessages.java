@@ -19,8 +19,8 @@ public class ClickfitMessages {
 
     public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Would you "
             + "like to load up the records of your fitness journey?" + System.lineSeparator()
-            + "Key in y or press enter keystroke to skip!" + System.lineSeparator()
-            + "Note: Pressing enter to skip this prompt will result in the previous session's data"
+            + "Key in 'y' to skip or press enter to load data from your previous session" + System.lineSeparator()
+            + "Note: Keying in 'y' to skip this prompt will result in the previous session's data"
             + "being deleted!";
 
     public static final String INCORRECT_INPUT = System.lineSeparator() + "CLI.ckFit has detected a "
@@ -39,40 +39,40 @@ public class ClickfitMessages {
             "parameters encapsulated by angle brackets \"< >\" are optional" + System.lineSeparator()
                     + "NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your meal library."
                     + System.lineSeparator()
-            + System.lineSeparator() + "[Add meal] | add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>"
-            + System.lineSeparator() + "[Add fluid] | add fluid FLUID_NAME </c FLUID_CALORIES "
+                    + System.lineSeparator() + "[Add meal] | add meal MEAL_NAME </c MEAL_CALORIES /d DATE /t TIME>"
+                    + System.lineSeparator() + "[Add fluid] | add fluid FLUID_NAME </c FLUID_CALORIES "
                     + "/v VOLUME /d DATE /t TIME>"
-            + System.lineSeparator() + "[Add weight] | add weight WEIGHT /d <DATE>"
-            + System.lineSeparator() + "[Add workout] | add workout WORKOUT_NAME /c "
+                    + System.lineSeparator() + "[Add weight] | add weight WEIGHT /d <DATE>"
+                    + System.lineSeparator() + "[Add workout] | add workout WORKOUT_NAME /c "
                     + "CALORIES_BURNED </d DATE /t TIME>"
-            + System.lineSeparator() + "[Add scheduled workout] | add schedule WORKOUT_NAME /d "
+                    + System.lineSeparator() + "[Add scheduled workout] | add schedule WORKOUT_NAME /d "
                     + "DATE /t TIME </a ACTIVTY_NAME:ACTIVITY_QUANITIFER, ...> </r>"
-            + System.lineSeparator() + "[Add meal to library] | library addmeal MEAL_NAME /c MEAL_CALORIES"
-            + System.lineSeparator() + "[Add fluid to library] | library addfluid "
+                    + System.lineSeparator() + "[Add meal to library] | library addmeal MEAL_NAME /c MEAL_CALORIES"
+                    + System.lineSeparator() + "[Add fluid to library] | library addfluid "
                     + "FLUID_NAME /c FLUID_CALORIES"
                     + System.lineSeparator()
-            + System.lineSeparator() + "[Remove meal] | delete meal INDEX"
-            + System.lineSeparator() + "[Remove fluid] | delete fluid INDEX"
-            + System.lineSeparator() + "[Remove weight] | delete weight INDEX"
-            + System.lineSeparator() + "[Remove workout] | delete workout INDEX"
-            + System.lineSeparator() + "[Remove scheduled workout] | delete schedule INDEX"
-            + System.lineSeparator() + "[Remove meal from library] | library deletemeal INDEX"
-            + System.lineSeparator() + "[Remove fluid from library] | library deletefluid INDEX"
+                    + System.lineSeparator() + "[Remove meal] | delete meal INDEX"
+                    + System.lineSeparator() + "[Remove fluid] | delete fluid INDEX"
+                    + System.lineSeparator() + "[Remove weight] | delete weight INDEX"
+                    + System.lineSeparator() + "[Remove workout] | delete workout INDEX"
+                    + System.lineSeparator() + "[Remove scheduled workout] | delete schedule INDEX"
+                    + System.lineSeparator() + "[Remove meal from library] | library deletemeal INDEX"
+                    + System.lineSeparator() + "[Remove fluid from library] | library deletefluid INDEX"
                     + System.lineSeparator()
-            + System.lineSeparator() + "[List meals] | list meals <DATE>"
-            + System.lineSeparator() + "[List fluids] | list fluids <DATE>"
-            + System.lineSeparator() + "[List weights] | list weights <DATE>"
-            + System.lineSeparator() + "[List workouts] | list workouts <DATE>"
-            + System.lineSeparator() + "[List calories] | list calories <DATE>"
-            + System.lineSeparator() + "[List volume] | list volumes <DATE>"
-            + System.lineSeparator() + "[List scheduled workouts] | list schedule <DATE>"
-            + System.lineSeparator() + "[List meals from library] | library listmeals"
-            + System.lineSeparator() + "[List fluids from library] | library listfluids"
+                    + System.lineSeparator() + "[List meals] | list meals <DATE>"
+                    + System.lineSeparator() + "[List fluids] | list fluids <DATE>"
+                    + System.lineSeparator() + "[List weights] | list weights <DATE>"
+                    + System.lineSeparator() + "[List workouts] | list workouts <DATE>"
+                    + System.lineSeparator() + "[List calories] | list calories <DATE>"
+                    + System.lineSeparator() + "[List volume] | list volumes <DATE>"
+                    + System.lineSeparator() + "[List scheduled workouts] | list schedule <DATE>"
+                    + System.lineSeparator() + "[List meals from library] | library listmeals"
+                    + System.lineSeparator() + "[List fluids from library] | library listfluids"
                     + System.lineSeparator()
-            + System.lineSeparator() + "[Access user help] | help commands"
-            + System.lineSeparator() + "[Access user guide] | help UG"  + System.lineSeparator()
+                    + System.lineSeparator() + "[Access user help] | help commands"
+                    + System.lineSeparator() + "[Access user guide] | help UG" + System.lineSeparator()
                     + System.lineSeparator() + "Here is the link to our User Guide! "
-            + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";
+                    + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";
 
     public static final String DATE_ERROR = "Please enter your date in the right format. "
             + "It should be \"DD/MM/YYYY\"";
@@ -227,6 +227,7 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
+
     /**
      * To notify the user that a meal has been deleted from their list of meals.
      */
@@ -236,6 +237,7 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
+
     /**
      * To notify the user that their meal list is empty.
      */
@@ -244,6 +246,7 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
+
     /**
      * To tell the user how many calories and meals they have consumed thus far.
      */
@@ -253,6 +256,7 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
+
     /**
      * To tell the user the details of a single meal such as its name, calories, and date and time of consumption.
      */
@@ -262,4 +266,30 @@ public class ClickfitMessages {
         System.out.println("Date: " + date);
         System.out.println("Time: " + time + "\n");
     }
+
+    //@@author teoziyiivy
+    /**
+     * Prints response for weight has been added to weight array successfully.
+     *
+     * @param weight Weight recorded in weight array.
+     * @param date   Date recorded in weight array.
+     */
+    public static void printAddWeightResponse(double weight, String date) {
+        System.out.println("Noted! CLI.ckFit has recorded your weight as "
+                + weight + " on " + date + ". Check back for your progress!");
+    }
+
+    //@@author teoziyiivy
+    /**
+     * Prints response for weight has been deleted from weight array successfully.
+     *
+     * @param weight Weight recorded in weight array.
+     * @param date   Date recorded in weight array.
+     */
+    public static void printDeleteWeightResponse(double weight, String date) {
+        System.out.println("Noted! CLI.ckFit has successfully deleted your weight of "
+                + weight + " on " + date + ".");
+    }
 }
+
+

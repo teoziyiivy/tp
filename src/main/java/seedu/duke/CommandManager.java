@@ -4,8 +4,6 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.meal.MealException;
-import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
-import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.schedule.ScheduleException;
 import seedu.duke.exceptions.weight.DeleteWeightException;
 import seedu.duke.exceptions.weight.WeightException;
