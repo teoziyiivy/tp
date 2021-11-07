@@ -83,7 +83,7 @@ class ParserTest {
 
     //@@author arvejw
     @Test
-    void getActivities_validActivityFormat_exceptionThrow() {
+    void getActivities_validActivityFormat_noExceptionThrow() {
         String input1 = "add schedule test123 /d 28/12/2021 /t 18:59 /a swimming:310 /r";
         String input2 = "add schedule test123 /d 28/12/2021 /t 18:59 /a squats:3x10 /r";
         String input3 = "add schedule test123 /d 28/12/2021 /t 18:59 /a squats: 3x10, swimming:1000, running:1000";

@@ -2,9 +2,10 @@
 
 ## Introduction
 
-CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input your calories,
-weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever you wish to.
-It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via Command Line Interface (CLI). CLI.ckFit 
+allows you to input and track your calories, weight, foods, and workouts throughout the day.
+It also allows you to save your data and view it whenever you wish to. 
+It comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
 level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students
 staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or
 even student athletes. Prior knowledge in fitness and gym-related terminologies is beneficial, but not necessary.
@@ -101,7 +102,8 @@ overly large and nonsensical integer value for calories such as `2147483647` the
   on the choice usage of HashMaps in implementation.
   
 * The current version CLI.ckFit only supports 3 types of distance based activities,
-  namely swimming, running and cycling. **ALL** other activities are assumed to be sets/repetitions based. 
+  namely swimming, running and cycling. **ALL** other activities are **assumed** to be sets/repetitions based.
+  (*Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions)*)
 
 ## Important FAQs
 
@@ -145,15 +147,7 @@ Note: Keying in "y" will result in the previous session's data being deleted!
   - [**List calories**](#list-calories)
 
   - [**List volumes**](#list-volumes)
-
-- #### Help
-
-  - [**Access user help**](#help-command)
-
-- #### Close CLI.ckFit
-
-  - [**Bye**](#bye)
-
+  
 ### Workout Manager
 
 - #### Add
@@ -197,6 +191,12 @@ Note: Keying in "y" will result in the previous session's data being deleted!
 ### List Manager
 
 - [**List everything**](#List-everything-on-current-date)
+
+### Getting help
+- [**Access user help**](#help-command)
+
+### Exiting CLI.ckFit
+- [**Exiting application**](#bye)
 
 ### Miscellaneous
 
@@ -308,6 +308,12 @@ Example of usage:
 
 `add weight 50 /d 03/04/2021`
 
+Expected outcome:
+
+```
+Noted! CLI.ckFit has recorded your weight as 50.0 kg on 03/04/2021. Check back for your progress!
+```
+
 ## Adding workout
 
 Command Word: `add workout`
@@ -398,7 +404,7 @@ Noted! CLI.ckFit has scheduled your recurring workout of description "weekly che
 
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 
-* The `/a` separator is optional.
+* The `/a` separator is optional. However, it **must** be included if an activity breakdown is to be included in the schedule.
 
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
 
@@ -412,7 +418,7 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 
 * For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers**
   in the form `[SETS]x[REPS]`. In other words it is **assumed** that the activities are sets/repetitions
-  activities. (Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions))
+  activities. (*Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions)*)
   
 * Multiple activities can be entered as long as they are separated by a comma `,`.
 
@@ -437,7 +443,6 @@ Noted! CLI.ckFit has scheduled your recurring workout of description "weekly che
 Activities Breakdown: 
 1. bench press: 5sets x 12reps
 2. pushups: 5sets x 20reps
-
 ```
 
 ```
@@ -447,7 +452,6 @@ Activities Breakdown:
 1. running: 3000metres
 2. swimming: 1000metres
 3. cycling: 4000metres
-
 ```
 
 ## Adding meal to library
@@ -556,7 +560,13 @@ Format: `delete weight INDEX`
 
 Example of usage:
 
-`delete weight 2`
+`delete weight 1`
+
+Expected outcome:
+
+```
+Noted! CLI.ckFit has successfully deleted your weight of 50.0 kg on 03/04/2021.
+```
 
 ## Delete a workout
 
@@ -734,7 +744,30 @@ Format: `list weights <DATE>`
 
 Example of usage:
 
-`list weights`, `list weights 22/10/2021`, `list weights all`
+* `list weights` will list the recorded weights for today
+* `list weights 06/11/2021` will list the recorded weights on 06/11/2021
+* `list weights all` will list all recorded weights
+
+Expected outcome:
+
+```
+1. Weight: 50.0 kg
+Total number of weights: 1
+```
+
+```
+1. Weight: 52.0 kg
+Total number of weights: 1
+```
+
+```
+Here are your recorded weights:
+1.  Weight: 52.0 kg Date: 06/11/2021
+
+2.  Weight: 50.0 kg Date: 07/11/2021
+
+Total number of weights: 2
+```
 
 ## List workouts
 
@@ -839,7 +872,6 @@ Activities Breakdown:
 1. running: 2000metres
 2. swimming: 1000metres
 3. cycling: 3000metres
-
 _________________________________________________________
 You have 1 scheduled workouts on that day!
 ```
@@ -854,7 +886,6 @@ Time: 15:00
 Activities Breakdown: 
 1. bench press: 5sets x 12reps
 2. pushups: 5sets x 20reps
-
 _________________________________________________________
 You have 1 scheduled workouts on that day!
 ```
@@ -870,7 +901,6 @@ Activities Breakdown:
 1. running: 2000metres
 2. swimming: 1000metres
 3. cycling: 3000metres
-
 _________________________________________________________
 2. weekly chest day [R]
 Date: 07/12/2021
@@ -879,7 +909,6 @@ Time: 15:00
 Activities Breakdown: 
 1. bench press: 5sets x 12reps
 2. pushups: 5sets x 20reps
-
 _________________________________________________________
 3. triathlon training
 Date: 09/12/2021
@@ -889,7 +918,6 @@ Activities Breakdown:
 1. running: 3000metres
 2. swimming: 1000metres
 3. cycling: 4000metres
-
 _________________________________________________________
 You have a total of 3 workouts in your schedule.
 ```
@@ -1004,7 +1032,7 @@ Total calories: 0
 Total number of fluids: 1
 Total calories: 100
 
-1. Weight: 60.0
+1. Weight: 60.0 kg
    Total number of weights: 1
 
 No workouts recorded for today!
@@ -1055,7 +1083,7 @@ Total number of fluids: 1
 Total calories: 123
 
 Here are your recorded weights:
-1.  Weight: 70.0  Date: 07/11/2021
+1.  Weight: 70.0 kg Date: 07/11/2021
 
 Total number of weights: 1
 
@@ -1133,7 +1161,7 @@ NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your
 Here is the link to our User Guide! https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html
 ```
 
-## Bye
+## Exiting the application
 
 Command Word: `bye`
 
