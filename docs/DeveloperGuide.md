@@ -4,8 +4,8 @@
 The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/)
 
 Written with reference to:
-* https://se-education.org/addressbook-level2/DeveloperGuide.html
-* https://se-education.org/addressbook-level3/DeveloperGuide.html
+* [https://se-education.org/addressbook-level2/DeveloperGuide.html](https://se-education.org/addressbook-level2/DeveloperGuide.html)
+* [https://se-education.org/addressbook-level3/DeveloperGuide.html](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Table of Contents
 - [**Design & Implementation**](#design--implementation)
