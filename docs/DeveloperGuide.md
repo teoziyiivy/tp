@@ -260,12 +260,14 @@ testers are expected to do more exploratory work for more comprehensive testing.
       Please minimally have the format: add workout [workout_description] /c [calories]
       Do remember to put spaces between your separators!
       ```
+      
 5. Adding a workout with invalid date or time format
     * **Test Case**: `add workout test /c 123 /d 08-11-21 /t 5:00pm`
     * **Expected**: 
       ```
       Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
       ```
+      
 #### Deleting a workout
 1. Deleting a workout with valid index
     * **Test Case**: `delete workout 1`
@@ -277,12 +279,14 @@ testers are expected to do more exploratory work for more comprehensive testing.
       ```
       Failed to delete that workout! Please enter an Integer within range.
       ```
+      
 3. Deleting a workout without specifying index
     * **Test Case**: `delete workout`
     * **Expected**:
       ```
       Please enter the workout index in the format: delete workout [index]
       ```
+      
 #### Listing workouts
 1. Listing workouts on date without any recorded workouts
     * **Test Case**: `list workouts 23/12/2021`
@@ -302,6 +306,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
       Please enter in the format: add schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]
       Do remember to put spaces between your separators.
       ```
+      
 2. Adding a scheduled workout with missing description
     * **Test Case**: `add schedule /d 12/12/2021 /t 23:59`
     * **Expected**:
@@ -309,12 +314,14 @@ testers are expected to do more exploratory work for more comprehensive testing.
       I am sorry... it appears the description is missing.
       Please enter a description for your scheduled workout!
       ```
+      
 4. Adding a scheduled workout with invalid date or time format
     * **Test Case**: `add schedule test /d 12-12-21 /t 11:59pm`
     * **Expected**:
       ```
       Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
       ```
+      
 5. Adding a scheduled workout with a date in the past
     * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59`
     * **Expected**:
@@ -322,6 +329,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
       Noted! CLI.ckFit has scheduled your workout of description "test" on 07/11/2021 at 13:59.
       CLI.ckFit has detected some overdue scheduled workouts and has deleted/rescheduled them!
       ```
+      
 5. Adding a scheduled workout with activity breakdown, missing activity splitter ":"
     * **Test Case**: `add schedule test /d 12/12/2021 /t 13:59 /a chest8x10, squats:3x10`
     * **Expected**:
@@ -329,6 +337,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
       Missing activity splitter ":" detected.
       Please enter [activity name]:[sets]x[reps] or [activity name]:[distance in metres] for your workout activities
       ```
+      
 6. Adding a scheduled workout with activity breakdown, unnecessary quantifier "x"
     * **Test Case**: `add schedule test /d 12/12/2021 /t 13:59 /a swimming:1000x2`
     * **Expected**:
@@ -338,6 +347,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
       activity name is either running/swimming/cycling.
       E.g. running:8000
       ```
+      
 7. Adding a scheduled workout with activity breakdown, missing quantifier "x"
     * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59 /a chest:8x10, squats:3 10`
     * **Expected**:
@@ -345,6 +355,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
       Missing activity quantifier "x" detected.
       Please enter your [sets]x[reps] for your non-distance based workout activities.
       ```
+      
 8. Adding a scheduled workout with activity breakdown with non-positive integers for distance or sets and reps
     * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59 /a chest:8x10, squats:3x-10`
     * **Expected**: 
@@ -356,6 +367,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
       E.g. bench press:3x12
       For multiple activities please separate them by ","
       ```
+      
 #### Deleting a scheduled workout
 1. Deleting a scheduled workout with valid index
     * **Test Case**: `delete schedule 1`
@@ -367,12 +379,14 @@ testers are expected to do more exploratory work for more comprehensive testing.
       ```
       Failed to delete that scheduled workout! Please enter an Integer within range.
       ```
+      
 3. Deleting a scheduled workout without specifying index
     * **Test Case**: `delete schedule`
     * **Expected**:
       ```
       Please enter the schedule index in the format: delete schedule [index]
       ```
+      
 #### Listing scheduled workouts
 1. Listing workout schedule on date without any scheduled workouts
     * **Test Case**: `list schedule 23/12/2021`
