@@ -421,9 +421,9 @@ public class ScheduleTracker {
      * @throws ScheduleException If duplicate workout detected.
      */
     public void duplicateScheduledWorkoutCheck(ScheduledWorkout scheduledWorkoutToAdd) throws ScheduleException {
-        String scheduledWorkoutAsString = scheduledWorkoutToAdd.getScheduledWorkoutAsString();
+        String scheduledWorkoutAsString = scheduledWorkoutToAdd.getScheduledWorkoutAsDataString();
         for (ScheduledWorkout s : scheduledWorkouts) {
-            if (scheduledWorkoutAsString.equals(s.getScheduledWorkoutAsString())) {
+            if (scheduledWorkoutAsString.equals(s.getScheduledWorkoutAsDataString())) {
                 throw new DuplicateScheduledWorkoutException();
             }
         }

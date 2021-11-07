@@ -2,8 +2,9 @@
 
 ## Introduction
 
-CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input your calories,
-weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever you wish to.
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input and track 
+your calories, weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever 
+you wish to. 
 It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
 level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students
 staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or
@@ -98,7 +99,8 @@ overly large and nonsensical integer value for calories such as `2147483647` the
   on the choice usage of HashMaps in implementation.
   
 * The current version CLI.ckFit only supports 3 types of distance based activities,
-  namely swimming, running and cycling. **ALL** other activities are assumed to be sets/repetitions based. 
+  namely swimming, running and cycling. **ALL** other activities are **assumed** to be sets/repetitions based.
+  (*Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions)*)
 
 ## Important FAQs
 
@@ -415,7 +417,7 @@ Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QU
 
 * For **ALL** other kinds of `ACTIVITY_NAME`, `ACTIVITY_QUANTIFIER` takes in two **positive non-zero integers**
   in the form `[SETS]x[REPS]`. In other words it is **assumed** that the activities are sets/repetitions
-  activities. (Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions))
+  activities. (*Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions)*)
   
 * Multiple activities can be entered as long as they are separated by a comma `,`.
 
@@ -440,7 +442,6 @@ Noted! CLI.ckFit has scheduled your recurring workout of description "weekly che
 Activities Breakdown: 
 1. bench press: 5sets x 12reps
 2. pushups: 5sets x 20reps
-
 ```
 
 ```
@@ -450,7 +451,6 @@ Activities Breakdown:
 1. running: 3000metres
 2. swimming: 1000metres
 3. cycling: 4000metres
-
 ```
 
 ## Adding meal to library
@@ -871,7 +871,6 @@ Activities Breakdown:
 1. running: 2000metres
 2. swimming: 1000metres
 3. cycling: 3000metres
-
 _________________________________________________________
 You have 1 scheduled workouts on that day!
 ```
@@ -886,7 +885,6 @@ Time: 15:00
 Activities Breakdown: 
 1. bench press: 5sets x 12reps
 2. pushups: 5sets x 20reps
-
 _________________________________________________________
 You have 1 scheduled workouts on that day!
 ```
@@ -902,7 +900,6 @@ Activities Breakdown:
 1. running: 2000metres
 2. swimming: 1000metres
 3. cycling: 3000metres
-
 _________________________________________________________
 2. weekly chest day [R]
 Date: 07/12/2021
@@ -911,7 +908,6 @@ Time: 15:00
 Activities Breakdown: 
 1. bench press: 5sets x 12reps
 2. pushups: 5sets x 20reps
-
 _________________________________________________________
 3. triathlon training
 Date: 09/12/2021
@@ -921,7 +917,6 @@ Activities Breakdown:
 1. running: 3000metres
 2. swimming: 1000metres
 3. cycling: 4000metres
-
 _________________________________________________________
 You have a total of 3 workouts in your schedule.
 ```

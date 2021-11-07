@@ -9,7 +9,7 @@ Written with reference to:
 
 ## Table of Contents
 - [**Design & Implementation**](#design-&-implementation)
-  - [**User Interface**](#user-interface-(ui))
+  - [**User Interface**](#user-interface-ui)
   - [**Meal Tracker**](#mealtracker)
   - [**Fluid Tracker**](#fluidtracker)
   - [**Weight Tracker**](#weighttracker)
@@ -158,9 +158,12 @@ Specifically made for people getting into serious fitness routines such as athle
 
 ### Value proposition
 
-CLI.ckFit is a comprehensive workout client with the two main components of a workout diary and a calorie manager
-with the peripherals being weight tracking and BMI/recommended caloric intake calculator. These features can be
-conveniently accessed via the Command Line Interface (CLI).
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input and track
+your calories, weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever
+you wish to. It also comes with a BMI and recommended caloric intake calculator which can give you an idea of 
+your current fitness level. All these features come together and complement each other but can also be used 
+independently of one another. For instance, CLI.ckFit can simply be used as a stand alone Weight tracker if the user
+sees fit.
 
 ## Appendix B: User Stories
 
