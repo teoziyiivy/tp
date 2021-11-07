@@ -214,7 +214,7 @@ as your `CLIckFit.jar`.
    * **Test Case**:
       1. Run `CLIckFit.jar`.
          * **Note**: Ensure this is done in a new isolated folder or all data is already wiped prior.
-      3. Add one valid meal, fluid, weight, workout and schedule entry each.
+      3. Add one valid meal, fluid, library, weight, workout and schedule entry each.
       4. Verify that there is a new entry in all the respective data files.
          * **Note**: Closing and reopening the data files might be required to see the changes.
       5. Exit the application.
@@ -230,7 +230,7 @@ Please check out CLI.ckFit's [User Guide](https://ay2122s1-cs2113t-f14-3.github.
 walk through of all commands and their formats.
 
 Take note that the following sections will focus more on command behavior not specified in the User Guide, such as 
-expected output for incorrect/invalid inputs. The test cases stated in the following sections are not exhaustive and 
+expected output for incorrect or invalid inputs. The test cases stated in the following sections are not exhaustive and 
 testers are expected to do more exploratory work for more comprehensive testing. 
 
 ### Workout Commands
