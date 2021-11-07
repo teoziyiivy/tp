@@ -7,8 +7,8 @@ public class ClickfitMessages {
 
     public static final String INITIAL_PROMPT = "What would you like to start with?";
 
-    public static final String MESSAGE_A = System.lineSeparator() + "Lets get your fitness journey "
-            + "started! input any commands to get started! Type \"help\" to get started!"
+    public static final String MESSAGE_A = System.lineSeparator() + "Welcome! Here's to your fitness journey! "
+            + "Type in any commands to get started! Type \"help\" to get started!"
             + System.lineSeparator()
             + "Lets work hard together in your fitness journey!";
 
@@ -18,10 +18,10 @@ public class ClickfitMessages {
             + System.lineSeparator() + "See you soon!";
 
     public static final String MEMORY_STARTUP_PROMPT = System.lineSeparator() + "Would you "
-            + "like to load up the records of your fitness journey?" + System.lineSeparator()
-            + "Key in 'y' to skip or press enter to load data from your previous session" + System.lineSeparator()
-            + "Note: Keying in 'y' to skip this prompt will result in the previous session's data"
-            + "being deleted!";
+            + "like to clear all records of your fitness journey?" + System.lineSeparator()
+            + "Key in \"y\" to clear your records, or press enter keystroke to load in data from your "
+            + "previous session(s)" + System.lineSeparator()
+            + "Note: Keying in \"y\" will result in the previous session's data being deleted!";
 
     public static final String INCORRECT_INPUT = System.lineSeparator() + "CLI.ckFit has detected a "
             + "wrong input, kindly check your inputs or type \"help commands\" for input examples.";
@@ -74,20 +74,14 @@ public class ClickfitMessages {
                     + System.lineSeparator() + "Here is the link to our User Guide! "
                     + "https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html";
 
-    public static final String DATE_ERROR = "Please enter your date in the right format. "
-            + "It should be \"DD/MM/YYYY\"";
-
     public static final String DATE_TIME_ERROR = "Please enter your date and time in the right format. "
             + "It should be \"DD/MM/YYYY\" and \"HH:MM\" respectively.";
 
     public static final String NUMBER_ERROR = "Please enter a positive integer.";
 
-    public static final String FLUID_ADD_FORMAT_ERROR = "Please enter in the format: drank [fluid_name]"
-            + " /c [calorie_intake] " + "/v [volume] /d [dd/mm/yyyy] /t [hh:mm]";
-
-    public static final String CALCULATOR_PROMPT = System.lineSeparator() + "Welcome! Would you "
+    public static final String CALCULATOR_PROMPT = System.lineSeparator() + "Would you "
             + "like to check your BMI and recommended caloric intake?" + System.lineSeparator()
-            + "Key in y or press enter keystroke to skip!";
+            + "Key in \"y\" to proceed, or press enter keystroke to skip!";
 
     public static final String MEAL_PRINT_FORMAT = System.lineSeparator() + "[Meal Summary:]"
             + System.lineSeparator() + "======================";
@@ -112,7 +106,7 @@ public class ClickfitMessages {
 
     public static final String FOOD_BANK_EXCEPTION_MESSAGE = "No such food or fluid with "
             + "its associated calories is stored "
-            + "within your library.";
+            + "within your library. Please enter calories.";
 
     public static final String DELETE_OR_UPDATE_SCHEDULE_MESSAGE = "CLI.ckFit has detected some overdue scheduled "
             + "workouts and has deleted/rescheduled them!";
@@ -191,7 +185,7 @@ public class ClickfitMessages {
                                                         String workoutTime, int caloriesBurned) {
         return "Noted! CLI.ckFit has successfully deleted your recorded workout of description \""
                 + workoutDescription + "\" on " + workoutDate + " at " + workoutTime + System.lineSeparator()
-                + " where you burned " + caloriesBurned + " calories!";
+                + "where you burned " + caloriesBurned + " calories!";
     }
 
     public static String getEmptyWorkoutListOnDateMessage(String date) {
@@ -219,11 +213,11 @@ public class ClickfitMessages {
     /**
      * To notify the user that a meal has been added to their list of meals.
      */
-    public static void printAddedMealMessage(String description, String date, String time, int calories, int totalCalories) {
+    public static void printAddedMealMessage(String description, String date, String time,
+                                             int calories) {
         System.out.println("Noted! CLI.ckFit has recorded your meal of "
                 + description + " on " + date + " and at " + time
-                + ". " + calories + " calories has been added to the calorie count. Your total calories"
-                + " for " + date + " is " + totalCalories + "!\n");
+                + ". " + calories + " calories has been added to the calorie count!\n");
     }
 
     //@@author VishalJeyaram
@@ -231,9 +225,8 @@ public class ClickfitMessages {
     /**
      * To notify the user that a meal has been deleted from their list of meals.
      */
-    public static void printDeletedMealMessage(String description, int totalCalories, String date) {
-        System.out.println(description + " will be removed from your list of meals consumed. You now "
-                + "have " + totalCalories + " left on " + date + " !\n");
+    public static void printDeletedMealMessage(String description, String date) {
+        System.out.println(description + " will be removed from your list of meals consumed!\n");
     }
 
     //@@author VishalJeyaram

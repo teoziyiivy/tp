@@ -3,13 +3,12 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.fluid.DeleteEmptyFluidListException;
 import seedu.duke.exceptions.fluid.FluidExceptions;
-import seedu.duke.exceptions.fluid.InvalidFluidDescription;
-import seedu.duke.exceptions.fluid.NoCaloriesEntered;
 import seedu.duke.exceptions.fluid.NoDeleteFluidIndexException;
 import seedu.duke.exceptions.fluid.NoFluidToDelete;
 import seedu.duke.exceptions.fluid.NoVolumeEntered;
+import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
-
+import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -17,6 +16,70 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //@@author pragyan01
 class FluidTest {
+
+    @Test
+    void generateFluidParameters() {
+        Fluid fluid = new Fluid();
+        String input = "coke /c 40 /v 100 /d 12/12/2021 /t 10:30";
+        assertDoesNotThrow(() -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters2() {
+        Fluid fluid = new Fluid();
+        String input = "coke /c 40 /v 100";
+        assertDoesNotThrow(() -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters3() {
+        Fluid fluid = new Fluid();
+        String input = "coke /c 40 /v 100";
+        assertDoesNotThrow(() -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters4() {
+        Fluid fluid = new Fluid();
+        String input = "coke /c 40";
+        assertDoesNotThrow(() -> fluid.generateFluidParameters(input));
+    }
+
+
+    @Test
+    void generateFluidParameters5() {
+        Fluid fluid = new Fluid();
+        String input = "coke";
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters6() {
+        Fluid fluid = new Fluid();
+        String input = "";
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters7() {
+        Fluid fluid = new Fluid();
+        String input = " ";
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters8() {
+        Fluid fluid = new Fluid();
+        String input = null;
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
+    }
+
+    @Test
+    void generateFluidParameters9() {
+        Fluid fluid = new Fluid();
+        String input = "-5";
+        assertThrows(NullPointerException.class, () -> fluid.generateFluidParameters(input));
+    }
 
     @Test
     void addFluid() {
@@ -72,7 +135,7 @@ class FluidTest {
     void addFluid8() {
         Fluid fluid = new Fluid();
         String input = "/c 40 /v 100 /d 12/12/2021 /t 10:30";
-        assertThrows(InvalidFluidDescription.class, () -> fluid.addFluid(input));
+        assertThrows(EmptyFoodDescription.class, () -> fluid.addFluid(input));
     }
 
     @Test
@@ -85,29 +148,33 @@ class FluidTest {
     @Test
     void addFluid10() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = "coke /v 100 /d 12/12/2021 /t 10:30";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
     void addFluid11() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = "";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
     void addFluid12() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = " ";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test
     void addFluid13() {
         Fluid fluid = new Fluid();
+        new FoodBank();
         String input = "coke";
-        assertThrows(NullPointerException.class, () -> fluid.addFluid(input));
+        assertThrows(NoFoodFoundException.class, () -> fluid.addFluid(input));
     }
 
     @Test

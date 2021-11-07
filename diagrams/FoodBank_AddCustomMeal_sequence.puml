@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+|||
+participant ":FoodBank"
+    ->":FoodBank" : "addCustomMeal(inputArguments: String)"
+    activate ":FoodBank" #FFBBBB
+    opt inputArguments == null
+    end
+    note left : if block only throws an exception
+    |||
+    opt Until no more meals
+
+    opt m.contains(inputArguments)
+    |||
+    end
+    |||
+    end
+    |||
+    note left : if block only throws an exception
+
+
+    ":FoodBank"->":FoodBank" : generateParameters(inputArguments: String)
+    activate ":FoodBank" #FFBBBB
+    return
+    |||
+
+    deactivate ":FoodBank"
+    |||
+@enduml

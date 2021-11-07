@@ -77,7 +77,8 @@ public class Storage {
      * @param foods List of foods.
      * @throws IOException If there is a problem with the text file.
      */
-    private void saveFoodLists(String filePath, FileWriter fw, String date, ArrayList<String> foods) throws IOException {
+    private void saveFoodLists(String filePath, FileWriter fw,
+                               String date, ArrayList<String> foods) throws IOException {
         int headerFlag;
         String currentDate;
         String currentMeal;
@@ -200,10 +201,8 @@ public class Storage {
     /**
      * This method loads all meals saved in .txt file to meal array list.
      *
-     * @throws IOException if I/O error occurs
      * @return meal array list
-     *
-     * @author pragyan01
+     * @throws IOException if I/O error occurs
      */
     public ArrayList<String> loadMeals() throws IOException {
         ArrayList<String> meals = new ArrayList<>();
@@ -230,10 +229,8 @@ public class Storage {
     /**
      * This method loads all fluids saved in .txt file to fluid array list.
      *
-     * @throws IOException if I/O error occurs
      * @return fluid array list
-     *
-     * @author pragyan01
+     * @throws IOException if I/O error occurs
      */
     public ArrayList<String> loadFluids() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();
@@ -307,10 +304,8 @@ public class Storage {
     /**
      * This method loads all fluid entries for foodbank saved in .txt file to fluid array list.
      *
-     * @throws IOException if I/O error occurs
      * @return fluid array lists
-     *
-     * @author pragyan01
+     * @throws IOException if I/O error occurs
      */
     public ArrayList<String> loadFluidLibrary() throws IOException {
         ArrayList<String> fluids = new ArrayList<>();

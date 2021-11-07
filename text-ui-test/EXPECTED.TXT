@@ -7,9 +7,9 @@ Greetings from
  `.____ .'|________||_____|(_)'.___.'[__|  \_]|_____|  [___]\__/
 
 
-Lets get your fitness journey started! input any commands to get started! Type "help" to get started!
+Welcome! Here's to your fitness journey! Type in any commands to get started! Type "help" to get started!
 Lets work hard together in your fitness journey!
 
-Welcome! Would you like to check your BMI and recommended caloric intake?
-Key in y or press enter keystroke to skip!
+Would you like to check your BMI and recommended caloric intake?
+Key in "y" to proceed, or press enter keystroke to skip!
 wrong input!

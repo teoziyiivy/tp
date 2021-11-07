@@ -44,16 +44,16 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
-//        if (!activityMap.isEmpty()) {
-//            for (var entry : activityMap.entrySet()) {
-//                activities.add(
-//                        new WorkoutActivity(
-//                                entry.getKey().trim(), entry.getValue(),
-//                                WorkoutActivity.isDistanceActivity(entry.getKey())
-//                        )
-//                );
-//            }
-//        }
+        if (!activityMap.isEmpty()) {
+            for (var entry : activityMap.entrySet()) {
+                activities.add(
+                        new WorkoutActivity(
+                                entry.getKey().trim(), entry.getValue(),
+                                WorkoutActivity.isDistanceActivity(entry.getKey())
+                        )
+                );
+            }
+        }
     }
 
     /**
@@ -110,9 +110,10 @@ public class ScheduledWorkout {
     /**
      * Returns the activities in a more readable String format to be printed.
      *
+     * @param isListing Whether the activities are being printed by list commands.
      * @return String Activity breakdown as a single String to be printed.
      */
-    public String getActivitiesAsStringToPrint() {
+    public String getActivitiesAsStringToPrint(boolean isListing) {
         String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
         if (activities.isEmpty()) {
             return output + "nil" + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
@@ -128,7 +129,7 @@ public class ScheduledWorkout {
             }
             currentIndex++;
         }
-        return output + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
+        return isListing ? output + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT : output;
     }
 
     /**
@@ -153,26 +154,36 @@ public class ScheduledWorkout {
      */
     public String getActivitiesAsString() {
         StringBuilder activityString = new StringBuilder();
-        if (!activities.isEmpty()) {
-            activityString.append(Parser.ACTIVITY_SEPARATOR);
-            int currentIndex = 0;
-            for (WorkoutActivity activity : activities) {
-                if (activity.isDistanceActivity()) {
-                    activityString.append(activity.getActivityDescription())
-                            .append(Parser.ACTIVITY_SPLITTER)
-                            .append(activity.getActivityDistance());
-                } else {
-                    activityString.append(activity.getActivityDescription())
-                            .append(Parser.ACTIVITY_SPLITTER)
-                            .append(activity.getActivitySets())
-                            .append(Parser.QUANTIFIER_SPLITTER)
-                            .append(activity.getActivityReps());
-                }
-                currentIndex++;
-                activityString.append(
-                        (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+        if (activities.isEmpty()) {
+            return activityString.toString();
+        }
+        activityString.append(Parser.ACTIVITY_SEPARATOR);
+        int currentIndex = 0;
+        for (WorkoutActivity activity : activities) {
+            if (activity.isDistanceActivity()) {
+                activityString.append(activity.getActivityDescription())
+                        .append(Parser.ACTIVITY_SPLITTER)
+                        .append(activity.getActivityDistance());
+            } else {
+                activityString.append(activity.getActivityDescription())
+                        .append(Parser.ACTIVITY_SPLITTER)
+                        .append(activity.getActivitySets())
+                        .append(Parser.QUANTIFIER_SPLITTER)
+                        .append(activity.getActivityReps());
             }
+            currentIndex++;
+            activityString.append(
+                    (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
         }
         return activityString.toString();
+    }
+
+    /**
+     * Returns a boolean depending on whether an activity breakdown was specified.
+     *
+     * @return <code>true</code> if has activities, <code>false</code> otherwise.
+     */
+    public boolean hasActivities() {
+        return !activities.isEmpty();
     }
 }

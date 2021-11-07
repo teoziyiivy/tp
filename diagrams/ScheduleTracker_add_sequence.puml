@@ -7,10 +7,10 @@ activate ":ScheduleTracker" #FFBBBB
 
 ":ScheduleTracker"->":ScheduleTracker" : generateParameters(inputArguments: String)
 activate ":ScheduleTracker" #DarkSalmon
-return generatedParameters: String[]
+return
 
 create ":ScheduledWorkout"
-":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.add(scheduledWorkout: ScheduledWorkout)
+":ScheduleTracker"->":ScheduledWorkout" : add ScheduledWorkout
 activate ":ScheduledWorkout"
 ":ScheduledWorkout"-->":ScheduleTracker"
 deactivate ":ScheduledWorkout"
@@ -19,36 +19,10 @@ deactivate ":ScheduledWorkout"
 
 activate ":ScheduleTracker" #DarkSalmon
 
-loop \tno more overdue workouts\t
-    note left : Take note that a workout is "overdue" \nif its scheduled date is before the current date
-    ":ScheduleTracker"->":ScheduleTracker" : updateOrDeleteScheduledWorkout(\n\tscheduledWorkout: ScheduledWorkout,\n\tcurrentDate: LocalDate)
-    activate ":ScheduleTracker" #IndianRed
-    alt \tisRecurringWorkout\t
-        ":ScheduleTracker"->":ScheduleTracker" : rescheduleRecurringWorkout(\n\tscheduledWorkout: ScheduledWorkout,\n\tcurrentDate: LocalDate)
-        activate ":ScheduleTracker" #LightSalmon
-        ":ScheduleTracker"->":ScheduledWorkout" : incrementWorkoutDate(days: long)
-        |||
-        activate ":ScheduledWorkout"
-        return
-        return
-        |||
-    else else
-        ":ScheduleTracker"->":ScheduleTracker" : deleteWorkout()
-        activate ":ScheduleTracker" #LightSalmon
-        ":ScheduleTracker"->":ScheduledWorkout" : scheduledWorkouts.remove(\n\tscheduledWorkout: ScheduledWorkout)
-        activate ":ScheduledWorkout"
-        destroy ":ScheduledWorkout"
-        return
-        return
-        |||
-    end
-end
+ref over ":ScheduleTracker", ":ScheduledWorkout" : updateOrDeleteScheduledWorkout
 
-":ScheduleTracker"->":ScheduleTracker" : sortScheduleList()
-activate ":ScheduleTracker" #LightSalmon
-return
 
-return
+
 return
 return
 

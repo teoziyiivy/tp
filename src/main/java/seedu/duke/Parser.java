@@ -146,7 +146,7 @@ public class Parser {
      * @param description Name of Food
      * @return Calories.
      * @throws FoodBankException If the user hasn't keyed in a description for their food, or if their
-     * meal or fluid is not stored in the meal or fluid library.
+     *                           meal or fluid is not stored in the meal or fluid library.
      */
     private static int findCaloriesInLibrary(String description) throws FoodBankException {
         int calories;
@@ -199,10 +199,8 @@ public class Parser {
      * This method extracts volume parameter from user input.
      *
      *@param inputArguments user input provided
-     *@throws DukeException if volume entered is negative
      *@return volume parameter
-     *
-     *@author pragyan01
+     *@throws DukeException if volume entered is negative
      */
     public static int getVolume(String inputArguments) throws FluidExceptions {
         String[] userInput = inputArguments.split("\\s+");

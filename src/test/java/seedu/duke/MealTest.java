@@ -122,6 +122,24 @@ class MealTest {
     }
 
     @Test
+    void addMeal14() {
+        Meal meal = new Meal();
+        String input = "pasta /c -134 /d 14/09/2021 /t 17:45";
+        assertThrows(NegativeCaloriesException.class, () -> {
+            meal.addMeal(input);
+        });
+    }
+
+    @Test
+    void addMeal15() {
+        Meal meal = new Meal();
+        String input = "pasta /c134 /d 14/09/2021 /t 17:45";
+        assertThrows(EmptyFoodDescription.class, () -> {
+            meal.addMeal(input);
+        });
+    }
+
+    @Test
     void deleteMeal1() throws MealException, FoodBankException {
         Meal meal = new Meal();
         String input = "pasta /c 300 /d 14/09/2021 /t 17:45";
@@ -173,7 +191,7 @@ class MealTest {
     @Test
     void deleteMeal6() throws MealException, FoodBankException {
         Meal meal = new Meal();
-        String input = "pasta /c 30 /d 14/09/2021";
+        String input = "pasta /c 31 /d 14/09/2021";
         meal.addMeal(input);
         String deleteInput = "&";
         assertThrows(NumberFormatException.class, () -> {
