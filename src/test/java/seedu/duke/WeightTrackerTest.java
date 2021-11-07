@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 //@@author teoziyiivy
 public class WeightTrackerTest {
-
     @Test
     void addWeight_validFormat1_noExceptionThrow() {
         WeightTracker weights = new WeightTracker();
