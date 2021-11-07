@@ -26,9 +26,16 @@ public class WeightTrackerTest {
     }
 
     @Test
-    void addWeight_invalidFormat_exceptionThrow() {
+    void addWeight_invalidFormat1_exceptionThrow() {
         WeightTracker weights = new WeightTracker();
         String input = "";
+        Assertions.assertThrows(WeightException.class, () -> weights.addWeight(input));
+    }
+
+    @Test
+    void addWeight_invalidFormat2_exceptionThrow() {
+        WeightTracker weights = new WeightTracker();
+        String input = "50 03/11/2021";
         Assertions.assertThrows(WeightException.class, () -> weights.addWeight(input));
     }
 
@@ -49,14 +56,21 @@ public class WeightTrackerTest {
     }
 
     @Test
-    void deleteWeightIndex_invalidIndex_exceptionThrow() {
+    void deleteWeightIndex_invalidIndex1_exceptionThrow() {
         WeightTracker weights = new WeightTracker();
         String input = "1";
         Assertions.assertThrows(DeleteWeightIndexException.class, () -> weights.deleteWeight(input));
     }
 
     @Test
-    void listWeightIndex_validFormat1_noExceptionThrow() throws WeightException {
+    void deleteWeightIndex_invalidIndex2_exceptionThrow() {
+        WeightTracker weights = new WeightTracker();
+        String input = "-1";
+        Assertions.assertThrows(DeleteWeightIndexException.class, () -> weights.deleteWeight(input));
+    }
+
+    @Test
+    void listWeight_validFormat1_noExceptionThrow() throws WeightException {
         WeightTracker weights = new WeightTracker();
         String entry = "50 /d 03/11/2021";
         weights.addWeight(entry);
@@ -65,7 +79,7 @@ public class WeightTrackerTest {
     }
 
     @Test
-    void listWeightIndex_validFormat2_noExceptionThrow() throws WeightException {
+    void listWeight_validFormat2_noExceptionThrow() throws WeightException {
         WeightTracker weights = new WeightTracker();
         String entry1 = "50 /d 02/11/2021";
         String entry2 = "45 /d 03/11/2021";
@@ -76,13 +90,20 @@ public class WeightTrackerTest {
     }
 
     @Test
-    void listWeightIndex_validFormat3_noExceptionThrow() throws WeightException {
+    void listWeight_validFormat3_noExceptionThrow() throws WeightException {
         WeightTracker weights = new WeightTracker();
         String entry1 = "50 /d 02/11/2021";
         String entry2 = "45 /d 03/11/2021";
         weights.addWeight(entry1);
         weights.addWeight(entry2);
         String input = "all";
+        assertDoesNotThrow(() -> weights.listWeights(input));
+    }
+
+    @Test
+    void listWeight_validFormat4_noExceptionThrow() {
+        WeightTracker weights = new WeightTracker();
+        String input = "";
         assertDoesNotThrow(() -> weights.listWeights(input));
     }
 }
