@@ -305,6 +305,12 @@ Example of usage:
 
 `add weight 50 /d 03/04/2021`
 
+Expected outcome:
+
+```
+Noted! CLI.ckFit has recorded your weight as 50.0 on 03/04/2021. Check back for your progress!
+```
+
 ## Adding workout
 
 Command Word: `add workout`
@@ -553,7 +559,13 @@ Format: `delete weight INDEX`
 
 Example of usage:
 
-`delete weight 2`
+`delete weight 1`
+
+Expected outcome:
+
+```
+Noted! CLI.ckFit has successfully deleted your weight of 50.0 on 03/04/2021.
+```
 
 ## Delete a workout
 
@@ -731,7 +743,30 @@ Format: `list weights <DATE>`
 
 Example of usage:
 
-`list weights`, `list weights 22/10/2021`, `list weights all`
+* `list weights` will list the recorded weights for today
+* `list weights 06/11/2021` will list the recorded weights on 06/11/2021
+* `list weights all` will list all recorded weights
+
+Expected outcome:
+
+```
+1. Weight: 50.0
+Total number of weights: 1
+```
+
+```
+1. Weight: 52.0
+Total number of weights: 1
+```
+
+```
+Here are your recorded weights:
+1.  Weight: 52.0  Date: 06/11/2021
+
+2.  Weight: 50.0  Date: 07/11/2021
+
+Total number of weights: 2
+```
 
 ## List workouts
 
