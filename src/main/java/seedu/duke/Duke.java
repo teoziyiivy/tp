@@ -19,6 +19,10 @@ import static seedu.duke.ClickfitMessages.MEMORY_STARTUP_INCORRECT_INPUT;
 
 //@@author teoziyiivy
 @SuppressWarnings("ALL")
+
+/**
+ * This <code>Duke</code> class contains the backbone for running our entire application.
+ */
 public class Duke {
     private Meal meal;
     private Ui ui;
@@ -31,7 +35,7 @@ public class Duke {
     private FoodBank foodbank;
     private DateTracker dateTracker;
     private Storage storage;
-
+    
     public static void main(String[] args) throws DukeException, FoodBankException, FluidExceptions {
         new Duke().run();
     }

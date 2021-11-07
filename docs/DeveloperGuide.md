@@ -102,8 +102,8 @@ The UML sequence diagram above shows what happens when the input command is reco
 
 #### Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/140641329-091135c4-798a-4ebb-a5d4-2af4882fc053.png)
-Above are the UML class level diagrams of `WeightTracker`, `WeightTrackerMessages`, `Tracker` and relevant exception classes. 
-As seen in the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` class and inherits from the 
+Above are the UML class level diagrams of `WeightTracker`, `ClickfitMessages`, `Tracker` and relevant exception classes. 
+As seen in the diagram, the `WeightTracker` class is dependent on the `ClickfitMessages` class and inherits from the 
 `Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.
 This class diagram has been simplified for better readability.
 
@@ -113,7 +113,7 @@ This class diagram has been simplified for better readability.
 The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
 The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date` 
 variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
-is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
+is called from the `ClickfitMessages` class for both the typical input and missing date cases. However,
 when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
 
 ### ScheduleTracker
