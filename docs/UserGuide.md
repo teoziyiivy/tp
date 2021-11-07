@@ -26,6 +26,9 @@ level stands. Users can also choose to skip using the calculators by entering th
 * *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator
 questions. Any deviating inputs will result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the
 calculator to calculate BMI and recommended daily caloric intake.
+* Please only enter one input for each question. 
+
+  eg. when prompted for the user's weight, the user should only type in "50" and not "50  6000".
   
 2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
 to track the calories burned.
@@ -1200,3 +1203,4 @@ Command | Format of input
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
 [**List everything**](#List-everything-on-current-date)| `list <DATE>`
 [**Access user help**](#help-command)| `help`
+[**Bye**](#bye)| `bye`

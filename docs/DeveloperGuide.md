@@ -46,6 +46,13 @@ The calculator takes in the following inputs as shown in the UML diagram through
 object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
 daily caloric intake through getIdealCalories().
 
+#### Memory startup method
+![Imgur](https://i.imgur.com/7ixwFz2.png)
+
+The user is greeted with a prompt that asks whether he wishes to load his saved date. Pressing the "enter" keystroke will 
+load up the previous session's data. typing in "y" will cause the previous session's data to be wiped, meaning the
+contents of the storage text files will all be emptied
+
 #### Get summary of all info stored in text files
 The user is next greeted with a second prompt that asks whether he or she wishes to get a summary of all meals, fluids 
 and workouts he has eaten or completed.
@@ -169,11 +176,18 @@ conveniently accessed via the Command Line Interface (CLI).
 |v1.0|fitness enthusiast|record my fitness activities|plan my extensive workout schedule|
 |v1.0|user|update how many calories I have burned through my workouts|keep track of my daily calories|
 |v1.0|athlete|record my weight|keep track of and maintain a competitive weight|
+|v1.0|forgetful user|input a "help" command|know the standard ways of inputting my commands|
 |v2.0|user|have the app remember my user data|access my data anytime| 
 |v2.0|user|have scheduled workouts in the list to be sorted by the nearest dates|easily keep track of upcoming workouts|
 |v2.0|frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|
 |v2.0|serious athlete|breakdown my workout into smaller activities|track things like sets, reps and distance|
-
+|v2.0|beginner|check my fluid summary| budget my remaining calories|
+|v2.0|beginner|check my meal summary| budget my remaining calories|
+|v2.0|beginner|check my workout summary| know whether i hae burned enough calories|
+|v2.0|beginner|check my weight summary| check my weight loss or gain progress|
+|v2.0|health conscious individual|know my recommended caloric intake|know how much food to consume in one day|
+|v2.0|health conscious individual| know my BMI indicator|know whether i need to lose weight|
+|v2.0| lazy user| have date and time automatically input depending as system time if i leave it empty| save time and effort for other stuff after my meal or drink|
 
 ## Appendix C: Non-Functional Requirements
 
@@ -187,6 +201,157 @@ conveniently accessed via the Command Line Interface (CLI).
 * *overdue workouts* - workouts whose dates are before the current date
 
 ## Appendix E: Instructions for manual testing
+
+### BMI calculator and Recommended caloric intake calculator
+
+Description: It is a calculator that allows the user to check his current BMI and daily recommended caloric intake.
+The user will be asked to enter his weight, height, age, activity level and gender. 
+
+#### Gender:
+Possible inputs: M , F 
+
+Wrong inputs: negative integers and doubles, symbols, combination of integers and doubles with symbols
+and strings, m, f
+
+Testcase 1 : m (small m or f are rejected)
+
+Testcase 2 : M (only M or F are accepted)
+
+Expected:
+
+`what is your SEX : M / F ?`
+
+`m`
+
+`what is your SEX : M / F ?`
+
+`M`
+
+*input accepted, proceeding to next question*
+
+#### Weight:
+Possible inputs: 60, 60.5 (integers or doubles are accepted)
+
+Wrong inputs: negative integers and doubles, symbols, strings, combination of integers and doubles with symbols 
+and strings
+
+Testcase 1 : -34 (negative integers or doubles are not accepted)
+
+Testcase 2 : 60.5 (integers or doubles are accepted)
+
+Expected:
+
+`what is your weight in kg? Enter a valid number!`
+
+`-34`
+
+`what is your weight in kg? Enter a valid number!`
+
+`60.5`
+
+*input accepted, proceeding to next question*
+
+#### Height:
+Possible inputs: 181, 181.5 (integers or doubles are accepted)
+
+Wrong inputs: negative integers and doubles, symbols, strings, combination of integers and doubles with symbols
+and strings
+
+Testcase 1 : -34.7 (negative integers or doubles are not accepted)
+
+Testcase 2 : 132! (combination of integers or doubles and symbols are not accepted)
+
+Testcase 3 : 181.5 (integers or doubles are accepted)
+
+Expected:
+
+`what is your height in cm? Enter a valid number!`
+
+`-34.7`
+
+`what is your height in cm? Enter a valid number!`
+
+`132!`
+
+`what is your height in cm? Enter a valid number!`
+
+`181.5`
+
+*input accepted, proceeding to next question*
+
+#### Age:
+Possible inputs: 23 (only integers are accepted)
+
+Wrong inputs: negative integers and doubles, positive doubles, symbols, strings, combination of integers and doubles with symbols
+and strings
+
+Testcase 1 : 23.5 (doubles are not accepted)
+
+Testcase 2 : twenty three (strings are not accepted)
+
+Testcase 3 : 23 (only integers are accepted)
+
+Expected:
+
+`what is your age in years? Enter an integer!`
+
+`23.5`
+
+`Please enter a valid input!`
+
+`what is your age in years? Enter an integer!`
+
+`twenty three`
+
+`what is your age in years? Enter an integer!`
+
+`23`
+
+*input accepted, proceeding to next question*
+
+#### Activity level:
+Possible inputs: 1, 2, 3, 4, 5 (integers 1 to 5)
+
+Wrong inputs: negative integers and doubles, positive doubles, symbols, strings, combination of integers and 
+doubles with symbols and strings
+
+Testcase 1 : 1.0 (doubles are not accepted even though it is within the range of 1 to 5)
+
+Testcase 2 : 6 (integers outside the range of 1 to 5 are not accepted)
+
+Testcase 3 : 4 (only integers within the range of 1 to 5 are accepted)
+
+Expected:
+
+`what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!`
+
+`1.0`
+
+`Please enter a valid input!`
+
+`what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!`
+
+`6`
+
+`what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!`
+
+`4`
+
+*input accepted, proceeding to result*
+#### Result
+If all the same inputs are used and accepted, the user will be greeted with this printout:
+
+`Your BMI outcome is`
+
+`You are underweight`
+
+`Your ideal number of calories to maintain your weight is`
+
+`2847 kcal`
+
+`Would you like to clear all records of your fitness journey?
+Key in "y" to clear your records, or press enter keystroke to load in data from your previous session(s)
+Note: Keying in "y" will result in the previous session's data being deleted!`
 
 ### Launching CLI.ckFit
 1. Ensure that you have Java 11 or above installed.
@@ -207,7 +372,7 @@ conveniently accessed via the Command Line Interface (CLI).
 ### Saving Data
  Data is saved in "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" in the same folder
 as your `CLIckFit.jar`.
-   * **Test Case**:
+   * **Test Case**:   
       1. Run `CLIckFit.jar`.
          * **Note**: Ensure this is done in a new isolated folder or all data is already wiped prior.
       3. Add one valid meal, fluid, weight, workout and schedule entry each.
