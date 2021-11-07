@@ -177,7 +177,7 @@ public class Storage {
         FileWriter fileCleaner = new FileWriter(SCHEDULE_FILE_PATH, false);
         ArrayList<String> currentScheduleStringList = new ArrayList<>();
         for (ScheduledWorkout w : scheduleTracker.getScheduledWorkouts()) {
-            currentScheduleStringList.add(w.getScheduledWorkoutAsString());
+            currentScheduleStringList.add(w.getScheduledWorkoutAsDataString());
         }
         DateTracker.sortDateAndTime(currentScheduleStringList);
         fileCleaner.write(Parser.EMPTY_STRING);
