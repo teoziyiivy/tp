@@ -42,16 +42,34 @@ public class Parser {
     public static final String EMPTY_STRING = "";
 
     //@@author teoziyiivy
+    /**
+     * Checks if the user's input contains the date separator ` /d `.
+     *
+     * @param inputArguments User's input.
+     * @return true, if input contains date separator, and false, if input does not contain date separator.
+     */
     public static boolean containsDateSeparator(String inputArguments) {
         return inputArguments.contains(DATE_SEPARATOR);
     }
 
     //@@author teoziyiivy
+    /**
+     * Checks if the user's input contains time separator ` /t `.
+     *
+     * @param inputArguments User's input.
+     * @return true, if input contains time separator, and false, if input does not contain time separator.
+     */
     public static boolean containsTimeSeparator(String inputArguments) {
         return inputArguments.contains(TIME_SEPARATOR);
     }
 
     //@@author teoziyiivy
+    /**
+     * Checks if the user's input contains calorie separator ' /c '.
+     *
+     * @param inputArguments User's input.
+     * @return true, if input contains calorie separator, and false, if input does not contain calorie separator.
+     */
     public static boolean containsCalorieSeparator(String inputArguments) {
         return inputArguments.contains(CALORIE_SEPARATOR);
     }
@@ -66,13 +84,27 @@ public class Parser {
     }
 
     //@@author teoziyiivy
-    public static int parseStringToInteger(String input) throws NumberFormatException {
-        return Integer.parseInt(input);
+    /**
+     * Converts user's String input to Integer.
+     *
+     * @param inputArguments User's input.
+     * @return Integer.parseInt(inputArguments) User's input as Integer.
+     * @throws NumberFormatException If user's input is not a valid Integer.
+     */
+    public static int parseStringToInteger(String inputArguments) throws NumberFormatException {
+        return Integer.parseInt(inputArguments);
     }
 
     //@@author teoziyiivy
-    public static double parseStringToDouble(String input) throws NumberFormatException {
-        return Double.parseDouble(input);
+    /**
+     * Converts user's String input to Double.
+     *
+     * @param inputArguments User's input.
+     * @return Double.parseDouble(inputArguments) User's input as Double.
+     * @throws NumberFormatException If user's input is not a valid Double.
+     */
+    public static double parseStringToDouble(String inputArguments) throws NumberFormatException {
+        return Double.parseDouble(inputArguments);
     }
 
     //@@author VishalJeyaram
@@ -272,6 +304,14 @@ public class Parser {
     }
 
     //@@author teoziyiivy
+    /**
+     * Returns date extracted from user's input to be used for comparisons without the need
+     * for tracking.
+     *
+     * @param inputArguments User's input.
+     * @return String Date that user input.
+     * @throws DateTimeParseException If the date is not entered properly.
+     */
     public static String getDateNoDateTracker(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -288,6 +328,13 @@ public class Parser {
     }
 
     //@@author teoziyiivy
+    /**
+     * Extracts the time from the user input.
+     *
+     * @param inputArguments User input.
+     * @return String Time that user input.
+     * @throws DateTimeParseException If time is not valid.
+     */
     public static String getTime(String inputArguments) throws DateTimeParseException {
         String[] userInput = inputArguments.split("\\s+");
         int length = userInput.length;
@@ -311,6 +358,7 @@ public class Parser {
      * Extracts the weight from the user input.
      *
      * @param inputArguments User input.
+     * @return double Weight that user input.
      * @throws DukeException If input does not have a weight or (weight < 0) or (weight > 1000).
      */
     public static double getWeight(String inputArguments) throws DukeException {
