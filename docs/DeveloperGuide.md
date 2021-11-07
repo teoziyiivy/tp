@@ -42,6 +42,7 @@ It implements the following operations:
 These operations will be illustrated through UML diagrams.
 
 #### Printing the welcome message
+
 The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported from Clickfitmessages class.
 
 #### Getting BMI and recommended daily caloric intake
@@ -60,6 +61,7 @@ load up the previous session's data. typing in "y" will cause the previous sessi
 contents of the storage text files will all be emptied
 
 #### Get summary of all info stored in text files
+
 The user is next greeted with a second prompt that asks whether he or she wishes to get a summary of all meals, fluids 
 and workouts he has eaten or completed.
 memoryStartup() is used to return a Boolean value. If it returns ture, it enters an if-loop in Duke class which calls 
@@ -72,23 +74,35 @@ printed as a summary of all stored information iu the text files.
 
 #### Meal: Listing Meals
 ![](https://user-images.githubusercontent.com/69350459/138880611-c82f4574-037f-4b64-9631-90d914f71701.png)
+
 The UML sequence diagram above shows what happens when the user attempts to list their meals. If the user inputs
 "list meals all", the if block's condition will be satisfied, and the method "listAllMeals()" will be called. If 
 the user inputs "list meals DATE" where date is an arbitrary date, the method "listMealsByDate(userDate)" will be 
-called, where userDate is the date specified by the user. Then, the method "printMealListTotals(mealNumber, totalCalories)"
-will be called, printing out a message to tell the user the total meal calories and number of meals.
+called, where userDate is the date specified by the user. Then, the static method 
+"printMealListTotals(mealNumber, totalCalories)", from the ClickfitMessages class will be called, 
+printing out a message to tell the user the total meal calories and number of meals.
 
 #### Class Diagram
 ![](https://user-images.githubusercontent.com/69350459/138307467-cef8cdd8-06ce-4284-92b5-9fe5e1ef50ef.png)
+
 Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
 the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
 ### FoodBank
 #### FoodBank: Adding custom meal
+![image](https://user-images.githubusercontent.com/69350459/140660563-aa140c5d-7df4-4ae8-96e4-44c9ae4474dd.png)
+
+The UML sequence diagram above shows what happens when the user attempts to add a meal to their library. 
+If the user inputs "library addmeal", the first if block's condition will be satisfied, and the exception 
+"EmptyFoodDescription()" will be thrown. Then the method "generateParameters(inputArguments)" is called, which sets 
+the class level attributes. Then, a for loop will be entered until the entire meal arraylist has been iterated through. 
+If the user has input a meal that already exists within the meal arraylist, the exception "DuplicateFood()" will be 
+thrown. Lastly, after exiting the for loop, the static method "printAddedLibraryMeal(description,calories,totalMeals)", 
+from the ClickfitMessages class will be called, printing out a message to tell the user that their meal has been added 
+to the library.
 
 ### FluidTracker
 #### Class diagram
-
 ![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
 
 Above are the UML class level diagrams of `Fluid`, `FluidExceptions` and `Tracker`. As seen in the diagram, the `Fluid` class is dependent on the `FluidExceptions` and the `Fluid`class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
@@ -115,6 +129,7 @@ The UML sequence diagram above shows what happens when the input command is reco
 
 #### Class diagram
 ![WeightTracker_class](https://user-images.githubusercontent.com/69446729/140641329-091135c4-798a-4ebb-a5d4-2af4882fc053.png)
+
 Above are the UML class level diagrams of `WeightTracker`, `ClickfitMessages`, `Tracker` and relevant exception classes. 
 As seen in the diagram, the `WeightTracker` class is dependent on the `ClickfitMessages` class and inherits from the 
 `Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.

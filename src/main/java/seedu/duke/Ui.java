@@ -156,6 +156,12 @@ public class Ui {
     }
 
     //@@author VishalJeyaram
+    /**
+     * This method obtains the user's weight.
+     *
+     * @param answerIsCorrect The boolean that checks if the answer is acceptable.
+     * @return answerIsCorrect.
+     */
     private boolean checkWeight(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
@@ -171,6 +177,12 @@ public class Ui {
     }
 
     //@@author VishalJeyaram
+    /**
+     * This method obtains the user's gender.
+     *
+     * @param answerIsCorrect The boolean that checks if the answer is acceptable.
+     * @return answerIsCorrect.
+     */
     private boolean checkGender(boolean answerIsCorrect) {
         String uiInput;
         while (!answerIsCorrect) {
