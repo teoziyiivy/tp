@@ -134,16 +134,7 @@ class MealTest {
     void addMeal15() {
         Meal meal = new Meal();
         String input = "pasta /c134 /d 14/09/2021 /t 17:45";
-        assertThrows(NoFoodFoundException.class, () -> {
-            meal.addMeal(input);
-        });
-    }
-
-    @Test
-    void addMeal16() {
-        Meal meal = new Meal();
-        String input = "pasta /c 134 /d 14/09/2021 /t 17:45";
-        assertThrows(NoFoodFoundException.class, () -> {
+        assertThrows(EmptyFoodDescription.class, () -> {
             meal.addMeal(input);
         });
     }

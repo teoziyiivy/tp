@@ -9,7 +9,7 @@ Written with reference to:
 
 ## Table of Contents
 - [**Design & Implementation**](#design-&-implementation)
-  - [**User Interface**](#user-interface-(ui))
+  - [**User Interface**](#user-interface-ui)
   - [**Meal Tracker**](#mealtracker)
   - [**Fluid Tracker**](#fluidtracker)
   - [**Weight Tracker**](#weighttracker)
@@ -71,11 +71,9 @@ Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
 the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
 ### FoodBank
-
 #### FoodBank: Adding custom meal
 
 ### FluidTracker
-
 #### Class diagram
 
 ![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
@@ -99,22 +97,23 @@ The UML sequence diagram above shows what happens when the input command is reco
 
 The UML sequence diagram above shows what happens when the input command is recognised as `list calories`. For all fluid entries stored in `fluidArray`, if the entries contain the date as provided, `generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. The `calorie` parameter for each fluid entry in the `fluidArray` is added up, which returns `calorieTotal` at the end of the method's lifeline.
 
+
 ### WeightTracker
 
 #### Class diagram
-![WeightTracker_class](https://user-images.githubusercontent.com/69446729/138873653-d5db5c99-1f22-4c68-86af-188f1ea2c593.png)
-Above are the UML class level diagrams of `WeightTracker`, `WeightTrackerMessages`, `Tracker` and relevant exception classes. 
-As seen in the diagram, the `WeightTracker` class is dependent on the `WeightTrackerMessages` class and inherits from the 
+![WeightTracker_class](https://user-images.githubusercontent.com/69446729/140641329-091135c4-798a-4ebb-a5d4-2af4882fc053.png)
+Above are the UML class level diagrams of `WeightTracker`, `ClickfitMessages`, `Tracker` and relevant exception classes. 
+As seen in the diagram, the `WeightTracker` class is dependent on the `ClickfitMessages` class and inherits from the 
 `Tracker` class. The `WeightTracker` class also throws 4 exceptions which inherit from the `WeightException` class.
 This class diagram has been simplified for better readability.
 
 #### Adding weight
-![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/138879720-3c3632c5-0765-4215-a2f8-5df7eea45277.png)
+![WeightTracker_add_sequence](https://user-images.githubusercontent.com/69446729/140641320-d243b7a8-a75c-4960-a731-6aeed02fd7ea.png)
 
 The UML sequence diagram above shows what happens when the input command is recognised as `addweight`.
 The `WeightTracker` class calls the `generateWeightParameters` function which updates the `weight` and `date` 
 variables. Then the `weight` and `date` variables are added to weight array list and `printAddWeightResponse`
-is called from the `WeightTrackerMessages` class for both the typical input and missing date cases. However,
+is called from the `ClickfitMessages` class for both the typical input and missing date cases. However,
 when an exception is encountered, the `WeightTracker` class will throw `AddWeightException()` instead.
 
 ### ScheduleTracker
@@ -159,9 +158,12 @@ Specifically made for people getting into serious fitness routines such as athle
 
 ### Value proposition
 
-CLI.ckFit is a comprehensive workout client with the two main components of a workout diary and a calorie manager
-with the peripherals being weight tracking and BMI/recommended caloric intake calculator. These features can be
-conveniently accessed via the Command Line Interface (CLI).
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input and track
+your calories, weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever
+you wish to. It also comes with a BMI and recommended caloric intake calculator which can give you an idea of 
+your current fitness level. All these features come together and complement each other but can also be used 
+independently of one another. For instance, CLI.ckFit can simply be used as a stand alone Weight tracker if the user
+sees fit.
 
 ## Appendix B: User Stories
 

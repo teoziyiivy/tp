@@ -11,7 +11,10 @@ import seedu.duke.exceptions.foodbank.InvalidMealIndexException;
 import seedu.duke.exceptions.foodbank.NegativeCaloriesException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import seedu.duke.exceptions.foodbank.NoFoodIndexException;
+import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
+import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
 
+@SuppressWarnings("ALL")
 public class FoodBankTest {
 
     //@@author VishalJeyaram
@@ -181,19 +184,7 @@ public class FoodBankTest {
         FoodBank foodbank = new FoodBank();
         FoodBank.addCustomMeal("pasta /c 213 /d 12/09/2021 /t 10:35");
         assertDoesNotThrow(() -> FoodBank.listCustomMeal());
-=======
-import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
-import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
-import seedu.duke.exceptions.foodbank.FoodBankException;
-import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
-import seedu.duke.exceptions.foodbank.NoFoodFoundException;
-import seedu.duke.exceptions.foodbank.NoFoodIndexException;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-@SuppressWarnings("ALL")
-public class FoodBankTest {
+    }
 
     //@@author pragyan01
     @Test
@@ -485,7 +476,7 @@ public class FoodBankTest {
     void isFoodFound() throws FoodBankException {
         FoodBank foodbank = new FoodBank();
         foodbank.addCustomFluid("coke /c 40");
-        String input = "coke";
+        String input = "cola";
         assertDoesNotThrow(() -> foodbank.isFoodFound(input));
     }
 

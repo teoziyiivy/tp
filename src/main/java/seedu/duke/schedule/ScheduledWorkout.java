@@ -44,16 +44,16 @@ public class ScheduledWorkout {
                 LocalTime.parse(workoutTime, DateTimeFormatter.ofPattern("HH:mm")));
         this.isRecurring = isRecurring;
         activities = new ArrayList<>();
-//        if (!activityMap.isEmpty()) {
-//            for (var entry : activityMap.entrySet()) {
-//                activities.add(
-//                        new WorkoutActivity(
-//                                entry.getKey().trim(), entry.getValue(),
-//                                WorkoutActivity.isDistanceActivity(entry.getKey())
-//                        )
-//                );
-//            }
-//        }
+        if (!activityMap.isEmpty()) {
+            for (var entry : activityMap.entrySet()) {
+                activities.add(
+                        new WorkoutActivity(
+                                entry.getKey().trim(), entry.getValue(),
+                                WorkoutActivity.isDistanceActivity(entry.getKey())
+                        )
+                );
+            }
+        }
     }
 
     /**
@@ -114,22 +114,31 @@ public class ScheduledWorkout {
      * @return String Activity breakdown as a single String to be printed.
      */
     public String getActivitiesAsStringToPrint(boolean isListing) {
-        String output = System.lineSeparator() + "Activities Breakdown: " + System.lineSeparator();
+        StringBuilder output = new StringBuilder();
+        output.append(System.lineSeparator()).append("Activities Breakdown: ").append(System.lineSeparator());
         if (activities.isEmpty()) {
-            return output + "nil" + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT;
+            output.append("nil").append(System.lineSeparator()).append(Ui.HORIZONTAL_BAR_SHORT);
+            return output.toString();
         }
         int currentIndex = 1;
         for (WorkoutActivity a : activities) {
             if (a.isDistanceActivity()) {
-                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivityDistance()
-                        + "metres" + System.lineSeparator();
+                output.append(currentIndex).append(". ").append(a.getActivityDescription())
+                        .append(": ").append(a.getActivityDistance()).append("metres");
             } else {
-                output += currentIndex + ". " + a.getActivityDescription() + ": " + a.getActivitySets() + "sets x "
-                        + a.getActivityReps() + "reps" + System.lineSeparator();
+                output.append(currentIndex).append(". ").append(a.getActivityDescription())
+                        .append(": ").append(a.getActivitySets()).append("sets x ").append(a.getActivityReps())
+                        .append("reps");
+            }
+            if (currentIndex < activities.size()) {
+                output.append(System.lineSeparator());
             }
             currentIndex++;
         }
-        return isListing ? output + System.lineSeparator() + Ui.HORIZONTAL_BAR_SHORT : output;
+        if (isListing) {
+            output.append(System.lineSeparator()).append(Ui.HORIZONTAL_BAR_SHORT);
+        }
+        return output.toString();
     }
 
     /**
@@ -137,14 +146,14 @@ public class ScheduledWorkout {
      *
      * @return String Scheduled workout information as a single String.
      */
-    public String getScheduledWorkoutAsString() {
-        String output = workoutDescription + Parser.DATE_SEPARATOR
-                + workoutDate + Parser.TIME_SEPARATOR + workoutTime;
-        output += getActivitiesAsString();
+    public String getScheduledWorkoutAsDataString() {
+        StringBuilder output = new StringBuilder();
+        output.append(workoutDescription).append(Parser.DATE_SEPARATOR).append(workoutDate)
+                .append(Parser.TIME_SEPARATOR).append(workoutTime).append(getActivitiesAsDataString());
         if (isRecurring) {
-            output += Parser.RECURRING_FLAG;
+            output.append(Parser.RECURRING_FLAG);
         }
-        return output;
+        return output.toString();
     }
 
     /**
@@ -152,7 +161,7 @@ public class ScheduledWorkout {
      *
      * @return String Activity breakdown information as a single String to be stored.
      */
-    public String getActivitiesAsString() {
+    public String getActivitiesAsDataString() {
         StringBuilder activityString = new StringBuilder();
         if (activities.isEmpty()) {
             return activityString.toString();
@@ -173,7 +182,7 @@ public class ScheduledWorkout {
             }
             currentIndex++;
             activityString.append(
-                    (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : "");
+                    (currentIndex < activities.size()) ? Parser.MULTIPLE_ACTIVITY_MARKER : Parser.EMPTY_STRING);
         }
         return activityString.toString();
     }
