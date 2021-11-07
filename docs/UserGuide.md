@@ -144,15 +144,7 @@ Note: Keying in "y" will result in the previous session's data being deleted!
   - [**List calories**](#list-calories)
 
   - [**List volumes**](#list-volumes)
-
-- #### Help
-
-  - [**Access user help**](#help-command)
-
-- #### Close CLI.ckFit
-
-  - [**Bye**](#bye)
-
+  
 ### Workout Manager
 
 - #### Add
@@ -196,6 +188,12 @@ Note: Keying in "y" will result in the previous session's data being deleted!
 ### List Manager
 
 - [**List everything**](#List-everything-on-current-date)
+
+### Getting help
+- [**Access user help**](#help-command)
+
+### Exiting CLI.ckFit
+- [**Exiting application**](#bye)
 
 ### Miscellaneous
 
@@ -403,7 +401,7 @@ Noted! CLI.ckFit has scheduled your recurring workout of description "weekly che
 
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 
-* The `/a` separator is optional.
+* The `/a` separator is optional. However, it **must** be included if an activity breakdown is to be included in the schedule.
 
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
 
@@ -1160,7 +1158,7 @@ NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your
 Here is the link to our User Guide! https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html
 ```
 
-## Bye
+## Exiting the application
 
 Command Word: `bye`
 

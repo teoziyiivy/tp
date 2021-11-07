@@ -8,7 +8,7 @@ Written with reference to:
 * https://se-education.org/addressbook-level3/DeveloperGuide.html
 
 ## Table of Contents
-- [**Design & Implementation**](#design-&-implementation)
+- [**Design & Implementation**](#design--implementation)
   - [**User Interface**](#user-interface-ui)
   - [**Meal Tracker**](#mealtracker)
   - [**Fluid Tracker**](#fluidtracker)
@@ -202,13 +202,8 @@ sees fit.
 
 **Expected**: CLI.ckFit will launch and a welcome message will be displayed.
 
-### Testing command behavior
-1. Refer to the commands and expected behavior as stated in CLI.ckFit's current [User Guide](https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html)
-
-**Note**: During testing, please consider what is written in the **Known limitations** section of the User Guide.
-
 ### Saving Data
- Data is saved in "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" in the same folder
+Data is saved in "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" in the same folder
 as your `CLIckFit.jar`.
    * **Test Case**:
       1. Run `CLIckFit.jar`.
@@ -223,5 +218,160 @@ as your `CLIckFit.jar`.
       9. Delete all entries added in *step 3*.
       9. Exit the application.
    * **Expected**: "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" will be empty.
-    
 
+### Command testing
+Please check out CLI.ckFit's [User Guide](https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html) for more detailed
+walk through of all commands and their formats.
+
+Take note that the following sections will focus more on command behavior not specified in the User Guide, such as 
+expected output for incorrect/invalid inputs. The test cases stated in the following sections are not exhaustive and 
+testers are expected to do more exploratory work for more comprehensive testing. 
+
+### Workout Commands
+
+#### Adding a workout
+1. Adding a workout omitting date and time
+    * **Test Case**: `add workout test /c 123`
+    * **Expected**: workout with description "test" and "123" calories burned will be recorded with the current date and time.
+    
+2. Adding a workout with specified date and time
+    * **Test Case**: `add workout test /c 123 /d 08/11/2021 /t 23:59`
+    * **Expected**: workout with description "test" and "123" calories burned will be recorded on "08/11/2021" at "23:59".
+    
+3. Adding a workout with missing description
+    * **Test Case**: `add workout /c 123`
+    * **Expected**:
+      ```
+      I am sorry... it appears the description is missing.
+      Please enter a workout description!
+      ```
+   
+4. Adding a workout with missing calorie separator "/c"
+    * **Test Case**: `add workout test 123`
+    * **Expected**:
+      ```
+      CLI.ckFit is having difficulties finding the calorie separator /c
+      Please minimally have the format: add workout [workout_description] /c [calories]
+      Do remember to put spaces between your separators!
+      ```
+5. Adding a workout with invalid date or time format
+    * **Test Case**: `add workout test /c 123 /d 08-11-21 /t 5:00pm`
+    * **Expected**: 
+      ```
+      Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
+      ```
+#### Deleting a workout
+1. Deleting a workout with valid index
+    * **Test Case**: `delete workout 1`
+    * **Expected**: deletes the first workout in the workout list.
+      
+2. Deleting a workout with invalid index
+    * **Test Case**: `delete workout -1`
+    * **Expected**: 
+      ```
+      Failed to delete that workout! Please enter an Integer within range.
+      ```
+3. Deleting a workout without specifying index
+    * **Test Case**: `delete workout`
+    * **Expected**:
+      ```
+      Please enter the workout index in the format: delete workout [index]
+      ```
+#### Listing workouts
+1. Listing workouts on date without any recorded workouts
+    * **Test Case**: `list workouts 23/12/2021`
+    * **Expected**: 
+      ```
+      No workouts recorded on the date: 23/12/2021
+      ```
+    
+### Schedule Commands
+
+#### Adding a scheduled workout
+1. Adding a scheduled workout with missing date or time separators, "/d" and "/t"
+    * **Test Case**: `add schedule 12/12/2021 23:59`
+    * **Expected**: 
+      ```
+      CLI.ckFit is having difficulties finding the separators...
+      Please enter in the format: add schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]
+      Do remember to put spaces between your separators.
+      ```
+2. Adding a scheduled workout with missing description
+    * **Test Case**: `add schedule /d 12/12/2021 /t 23:59`
+    * **Expected**:
+      ```
+      I am sorry... it appears the description is missing.
+      Please enter a description for your scheduled workout!
+      ```
+4. Adding a scheduled workout with invalid date or time format
+    * **Test Case**: `add schedule test /d 12-12-21 /t 11:59pm`
+    * **Expected**:
+      ```
+      Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
+      ```
+5. Adding a scheduled workout with a date in the past
+    * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59`
+    * **Expected**:
+      ```
+      Noted! CLI.ckFit has scheduled your workout of description "test" on 07/11/2021 at 13:59.
+      CLI.ckFit has detected some overdue scheduled workouts and has deleted/rescheduled them!
+      ```
+5. Adding a scheduled workout with activity breakdown, missing activity splitter ":"
+    * **Test Case**: `add schedule test /d 12/12/2021 /t 13:59 /a chest8x10, squats:3x10`
+    * **Expected**:
+      ```
+      Missing activity splitter ":" detected.
+      Please enter [activity name]:[sets]x[reps] or [activity name]:[distance in metres] for your workout activities
+      ```
+6. Adding a scheduled workout with activity breakdown, unnecessary quantifier "x"
+    * **Test Case**: `add schedule test /d 12/12/2021 /t 13:59 /a swimming:1000x2`
+    * **Expected**:
+      ```
+      Unnecessary activity quantifier splitter "x" detected.
+      Please enter [activity name]:[distance in metres] for distance based workout activities if your
+      activity name is either running/swimming/cycling.
+      E.g. running:8000
+      ```
+7. Adding a scheduled workout with activity breakdown, missing quantifier "x"
+    * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59 /a chest:8x10, squats:3 10`
+    * **Expected**:
+      ```
+      Missing activity quantifier "x" detected.
+      Please enter your [sets]x[reps] for your non-distance based workout activities.
+      ```
+8. Adding a scheduled workout with activity breakdown with non-positive integers for distance or sets and reps
+    * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59 /a chest:8x10, squats:3x-10`
+    * **Expected**: 
+      ```
+      There was an issue getting your activity breakdown.
+      Please enter a positive integer [distance in metres] for distance based activities(swimming/running/cycling).
+      E.g. running:8000
+      Enter two positive integers in the format [set]x[reps] for everything else.
+      E.g. bench press:3x12
+      For multiple activities please separate them by ","
+      ```
+#### Deleting a scheduled workout
+1. Deleting a scheduled workout with valid index
+    * **Test Case**: `delete schedule 1`
+    * **Expected**: deletes the first workout in the workout list.
+
+2. Deleting a scheduled workout with invalid index
+    * **Test Case**: `delete schedule -1`
+    * **Expected**:
+      ```
+      Failed to delete that scheduled workout! Please enter an Integer within range.
+      ```
+3. Deleting a scheduled workout without specifying index
+    * **Test Case**: `delete schedule`
+    * **Expected**:
+      ```
+      Please enter the schedule index in the format: delete schedule [index]
+      ```
+#### Listing scheduled workouts
+1. Listing workout schedule on date without any scheduled workouts
+    * **Test Case**: `list schedule 23/12/2021`
+    * **Expected**:
+      ```
+      Workout schedule is empty on the date: 23/12/2021
+      ```
+      
