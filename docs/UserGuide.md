@@ -308,7 +308,7 @@ Example of usage:
 Expected outcome:
 
 ```
-Noted! CLI.ckFit has recorded your weight as 50.0 on 03/04/2021. Check back for your progress!
+Noted! CLI.ckFit has recorded your weight as 50.0 kg on 03/04/2021. Check back for your progress!
 ```
 
 ## Adding workout
@@ -564,7 +564,7 @@ Example of usage:
 Expected outcome:
 
 ```
-Noted! CLI.ckFit has successfully deleted your weight of 50.0 on 03/04/2021.
+Noted! CLI.ckFit has successfully deleted your weight of 50.0 kg on 03/04/2021.
 ```
 
 ## Delete a workout
@@ -750,20 +750,20 @@ Example of usage:
 Expected outcome:
 
 ```
-1. Weight: 50.0
+1. Weight: 50.0 kg
 Total number of weights: 1
 ```
 
 ```
-1. Weight: 52.0
+1. Weight: 52.0 kg
 Total number of weights: 1
 ```
 
 ```
 Here are your recorded weights:
-1.  Weight: 52.0  Date: 06/11/2021
+1.  Weight: 52.0 kg Date: 06/11/2021
 
-2.  Weight: 50.0  Date: 07/11/2021
+2.  Weight: 50.0 kg Date: 07/11/2021
 
 Total number of weights: 2
 ```
@@ -1036,7 +1036,7 @@ Total calories: 0
 Total number of fluids: 1
 Total calories: 100
 
-1. Weight: 60.0
+1. Weight: 60.0 kg
    Total number of weights: 1
 
 No workouts recorded for today!
@@ -1087,7 +1087,7 @@ Total number of fluids: 1
 Total calories: 123
 
 Here are your recorded weights:
-1.  Weight: 70.0  Date: 07/11/2021
+1.  Weight: 70.0 kg Date: 07/11/2021
 
 Total number of weights: 1
 
