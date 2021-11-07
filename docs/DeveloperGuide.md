@@ -46,7 +46,7 @@ These operations will be illustrated through UML diagrams.
 The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported from Clickfitmessages class.
 
 #### Getting BMI and recommended daily caloric intake
-![Imgur](https://i.imgur.com/TZbe6Qh.png)
+![Imgur](https://i.imgur.com/Pr4fVXf.png)
 
 The user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
 The calculator takes in the following inputs as shown in the UML diagram through the instantiating of a new calculator
@@ -207,11 +207,11 @@ sees fit.
 |v2.0|serious athlete|breakdown my workout into smaller activities|track things like sets, reps and distance|
 |v2.0|beginner|check my fluid summary| budget my remaining calories|
 |v2.0|beginner|check my meal summary| budget my remaining calories|
-|v2.0|beginner|check my workout summary| know whether i hae burned enough calories|
+|v2.0|beginner|check my workout summary| know whether i have burned enough calories|
 |v2.0|beginner|check my weight summary| check my weight loss or gain progress|
 |v2.0|health conscious individual|know my recommended caloric intake|know how much food to consume in one day|
 |v2.0|health conscious individual| know my BMI indicator|know whether i need to lose weight|
-|v2.0| lazy user| have date and time automatically input depending as system time if i leave it empty| save time and effort for other stuff after my meal or drink|
+|v2.0| lazy user| have date and time automatically input depending as system time if i leave it empty| save time and effort for other stuff after my meal or drinks|
 
 ## Appendix C: Non-Functional Requirements
 
