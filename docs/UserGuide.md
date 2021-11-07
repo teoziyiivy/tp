@@ -2,10 +2,10 @@
 
 ## Introduction
 
-CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input and track 
-your calories, weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever 
-you wish to. 
-It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via Command Line Interface (CLI). CLI.ckFit 
+allows you to input and track your calories, weight, foods, and workouts throughout the day.
+It also allows you to save your data and view it whenever you wish to. 
+It comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
 level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students
 staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or
 even student athletes. Prior knowledge in fitness and gym-related terminologies is beneficial, but not necessary.
