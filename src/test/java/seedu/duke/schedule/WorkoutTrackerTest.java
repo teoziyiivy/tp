@@ -6,6 +6,7 @@ import seedu.duke.exceptions.workout.WorkoutException;
 
 import java.time.format.DateTimeParseException;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,9 +21,23 @@ class WorkoutTrackerTest {
     }
 
     @Test
-    void isCompletedWorkoutNumberWithinRange_inputOutOfRange_failure() {
+    void isWorkoutNumberWithinRange_inputOutOfRangeNegative_failure() {
         WorkoutTracker wt = new WorkoutTracker();
-        assertFalse(wt.isWorkoutNumberWithinRange(-256));
+        assertFalse(wt.isWorkoutNumberWithinRange(-1));
+    }
+
+    @Test
+    void isWorkoutNumberWithinRange_inputOutOfRangePositive_failure() {
+        WorkoutTracker wt = new WorkoutTracker();
+        assertFalse(wt.isWorkoutNumberWithinRange(999));
+    }
+
+    @Test
+    void isWorkoutNumberWithinRange_inputWithinRange_success() throws WorkoutException {
+        WorkoutTracker wt = new WorkoutTracker();
+        String argumentInput = "test /c 123 /d 07/07/2021 /t 17:59";
+        wt.addWorkout(argumentInput, true);
+        assertTrue(wt.isWorkoutNumberWithinRange(1));
     }
 
     @Test
@@ -84,5 +99,12 @@ class WorkoutTrackerTest {
         WorkoutTracker wt = new WorkoutTracker();
         String argumentInput = "  /c 123 /d 07/07/2021 /t 07:59";
         assertThrows(WorkoutException.class, () -> wt.missingDescriptionCheck(argumentInput));
+    }
+
+    @Test
+    void missingDescriptionCheck_validDescription_noExceptionThrow() {
+        WorkoutTracker wt = new WorkoutTracker();
+        String argumentInput = "test  /c 123 /d 07/07/2021 /t 07:59";
+        assertDoesNotThrow(() -> wt.missingDescriptionCheck(argumentInput));
     }
 }
