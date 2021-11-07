@@ -71,11 +71,9 @@ Above are the UML class level diagrams of `Meal`, and `Tracker`. As seen in
 the diagram, the `Meal` class inherits from the `Tracker` class. This class diagram has been simplified for better readability.
 
 ### FoodBank
-
 #### FoodBank: Adding custom meal
 
 ### FluidTracker
-
 #### Class diagram
 
 ![](https://user-images.githubusercontent.com/69446495/138308110-c73bc021-3744-4164-98dc-52b7f76cb4c0.png)
@@ -98,6 +96,7 @@ The UML sequence diagram above shows what happens when the input command is reco
 ![](https://user-images.githubusercontent.com/69446495/140621687-7f221499-f29b-4003-a0f5-90d26ecf7f16.png)
 
 The UML sequence diagram above shows what happens when the input command is recognised as `list calories`. For all fluid entries stored in `fluidArray`, if the entries contain the date as provided, `generateFluidParameters` method in the `Fluid class` is called upon which updates variables relevent to a fluid, such its `description`, `calories`, `volume`, `date` and `time`. The `calorie` parameter for each fluid entry in the `fluidArray` is added up, which returns `calorieTotal` at the end of the method's lifeline.
+
 
 ### WeightTracker
 
