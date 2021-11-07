@@ -1,8 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.foodbank.FoodBankException;
-import seedu.duke.exceptions.workout.WorkoutException;
 import seedu.duke.schedule.ScheduleTracker;
 import seedu.duke.schedule.ScheduledWorkout;
 
@@ -15,9 +13,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 import static seedu.duke.ClickfitMessages.MEAL_PRINT_FORMAT;
 import static seedu.duke.ClickfitMessages.FLUID_PRINT_FORMAT;
@@ -130,6 +126,11 @@ public class Storage {
     }
 
     //@@author teoziyiivy
+    /**
+     * Saves weight to Weight.txt file.
+     *
+     * @throws IOException If there is a problem with the text file.
+     */
     public void saveWeight(WeightTracker weight) throws IOException {
         String currentWeight;
         String header;
@@ -254,6 +255,12 @@ public class Storage {
     }
 
     //@@author teoziyiivy
+    /**
+     * This method loads all weights saved in Weight.txt file to the weights array list.
+     *
+     * @return weights arrayList
+     * @throws IOException If there is a problem with the text file.
+     */
     public ArrayList<String> loadWeights() throws IOException {
         ArrayList<String> weights = new ArrayList<>();
         String newFilePath = new File(weightFile).getAbsolutePath();
@@ -382,6 +389,9 @@ public class Storage {
     }
 
     //@@author teoziyiivy
+    /**
+     * Creates food bank file, "Foodbank.txt" if it hasn't already been created.
+     */
     public static void initializeFoodBankFile() {
         File dataFile = new File(libraryFile);
         if (!dataFile.exists()) {
@@ -394,6 +404,9 @@ public class Storage {
     }
 
     //@@author teoziyiivy
+    /**
+     * Creates weight file, "Weight.txt" if it hasn't already been created.
+     */
     public static void initializeWeightFile() {
         File dataFile = new File(weightFile);
         if (!dataFile.exists()) {
@@ -508,6 +521,14 @@ public class Storage {
     }
 
     //@@author teoziyiivy
+    /**
+     * A method that takes in the weight array list and formats it into the appropriate output
+     * form to provide a useful weight summary to the user. It will print out the summary for
+     * all the weights in the weights array list printing the index in the list, weight, date,
+     * and total number of weights.
+     *
+     * @throws DukeException If encountered error when generating weight parameters
+     */
     public void weightSummary() throws DukeException {
         int i = 1;
         double weight;

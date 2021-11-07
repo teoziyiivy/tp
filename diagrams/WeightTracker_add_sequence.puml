@@ -3,7 +3,7 @@
 
 
 participant ":WeightTracker"
-participant ":WeightTrackerMessages"
+participant ":ClickfitMessages"
 
 ->":WeightTracker" : weightTracker.addWeights(input: String)
 activate ":WeightTracker" #Salmon
@@ -11,18 +11,18 @@ activate ":WeightTracker" #Salmon
 activate ":WeightTracker" #LightSalmon
 return
 alt typical input
-":WeightTracker"->":WeightTrackerMessages" : printAddWeightResponse(weight: int, date: String)
+":WeightTracker"->":ClickfitMessages" : printAddWeightResponse(weight: int, date: String)
 activate ":WeightTracker" #LightSalmon
-activate ":WeightTrackerMessages" #Tomato
+activate ":ClickfitMessages" #Tomato
 return
-deactivate ":WeightTrackerMessages"
+deactivate ":ClickfitMessages"
 return
 else missing date
-":WeightTracker"->":WeightTrackerMessages" : printAddWeightResponse(weight: int, date: String)
+":WeightTracker"->":ClickfitMessages" : printAddWeightResponse(weight: int, date: String)
 activate ":WeightTracker" #LightSalmon
-activate ":WeightTrackerMessages"#Tomato
+activate ":ClickfitMessages"#Tomato
 return
-deactivate ":WeightTrackerMessages"
+deactivate ":ClickfitMessages"
 <--":WeightTracker"
 deactivate ":WeightTracker"
 else exception

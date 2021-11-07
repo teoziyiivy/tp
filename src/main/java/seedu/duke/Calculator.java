@@ -12,6 +12,9 @@ public class Calculator {
     protected double multiplier;
 
     //@@author teoziyiivy
+    /**
+     * Constructs the <code>Calculator</code> object.
+     */
     public Calculator(String sex, double weight, double height, int age, int activityLevel) {
         this.height = height;
         this.weight = weight;

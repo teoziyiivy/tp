@@ -158,7 +158,7 @@ public class WeightTracker extends Tracker {
                 generateWeightParameters(weights);
                 logger.log(Level.INFO, "weight parameters generated");
                 System.out.print(i + ". ");
-                System.out.println("Weight: " + weight);
+                System.out.println("Weight: " + weight + " kg");
                 i++;
                 numberOfSpecificWeights++;
             }
@@ -181,7 +181,7 @@ public class WeightTracker extends Tracker {
         for (String weights : weightsArray) {
             generateWeightParameters(weights);
             System.out.print(i + ". ");
-            System.out.print(" Weight: " + weight + " ");
+            System.out.print(" Weight: " + weight + " kg ");
             System.out.println(" Date: " + date + System.lineSeparator());
             i++;
         }
