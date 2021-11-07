@@ -8,7 +8,7 @@ Written with reference to:
 * https://se-education.org/addressbook-level3/DeveloperGuide.html
 
 ## Table of Contents
-- [**Design & Implementation**](#design-&-implementation)
+- [**Design & Implementation**](#design--implementation)
   - [**User Interface**](#user-interface-ui)
   - [**Meal Tracker**](#mealtracker)
   - [**Fluid Tracker**](#fluidtracker)
