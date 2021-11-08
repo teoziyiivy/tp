@@ -3,25 +3,33 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-participant "Ui:memoryStartup()"
+participant "Ui"
 
-->"Ui:memoryStartup()" :String uiInput
-activate "Ui:memoryStartup()" #FFBBBB
+->"Ui" :memoryStartup()
+activate "Ui" #FFBBBB
 
-"Ui:memoryStartup()" -> "Ui:memoryStartup()" : uiInput = uiScanner.nextLine();
-activate "Ui:memoryStartup()" #DarkSalmon
+"Ui" -> "Scanner" : uiInput = uiScanner.nextLine();
+activate "Scanner" #DarkSalmon
 return
 |||
-alt  result = true, flag = true;
-else else
-"Ui:memoryStartup()"->"Ui:memoryStartup()" : result = false, flag = true;
-activate "Ui:memoryStartup()" #IndianRed
+opt !flag
+"Ui" -> "Scanner" : uiInput = uiScanner.nextLine();
+activate "Scanner" #DarkSalmon
 return
+|||
+alt  uiInput.isEmpty()
+|||
+else uiInput.trim().equals("y")
+|||
+else
 |||
 end
-note left: if block loads up memory of previous session if enter is detected, else deletes previous session
 |||
-deactivate "Ui:memoryStartup()"
+note left: if block loads the data for the previous session else if block deletes the data for the previous session, else just prints out incorrect input
+end
+|||
+return result
+deactivate "Ui"
 |||
 
 @enduml

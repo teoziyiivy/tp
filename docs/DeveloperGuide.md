@@ -54,11 +54,11 @@ object that takes in the class-level attributes of Ui to calculate the user's BM
 daily caloric intake through getIdealCalories().
 
 #### Memory startup method
-![Imgur](https://i.imgur.com/7ixwFz2.png)
+![Imgur](https://i.imgur.com/cRw6Bp3.png)
 
 The user is greeted with a prompt that asks whether he wishes to load his saved date. Pressing the "enter" keystroke will 
-load up the previous session's data. typing in "y" will cause the previous session's data to be wiped, meaning the
-contents of the storage text files will all be emptied
+load up the previous session's data. Typing in "y" will cause the previous session's data to be wiped, meaning the
+contents of the storage text files will all be emptied, so the user can start afresh.
 
 #### Get summary of all info stored in text files
 
@@ -213,7 +213,7 @@ sees fit.
 |v2.0|beginner|check my weight summary| check my weight loss or gain progress|
 |v2.0|health conscious individual|know my recommended caloric intake|know how much food to consume in one day|
 |v2.0|health conscious individual| know my BMI indicator|know whether i need to lose weight|
-|v2.0| lazy user| have date and time automatically input depending as system time if i leave it empty| save time and effort for other stuff after my meal or drinks|
+|v2.0| lazy user| have date/time automatically input corresponding to system date/time if i leave it empty| save time and effort for other stuff after my meal or drinks|
 
 ## Appendix C: Non-Functional Requirements
 
