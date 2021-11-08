@@ -66,9 +66,6 @@ public class FoodBank {
         }
         generateParameters(inputArguments);
         inputArguments = description + " /c " + calories;
-        if (Parser.containsSeparators(description)) {
-            throw new FoodBankException();
-        }
         for (String f : fluids) {
             if (f.contains(description)) {
                 throw new DuplicateFood();
@@ -144,11 +141,10 @@ public class FoodBank {
         int i = 1;
         for (String meal : meals) {
             generateParameters(meal);
-            System.out.println(i + ". " + description);
-            System.out.println("Calories: " + calories + "\n");
+            ClickfitMessages.printSingleLibraryMeal(i,description,calories);
             i += 1;
         }
-        System.out.println("Total number of meals in library: " + totalMeals);
+        ClickfitMessages.printMealLibraryTotals(totalMeals);
     }
 
     //@@author VishalJeyaram
@@ -165,19 +161,15 @@ public class FoodBank {
             throw new EmptyFoodDescription();
         }
         generateParameters(inputArguments);
-        if (Parser.containsSeparators(description)) {
-            throw new FoodBankException();
-        }
         for (String m : meals) {
             if (m.contains(description)) {
                 throw new DuplicateFood();
             }
         }
-        inputArguments = description + " /c " + calories;
+        inputArguments = description + Parser.CALORIE_SEPARATOR + calories;
         meals.add(inputArguments);
         totalMeals += 1;
-        System.out.println(description + ", which has " + calories
-                + " calories, will be added to your library of meals. You now have " + totalMeals + " meals!\n");
+        ClickfitMessages.printAddedLibraryMeal(description,calories,totalMeals);
     }
 
     //@@author VishalJeyaram
@@ -204,8 +196,7 @@ public class FoodBank {
         generateParameters(meals.get(mealIndex));
         meals.remove(mealIndex);
         totalMeals -= 1;
-        System.out.println(description + " will be removed from your list of meals consumed. You now have "
-                + totalMeals + " meals left!\n");
+        ClickfitMessages.printDeletedLibraryMeal(description,totalMeals);
     }
 
     //@@author pragyan01

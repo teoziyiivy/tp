@@ -221,7 +221,6 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
-
     /**
      * To notify the user that a meal has been deleted from their list of meals.
      */
@@ -230,7 +229,6 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
-
     /**
      * To notify the user that their meal list is empty.
      */
@@ -239,7 +237,6 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
-
     /**
      * To tell the user how many calories and meals they have consumed thus far.
      */
@@ -249,7 +246,6 @@ public class ClickfitMessages {
     }
 
     //@@author VishalJeyaram
-
     /**
      * To tell the user the details of a single meal such as its name, calories, and date and time of consumption.
      */
@@ -258,6 +254,41 @@ public class ClickfitMessages {
         System.out.println("Calories: " + calories);
         System.out.println("Date: " + date);
         System.out.println("Time: " + time + "\n");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To notify the user that a meal has been added to their library.
+     */
+    public static void printAddedLibraryMeal(String description, int calories, int totalMeals) {
+        System.out.println(description + ", which has " + calories
+                + " calories, will be added to your library of meals. You now have " + totalMeals + " meals!\n");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To notify the user that a meal has been deleted from their library.
+     */
+    public static void printDeletedLibraryMeal(String description, int totalMeals) {
+        System.out.println(description + " will be removed from your list of meals consumed. You now have "
+                + totalMeals + " meals left!\n");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To tell the user the details of a single meal in the library such as its name and calories.
+     */
+    public static void printSingleLibraryMeal(int i, String description, int calories) {
+        System.out.println(i + ". " + description);
+        System.out.println("Calories: " + calories + "\n");
+    }
+
+    //@@author VishalJeyaram
+    /**
+     * To tell the user how many meals are in their meal library.
+     */
+    public static void printMealLibraryTotals(int totalMeals) {
+        System.out.println("Total number of meals in library: " + totalMeals);
     }
 
     //@@author teoziyiivy
