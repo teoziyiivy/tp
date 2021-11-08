@@ -780,6 +780,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
 4. Adding a weight with omission of weight
    * **Test Case**: `add weight`
    * **Expected**: `CLI.ckFit has detected a wrong input, kindly check your inputs or type "help commands" for input examples.`
+
 #### Deleting a weight
 1. Deleting a weight with valid index
    * **Test Case**: `delete weight 1`
@@ -798,6 +799,7 @@ testers are expected to do more exploratory work for more comprehensive testing.
    CLI.ckFit encountered a problem deleting your weight.
    Please follow the format: delete weight INDEX
    ```
+   
 #### Listing weights
 1. Listing weights for current date
    * **Test Case**: `list weights`
