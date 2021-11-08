@@ -148,6 +148,10 @@ public class ClickfitMessages {
 
     public static final String UNKNOWN_ERROR_MESSAGE = "Unknown error detected, please contact the devs of CLI.ckFit";
 
+    public static final String EMPTY_FLUID_LIBRARY = "Your fluids library is empty!";
+
+    public static final String EMPTY_FLUID_LIST = "Your fluids list is empty!";
+
     public static String getScheduledWorkoutCountMessage(int workoutCount) {
         return "You have " + workoutCount + " scheduled workouts on that day!";
     }

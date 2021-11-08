@@ -32,7 +32,7 @@ The fluid library also automatically adds the calories associated to that fluid 
 * New feature for DateTracker class: Added ability to sort array list containing dates and times in ascending order.
   * What it does: DateTracker array list is now sorted in ascending order in the order of date and then time.
   * Justification: Sorted array list allows text to be written to a local .txt file in ascending order for better readability
-  * Highlights: This feature enhances the saving and loading functionalities to/from a .txt file and supports array lists in other classes such as the Meal class, keep them all organised and sorted. One challenge faced is when the user might not input a date with his entries, making this sortDate() method unnecessary. This hurdle was overcomed eventually as the program now inputs the user's system date and time at the time of his entry if the user does not input a date/time manually.
+  * Highlights: This feature enhances the saving and loading functionalities to/from a .txt file and supports array lists in other classes such as the Meal class, keep them all organised and sorted. One challenge faced is when the user might not input a date with his entries, making this sortDate() method unnecessary. This hurdle was overcame eventually as the program now inputs the user's system date and time at the time of his entry if the user does not input a date/time manually.
   
 #### Contributions to UG
 * Technical start up section
