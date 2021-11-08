@@ -42,21 +42,23 @@ which can give you an idea of your current fitness level.
 
 #### Contributions to UG
 
-* Add/delete/list workout command sections
-* Add/delete/list schedule commands sections
-* Some parts of known limitations section
+* Wrote add/delete/list workout command sections.
+* Wrote add/delete/list schedule commands sections.
+* Wrote some parts of known limitations section.
 
 #### Contributions to DG
 
-* ScheduleTracker Design & Implementation section
-* UML Class and sequence diagrams associated with ScheduleTracker
+* ScheduleTracker Design & Implementation section.
+* UML Class and sequence diagrams associated with ScheduleTracker.
 * Some reformatting of the Design & Implementation section to be neater.
-* Added appendix sections in the DG as well as some content to them
-* Added manual testing for workouts and scheduling of workouts
+* Added appendix sections in the DG as well as some content to them.
+* Added manual testing for workouts, scheduling of workouts and saving of data.
 
 #### Contributions to team-based tasks
 * Some reformatting of the Design & implementation section in the DG.
-* Added hyperlink support to table of contents in DG
+* Added hyperlink support to table of contents in DG.
+* Contributed in debugging code.
+* Changed some parsing implementation to split user input by any length of whitespace instead of a fixed single whitespace character.
 
 #### Review/mentoring contributions
 * Group mate PR reviews:
