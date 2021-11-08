@@ -1,12 +1,10 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.meal.EmptyMealListException;
 import seedu.duke.exceptions.meal.MealException;
 import seedu.duke.exceptions.meal.NoDeleteMealIndexException;
-import seedu.duke.exceptions.meal.NoMealDescriptionException;
 import seedu.duke.exceptions.meal.NoMealDetailsException;
 import seedu.duke.exceptions.meal.NoSuchMealIndexException;
 import java.time.format.DateTimeParseException;
@@ -74,7 +72,6 @@ public class Meal extends Tracker {
         }
         mealNumber = meals.size();
         generateMealParameters(inputArguments);
-        System.out.println(description);
         if (Parser.containsSeparators(description)) {
             throw new EmptyFoodDescription();
         }

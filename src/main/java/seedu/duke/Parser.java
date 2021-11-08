@@ -6,6 +6,7 @@ import seedu.duke.exceptions.fluid.NegativeVolumeException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.FoodBankException;
 import seedu.duke.exceptions.foodbank.NegativeCaloriesException;
+import seedu.duke.exceptions.foodbank.NoCaloriesException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
 import seedu.duke.exceptions.schedule.GetActivityException;
 import seedu.duke.exceptions.schedule.InvalidActivityFormatException;
