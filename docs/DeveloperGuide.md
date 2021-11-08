@@ -1,14 +1,20 @@
 # Developer Guide
 
+## Introduction
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via Command Line Interface (CLI). CLI.ckFit allows you to input and track
+your calories, weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever
+you wish to. It comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
+level.
+
 ## Acknowledgements
 The UML Diagrams were generated with the help of: [PlantUML](https://plantuml.com/)
 
 Written with reference to:
-* https://se-education.org/addressbook-level2/DeveloperGuide.html
-* https://se-education.org/addressbook-level3/DeveloperGuide.html
+* [https://se-education.org/addressbook-level2/DeveloperGuide.html](https://se-education.org/addressbook-level2/DeveloperGuide.html)
+* [https://se-education.org/addressbook-level3/DeveloperGuide.html](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Table of Contents
-- [**Design & Implementation**](#design-&-implementation)
+- [**Design & Implementation**](#design--implementation)
   - [**User Interface**](#user-interface-ui)
   - [**Meal Tracker**](#mealtracker)
   - [**Fluid Tracker**](#fluidtracker)
@@ -40,12 +46,19 @@ These operations will be illustrated through UML diagrams.
 The user launches the CLI for the first time. The welcomeMessage() is called first and prints out the messages imported from Clickfitmessages class.
 
 #### Getting BMI and recommended daily caloric intake
-![Imgur](https://i.imgur.com/TZbe6Qh.png)
+![Imgur](https://i.imgur.com/Pr4fVXf.png)
 
 The user is then greeted with a prompt that asks whether he or she wished to enter the calculator function of CLI.ckFit. 
 The calculator takes in the following inputs as shown in the UML diagram through the instantiating of a new calculator
 object that takes in the class-level attributes of Ui to calculate the user's BMI in getBmi and the user's recommended 
 daily caloric intake through getIdealCalories().
+
+#### Memory startup method
+![Imgur](https://i.imgur.com/7ixwFz2.png)
+
+The user is greeted with a prompt that asks whether he wishes to load his saved date. Pressing the "enter" keystroke will 
+load up the previous session's data. typing in "y" will cause the previous session's data to be wiped, meaning the
+contents of the storage text files will all be emptied
 
 #### Get summary of all info stored in text files
 
@@ -187,11 +200,18 @@ sees fit.
 |v1.0|fitness enthusiast|record my fitness activities|plan my extensive workout schedule|
 |v1.0|user|update how many calories I have burned through my workouts|keep track of my daily calories|
 |v1.0|athlete|record my weight|keep track of and maintain a competitive weight|
+|v1.0|forgetful user|input a "help" command|know the standard ways of inputting my commands|
 |v2.0|user|have the app remember my user data|access my data anytime| 
 |v2.0|user|have scheduled workouts in the list to be sorted by the nearest dates|easily keep track of upcoming workouts|
 |v2.0|frequent gym goer| be able to schedule recurring weekly workouts| have a routine schedule without having to reschedule the same workout every week|
 |v2.0|serious athlete|breakdown my workout into smaller activities|track things like sets, reps and distance|
-
+|v2.0|beginner|check my fluid summary| budget my remaining calories|
+|v2.0|beginner|check my meal summary| budget my remaining calories|
+|v2.0|beginner|check my workout summary| know whether i have burned enough calories|
+|v2.0|beginner|check my weight summary| check my weight loss or gain progress|
+|v2.0|health conscious individual|know my recommended caloric intake|know how much food to consume in one day|
+|v2.0|health conscious individual| know my BMI indicator|know whether i need to lose weight|
+|v2.0| lazy user| have date and time automatically input depending as system time if i leave it empty| save time and effort for other stuff after my meal or drinks|
 
 ## Appendix C: Non-Functional Requirements
 
@@ -206,6 +226,157 @@ sees fit.
 
 ## Appendix E: Instructions for manual testing
 
+### BMI calculator and Recommended caloric intake calculator
+
+Description: It is a calculator that allows the user to check his current BMI and daily recommended caloric intake.
+The user will be asked to enter his weight, height, age, activity level and gender. 
+
+#### Gender:
+Possible inputs: M , F 
+
+Wrong inputs: negative integers and doubles, symbols, combination of integers and doubles with symbols
+and strings, m, f
+
+Testcase 1 : m (small m or f are rejected)
+
+Testcase 2 : M (only M or F are accepted)
+
+Expected:
+
+`what is your SEX : M / F ?`
+
+`m`
+
+`what is your SEX : M / F ?`
+
+`M`
+
+*input accepted, proceeding to next question*
+
+#### Weight:
+Possible inputs: 60, 60.5 (integers or doubles are accepted)
+
+Wrong inputs: negative integers and doubles, symbols, strings, combination of integers and doubles with symbols 
+and strings
+
+Testcase 1 : -34 (negative integers or doubles are not accepted)
+
+Testcase 2 : 60.5 (integers or doubles are accepted)
+
+Expected:
+
+`what is your weight in kg? Enter a valid number!`
+
+`-34`
+
+`what is your weight in kg? Enter a valid number!`
+
+`60.5`
+
+*input accepted, proceeding to next question*
+
+#### Height:
+Possible inputs: 181, 181.5 (integers or doubles are accepted)
+
+Wrong inputs: negative integers and doubles, symbols, strings, combination of integers and doubles with symbols
+and strings
+
+Testcase 1 : -34.7 (negative integers or doubles are not accepted)
+
+Testcase 2 : 132! (combination of integers or doubles and symbols are not accepted)
+
+Testcase 3 : 181.5 (integers or doubles are accepted)
+
+Expected:
+
+`what is your height in cm? Enter a valid number!`
+
+`-34.7`
+
+`what is your height in cm? Enter a valid number!`
+
+`132!`
+
+`what is your height in cm? Enter a valid number!`
+
+`181.5`
+
+*input accepted, proceeding to next question*
+
+#### Age:
+Possible inputs: 23 (only integers are accepted)
+
+Wrong inputs: negative integers and doubles, positive doubles, symbols, strings, combination of integers and doubles with symbols
+and strings
+
+Testcase 1 : 23.5 (doubles are not accepted)
+
+Testcase 2 : twenty three (strings are not accepted)
+
+Testcase 3 : 23 (only integers are accepted)
+
+Expected:
+
+`what is your age in years? Enter an integer!`
+
+`23.5`
+
+`Please enter a valid input!`
+
+`what is your age in years? Enter an integer!`
+
+`twenty three`
+
+`what is your age in years? Enter an integer!`
+
+`23`
+
+*input accepted, proceeding to next question*
+
+#### Activity level:
+Possible inputs: 1, 2, 3, 4, 5 (integers 1 to 5)
+
+Wrong inputs: negative integers and doubles, positive doubles, symbols, strings, combination of integers and 
+doubles with symbols and strings
+
+Testcase 1 : 1.0 (doubles are not accepted even though it is within the range of 1 to 5)
+
+Testcase 2 : 6 (integers outside the range of 1 to 5 are not accepted)
+
+Testcase 3 : 4 (only integers within the range of 1 to 5 are accepted)
+
+Expected:
+
+`what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!`
+
+`1.0`
+
+`Please enter a valid input!`
+
+`what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!`
+
+`6`
+
+`what is your activity level from a scale of 1 - 5? Enter an integer from 1 to 5!`
+
+`4`
+
+*input accepted, proceeding to result*
+#### Result
+If all the same inputs are used and accepted, the user will be greeted with this printout:
+
+`Your BMI outcome is`
+
+`You are underweight`
+
+`Your ideal number of calories to maintain your weight is`
+
+`2847 kcal`
+
+`Would you like to clear all records of your fitness journey?
+Key in "y" to clear your records, or press enter keystroke to load in data from your previous session(s)
+Note: Keying in "y" will result in the previous session's data being deleted!`
+
 ### Launching CLI.ckFit
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `CLI.ckFit` from [here](http://link.to/duke).
@@ -217,18 +388,13 @@ sees fit.
 
 **Expected**: CLI.ckFit will launch and a welcome message will be displayed.
 
-### Testing command behavior
-1. Refer to the commands and expected behavior as stated in CLI.ckFit's current [User Guide](https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html)
-
-**Note**: During testing, please consider what is written in the **Known limitations** section of the User Guide.
-
 ### Saving Data
- Data is saved in "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" in the same folder
+Data is saved in "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" in the same folder
 as your `CLIckFit.jar`.
-   * **Test Case**:
+   * **Test Case**:   
       1. Run `CLIckFit.jar`.
          * **Note**: Ensure this is done in a new isolated folder or all data is already wiped prior.
-      3. Add one valid meal, fluid, weight, workout and schedule entry each.
+      3. Add one valid meal, fluid, library, weight, workout and schedule entry each.
       4. Verify that there is a new entry in all the respective data files.
          * **Note**: Closing and reopening the data files might be required to see the changes.
       5. Exit the application.
@@ -238,5 +404,174 @@ as your `CLIckFit.jar`.
       9. Delete all entries added in *step 3*.
       9. Exit the application.
    * **Expected**: "Food.txt", "FoodBank.txt", "Weight.txt", "Workout.txt" and "Schedule.txt" will be empty.
-    
 
+### Command testing
+Please check out CLI.ckFit's [User Guide](https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html) for more detailed
+walk through of all commands and their formats.
+
+Take note that the following sections will focus more on command behavior not specified in the User Guide, such as 
+expected output for incorrect or invalid inputs. The test cases stated in the following sections are not exhaustive and 
+testers are expected to do more exploratory work for more comprehensive testing. 
+
+### Workout Commands
+
+#### Adding a workout
+1. Adding a workout omitting date and time
+    * **Test Case**: `add workout test /c 123`
+    * **Expected**: workout with description "test" and "123" calories burned will be recorded with the current date and time.
+    
+2. Adding a workout with specified date and time
+    * **Test Case**: `add workout test /c 123 /d 08/11/2021 /t 23:59`
+    * **Expected**: workout with description "test" and "123" calories burned will be recorded on "08/11/2021" at "23:59".
+    
+3. Adding a workout with missing description
+    * **Test Case**: `add workout /c 123`
+    * **Expected**:
+      ```
+      I am sorry... it appears the description is missing.
+      Please enter a workout description!
+      ```
+   
+4. Adding a workout with missing calorie separator "/c"
+    * **Test Case**: `add workout test 123`
+    * **Expected**:
+      ```
+      CLI.ckFit is having difficulties finding the calorie separator /c
+      Please minimally have the format: add workout [workout_description] /c [calories]
+      Do remember to put spaces between your separators!
+      ```
+      
+5. Adding a workout with invalid date or time format
+    * **Test Case**: `add workout test /c 123 /d 08-11-21 /t 5:00pm`
+    * **Expected**: 
+      ```
+      Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
+      ```
+      
+#### Deleting a workout
+1. Deleting a workout with valid index
+    * **Test Case**: `delete workout 1`
+    * **Expected**: deletes the first workout in the workout list.
+      
+2. Deleting a workout with invalid index
+    * **Test Case**: `delete workout -1`
+    * **Expected**: 
+      ```
+      Failed to delete that workout! Please enter an Integer within range.
+      ```
+      
+3. Deleting a workout without specifying index
+    * **Test Case**: `delete workout`
+    * **Expected**:
+      ```
+      Please enter the workout index in the format: delete workout [index]
+      ```
+      
+#### Listing workouts
+1. Listing workouts on date without any recorded workouts
+    * **Test Case**: `list workouts 23/12/2021`
+    * **Expected**: 
+      ```
+      No workouts recorded on the date: 23/12/2021
+      ```
+    
+### Schedule Commands
+
+#### Adding a scheduled workout
+1. Adding a scheduled workout with missing date or time separators, "/d" and "/t"
+    * **Test Case**: `add schedule 12/12/2021 23:59`
+    * **Expected**: 
+      ```
+      CLI.ckFit is having difficulties finding the separators...
+      Please enter in the format: add schedule [workout_description] /d [dd/mm/yyyy] /t [hh:mm]
+      Do remember to put spaces between your separators.
+      ```
+      
+2. Adding a scheduled workout with missing description
+    * **Test Case**: `add schedule /d 12/12/2021 /t 23:59`
+    * **Expected**:
+      ```
+      I am sorry... it appears the description is missing.
+      Please enter a description for your scheduled workout!
+      ```
+      
+4. Adding a scheduled workout with invalid date or time format
+    * **Test Case**: `add schedule test /d 12-12-21 /t 11:59pm`
+    * **Expected**:
+      ```
+      Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
+      ```
+      
+5. Adding a scheduled workout with a date in the past
+    * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59`
+    * **Expected**:
+      ```
+      Noted! CLI.ckFit has scheduled your workout of description "test" on 07/11/2021 at 13:59.
+      CLI.ckFit has detected some overdue scheduled workouts and has deleted/rescheduled them!
+      ```
+      
+5. Adding a scheduled workout with activity breakdown, missing activity splitter ":"
+    * **Test Case**: `add schedule test /d 12/12/2021 /t 13:59 /a chest8x10, squats:3x10`
+    * **Expected**:
+      ```
+      Missing activity splitter ":" detected.
+      Please enter [activity name]:[sets]x[reps] or [activity name]:[distance in metres] for your workout activities
+      ```
+      
+6. Adding a scheduled workout with activity breakdown, unnecessary quantifier "x"
+    * **Test Case**: `add schedule test /d 12/12/2021 /t 13:59 /a swimming:1000x2`
+    * **Expected**:
+      ```
+      Unnecessary activity quantifier splitter "x" detected.
+      Please enter [activity name]:[distance in metres] for distance based workout activities if your
+      activity name is either running/swimming/cycling.
+      E.g. running:8000
+      ```
+      
+7. Adding a scheduled workout with activity breakdown, missing quantifier "x"
+    * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59 /a chest:8x10, squats:3 10`
+    * **Expected**:
+      ```
+      Missing activity quantifier "x" detected.
+      Please enter your [sets]x[reps] for your non-distance based workout activities.
+      ```
+      
+8. Adding a scheduled workout with activity breakdown with non-positive integers for distance or sets and reps
+    * **Test Case**: `add schedule test /d 07/11/2021 /t 13:59 /a chest:8x10, squats:3x-10`
+    * **Expected**: 
+      ```
+      There was an issue getting your activity breakdown.
+      Please enter a positive integer [distance in metres] for distance based activities(swimming/running/cycling).
+      E.g. running:8000
+      Enter two positive integers in the format [set]x[reps] for everything else.
+      E.g. bench press:3x12
+      For multiple activities please separate them by ","
+      ```
+      
+#### Deleting a scheduled workout
+1. Deleting a scheduled workout with valid index
+    * **Test Case**: `delete schedule 1`
+    * **Expected**: deletes the first workout in the workout list.
+
+2. Deleting a scheduled workout with invalid index
+    * **Test Case**: `delete schedule -1`
+    * **Expected**:
+      ```
+      Failed to delete that scheduled workout! Please enter an Integer within range.
+      ```
+      
+3. Deleting a scheduled workout without specifying index
+    * **Test Case**: `delete schedule`
+    * **Expected**:
+      ```
+      Please enter the schedule index in the format: delete schedule [index]
+      ```
+      
+#### Listing scheduled workouts
+1. Listing workout schedule on date without any scheduled workouts
+    * **Test Case**: `list schedule 23/12/2021`
+    * **Expected**:
+      ```
+      Workout schedule is empty on the date: 23/12/2021
+      ```
+      

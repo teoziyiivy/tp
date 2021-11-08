@@ -2,10 +2,10 @@
 
 ## Introduction
 
-CLI.ckFit is a desktop-based fitness app which can be accessed easily via CLI. CLI.ckFit allows you to input and track 
-your calories, weight, foods, and workouts throughout the day. It also allows you to save your data and view it whenever 
-you wish to. 
-It also comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
+CLI.ckFit is a desktop-based fitness app which can be accessed easily via Command Line Interface (CLI). CLI.ckFit 
+allows you to input and track your calories, weight, foods, and workouts throughout the day.
+It also allows you to save your data and view it whenever you wish to. 
+It comes with a BMI and recommended caloric intake calculator which can give you an idea of your current fitness
 level. You can also schedule a variety of workouts such as running, cycling, gym etc. It is suitable for students
 staying on campus, especially existing people already involved in some level of exercise, such as casual gym goers or
 even student athletes. Prior knowledge in fitness and gym-related terminologies is beneficial, but not necessary.
@@ -27,6 +27,9 @@ level stands. Users can also choose to skip using the calculators by entering th
 * *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator
 questions. Any deviating inputs will result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the
 calculator to calculate BMI and recommended daily caloric intake.
+* Please only enter one input for each question. 
+
+  eg. when prompted for the user's weight, the user should only type in "50" and not "50  6000".
   
 2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
 to track the calories burned.
@@ -144,15 +147,7 @@ Note: Keying in "y" will result in the previous session's data being deleted!
   - [**List calories**](#list-calories)
 
   - [**List volumes**](#list-volumes)
-
-- #### Help
-
-  - [**Access user help**](#help-command)
-
-- #### Close CLI.ckFit
-
-  - [**Bye**](#bye)
-
+  
 ### Workout Manager
 
 - #### Add
@@ -196,6 +191,12 @@ Note: Keying in "y" will result in the previous session's data being deleted!
 ### List Manager
 
 - [**List everything**](#List-everything-on-current-date)
+
+### Getting help
+- [**Access user help**](#help-command)
+
+### Exiting CLI.ckFit
+- [**Exiting application**](#bye)
 
 ### Miscellaneous
 
@@ -403,7 +404,7 @@ Noted! CLI.ckFit has scheduled your recurring workout of description "weekly che
 
 Format: `add schedule WORKOUT_NAME /d DATE /t TIME </a ACTIVITY_NAME:ACTIVITY_QUANTIFIER, ...> </r>`
 
-* The `/a` separator is optional.
+* The `/a` separator is optional. However, it **must** be included if an activity breakdown is to be included in the schedule.
 
 * The `ACTIVITY_NAME` can contain spaces and `:` ***must*** follow after it.
 
@@ -1160,7 +1161,7 @@ NOTE: You can only omit putting MEAL_CALORIES if you have saved the meal in your
 Here is the link to our User Guide! https://ay2122s1-cs2113t-f14-3.github.io/tp/UserGuide.html
 ```
 
-## Bye
+## Exiting the application
 
 Command Word: `bye`
 
@@ -1230,3 +1231,4 @@ Command | Format of input
 [**List fluids from library**](#list-fluids-stored-in-library)| `library listfluids`
 [**List everything**](#List-everything-on-current-date)| `list <DATE>`
 [**Access user help**](#help-command)| `help`
+[**Bye**](#bye)| `bye`
