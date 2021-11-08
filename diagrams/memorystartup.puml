@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+participant "Ui:memoryStartup()"
+
+->"Ui:memoryStartup()" :String uiInput
+activate "Ui:memoryStartup()" #FFBBBB
+
+"Ui:memoryStartup()" -> "Ui:memoryStartup()" : uiInput = uiScanner.nextLine();
+activate "Ui:memoryStartup()" #DarkSalmon
+return
+|||
+alt  result = true, flag = true;
+else else
+"Ui:memoryStartup()"->"Ui:memoryStartup()" : result = false, flag = true;
+activate "Ui:memoryStartup()" #IndianRed
+return
+|||
+end
+note left: if block loads up memory of previous session if enter is detected, else deletes previous session
+|||
+deactivate "Ui:memoryStartup()"
+|||
+
+@enduml

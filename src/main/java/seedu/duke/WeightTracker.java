@@ -150,16 +150,16 @@ public class WeightTracker extends Tracker {
     public void listSpecificWeights(String date) throws WeightException {
         logger.entering(getClass().getName(), "listSpecificWeights");
         logger.log(Level.INFO, "going to list specific logged weights and dates");
-        int i = 1;
+        int index = 1;
         int numberOfSpecificWeights = 0;
         for (String weights : weightsArray) {
             if (weights.contains(date)) {
                 logger.log(Level.INFO, "generating weight parameters");
                 generateWeightParameters(weights);
                 logger.log(Level.INFO, "weight parameters generated");
-                System.out.print(i + ". ");
-                System.out.println("Weight: " + weight);
-                i++;
+                System.out.print(index + ". ");
+                System.out.println("Weight: " + weight + " kg");
+                index++;
                 numberOfSpecificWeights++;
             }
         }
@@ -176,16 +176,16 @@ public class WeightTracker extends Tracker {
     public void listAllWeights() throws WeightException {
         logger.entering(getClass().getName(), "listAllWeights");
         logger.log(Level.INFO, "going to list all logged weights and dates");
-        int i = 1;
+        int index = 1;
         System.out.println("Here are your recorded weights:");
         for (String weights : weightsArray) {
             generateWeightParameters(weights);
-            System.out.print(i + ". ");
-            System.out.print(" Weight: " + weight + " ");
+            System.out.print(index + ". ");
+            System.out.print(" Weight: " + weight + " kg ");
             System.out.println(" Date: " + date + System.lineSeparator());
-            i++;
+            index++;
         }
-        System.out.println("Total number of weights: " + (i - 1));
+        System.out.println("Total number of weights: " + (index - 1));
         logger.exiting(getClass().getName(), "listAllWeights");
         logger.log(Level.INFO, "end of processing listAllWeights command");
     }

@@ -36,11 +36,11 @@ class NoWeightsException {
 class WeightException {
 +getMessage():String
 }
-class WeightTrackerMessages {
+class ClickfitMessages {
 +printAddWeightResponse(weight: double, date: String):void
 +printDeleteWeightResponse(weight: double, date: String):void
 }
-WeightTracker --> WeightTrackerMessages
+WeightTracker --> ClickfitMessages
 WeightTracker ..> "<<throws>>" AddWeightException
 WeightTracker ..> "<<throws>>" DeleteWeightException
 WeightTracker ..> "<<throws>>" DeleteWeightIndexException
