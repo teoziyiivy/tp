@@ -5,7 +5,6 @@ import seedu.duke.exceptions.foodbank.EmptyFluidBankException;
 import seedu.duke.exceptions.foodbank.EmptyFoodDescription;
 import seedu.duke.exceptions.foodbank.EmptyMealBankException;
 import seedu.duke.exceptions.foodbank.FoodBankException;
-import seedu.duke.exceptions.foodbank.IncorrectLibraryAddFormatException;
 import seedu.duke.exceptions.foodbank.InvalidFluidIndexException;
 import seedu.duke.exceptions.foodbank.InvalidMealIndexException;
 import seedu.duke.exceptions.foodbank.NoFoodFoundException;
@@ -116,7 +115,7 @@ public class FoodBank {
      */
     public static void listCustomFluids() throws FoodBankException {
         if (fluids.size() == 0) {
-            System.out.println("Your fluids library is empty!");
+            System.out.println(ClickfitMessages.EMPTY_FLUID_LIBRARY);
         }
         int i = 1;
         for (String fluid : fluids) {

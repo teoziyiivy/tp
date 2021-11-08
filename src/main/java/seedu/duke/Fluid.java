@@ -161,7 +161,7 @@ public class Fluid extends Tracker {
         logr.entering(getClass().getName(), "listFluid");
         if (fluidArray.size() == 0) {
             logr.info("error listing fluids: fluid list is empty");
-            System.out.println("Your fluid list is empty.");
+            System.out.println(ClickfitMessages.EMPTY_FLUID_LIST);
         }
         logr.info("checking if specific date is provided by user or all entries are to be printed");
         if (userDate.equals("all")) {
