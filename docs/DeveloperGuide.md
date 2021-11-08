@@ -576,4 +576,187 @@ testers are expected to do more exploratory work for more comprehensive testing.
       ```
       Workout schedule is empty on the date: 23/12/2021
       ```
+
+### Meal commands
+
+#### Adding a meal
+
+1. Adding a meal omitting date and time
+    * **Test Case**: `add meal pasta /c 190`
+    * **Expected**: 
+   ```
+   Noted! CLI.ckFit has recorded your meal of pasta on 08/11/2021 and at 18:39. 190 calories has been added to the calorie count!"
+   ```
+    
+2. Adding a meal with specified date and time
+    * **Test Case**: `add meal pasta /c 190 /d 08/11/2021 /t 23:59`
+    * **Expected**:
+   ```
+   Noted! CLI.ckFit has recorded your meal of pasta on 08/11/2021 and at 23:59. 190 calories has been added to the calorie count!"
+   ``` 
+   
+3. Adding a meal with missing description
+    * **Test Case**: `add meal /c 190`
+    * **Expected**: 
+   ```
+   Please enter a meal/fluid description, and optionally, calories if not previously added to the library!
+   e.g "add meal {DESCRIPTION} /c {CALORIES}" OR "add meal {DESCRIPTION}"
+   e.g "add fluid {DESCRIPTION} /c {CALORIES}" OR "add fluid {DESCRIPTION}"
+   ```
+   
+4. Adding a meal with missing calories
+    * **Test Case**: `add meal pasta /c`
+* **Expected**:
+  ```
+  Please enter a meal/fluid description, and optionally, calories if not previously added to the library!
+  e.g "add meal {DESCRIPTION} /c {CALORIES}" OR "add meal {DESCRIPTION}"
+  e.g "add fluid {DESCRIPTION} /c {CALORIES}" OR "add fluid {DESCRIPTION}"
+  ```
+
+5. Adding a meal with invalid date or time format
+    * **Test Case**: `add meal pasta /c 123 /d 08-11-21 /t 5:00pm`
+    * **Expected**:
+      ```
+      Please enter your date and time in the right format. It should be "DD/MM/YYYY" and "HH:MM" respectively.
+      ```
       
+6. Adding a meal with negative calories
+   * **Test Case**: `add meal pasta /c -123`
+   * **Expected**:
+     ```
+     Please input a positive integer value for your calories!
+     ```
+
+#### Deleting a meal
+1. Deleting a meal with valid index
+    * **Test Case**: `delete meal 1`
+    * **Expected**:
+   ```
+   pasta will be removed from your list of meals consumed!
+   ```
+
+2. Deleting a meal with invalid index
+    * **Test Case**: `delete meal -1`
+    * **Expected**:
+     ```
+     Please enter a proper meal index. Use "list meals all" to view each meal's index
+     ```
+
+3. Deleting a meal without specifying index
+    * **Test Case**: `delete meal`
+    * **Expected**:
+      ```
+      Please enter the index of the meal you wish to delete!
+      ```
+
+#### Listing workouts
+1. Listing meals on a specific date
+    * **Test Case**: `list meals 08/11/2021`
+    * **Expected**:
+      ```
+      1. pasta
+      Calories: 122
+      Date: 08/11/2021
+      Time: 19:17
+      
+      Total number of meals: 1
+      Total calories: 122      
+      ```
+2. Listing meals on all dates
+   * **Test Case**: `list meals all`
+   * **Expected**:
+     ```
+     1. pasta
+     Calories: 122
+     Date: 08/11/2021
+     Time: 19:17
+     
+     2. pizza
+     Calories: 22
+     Date: 15/03/2022
+     Time: 09:37
+     
+     Total number of meals: 2
+     Total calories: 144    
+     ```
+3Listing meals on current date
+   * **Test Case**: `list meals`
+   * **Expected**:
+     ```
+     1. pasta
+     Calories: 122
+     Date: 08/11/2021
+     Time: 19:17
+     
+     Total number of meals: 1
+     Total calories: 122      
+     ``` 
+### FoodBank commands
+
+#### Adding a custom meal
+
+1. Adding a custom meal 
+   * **Test Case**: `library addmeal pasta /c 190`
+   * **Expected**:
+   ```
+   pasta, which has 190 calories, will be added to your library of meals. You now have 1 meals!
+   ```
+
+2. Adding a custom meal without its calories
+   * **Test Case**: `library addmeal pasta`
+   * **Expected**:
+   ```
+   No such food or fluid with its associated calories is stored within your library. Please enter calories.
+   ``` 
+
+3. Adding a custom meal with missing description
+   * **Test Case**: `library addmeal /c 190`
+   * **Expected**:
+   ```
+   Please enter a meal/fluid description, and optionally, calories if not previously added to the library!
+   e.g "add meal {DESCRIPTION} /c {CALORIES}" OR "add meal {DESCRIPTION}"
+   e.g "add fluid {DESCRIPTION} /c {CALORIES}" OR "add fluid {DESCRIPTION}"
+   ```
+   
+6. Adding a meal with negative calories
+   * **Test Case**: `library addmeal pasta /c -123`
+   * **Expected**:
+     ```
+     Please input a positive integer value for your calories!
+     ```
+
+#### Deleting a meal
+
+1. Deleting a meal with valid index
+   * **Test Case**: `library deletemeal 1`
+   * **Expected**:
+   ```
+   pasta will be removed from your list of meals consumed. You now have 0 meals left!
+   ```
+
+2. Deleting a meal with invalid index
+   * **Test Case**: `library deletemeal -1`
+   * **Expected**:
+     ```
+     Please enter a valid meal index! Use "library listmeals" to see the meal indexes
+     ```
+
+3. Deleting a meal without specifying index
+   * **Test Case**: `library deletemeal`
+   * **Expected**:
+     ```
+     Please enter a food index!
+     ```
+
+#### Listing workouts
+
+1. Listing meals on a specific date
+   * **Test Case**: `library listmeals`
+   * **Expected**:
+     ```
+     1. pasta
+     Calories: 122
+     
+     Total number of meals in library: 1
+     ```
+
