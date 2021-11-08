@@ -7,7 +7,7 @@ which can give you an idea of your current fitness level.
 
 ### Summary of Contributions
 #### Code contributed
-[https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=arvejw&tabRepo=AY2122S1-CS2113T-F14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=arvejw&tabRepo=AY2122S1-CS2113T-F14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+[RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=arvejw&tabRepo=AY2122S1-CS2113T-F14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 #### Enhancements implemented
 * Weekly recurring workouts and automatic deletion/rescheduling of scheduled workouts
@@ -42,21 +42,23 @@ which can give you an idea of your current fitness level.
 
 #### Contributions to UG
 
-* Add/delete/list workout command sections
-* Add/delete/list schedule commands sections
-* Some parts of known limitations section
+* Wrote add/delete/list workout command sections.
+* Wrote add/delete/list schedule commands sections.
+* Wrote some parts of known limitations section.
 
 #### Contributions to DG
 
-* ScheduleTracker Design & Implementation section
-* UML Class and sequence diagrams associated with ScheduleTracker
+* ScheduleTracker Design & Implementation section.
+* UML Class and sequence diagrams associated with ScheduleTracker.
 * Some reformatting of the Design & Implementation section to be neater.
-* Added appendix sections in the DG as well as some content to them
-* Added manual testing for workouts and scheduling of workouts
+* Added appendix sections in the DG as well as some content to them.
+* Added manual testing for workouts, scheduling of workouts and saving of data.
 
 #### Contributions to team-based tasks
 * Some reformatting of the Design & implementation section in the DG.
-* Added hyperlink support to table of contents in DG
+* Added hyperlink support to table of contents in DG.
+* Contributed in debugging code.
+* Changed some parsing implementation to split user input by any length of whitespace instead of a fixed single whitespace character.
 
 #### Review/mentoring contributions
 * Group mate PR reviews:
