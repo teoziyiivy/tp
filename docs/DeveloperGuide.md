@@ -760,3 +760,56 @@ testers are expected to do more exploratory work for more comprehensive testing.
      Total number of meals in library: 1
      ```
 
+### Weight Commands
+
+#### Adding a weight
+1. Adding a weight for current date
+   * **Test Case**: `add weight 50`
+   * **Expected**: `Noted! CLI.ckFit has recorded your weight as 50.0 kg on 08/11/2021. Check back for your progress!`
+2. Adding a weight for specific date
+   * **Test Case**: `add weight 50 08/11/2021`
+   * **Expected**: `Noted! CLI.ckFit has recorded your weight as 50.0 kg on 08/11/2021. Check back for your progress!`
+3. Adding a weight for unaccepted weight
+(only numbers to 1 decimal point from 0 <= weight <= 1000 allowed)
+   * **Test Case**: `add weight 99999`
+   * **Expected**:
+   ```
+   Exceeded maximum weight 
+   An unknown error has occurred in Weight Tracker
+   ```
+4. Adding a weight with omission of weight
+   * **Test Case**: `add weight`
+   * **Expected**: `CLI.ckFit has detected a wrong input, kindly check your inputs or type "help commands" for input examples.`
+#### Deleting a weight
+1. Deleting a weight with valid index
+   * **Test Case**: `delete weight 1`
+   * **Expected**: `Noted! CLI.ckFit has successfully deleted your weight of 50.0 kg on 08/11/2021.`
+2. Deleting a weight with invalid index
+   * **Test Case**: `delete weight -1`
+   * **Expected**: 
+   ```
+   CLI.ckFit encountered a problem deleting your weight.
+   Please ensure the index is within the list.
+   ```
+3. Deleting a weight with omission of index
+   * **Test Case**: `delete weight`
+   * **Expected**:
+   ```
+   CLI.ckFit encountered a problem deleting your weight.
+   Please follow the format: delete weight INDEX
+   ```
+#### Listing weights
+1. Listing weights for current date
+   * **Test Case**: `list weights`
+   * **Expected**:
+   ```
+   1. Weight: 50.0 kg
+   Total number of weights: 1
+   ```
+2. Listing weights for specific date
+   * **Test Case**: `list weights 08/11/2021`
+   * **Expected**:
+   ```
+   1. Weight: 50.0 kg
+   Total number of weights: 1
+   ```
